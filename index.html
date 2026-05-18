@@ -7,7 +7,7 @@
     <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
     <meta
       name="description"
-      content="Werkles is business partner matching for workers, operators, and small investors who want to build companies with their own hands."
+      content="Werkles helps builders, operators, backers, connectors, and sparks find the missing piece for a real business."
     >
     <title>Werkles | Business partner matching</title>
     <link rel="stylesheet" href="styles.css">
@@ -15,75 +15,100 @@
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Werkles home">
-        <span class="brand-mark">W</span>
+        <span class="brand-mark image-mark">
+          <img src="assets/werkles-logo.png" alt="" aria-hidden="true">
+        </span>
         <span>
           <strong>Werkles</strong>
-          <small>Find your builder-half</small>
+          <small>People who build together</small>
         </span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="#matchboard">Matchboard</a>
+        <a href="#people">People</a>
+        <a href="#matchboard">Matches</a>
         <a href="#profile">Profile</a>
-        <a href="#proof">Proof</a>
+        <a href="proof.html">Proof</a>
         <a href="#beta">Beta</a>
       </nav>
-      <a class="header-cta" href="#profile">Light the forge</a>
+      <a class="header-cta" href="#profile">Start building</a>
     </header>
 
     <main id="top">
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">For the music makers with invoices due</p>
-          <h1>Find the person who helps you build the world you keep seeing in your head.</h1>
+          <h1>The World Belongs to the Builders.</h1>
           <p>
-            Dreamers are cheap. Builders are rare. Werkles matches the worker, operator,
-            closer, bookkeeper, crew lead, or small-money partner who can turn nerve,
-            sweat, craft, and capital into a living company.
+            Werkles helps skilled builders, operators, backers, connectors, and sparks
+            find the missing piece for a real business. Bring labor, craft, capital,
+            customers, discipline, or an idea worth proving. Meet people who can help
+            turn it into something that survives daylight.
           </p>
           <div class="hero-actions">
-            <a class="button button-light" href="#matchboard">Open the match deck</a>
-            <a class="button button-ghost" href="#beta">Join the first forge</a>
+            <a class="button button-light" href="#profile">Name what you bring</a>
+            <a class="button button-ghost" href="#matchboard">See the match deck</a>
           </div>
         </div>
 
-        <aside class="hero-signal" aria-label="Werkles forge pulse">
-          <span class="signal-number" id="heroMatchScore">86%</span>
-          <span class="signal-label">strongest spark</span>
-          <div class="signal-bars" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
+        <aside class="hero-card" aria-label="Werkles people-first signal">
+          <img src="assets/werkles-logo.png" alt="Werkles logo">
+          <div class="hero-card-copy">
+            <strong id="heroMatchScore">86%</strong>
+            <span>strongest human fit</span>
+          </div>
+          <div class="mini-people" aria-hidden="true">
+            <span>B</span>
+            <span>O</span>
+            <span>C</span>
+            <span>+</span>
           </div>
         </aside>
       </section>
 
-      <section class="lane-strip" aria-label="Werkles partner lanes">
+      <section id="people" class="people-strip" aria-label="Werkles people lanes">
         <article>
-          <span>01</span>
-          <h2>Workers</h2>
-          <p>The people who know where the work bends, breaks, and quietly gets saved.</p>
+          <span>Builder</span>
+          <h2>Sweat, trust, field sense.</h2>
+          <p>You bring labor, craft, floor experience, crew respect, customer memory, or hard-earned repetition.</p>
         </article>
         <article>
-          <span>02</span>
-          <h2>Operators</h2>
-          <p>The craft carriers: licenses, tools, trucks, judgment, and the scar tissue of doing it right.</p>
+          <span>Operator</span>
+          <h2>The work has to run.</h2>
+          <p>You bring licenses, estimating, scheduling, equipment, delivery, and the judgment to keep promises.</p>
         </article>
         <article>
-          <span>03</span>
-          <h2>Capital</h2>
-          <p>Not lords on balconies. Partners with cash, sales, books, rhythm, and skin in the game.</p>
+          <span>Backer</span>
+          <h2>Money without a throne.</h2>
+          <p>You bring capital, credit, assets, or runway, and you want to stand beside real builders.</p>
         </article>
         <article>
-          <span>04</span>
-          <h2>Hybrids</h2>
-          <p>The odd ones with two keys already in hand, looking for the door the third key opens.</p>
+          <span>Connector</span>
+          <h2>The room needs a pulse.</h2>
+          <p>You bring sales, admin, books, hiring, relationships, customers, venues, or the ability to make people move.</p>
         </article>
+        <article>
+          <span>Spark</span>
+          <h2>An opening worth proving.</h2>
+          <p>You bring an idea, lead, property, customer, or strange little chance that needs people and pressure.</p>
+        </article>
+      </section>
+
+      <section class="manifesto" aria-labelledby="manifestoTitle">
+        <div>
+          <p class="eyebrow">The magic of creation. The brutality of reality.</p>
+          <h2 id="manifestoTitle">Werkles is where the people who show up find each other.</h2>
+        </div>
+        <p>
+          A license is value. A clean set of books is value. A floor lead people actually
+          respect is value. Cash is value. A real opportunity, tested against reality, is value.
+          Nobody gets a throne. Everybody brings a charge.
+        </p>
       </section>
 
       <section id="matchboard" class="matchboard" aria-labelledby="matchTitle">
         <div class="section-heading">
           <p>Matchboard</p>
-          <h2 id="matchTitle">No crowds. One possible accomplice at a time.</h2>
+          <h2 id="matchTitle">No crowds. One possible partner at a time.</h2>
         </div>
 
         <div class="match-layout">
@@ -95,15 +120,17 @@
 
             <div class="segment-control" aria-label="Filter matches">
               <button class="segment is-active" type="button" data-filter="all">All</button>
-              <button class="segment" type="button" data-filter="worker">Workers</button>
+              <button class="segment" type="button" data-filter="builder">Builders</button>
               <button class="segment" type="button" data-filter="operator">Operators</button>
-              <button class="segment" type="button" data-filter="capital">Capital</button>
+              <button class="segment" type="button" data-filter="backer">Backers</button>
+              <button class="segment" type="button" data-filter="connector">Connectors</button>
+              <button class="segment" type="button" data-filter="spark">Sparks</button>
             </div>
 
             <div class="market-stats" aria-label="Builder snapshot">
-              <div><strong id="workerCount">0</strong><span>Workers</span></div>
+              <div><strong id="builderCount">0</strong><span>Builders</span></div>
               <div><strong id="operatorCount">0</strong><span>Operators</span></div>
-              <div><strong id="capitalCount">0</strong><span>Capital</span></div>
+              <div><strong id="backerCount">0</strong><span>Backers</span></div>
               <div><strong id="introCount">0</strong><span>Intros</span></div>
             </div>
           </aside>
@@ -111,7 +138,7 @@
           <article class="candidate-card" id="candidateCard" aria-live="polite"></article>
 
           <aside class="deal-panel" aria-labelledby="dealPanelTitle">
-            <h2 id="dealPanelTitle">Spark map</h2>
+            <h2 id="dealPanelTitle">Human fit map</h2>
             <canvas id="matchGraph" width="520" height="320" aria-label="Visual map of top partner matches"></canvas>
             <div class="deck-buttons">
               <button class="round-action" id="prevMatch" type="button" aria-label="Previous match">Back</button>
@@ -125,7 +152,7 @@
       <section id="profile" class="profile-studio" aria-labelledby="profileTitle">
         <div class="section-heading">
           <p>Your Signal</p>
-          <h2 id="profileTitle">Tell the machine what kind of builder you are.</h2>
+          <h2 id="profileTitle">Name what you bring. Name what you need.</h2>
         </div>
 
         <form id="profileForm" class="profile-grid">
@@ -137,10 +164,11 @@
           <label class="field">
             <span>Lane</span>
             <select id="role">
-              <option value="worker">Worker / builder</option>
-              <option value="operator">Trade operator</option>
-              <option value="capital">Capital partner</option>
-              <option value="hybrid">Hybrid</option>
+              <option value="builder">Builder</option>
+              <option value="operator">Operator</option>
+              <option value="backer">Backer</option>
+              <option value="connector">Connector</option>
+              <option value="spark">Spark</option>
             </select>
           </label>
 
@@ -168,19 +196,19 @@
           </label>
 
           <label class="field money-field">
-            <span>Gold you can risk</span>
+            <span>Money you can risk</span>
             <output id="capitalAvailableValue">$50k</output>
             <input id="capitalAvailable" type="range" min="0" max="250000" step="5000" value="50000">
           </label>
 
           <label class="field money-field">
-            <span>Gold you need</span>
+            <span>Money you need</span>
             <output id="capitalNeededValue">$0</output>
             <input id="capitalNeeded" type="range" min="0" max="250000" step="5000" value="0">
           </label>
 
           <fieldset class="chip-grid">
-            <legend>Tools on the table</legend>
+            <legend>Value on the table</legend>
             <label><input type="checkbox" name="skills" value="field" checked> Field work</label>
             <label><input type="checkbox" name="skills" value="license"> License</label>
             <label><input type="checkbox" name="skills" value="sales" checked> Sales</label>
@@ -191,11 +219,12 @@
             <label><input type="checkbox" name="skills" value="estimating"> Estimating</label>
             <label><input type="checkbox" name="skills" value="customers"> Customers</label>
             <label><input type="checkbox" name="skills" value="equipment"> Equipment</label>
+            <label><input type="checkbox" name="skills" value="idea"> Idea / lead</label>
           </fieldset>
 
           <fieldset class="chip-grid">
-            <legend>What you want to break open</legend>
-            <label><input type="checkbox" name="goals" value="leave" checked> Escape employer</label>
+            <legend>What you want to build toward</legend>
+            <label><input type="checkbox" name="goals" value="leave" checked> Leave employer</label>
             <label><input type="checkbox" name="goals" value="start" checked> Start shop</label>
             <label><input type="checkbox" name="goals" value="scale"> Scale shop</label>
             <label><input type="checkbox" name="goals" value="buy"> Buy business</label>
@@ -215,7 +244,7 @@
         <article id="proof" class="ops-card">
           <div class="card-heading">
             <p>Proof Stack</p>
-            <h2>Trust that can survive daylight.</h2>
+            <h2>Werkles verifies you. Members see status, not your files.</h2>
           </div>
           <div class="verification-list">
             <label><input type="checkbox" name="verify" value="identity" checked> Identity</label>
@@ -224,7 +253,8 @@
             <label><input type="checkbox" name="verify" value="license"> Licenses</label>
             <label><input type="checkbox" name="verify" value="references"> References</label>
           </div>
-          <p class="status-line"><span id="verifiedCount">2/5</span> checks marked for prototype matching.</p>
+          <p class="status-line"><span id="verifiedCount">2/5</span> prototype proof categories marked.</p>
+          <a class="button button-outline" href="proof.html">How proof will work</a>
         </article>
 
         <article id="intros" class="ops-card">
@@ -239,7 +269,7 @@
         <article id="beta" class="ops-card">
           <div class="card-heading">
             <p>Private Beta</p>
-            <h2>One city. Real people. Sharp edges.</h2>
+            <h2>One city. Real people. Useful introductions.</h2>
           </div>
           <form id="betaForm" class="beta-form">
             <label class="field">
@@ -249,13 +279,14 @@
             <label class="field">
               <span>Lane</span>
               <select id="betaRole">
-                <option value="worker">Worker / builder</option>
-                <option value="operator">Trade operator</option>
-                <option value="capital">Capital partner</option>
-                <option value="hybrid">Hybrid</option>
+                <option value="builder">Builder</option>
+                <option value="operator">Operator</option>
+                <option value="backer">Backer</option>
+                <option value="connector">Connector</option>
+                <option value="spark">Spark</option>
               </select>
             </label>
-            <button class="button button-dark" type="submit">Enter the forge</button>
+            <button class="button button-dark" type="submit">Join the first room</button>
             <p id="betaStatus" class="status-line" role="status">Stored locally until we wire Supabase.</p>
           </form>
         </article>

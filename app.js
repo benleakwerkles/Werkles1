@@ -17,7 +17,7 @@ const profiles = [
   {
     id: "dana-cole",
     name: "Dana Cole",
-    role: "worker",
+    role: "builder",
     industry: "logistics",
     city: "Akron, OH",
     capitalNeeded: 20000,
@@ -32,7 +32,7 @@ const profiles = [
   {
     id: "imara-singh",
     name: "Imara Singh",
-    role: "worker",
+    role: "builder",
     industry: "hvac",
     city: "Cleveland, OH",
     capitalNeeded: 15000,
@@ -62,7 +62,7 @@ const profiles = [
   {
     id: "mayra-lopez",
     name: "Mayra Lopez",
-    role: "worker",
+    role: "connector",
     industry: "services",
     city: "Detroit, MI",
     capitalNeeded: 10000,
@@ -77,7 +77,7 @@ const profiles = [
   {
     id: "sean-brooks",
     name: "Sean Brooks",
-    role: "capital",
+    role: "backer",
     industry: "contracting",
     city: "Cincinnati, OH",
     capitalNeeded: 0,
@@ -87,7 +87,22 @@ const profiles = [
     needs: ["field", "license", "estimating"],
     goals: ["start", "buy", "partner"],
     verified: ["identity", "funds", "references"],
-    summary: "Small investor with home-service sales experience. Wants a real operator, not a passive paper deal."
+    summary: "Backer with home-service sales experience. Wants a real operator, not a passive paper deal."
+  },
+  {
+    id: "jules-farrow",
+    name: "Jules Farrow",
+    role: "spark",
+    industry: "services",
+    city: "Cleveland, OH",
+    capitalNeeded: 25000,
+    capitalAvailable: 3000,
+    years: 3,
+    skills: ["idea", "customers", "sales"],
+    needs: ["ops", "field", "books", "capital"],
+    goals: ["start", "partner", "equity"],
+    verified: ["identity", "references"],
+    summary: "Has a tested lead source for recurring local service work and early customer interest. Needs operators, books, and proof under pressure."
   },
   {
     id: "anton-bell",
@@ -107,7 +122,7 @@ const profiles = [
   {
     id: "erica-henson",
     name: "Erica Henson",
-    role: "hybrid",
+    role: "connector",
     industry: "contracting",
     city: "Columbus, OH",
     capitalNeeded: 30000,
@@ -122,7 +137,7 @@ const profiles = [
   {
     id: "malik-porter",
     name: "Malik Porter",
-    role: "worker",
+    role: "builder",
     industry: "plumbing",
     city: "Canton, OH",
     capitalNeeded: 12000,
@@ -137,10 +152,11 @@ const profiles = [
 ];
 
 const roleLabels = {
-  worker: "Worker / builder",
-  operator: "Trade operator",
-  capital: "Capital partner",
-  hybrid: "Hybrid"
+  builder: "Builder",
+  operator: "Operator",
+  backer: "Backer",
+  connector: "Connector",
+  spark: "Spark"
 };
 
 const industryLabels = {
@@ -164,12 +180,13 @@ const skillLabels = {
   estimating: "estimating",
   customers: "customer base",
   equipment: "equipment",
-  capital: "capital"
+  capital: "capital",
+  idea: "idea / lead"
 };
 
 const storageKeys = {
-  profile: "werkles.profile.v3",
-  intros: "werkles.intros.v3",
+  profile: "werkles.profile.v4",
+  intros: "werkles.intros.v4",
   beta: "werkles.beta.v1"
 };
 
@@ -232,6 +249,15 @@ function setCheckedValues(name, values) {
   });
 }
 
+function normalizeRole(role) {
+  const legacy = {
+    worker: "builder",
+    capital: "backer",
+    hybrid: "connector"
+  };
+  return legacy[role] || role || "builder";
+}
+
 function getUserProfile() {
   return {
     id: "you",
@@ -253,7 +279,7 @@ function hydrateProfile() {
   if (!saved) return;
 
   profileNameInput.value = saved.name || "Ben";
-  roleInput.value = saved.role || "worker";
+  roleInput.value = normalizeRole(saved.role);
   industryInput.value = saved.industry || "plumbing";
   locationInput.value = saved.city || "Cleveland, OH";
   radiusInput.value = saved.radius || 75;
@@ -271,13 +297,22 @@ function sameState(left, right) {
 }
 
 function complementaryRoles(userRole, candidateRole) {
-  if (userRole === "hybrid" || candidateRole === "hybrid") return 17;
-  if (userRole === candidateRole) return userRole === "worker" ? 8 : 6;
+  if (userRole === "connector" || candidateRole === "connector") return 16;
+  if (userRole === "spark" && candidateRole !== "spark") return 12;
+  if (candidateRole === "spark" && userRole !== "spark") return 10;
+  if (userRole === candidateRole) return userRole === "builder" ? 8 : 6;
   const pair = [userRole, candidateRole].sort().join(":");
   const weights = {
-    "capital:operator": 20,
-    "capital:worker": 16,
-    "operator:worker": 14
+    "backer:operator": 20,
+    "backer:builder": 16,
+    "builder:operator": 14,
+    "backer:connector": 14,
+    "connector:operator": 15,
+    "builder:connector": 13,
+    "operator:spark": 12,
+    "backer:spark": 10,
+    "connector:spark": 14,
+    "builder:spark": 9
   };
   return weights[pair] || 8;
 }
@@ -329,7 +364,7 @@ function scoreProfile(user, candidate) {
     reasons.push(`your ${money(user.capitalAvailable)} can fund the ask`);
   } else if (candidate.capitalNeeded > 0 && user.capitalAvailable >= candidate.capitalNeeded * 0.5) {
     score += 8;
-    reasons.push("partial capital fit");
+    reasons.push("partial money fit");
   }
 
   if (user.capitalNeeded > 0 && candidate.capitalAvailable >= user.capitalNeeded) {
@@ -431,8 +466,8 @@ function renderCandidate() {
 
     <div class="candidate-stats">
       <div><strong>${profile.years}</strong><span>years in arena</span></div>
-      <div><strong>${money(profile.capitalNeeded)}</strong><span>capital needed</span></div>
-      <div><strong>${money(profile.capitalAvailable)}</strong><span>capital available</span></div>
+      <div><strong>${money(profile.capitalNeeded)}</strong><span>money needed</span></div>
+      <div><strong>${money(profile.capitalAvailable)}</strong><span>money available</span></div>
     </div>
 
     <div class="tag-row">${visibleSkills}</div>
@@ -450,9 +485,9 @@ function renderCandidate() {
 }
 
 function renderMetrics() {
-  document.querySelector("#workerCount").textContent = profiles.filter((profile) => profile.role === "worker").length;
+  document.querySelector("#builderCount").textContent = profiles.filter((profile) => profile.role === "builder").length;
   document.querySelector("#operatorCount").textContent = profiles.filter((profile) => profile.role === "operator").length;
-  document.querySelector("#capitalCount").textContent = profiles.filter((profile) => profile.role === "capital").length;
+  document.querySelector("#backerCount").textContent = profiles.filter((profile) => profile.role === "backer").length;
   document.querySelector("#introCount").textContent = state.intros.size;
 }
 
@@ -518,10 +553,11 @@ function drawGraph(matches) {
   graphContext.fillText("YOU", center.x, center.y);
 
   const roleColors = {
-    worker: "#0b9f69",
+    builder: "#0b9f69",
     operator: "#6f3ff5",
-    capital: "#d69a24",
-    hybrid: "#ff4fa7"
+    backer: "#d69a24",
+    connector: "#ff4fa7",
+    spark: "#c8612c"
   };
 
   matches.forEach((match, index) => {
@@ -569,8 +605,8 @@ function buildBrief() {
     `Lane: ${roleLabels[profile.role]}`,
     `Arena: ${industryLabels[profile.industry]}`,
     `City: ${profile.city}`,
-    `Capital available: ${money(profile.capitalAvailable)}`,
-    `Capital needed: ${money(profile.capitalNeeded)}`,
+    `Money available: ${money(profile.capitalAvailable)}`,
+    `Money needed: ${money(profile.capitalNeeded)}`,
     `Skills: ${profile.skills.map((skill) => skillLabels[skill] || skill).join(", ") || "none selected"}`,
     `Goals: ${profile.goals.join(", ") || "none selected"}`,
     `Verification: ${profile.verified.join(", ") || "none selected"}`,
