@@ -3,3 +3,6 @@ werkles-site.zip
 netlify.toml
 server.log
 server.err.log
+.env
+.env.local
+supabase/.temp

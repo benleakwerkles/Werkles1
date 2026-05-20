@@ -200,14 +200,14 @@ const requiredProof = ["licenseFront", "licenseBack", "faceCapture", "phone"];
 
 const storageKeys = {
   profile: "werkles.profile.v5",
-  intros: "werkles.intros.v4",
-  beta: "werkles.beta.v2"
+  intros: "werkles.intros.v4"
 };
 
 const state = {
   filter: "all",
   search: "",
   deckIndex: 0,
+  deckComplete: false,
   intros: new Set(loadJson(storageKeys.intros, []))
 };
 
@@ -215,7 +215,8 @@ const profileNameInput = document.querySelector("#profileName");
 const profilePhoneInput = document.querySelector("#profilePhone");
 const roleInput = document.querySelector("#role");
 const industryInput = document.querySelector("#industry");
-const locationInput = document.querySelector("#location");
+const profileCityInput = document.querySelector("#profileCity");
+const profileStateInput = document.querySelector("#profileState");
 const radiusInput = document.querySelector("#radius");
 const capitalAvailableInput = document.querySelector("#capitalAvailable");
 const capitalNeededInput = document.querySelector("#capitalNeeded");
@@ -231,7 +232,6 @@ const graphContext = graph.getContext("2d");
 const profileStatus = document.querySelector("#profileStatus");
 const betaForm = document.querySelector("#betaForm");
 const betaEmail = document.querySelector("#betaEmail");
-const betaPhone = document.querySelector("#betaPhone");
 const betaRole = document.querySelector("#betaRole");
 const betaStatus = document.querySelector("#betaStatus");
 const heroMatchScore = document.querySelector("#heroMatchScore");
@@ -253,6 +253,32 @@ function money(value) {
   if (value === 0) return "$0";
   if (value >= 1000) return `$${Math.round(value / 1000)}k`;
   return `$${value}`;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+function normalizeState(value) {
+  return String(value || "").trim().toUpperCase().slice(0, 2);
+}
+
+function formatLocation(city, stateCode) {
+  return [String(city || "").trim(), normalizeState(stateCode)].filter(Boolean).join(", ");
+}
+
+function parseLocation(value) {
+  const parts = String(value || "").split(",");
+  return {
+    city: parts[0]?.trim() || "Cleveland",
+    state: normalizeState(parts[1] || "OH") || "OH"
+  };
 }
 
 function selectedValues(name) {
@@ -286,7 +312,9 @@ function getUserProfile() {
     phone: profilePhoneInput.value.trim(),
     role: roleInput.value,
     industry: industryInput.value,
-    city: locationInput.value.trim(),
+    locationCity: profileCityInput.value.trim() || "Cleveland",
+    locationState: normalizeState(profileStateInput.value || "OH"),
+    city: formatLocation(profileCityInput.value || "Cleveland", profileStateInput.value || "OH"),
     radius: Number(radiusInput.value || 0),
     capitalAvailable: Number(capitalAvailableInput.value),
     capitalNeeded: Number(capitalNeededInput.value),
@@ -304,7 +332,9 @@ function hydrateProfile() {
   profilePhoneInput.value = saved.phone || "";
   roleInput.value = normalizeRole(saved.role);
   industryInput.value = saved.industry || "plumbing";
-  locationInput.value = saved.city || "Cleveland, OH";
+  const savedLocation = parseLocation(saved.city || formatLocation(saved.locationCity, saved.locationState));
+  profileCityInput.value = saved.locationCity || savedLocation.city;
+  profileStateInput.value = saved.locationState || savedLocation.state;
   radiusInput.value = saved.radius || 75;
   capitalAvailableInput.value = saved.capitalAvailable ?? 50000;
   capitalNeededInput.value = saved.capitalNeeded ?? 0;
@@ -459,6 +489,20 @@ function renderCandidate() {
   const topMatch = getScoredMatches()[0];
   heroMatchScore.textContent = topMatch ? `${topMatch.score}%` : "0%";
 
+  if (state.deckComplete && matches.length) {
+    candidateCard.innerHTML = `
+      <div class="candidate-empty">
+        <div>
+          <h3>No fit. Keep building.</h3>
+          <p>You reached the end of this deck. Adjust the filters, search a different arena, or restart the deck.</p>
+          <button class="button button-dark" type="button" data-restart-deck>Restart deck</button>
+        </div>
+      </div>
+    `;
+    drawGraph(matches.slice(0, 5));
+    return;
+  }
+
   if (!profile) {
     candidateCard.innerHTML = `<div class="candidate-empty">No matches found. Loosen the filters or search for another trade.</div>`;
     drawGraph([]);
@@ -466,41 +510,42 @@ function renderCandidate() {
   }
 
   const added = state.intros.has(profile.id);
-  const visibleSkills = profile.skills.slice(0, 5).map((skill) => `<span class="tag">${skillLabels[skill] || skill}</span>`).join("");
-  const verified = profile.verified.length >= 3 ? `<span class="verified-tag">${profile.verified.length} proof signals</span>` : "";
-  const reasons = profile.reasons.map((reason) => `<li>${reason}</li>`).join("");
+  const visibleSkills = profile.skills.slice(0, 5).map((skill) => `<span class="tag">${escapeHtml(skillLabels[skill] || skill)}</span>`).join("");
+  const verified = profile.verified.length >= 3 ? `<span class="verified-tag">${escapeHtml(profile.verified.length)} proof signals</span>` : "";
+  const reasons = profile.reasons.map((reason) => `<li>${escapeHtml(reason)}</li>`).join("");
+  const profileId = escapeHtml(profile.id);
 
   candidateCard.innerHTML = `
     <div class="candidate-top">
-      <span class="avatar ${profile.role}" aria-hidden="true">${initials(profile.name)}</span>
+      <span class="avatar ${escapeHtml(profile.role)}" aria-hidden="true">${escapeHtml(initials(profile.name))}</span>
       <div>
-        <h3>${profile.name}</h3>
+        <h3>${escapeHtml(profile.name)}</h3>
         <div class="meta-row">
-          <span class="tag">${roleLabels[profile.role]}</span>
-          <span class="tag">${industryLabels[profile.industry]}</span>
-          <span class="tag">${profile.city}</span>
+          <span class="tag">${escapeHtml(roleLabels[profile.role])}</span>
+          <span class="tag">${escapeHtml(industryLabels[profile.industry])}</span>
+          <span class="tag">${escapeHtml(profile.city)}</span>
           ${verified}
         </div>
       </div>
-      <span class="score">${profile.score}%</span>
+      <span class="score">${escapeHtml(profile.score)}%</span>
     </div>
 
-    <p class="candidate-summary">${profile.summary}</p>
+    <p class="candidate-summary">${escapeHtml(profile.summary)}</p>
 
     <div class="candidate-stats">
-      <div><strong>${profile.years}</strong><span>years in arena</span></div>
-      <div><strong>${money(profile.capitalNeeded)}</strong><span>money needed</span></div>
-      <div><strong>${money(profile.capitalAvailable)}</strong><span>money available</span></div>
+      <div><strong>${escapeHtml(profile.years)}</strong><span>years in arena</span></div>
+      <div><strong>${escapeHtml(money(profile.capitalNeeded))}</strong><span>money needed</span></div>
+      <div><strong>${escapeHtml(money(profile.capitalAvailable))}</strong><span>money available</span></div>
     </div>
 
     <div class="tag-row">${visibleSkills}</div>
     <ul class="reason-list">${reasons}</ul>
 
     <div class="candidate-actions">
-      <button class="button button-dark" type="button" data-intro="${profile.id}">${added ? "Intro queued" : "Request intro"}</button>
-      <button class="button button-outline" type="button" data-save="${profile.id}">${added ? "Remove shortlist" : "Shortlist"}</button>
+      <button class="button button-dark" type="button" data-intro="${profileId}">${added ? "Checking the Blueprint" : "Request intro"}</button>
+      <button class="button button-outline" type="button" data-save="${profileId}">${added ? "Remove shortlist" : "Shortlist"}</button>
       <button class="button button-outline" type="button" data-next>Pass for now</button>
-      <span class="status-line">${state.deckIndex + 1} of ${matches.length}</span>
+      <span class="status-line">${escapeHtml(state.deckIndex + 1)} of ${escapeHtml(matches.length)}</span>
     </div>
   `;
 
@@ -538,10 +583,10 @@ function renderIntroQueue() {
   introQueue.innerHTML = queued
     .map((profile) => `
       <div class="intro-item">
-        <span class="mini-avatar">${initials(profile.name)}</span>
+        <span class="mini-avatar">${escapeHtml(initials(profile.name))}</span>
         <span>
-          <strong>${profile.name}</strong>
-          <small>${roleLabels[profile.role]} - ${industryLabels[profile.industry]}</small>
+          <strong>${escapeHtml(profile.name)}</strong>
+          <small>${escapeHtml(roleLabels[profile.role])} - ${escapeHtml(industryLabels[profile.industry])}</small>
         </span>
       </div>
     `)
@@ -631,7 +676,6 @@ function buildBrief() {
   const topMatches = getScoredMatches().slice(0, 3);
   return [
     `Werkles profile: ${profile.name}`,
-    `Linked phone: ${profile.phone || "required before activation"}`,
     `Lane: ${roleLabels[profile.role]}`,
     `Arena: ${industryLabels[profile.industry]}`,
     `City: ${profile.city}`,
@@ -663,12 +707,28 @@ function saveIntroState() {
 function moveDeck(direction) {
   const matches = getFilteredMatches();
   if (!matches.length) return;
+
+  if (direction > 0 && state.deckIndex >= matches.length - 1) {
+    state.deckComplete = true;
+    renderCandidate();
+    return;
+  }
+
+  if (state.deckComplete && direction < 0) {
+    state.deckComplete = false;
+    state.deckIndex = matches.length - 1;
+    renderCandidate();
+    return;
+  }
+
+  state.deckComplete = false;
   state.deckIndex = (state.deckIndex + direction + matches.length) % matches.length;
   renderCandidate();
 }
 
 document.querySelector("#profileForm").addEventListener("input", () => {
   state.deckIndex = 0;
+  state.deckComplete = false;
   saveProfile("Profile updated.");
   render();
 });
@@ -688,6 +748,7 @@ document.querySelector("#copyBrief").addEventListener("click", copyBrief);
 searchInput.addEventListener("input", (event) => {
   state.search = event.target.value;
   state.deckIndex = 0;
+  state.deckComplete = false;
   renderCandidate();
 });
 
@@ -696,11 +757,19 @@ document.querySelector(".segment-control").addEventListener("click", (event) => 
   if (!button) return;
   state.filter = button.dataset.filter;
   state.deckIndex = 0;
+  state.deckComplete = false;
   document.querySelectorAll(".segment").forEach((segment) => segment.classList.toggle("is-active", segment === button));
   renderCandidate();
 });
 
 candidateCard.addEventListener("click", (event) => {
+  if (event.target.closest("[data-restart-deck]")) {
+    state.deckIndex = 0;
+    state.deckComplete = false;
+    renderCandidate();
+    return;
+  }
+
   const introButton = event.target.closest("[data-intro], [data-save]");
   if (event.target.closest("[data-next]")) {
     moveDeck(1);
@@ -737,19 +806,32 @@ document.querySelector("#clearIntros").addEventListener("click", () => {
   render();
 });
 
-betaForm.addEventListener("submit", (event) => {
+betaForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const entries = loadJson(storageKeys.beta, []);
-  entries.push({
-    email: betaEmail.value.trim(),
-    phone: betaPhone.value.trim(),
-    role: betaRole.value,
-    createdAt: new Date().toISOString()
-  });
-  saveJson(storageKeys.beta, entries);
-  betaStatus.textContent = "Invite request saved locally. Activation still requires license front/back, face capture, and phone link.";
-  betaEmail.value = "";
-  betaPhone.value = "";
+  betaStatus.textContent = "Checking the Blueprint...";
+
+  try {
+    const response = await fetch("/api/beta-signups", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: betaEmail.value.trim(),
+        lane: betaRole.value
+      })
+    });
+
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(result.error || "Could not save beta signup.");
+    }
+
+    betaStatus.textContent = "Invite request saved. Activation still requires license front/back, face capture, and phone link.";
+    betaEmail.value = "";
+  } catch (error) {
+    betaStatus.textContent = error.message;
+  }
 });
 
 hydrateProfile();

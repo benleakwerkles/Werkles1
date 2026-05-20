@@ -17,9 +17,24 @@ Current prototype:
 - Local browser storage for profile, intro queue, and beta signup capture
 - Founder brief copy action for sharing a profile summary
 
-This prototype is intentionally an introductions product. Real investment, lending, securities, ownership, KYC, and AML flows should be designed with legal and financial professionals before any production launch.
+This prototype is intentionally an introductions and verification-status product. Werkles is not a money-movement, lending, securities, broker-dealer, business-sale, or deal-facilitation platform.
 
-Next production step: migrate profile, intro, and beta signup data from local browser storage to Supabase.
+Architecture direction:
+
+- Web-first, mobile-first responsive Next.js app on Vercel.
+- Supabase Postgres and Supabase Auth for the first functional backend.
+- Email plus phone for two-factor authentication.
+- Row-Level Security on every user-data table.
+- Zero raw sensitive document storage in v0-v1; store verification receipts only.
+- Subscription-only monetization for v0-v1. No transaction-based compensation, success fees, or deal-tied referral fees.
+
+Next production step: convert the static prototype into a Next.js/Supabase vertical slice with database-backed profiles, explainable matching, intro requests, and admin review.
+
+Architecture docs:
+
+- `docs/architecture.md`
+- `docs/adr/ADR-001-web-first-mobile-first.md`
+- `supabase/migrations/202605200001_initial_werkles_schema.sql`
 
 SEO quarantine:
 
