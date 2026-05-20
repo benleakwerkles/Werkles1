@@ -2,6 +2,8 @@
 
 This document is the current source of truth for architecture, monetization boundaries, and cross-agent working assumptions.
 
+Current locked spec: Werkles v0.2 final master spec, May 20, 2026. This supersedes earlier AI handoffs.
+
 ## Platform
 
 Werkles is web-first and mobile-first responsive. The functional app should be built with Next.js on Vercel. Native iOS and Android are deferred by ADR-001 and gated by product metrics. A PWA is optional during beta.
@@ -13,6 +15,7 @@ Use Supabase Postgres and Supabase Auth.
 - Auth starts with email plus phone for two-factor authentication.
 - Apply Row-Level Security to every user-data table.
 - Keep the existing Vercel deployment path.
+- Admin authorization is table-driven through `public.admin_users`; do not hardcode admin emails into RLS policies.
 
 ## Data Philosophy
 
@@ -59,6 +62,32 @@ Werkles does not:
 
 All deals happen off-platform. Anything involving securities, lending, business sale facilitation, equity, revenue share, paid introductions tied to capital, background checks, or verification retention must be reviewed by qualified counsel before production use.
 
+Required platform disclaimer:
+
+> Werkles is a partner discovery and verification platform. We do not facilitate any securities transaction, loan, investment, or sale of business. Werkles never holds or transmits funds.
+
+This disclaimer must appear in the footer, Terms, and every match card.
+
+Phone collection requires explicit consent before phone verification or two-factor authentication. Checkr/FCRA workflows, Terms, Privacy Policy, tax treatment, and transaction/investment boundary language need attorney/accountant review before launch.
+
+DPAs must be executed with Stripe, Plaid, Twilio, PostHog, and Checkr before the first beta user.
+
+## Vendor Stack
+
+Locked v0 vendor choices:
+
+| Function | Vendor |
+| --- | --- |
+| Identity verification | Stripe Identity |
+| Funds verification | Plaid Assets |
+| Background checks | Checkr hosted flow |
+| Phone verification | Twilio Verify |
+| Subscriptions | Stripe Billing |
+| Analytics | PostHog |
+| Push notifications | Expo Push, deferred to v1.5 |
+
+Do not add money movement, lending, securities, broker-dealer, or deal-facilitation features in v0-v1.
+
 ## Product Language
 
 Approved action copy:
@@ -101,3 +130,29 @@ Active blueprint caps are enforced server-side.
 Admin quarantine sets `profiles.account_status = 'Quarantined'`. Quarantined users disappear from `profiles_public`, but existing blueprint memberships stay untouched.
 
 Blocking must be respected both directions before showing a profile in the match deck or allowing an intro request.
+
+## Matching Engine
+
+Production matching starts in Postgres with `public.match_candidates_for_blueprint(p_blueprint_id uuid, p_scout_user_id uuid)`.
+
+The function returns `target_user_id`, integer `score`, and explainable `factors` JSONB. It uses:
+
+- fluid location gate by blueprint environment
+- Gemini lane complementarity matrix
+- candidate verified Capital badge plus range overlap
+- skill lock-and-key from `skills_sought` to `skills_offered`
+- shared `industry_tags`
+- `timeline_to_launch` and `primary_goal`
+- endgame penalty for `Venture Scale/Exit` vs `Generational Family Business`
+- blocking and quarantine exclusion
+
+It must never return raw financial ranges.
+
+## Camelot Admin Bootstrap
+
+Initial admin emails:
+
+- `shaunmroberts1230@gmail.com`
+- `ben.leak@kindsir.com`
+
+After those people create Supabase Auth accounts and profiles, run `supabase/admin_bootstrap.sql`. The script maps emails to `auth.users` UUIDs and inserts matching profile IDs into `public.admin_users`. RLS policies continue to use `public.admin_users` only.

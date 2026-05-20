@@ -14,7 +14,7 @@ Current prototype:
 - Required account gate: driver's license front/back, face capture, and linked phone number before member activation
 - Proof checklist and `proof.html` trust page: Werkles verifies members; members do not inspect each other's raw documents
 - Canvas-based market map
-- Local browser storage for profile, intro queue, and beta signup capture
+- Local browser storage for profile and intro queue; beta signup posts to the Vercel API route when Supabase env vars are configured
 - Founder brief copy action for sharing a profile summary
 
 This prototype is intentionally an introductions and verification-status product. Werkles is not a money-movement, lending, securities, broker-dealer, business-sale, or deal-facilitation platform.
@@ -27,6 +27,8 @@ Architecture direction:
 - Row-Level Security on every user-data table.
 - Zero raw sensitive document storage in v0-v1; store verification receipts only.
 - Subscription-only monetization for v0-v1. No transaction-based compensation, success fees, or deal-tied referral fees.
+- Admin authorization is table-driven through `public.admin_users`; use `supabase/admin_bootstrap.sql` after Camelot Auth accounts and profiles exist.
+- Production matching is scaffolded in Supabase with `public.match_candidates_for_blueprint(...)`, returning explainable factors without raw financial ranges.
 
 Next production step: convert the static prototype into a Next.js/Supabase vertical slice with database-backed profiles, explainable matching, intro requests, and admin review.
 

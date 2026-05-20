@@ -197,6 +197,7 @@ const proofLabels = {
 };
 
 const requiredProof = ["licenseFront", "licenseBack", "faceCapture", "phone"];
+const platformDisclaimer = "Werkles is a partner discovery and verification platform. We do not facilitate any securities transaction, loan, investment, or sale of business. Werkles never holds or transmits funds.";
 
 const storageKeys = {
   profile: "werkles.profile.v5",
@@ -213,6 +214,7 @@ const state = {
 
 const profileNameInput = document.querySelector("#profileName");
 const profilePhoneInput = document.querySelector("#profilePhone");
+const profilePhoneConsentInput = document.querySelector("#profilePhoneConsent");
 const roleInput = document.querySelector("#role");
 const industryInput = document.querySelector("#industry");
 const profileCityInput = document.querySelector("#profileCity");
@@ -310,6 +312,7 @@ function getUserProfile() {
     id: "you",
     name: profileNameInput.value.trim() || "You",
     phone: profilePhoneInput.value.trim(),
+    phoneConsent: profilePhoneConsentInput.checked,
     role: roleInput.value,
     industry: industryInput.value,
     locationCity: profileCityInput.value.trim() || "Cleveland",
@@ -330,6 +333,7 @@ function hydrateProfile() {
 
   profileNameInput.value = saved.name || "Ben";
   profilePhoneInput.value = saved.phone || "";
+  profilePhoneConsentInput.checked = Boolean(saved.phoneConsent);
   roleInput.value = normalizeRole(saved.role);
   industryInput.value = saved.industry || "plumbing";
   const savedLocation = parseLocation(saved.city || formatLocation(saved.locationCity, saved.locationState));
@@ -540,6 +544,7 @@ function renderCandidate() {
 
     <div class="tag-row">${visibleSkills}</div>
     <ul class="reason-list">${reasons}</ul>
+    <p class="compliance-note">${escapeHtml(platformDisclaimer)}</p>
 
     <div class="candidate-actions">
       <button class="button button-dark" type="button" data-intro="${profileId}">${added ? "Checking the Blueprint" : "Request intro"}</button>
@@ -563,11 +568,11 @@ function renderTrust() {
   const verified = withRequiredProof(selectedValues("verify"));
   const totalProofInputs = document.querySelectorAll(`input[name="verify"]`).length;
   const phoneDigits = profilePhoneInput.value.replace(/\D/g, "");
-  const gateReady = requiredProof.every((proof) => verified.includes(proof)) && phoneDigits.length >= 10;
+  const gateReady = requiredProof.every((proof) => verified.includes(proof)) && phoneDigits.length >= 10 && profilePhoneConsentInput.checked;
   verifiedCount.textContent = `${verified.length}/${totalProofInputs}`;
   gateStatus.textContent = gateReady
-    ? "Account gate ready in prototype: license front/back, face capture, and phone present."
-    : "License front/back, face capture, and linked phone required before account activation.";
+    ? "Account gate ready in prototype: license front/back, face capture, phone present, and phone consent checked."
+    : "License front/back, face capture, linked phone, and phone consent required before account activation.";
 }
 
 function renderIntroQueue() {
@@ -681,6 +686,7 @@ function buildBrief() {
     `City: ${profile.city}`,
     `Money available: ${money(profile.capitalAvailable)}`,
     `Money needed: ${money(profile.capitalNeeded)}`,
+    `Phone verified: ${profile.phone && profile.phoneConsent ? "yes" : "no"}`,
     `Skills: ${profile.skills.map((skill) => skillLabels[skill] || skill).join(", ") || "none selected"}`,
     `Goals: ${profile.goals.join(", ") || "none selected"}`,
     `Proof signals: ${profile.verified.map((proof) => proofLabels[proof] || proof).join(", ") || "none selected"}`,

@@ -37,6 +37,11 @@ create table public.profiles (
   work_preference public.work_preference not null,
   current_employer text,
   past_roles jsonb,
+  skills_offered text[] not null default '{}',
+  skills_sought text[] not null default '{}',
+  industry_tags text[] not null default '{}',
+  timeline_to_launch text,
+  primary_goal text,
   visibility_mode public.profile_visibility_mode not null default 'full_name',
   show_employer boolean not null default false,
   account_status public.account_status not null default 'Active',
@@ -68,8 +73,8 @@ alter table public.admin_users enable row level security;
 create table public.beta_signups (
   id uuid primary key default gen_random_uuid(),
   email text not null,
-  lane public.user_lane not null,
-  created_at timestamptz not null default now(),
+  lane public.user_lane,
+  signed_up_at timestamptz not null default now(),
   constraint beta_signups_email_not_blank check (length(trim(email)) > 0),
   constraint beta_signups_email_shape check (position('@' in email) > 1)
 );
@@ -139,6 +144,11 @@ select
   work_preference,
   linkedin_url,
   case when show_employer then current_employer else null end as current_employer,
+  skills_offered,
+  skills_sought,
+  industry_tags,
+  timeline_to_launch,
+  primary_goal,
   account_status,
   created_at
 from public.profiles
@@ -629,6 +639,30 @@ create policy "Admins can view block lists"
 
 grant select, insert, update, delete on public.blocked_users to authenticated;
 
+create or replace function public.distance_miles(
+  left_lat double precision,
+  left_lng double precision,
+  right_lat double precision,
+  right_lng double precision
+)
+returns double precision
+language sql
+immutable
+returns null on null input
+as $$
+  select 3958.8 * acos(
+    least(
+      1,
+      greatest(
+        -1,
+        sin(radians(left_lat)) * sin(radians(right_lat)) +
+        cos(radians(left_lat)) * cos(radians(right_lat)) *
+        cos(radians(right_lng - left_lng))
+      )
+    )
+  );
+$$;
+
 create or replace function public.matchable_profiles_for(check_user_id uuid default auth.uid())
 returns table (
   id uuid,
@@ -639,6 +673,11 @@ returns table (
   work_preference public.work_preference,
   linkedin_url text,
   current_employer text,
+  skills_offered text[],
+  skills_sought text[],
+  industry_tags text[],
+  timeline_to_launch text,
+  primary_goal text,
   created_at timestamptz,
   proof_categories public.proof_category[]
 )
@@ -656,8 +695,16 @@ as $$
     profile.work_preference,
     profile.linkedin_url,
     profile.current_employer,
+    profile.skills_offered,
+    profile.skills_sought,
+    profile.industry_tags,
+    profile.timeline_to_launch,
+    profile.primary_goal,
     profile.created_at,
-    coalesce(array_agg(badge.proof_category) filter (where badge.proof_category is not null), '{}') as proof_categories
+    coalesce(
+      array_agg(badge.proof_category) filter (where badge.proof_category is not null),
+      '{}'::public.proof_category[]
+    ) as proof_categories
   from public.profiles_public profile
   left join public.verified_badges_view badge on badge.user_id = profile.id
   where profile.id <> check_user_id
@@ -671,10 +718,263 @@ as $$
     profile.work_preference,
     profile.linkedin_url,
     profile.current_employer,
+    profile.skills_offered,
+    profile.skills_sought,
+    profile.industry_tags,
+    profile.timeline_to_launch,
+    profile.primary_goal,
     profile.created_at;
 $$;
 
 grant execute on function public.matchable_profiles_for(uuid) to authenticated;
+
+create or replace function public.match_candidates_for_blueprint(
+  p_blueprint_id uuid,
+  p_scout_user_id uuid default auth.uid()
+)
+returns table (
+  target_user_id uuid,
+  score integer,
+  factors jsonb
+)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  with blueprint as (
+    select blueprint.*
+    from public.blueprints blueprint
+    where blueprint.id = p_blueprint_id
+      and (
+        blueprint.status = 'Active'
+        or blueprint.creator_id = p_scout_user_id
+        or public.is_blueprint_member(blueprint.id, p_scout_user_id)
+        or public.is_admin()
+      )
+  ),
+  scout as (
+    select profile.*
+    from public.profiles profile
+    where profile.id = p_scout_user_id
+      and profile.account_status = 'Active'
+      and (profile.id = auth.uid() or public.is_admin())
+  ),
+  scout_financials as (
+    select financials.*
+    from public.user_financials financials
+    where financials.user_id = p_scout_user_id
+  ),
+  candidate_inputs as (
+    select
+      candidate.id,
+      candidate.lane as candidate_lane,
+      scout.lane as scout_lane,
+      candidate.work_preference,
+      candidate.skills_offered,
+      candidate.skills_sought,
+      candidate.industry_tags,
+      candidate.timeline_to_launch,
+      scout.timeline_to_launch as scout_timeline_to_launch,
+      candidate.primary_goal,
+      scout.primary_goal as scout_primary_goal,
+      blueprint.project_environment,
+      public.distance_miles(
+        blueprint.location_lat,
+        blueprint.location_lng,
+        candidate.location_lat,
+        candidate.location_lng
+      ) as distance_from_blueprint,
+      exists (
+        select 1
+        from public.verified_badges_view badge
+        where badge.user_id = candidate.id
+          and badge.proof_category = 'Capital'::public.proof_category
+      ) as has_verified_capital,
+      coalesce(
+        candidate_financials.capital_available_range && scout_financials.capital_sought_range,
+        false
+      ) as capital_ranges_overlap,
+      coalesce(
+        (
+          select array_agg(distinct skill.value order by skill.value)
+          from unnest(scout.skills_sought) as skill(value)
+          where skill.value = any(candidate.skills_offered)
+        ),
+        '{}'::text[]
+      ) as matching_skills,
+      coalesce(
+        (
+          select array_agg(distinct tag.value order by tag.value)
+          from unnest(scout.industry_tags) as tag(value)
+          where tag.value = any(candidate.industry_tags)
+        ),
+        '{}'::text[]
+      ) as matching_industries
+    from blueprint
+    cross join scout
+    join public.profiles candidate on candidate.account_status = 'Active'
+    left join public.user_financials candidate_financials on candidate_financials.user_id = candidate.id
+    left join scout_financials on true
+    where candidate.id <> p_scout_user_id
+      and not public.is_blueprint_member(p_blueprint_id, candidate.id)
+      and not public.is_blocked_between(p_scout_user_id, candidate.id)
+  ),
+  scored as (
+    select
+      candidate_inputs.*,
+      case
+        when project_environment = 'Digital' then 0
+        when distance_from_blueprint is null then 0
+        when distance_from_blueprint > 50
+          and work_preference in ('Open to Travel'::public.work_preference, 'Willing to Relocate'::public.work_preference)
+          then 0
+        when distance_from_blueprint > 50 then -100
+        else 20
+      end as location_score,
+      case
+        when array[scout_lane::text, candidate_lane::text] @> array['Operator', 'Backer'] then 25
+        when array[scout_lane::text, candidate_lane::text] @> array['Spark', 'Operator'] then 20
+        when array[scout_lane::text, candidate_lane::text] @> array['Operator', 'Connector'] then 20
+        when array[scout_lane::text, candidate_lane::text] @> array['Operator', 'Builder'] then 20
+        when array[scout_lane::text, candidate_lane::text] @> array['Spark', 'Backer'] then 15
+        when array[scout_lane::text, candidate_lane::text] @> array['Backer', 'Connector'] then 15
+        when array[scout_lane::text, candidate_lane::text] @> array['Builder', 'Backer'] then 15
+        when scout_lane = 'Builder'::public.user_lane and candidate_lane = 'Builder'::public.user_lane then 10
+        when scout_lane = 'Backer'::public.user_lane and candidate_lane = 'Backer'::public.user_lane then 10
+        when array[scout_lane::text, candidate_lane::text] @> array['Spark', 'Builder'] then 10
+        when array[scout_lane::text, candidate_lane::text] @> array['Connector', 'Builder'] then 10
+        when scout_lane = 'Operator'::public.user_lane and candidate_lane = 'Operator'::public.user_lane then 5
+        when array[scout_lane::text, candidate_lane::text] @> array['Spark', 'Connector'] then 5
+        when scout_lane = 'Spark'::public.user_lane and candidate_lane = 'Spark'::public.user_lane then 0
+        when scout_lane = 'Connector'::public.user_lane and candidate_lane = 'Connector'::public.user_lane then 0
+        else 0
+      end as lane_score,
+      case
+        when array[scout_lane::text, candidate_lane::text] @> array['Operator', 'Backer']
+          then 'An Operator and a Backer is the golden combo: proven execution meets verified capital.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Spark', 'Operator']
+          then 'An idea meets the person who can get the licenses and run the schedule.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Operator', 'Connector']
+          then 'Operator builds/delivers, Connector sells/manages the books.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Operator', 'Builder']
+          then 'Operator manages the site, Builder provides the raw execution/crew.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Spark', 'Backer']
+          then 'Idea meets money - solid, but you''ll want an Operator soon.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Backer', 'Connector']
+          then 'Capital meets sales/audience. Great for franchises or CPG.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Builder', 'Backer']
+          then 'Sweat meets Equity. Needs operational oversight eventually.'
+        when scout_lane = 'Builder'::public.user_lane and candidate_lane = 'Builder'::public.user_lane
+          then 'Crew Formation: Good for scaling labor, but missing business infrastructure.'
+        when scout_lane = 'Backer'::public.user_lane and candidate_lane = 'Backer'::public.user_lane
+          then 'Two wallets joining forces to fund a larger room.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Spark', 'Builder']
+          then 'Idea meets labor. Plucky, but chaotic without an Operator.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Connector', 'Builder']
+          then 'Sales meets product. Missing the operational middle layer.'
+        when scout_lane = 'Operator'::public.user_lane and candidate_lane = 'Operator'::public.user_lane
+          then 'Potential ''too many cooks'' situation, unless skills are vastly different.'
+        when array[scout_lane::text, candidate_lane::text] @> array['Spark', 'Connector']
+          then 'Idea meets sales. What are you selling if it''s not built yet?'
+        when scout_lane = 'Spark'::public.user_lane and candidate_lane = 'Spark'::public.user_lane
+          then 'Two idea people, no execution. The classic coffee shop trap.'
+        when scout_lane = 'Connector'::public.user_lane and candidate_lane = 'Connector'::public.user_lane
+          then 'Two salespeople, no product.'
+        else 'No special lane complementarity rule fired.'
+      end as lane_reason,
+      case when has_verified_capital and capital_ranges_overlap then 20 else 0 end as capital_score,
+      least(cardinality(matching_skills) * 10, 20) as skill_score,
+      least(cardinality(matching_industries) * 5, 15) as industry_score,
+      case
+        when scout_timeline_to_launch is not null
+          and timeline_to_launch is not null
+          and scout_timeline_to_launch = timeline_to_launch
+          then 5
+        else 0
+      end as timeline_score,
+      case
+        when scout_primary_goal is not null
+          and primary_goal is not null
+          and scout_primary_goal = primary_goal
+          then 5
+        else 0
+      end as goal_score,
+      case
+        when (
+          scout_primary_goal = 'Venture Scale/Exit'
+          and primary_goal = 'Generational Family Business'
+        ) or (
+          scout_primary_goal = 'Generational Family Business'
+          and primary_goal = 'Venture Scale/Exit'
+        )
+          then -15
+        else 0
+      end as endgame_penalty
+    from candidate_inputs
+  )
+  select
+    id as target_user_id,
+    (
+      location_score +
+      lane_score +
+      capital_score +
+      skill_score +
+      industry_score +
+      timeline_score +
+      goal_score +
+      endgame_penalty
+    )::integer as score,
+    jsonb_build_object(
+      'location_fit',
+        case
+          when project_environment = 'Digital' then '0 (Digital blueprint: distance ignored)'
+          when distance_from_blueprint is null then '0 (Location unavailable for one side)'
+          when distance_from_blueprint > 50
+            and work_preference in ('Open to Travel'::public.work_preference, 'Willing to Relocate'::public.work_preference)
+            then '0 (Outside 50 miles, but open to travel or relocate)'
+          when distance_from_blueprint > 50 then '-100 (Outside 50 miles and not travel-ready)'
+          else '+20 (Within 50 miles)'
+        end,
+      'lane_fit',
+        case when lane_score > 0 then '+' else '' end || lane_score::text || ' (' || lane_reason || ')',
+      'capital_overlap',
+        case
+          when capital_score > 0 then '+20 (Verified capital aligns with your needs)'
+          when has_verified_capital then '0 (Candidate has a Capital badge, but no requested range overlap)'
+          else '0 (No unexpired Capital badge on candidate)'
+        end,
+      'skill_match',
+        case
+          when skill_score > 0 then '+' || skill_score::text || ' (They bring ' || array_to_string(matching_skills, ', ') || ', which is exactly what you are looking for)'
+          else '0 (No direct skill lock-and-key yet)'
+        end,
+      'industry_match',
+        case
+          when industry_score > 0 then '+' || industry_score::text || ' (Both operating in ' || array_to_string(matching_industries, ', ') || ')'
+          else '0 (No shared industry tags yet)'
+        end,
+      'timeline_match',
+        case
+          when timeline_score > 0 then '+5 (Launch timeline matches)'
+          else '0 (Launch timeline is not aligned or is unknown)'
+        end,
+      'goal_match',
+        case
+          when goal_score > 0 then '+5 (Primary goal matches)'
+          else '0 (Primary goal is not aligned or is unknown)'
+        end,
+      'endgame_dealbreaker',
+        case
+          when endgame_penalty < 0 then '-15 (Venture Scale/Exit and Generational Family Business are conflicting endgames)'
+          else '0 (No endgame dealbreaker)'
+        end
+    ) as factors
+  from scored
+  order by 2 desc, 1;
+$$;
+
+grant execute on function public.match_candidates_for_blueprint(uuid, uuid) to authenticated;
 
 create table public.user_reports (
   id uuid primary key default gen_random_uuid(),
@@ -707,6 +1007,9 @@ grant select, insert, update on public.user_reports to authenticated;
 create index profiles_lane_idx on public.profiles(lane);
 create index profiles_location_idx on public.profiles(location_state, location_city);
 create index profiles_account_status_idx on public.profiles(account_status);
+create index profiles_skills_offered_idx on public.profiles using gin(skills_offered);
+create index profiles_skills_sought_idx on public.profiles using gin(skills_sought);
+create index profiles_industry_tags_idx on public.profiles using gin(industry_tags);
 create index verification_badges_user_idx on public.verification_badges(user_id);
 create index verification_badges_expiry_idx on public.verification_badges(expires_at);
 create index blueprints_creator_idx on public.blueprints(creator_id);

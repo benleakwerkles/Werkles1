@@ -2,6 +2,8 @@
 
 Use this file to brief Gemini, DeepSeek, Perplexity, or any other review agent on the current Werkles prototype.
 
+Current locked spec: Werkles v0.2 final master spec, May 20, 2026. Discard earlier partial handoffs.
+
 ## One-Sentence Product
 
 Werkles is business partner matching for builders, operators, backers, connectors, and sparks who want to start, buy, or scale Main Street businesses together.
@@ -12,7 +14,7 @@ Werkles is business partner matching for builders, operators, backers, connector
 - Hosting: Vercel
 - Repo: GitHub repo connected to Vercel
 - App type: static HTML/CSS/JavaScript prototype
-- Backend: none yet
+- Backend: Supabase schema and Vercel beta-signup API scaffold are in repo, not fully wired into the live UI yet
 - Persistence: browser `localStorage`
 - Next architecture: web-first, mobile-first responsive Next.js on Vercel with Supabase Postgres and Supabase Auth
 - Current files:
@@ -22,6 +24,8 @@ Werkles is business partner matching for builders, operators, backers, connector
   - `README.md`: project overview
   - `DEPLOY.md`: deploy notes
   - `vercel.json`: static deploy headers
+  - `supabase/migrations/202605200001_initial_werkles_schema.sql`: v0.2 schema, RLS, triggers, and matching function
+  - `supabase/admin_bootstrap.sql`: Camelot admin bootstrap after Auth signup/profile creation
 
 ## Architecture Decisions
 
@@ -35,6 +39,17 @@ Werkles is business partner matching for builders, operators, backers, connector
 - Verification: store scoped third-party verification receipts only, not raw SSNs, bank account numbers, full ID documents, or face images.
 - Monetization: subscription only for v0-v1. No transaction-based compensation, success fees, or referral fees tied to deals.
 - Design system: CSS tokens in `:root` are the source of truth. Tailwind is an implementation detail and future React Native must map to the same tokens.
+- Admins: authorization comes from `public.admin_users`; do not hardcode admin emails into RLS policies.
+
+## Locked Vendor Stack
+
+- Identity verification: Stripe Identity
+- Funds verification: Plaid Assets
+- Background checks: Checkr hosted flow, attorney/FCRA review required
+- Phone verification: Twilio Verify
+- Subscriptions: Stripe Billing
+- Analytics: PostHog
+- Push notifications: Expo Push, deferred to v1.5
 
 ## Product Thesis
 
@@ -98,6 +113,10 @@ Prefer:
 - Skills
 - Goals
 - Verification checks
+- Skills offered and sought
+- Industry tags
+- Timeline to launch
+- Primary goal
 
 ## Current Matching Heuristics
 
@@ -113,6 +132,8 @@ The prototype scores matches based on:
 - proof signal strength
 
 This is intentionally explainable. Do not replace it with opaque AI matching yet. Improve the logic only if the explanation remains legible to users.
+
+Production matching is scaffolded as `public.match_candidates_for_blueprint(p_blueprint_id, p_scout_user_id)`. It returns target IDs, scores, and explainable JSONB factors. It uses the Gemini-refined lane matrix, location gate, verified capital overlap, skills, industry tags, timeline, goal alignment, and endgame penalty. It never returns raw financial ranges.
 
 ## Compliance Frame
 
@@ -135,6 +156,12 @@ Werkles should not yet be framed as:
 - legal, tax, or investment advice
 
 All deals happen off-platform. Werkles does not solicit, recommend, structure, or facilitate any securities transaction, loan, investment, or sale of business. Any real investment, lending, equity, revenue-share, acquisition, background-check, or verification-retention workflow needs legal review before production.
+
+Required disclaimer for footer, Terms, and match cards:
+
+> Werkles is a partner discovery and verification platform. We do not facilitate any securities transaction, loan, investment, or sale of business. Werkles never holds or transmits funds.
+
+Phone collection requires explicit consent before phone verification or two-factor authentication. Execute DPAs with Stripe, Plaid, Twilio, PostHog, and Checkr before beta users.
 
 ## Proposed AI Team Roles
 
@@ -232,6 +259,15 @@ Ask every external model to respond in this structure:
 6. Add intro request storage and admin review.
 7. Add verification receipt/status fields without raw sensitive document storage.
 8. Validate the product with a narrow first market, such as one metro and one or two trades.
+
+## Camelot Admin Bootstrap
+
+Initial admin emails:
+
+- `shaunmroberts1230@gmail.com`
+- `ben.leak@kindsir.com`
+
+After those users create Supabase Auth accounts and profiles, run `supabase/admin_bootstrap.sql`. It inserts their UUIDs into `public.admin_users`; RLS policies read from that table.
 
 ## Copywriting Overrides
 
