@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+    <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+    <meta
+      name="description"
+      content="Werkles helps builders, operators, backers, connectors, and sparks find the missing piece for a real business."
+    >
+    <title>Werkles | Business partner matching</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Werkles home">
+        <span class="brand-mark image-mark">
+          <img src="/assets/werkles-mark.png" alt="" aria-hidden="true">
+        </span>
+        <span>
+          <strong>Werkles</strong>
+          <small>People who build together</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#people">People</a>
+        <a href="#matchboard">Matches</a>
+        <a href="#profile">Profile</a>
+        <a href="/proof.html">Proof</a>
+        <a href="#beta">Beta</a>
+      </nav>
+      <a class="header-cta" href="#profile">Start building</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">For the music makers with invoices due</p>
+          <h1>The World Belongs to the Builders.</h1>
+          <p>
+            Werkles helps skilled builders, operators, backers, connectors, and sparks
+            find the missing piece for a real business. Bring labor, craft, capital,
+            customers, discipline, or an idea worth proving. Meet people who can help
+            turn it into something that survives daylight.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-light" href="#profile">Name what you bring</a>
+            <a class="button button-ghost" href="#matchboard">See the match deck</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Werkles people-first signal">
+          <img src="/assets/werkles-logo.png" alt="Werkles logo">
+          <div class="hero-card-copy">
+            <strong id="heroMatchScore">86%</strong>
+            <span>strongest human fit</span>
+          </div>
+          <div class="mini-people" aria-hidden="true">
+            <span>B</span>
+            <span>O</span>
+            <span>C</span>
+            <span>+</span>
+          </div>
+        </aside>
+      </section>
+
+      <section id="people" class="people-strip" aria-label="Werkles people lanes">
+        <article>
+          <span>Builder</span>
+          <h2>Sweat, trust, field sense.</h2>
+          <p>You bring labor, craft, floor experience, crew respect, customer memory, or hard-earned repetition.</p>
+        </article>
+        <article>
+          <span>Operator</span>
+          <h2>The work has to run.</h2>
+          <p>You bring licenses, estimating, scheduling, equipment, delivery, and the judgment to keep promises.</p>
+        </article>
+        <article>
+          <span>Backer</span>
+          <h2>Money without a throne.</h2>
+          <p>You bring capital, credit, assets, or runway, and you want to stand beside real builders.</p>
+        </article>
+        <article>
+          <span>Connector</span>
+          <h2>The room needs a pulse.</h2>
+          <p>You bring sales, admin, books, hiring, relationships, customers, venues, or the ability to make people move.</p>
+        </article>
+        <article>
+          <span>Spark</span>
+          <h2>An opening worth proving.</h2>
+          <p>You bring an idea, lead, property, customer, or strange little chance that needs people and pressure.</p>
+        </article>
+      </section>
+
+      <section class="manifesto" aria-labelledby="manifestoTitle">
+        <div>
+          <p class="eyebrow">The magic of creation. The brutality of reality.</p>
+          <h2 id="manifestoTitle">Werkles is where the people who show up find each other.</h2>
+        </div>
+        <p>
+          A license is value. A clean set of books is value. A floor lead people actually
+          respect is value. Cash is value. A real opportunity, tested against reality, is value.
+          Nobody gets a throne. Everybody brings a charge.
+        </p>
+      </section>
+
+      <section id="matchboard" class="matchboard" aria-labelledby="matchTitle">
+        <div class="section-heading">
+          <p>Matchboard</p>
+          <h2 id="matchTitle">No crowds. One possible partner at a time.</h2>
+        </div>
+
+        <div class="match-layout">
+          <aside class="deck-rail" aria-label="Match filters">
+            <label class="field">
+              <span>Search</span>
+              <input id="searchInput" type="search" placeholder="plumbing, books, Cleveland">
+            </label>
+
+            <div class="segment-control" aria-label="Filter matches">
+              <button class="segment is-active" type="button" data-filter="all">All</button>
+              <button class="segment" type="button" data-filter="builder">Builders</button>
+              <button class="segment" type="button" data-filter="operator">Operators</button>
+              <button class="segment" type="button" data-filter="backer">Backers</button>
+              <button class="segment" type="button" data-filter="connector">Connectors</button>
+              <button class="segment" type="button" data-filter="spark">Sparks</button>
+            </div>
+
+            <div class="market-stats" aria-label="Builder snapshot">
+              <div><strong id="builderCount">0</strong><span>Builders</span></div>
+              <div><strong id="operatorCount">0</strong><span>Operators</span></div>
+              <div><strong id="backerCount">0</strong><span>Backers</span></div>
+              <div><strong id="introCount">0</strong><span>Intros</span></div>
+            </div>
+          </aside>
+
+          <article class="candidate-card" id="candidateCard" aria-live="polite"></article>
+
+          <aside class="deal-panel" aria-labelledby="dealPanelTitle">
+            <h2 id="dealPanelTitle">Human fit map</h2>
+            <canvas id="matchGraph" width="520" height="320" aria-label="Visual map of top partner matches"></canvas>
+            <div class="deck-buttons">
+              <button class="round-action" id="prevMatch" type="button" aria-label="Previous match">Back</button>
+              <button class="round-action loud" id="saveMatch" type="button">Shortlist</button>
+              <button class="round-action" id="nextMatch" type="button" aria-label="Next match">Next</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="profile" class="profile-studio" aria-labelledby="profileTitle">
+        <div class="section-heading">
+          <p>Your Signal</p>
+          <h2 id="profileTitle">Name what you bring. Name what you need.</h2>
+        </div>
+
+        <form id="profileForm" class="profile-grid">
+          <label class="field">
+            <span>Name</span>
+            <input id="profileName" type="text" value="Ben" autocomplete="name">
+          </label>
+
+          <label class="field">
+            <span>Phone</span>
+            <input id="profilePhone" type="tel" placeholder="Linked before activation" autocomplete="tel">
+          </label>
+
+          <label class="consent-line">
+            <input id="profilePhoneConsent" type="checkbox">
+            <span>I consent to phone verification for account security.</span>
+          </label>
+
+          <label class="field">
+            <span>Lane</span>
+            <select id="role">
+              <option value="builder">Builder</option>
+              <option value="operator">Operator</option>
+              <option value="backer">Backer</option>
+              <option value="connector">Connector</option>
+              <option value="spark">Spark</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Arena</span>
+            <select id="industry">
+              <option value="plumbing">Plumbing</option>
+              <option value="hvac">HVAC</option>
+              <option value="electrical">Electrical</option>
+              <option value="contracting">Contracting</option>
+              <option value="logistics">Logistics</option>
+              <option value="auto">Auto / diesel</option>
+              <option value="services">Local services</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>City</span>
+            <input id="profileCity" type="text" value="Cleveland" autocomplete="address-level2">
+          </label>
+
+          <label class="field">
+            <span>State</span>
+            <input id="profileState" type="text" value="OH" maxlength="2" autocomplete="address-level1">
+          </label>
+
+          <label class="field">
+            <span>Radius</span>
+            <input id="radius" type="number" min="5" max="500" step="5" value="75">
+          </label>
+
+          <label class="field money-field">
+            <span>Money you can risk</span>
+            <output id="capitalAvailableValue">$50k</output>
+            <input id="capitalAvailable" type="range" min="0" max="250000" step="5000" value="50000">
+          </label>
+
+          <label class="field money-field">
+            <span>Money you need</span>
+            <output id="capitalNeededValue">$0</output>
+            <input id="capitalNeeded" type="range" min="0" max="250000" step="5000" value="0">
+          </label>
+
+          <fieldset class="chip-grid">
+            <legend>Value on the table</legend>
+            <label><input type="checkbox" name="skills" value="field" checked> Field work</label>
+            <label><input type="checkbox" name="skills" value="license"> License</label>
+            <label><input type="checkbox" name="skills" value="sales" checked> Sales</label>
+            <label><input type="checkbox" name="skills" value="ops" checked> Ops</label>
+            <label><input type="checkbox" name="skills" value="admin"> Admin</label>
+            <label><input type="checkbox" name="skills" value="hiring"> Hiring</label>
+            <label><input type="checkbox" name="skills" value="books"> Books</label>
+            <label><input type="checkbox" name="skills" value="estimating"> Estimating</label>
+            <label><input type="checkbox" name="skills" value="customers"> Customers</label>
+            <label><input type="checkbox" name="skills" value="equipment"> Equipment</label>
+            <label><input type="checkbox" name="skills" value="idea"> Idea / lead</label>
+          </fieldset>
+
+          <fieldset class="chip-grid">
+            <legend>What you want to build toward</legend>
+            <label><input type="checkbox" name="goals" value="leave" checked> Leave employer</label>
+            <label><input type="checkbox" name="goals" value="start" checked> Start shop</label>
+            <label><input type="checkbox" name="goals" value="scale"> Scale shop</label>
+            <label><input type="checkbox" name="goals" value="buy"> Buy business</label>
+            <label><input type="checkbox" name="goals" value="equity"> Earn equity</label>
+            <label><input type="checkbox" name="goals" value="partner"> Find partner</label>
+          </fieldset>
+
+          <div class="profile-actions">
+            <button class="button button-dark" id="saveProfile" type="button">Save signal</button>
+            <button class="button button-outline" id="copyBrief" type="button">Copy brief</button>
+            <p id="profileStatus" class="status-line" role="status">Profile saves in this browser for now.</p>
+          </div>
+        </form>
+      </section>
+
+      <section class="operations-grid">
+        <article id="proof" class="ops-card">
+          <div class="card-heading">
+            <p>Proof Stack</p>
+            <h2>Werkles verifies you. Members see status, not your files.</h2>
+          </div>
+          <div class="gate-list" aria-label="Required account gate">
+            <span>Required: driver's license front</span>
+            <span>Required: driver's license back</span>
+            <span>Required: live face capture</span>
+            <span>Required: linked phone number</span>
+          </div>
+          <div class="verification-list">
+            <label><input type="checkbox" name="verify" value="licenseFront" checked disabled> Driver's license front</label>
+            <label><input type="checkbox" name="verify" value="licenseBack" checked disabled> Driver's license back</label>
+            <label><input type="checkbox" name="verify" value="faceCapture" checked disabled> Face capture</label>
+            <label><input type="checkbox" name="verify" value="phone" checked disabled> Phone link gate</label>
+            <label><input type="checkbox" name="verify" value="identity" checked> Identity</label>
+            <label><input type="checkbox" name="verify" value="funds" checked> Funds snapshot</label>
+            <label><input type="checkbox" name="verify" value="history"> Work history support</label>
+            <label><input type="checkbox" name="verify" value="license"> Licenses</label>
+            <label><input type="checkbox" name="verify" value="references"> Reference checks</label>
+          </div>
+          <p id="gateStatus" class="status-line" role="status">License front/back, face capture, and linked phone required before account activation.</p>
+          <p class="status-line"><span id="verifiedCount">6/9</span> prototype proof requirements and signals selected.</p>
+          <a class="button button-outline" href="/proof.html">How proof will work</a>
+        </article>
+
+        <article id="intros" class="ops-card">
+          <div class="card-heading">
+            <p>Intro Queue</p>
+            <h2>People worth opening the gate for.</h2>
+          </div>
+          <div id="introQueue" class="intro-queue empty">No intro requests yet.</div>
+          <button id="clearIntros" class="button button-outline" type="button">Clear queue</button>
+        </article>
+
+        <article id="beta" class="ops-card">
+          <div class="card-heading">
+            <p>Private Beta</p>
+            <h2>One city. Real people. Useful introductions.</h2>
+          </div>
+          <form id="betaForm" class="beta-form">
+            <label class="field">
+              <span>Email</span>
+              <input id="betaEmail" type="email" placeholder="you@example.com" required>
+            </label>
+            <label class="field">
+              <span>Lane</span>
+              <select id="betaRole">
+                <option value="builder">Builder</option>
+                <option value="operator">Operator</option>
+                <option value="backer">Backer</option>
+                <option value="connector">Connector</option>
+                <option value="spark">Spark</option>
+              </select>
+            </label>
+            <button class="button button-dark" type="submit">Request gated invite</button>
+            <p id="betaStatus" class="status-line" role="status">Production activation will require license front/back, face capture, and phone link.</p>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Werkles is a partner discovery and verification platform. We do not facilitate any securities transaction, loan, investment, or sale of business. Werkles never holds or transmits funds.</p>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

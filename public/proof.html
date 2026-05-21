@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+    <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+    <meta
+      name="description"
+      content="Werkles proof and document-handling standards for future identity, funds, license, work history, and reference verification."
+    >
+    <title>Werkles Proof | Verification and document security</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/#top" aria-label="Werkles home">
+        <span class="brand-mark image-mark">
+          <img src="/assets/werkles-mark.png" alt="" aria-hidden="true">
+        </span>
+        <span>
+          <strong>Werkles</strong>
+          <small>People who build together</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="/#people">People</a>
+        <a href="/#matchboard">Matches</a>
+        <a href="/#profile">Profile</a>
+        <a href="/proof.html">Proof</a>
+      </nav>
+      <a class="header-cta" href="/#beta">Join beta</a>
+    </header>
+
+    <main class="proof-main">
+      <section class="proof-hero">
+        <div>
+          <p class="eyebrow">Werkles verifies you</p>
+          <h1>Members do not verify each other.</h1>
+          <p>
+            Werkles should verify different facts with different levels of confidence. Partners
+            should see the proof method, status, scope, and date, not your raw bank statements,
+            IDs, tax records, customer lists, or private files.
+          </p>
+        </div>
+        <img src="/assets/werkles-logo.png" alt="Werkles logo">
+      </section>
+
+      <section class="proof-callout">
+        <strong>Current prototype boundary</strong>
+        <p>
+          Werkles does not currently accept, upload, process, or store sensitive financial,
+          driver's license, phone, identity, employment, tax, or business documents through this
+          website. Do not email or message us bank statements, driver's licenses, IDs, Social
+          Security numbers, tax returns, payroll files, customer lists, private contracts, or
+          background documents. The secure upload flow comes later.
+        </p>
+      </section>
+
+      <section class="proof-warning proof-gate">
+        <div>
+          <p class="eyebrow">Account gate</p>
+          <h2>No active member account without license front/back, face capture, and linked phone.</h2>
+        </div>
+        <p>
+          Werkles should block full membership until the person captures the front and back of a
+          driver's license, completes a live face capture, and links a phone number to the account.
+          Other members should only see that the gate was passed, with date and scope. They should
+          not see the license image, license number, date of birth, address, phone number, face
+          image, or verification vendor data.
+        </p>
+      </section>
+
+      <section class="proof-process proof-levels" aria-labelledby="proofStrengthTitle">
+        <div class="section-heading">
+          <p>Proof strength</p>
+          <h2 id="proofStrengthTitle">Not every proof badge means the same thing.</h2>
+        </div>
+
+        <div class="proof-matrix">
+          <article>
+            <strong>Source-checked</strong>
+            <p>
+              Strongest category. A driver's license front/back capture with live face match,
+              license lookup, vendor background check, phone link, or linked account snapshot can
+              be checked against a system of record.
+            </p>
+          </article>
+          <article>
+            <strong>Document-supported</strong>
+            <p>
+              Pay stubs, tax records, contracts, or statements can support a claim, but the badge
+              must say what was reviewed and when.
+            </p>
+          </article>
+          <article>
+            <strong>Point-in-time funds</strong>
+            <p>
+              Werkles can verify an account balance or statement contents as of a date. That does
+              not guarantee the money remains available or that the member will invest.
+            </p>
+          </article>
+          <article>
+            <strong>Reference-confirmed</strong>
+            <p>
+              References and work history are useful, but gameable. They should be labeled as
+              confirmed, supported, or attested, not treated like a bank balance or license.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="proof-grid" aria-label="Werkles proof principles">
+        <article class="proof-card">
+          <h2>We verify. Members do not inspect.</h2>
+          <p>
+            Werkles verification should create a badge, status, date, and confidence signal. It
+            should not expose sensitive files to matches.
+          </p>
+          <ul>
+            <li>Members see proof status, not documents.</li>
+            <li>Admins review only when required.</li>
+            <li>Every review action should be logged.</li>
+            <li>Verification can expire and require refresh.</li>
+          </ul>
+        </article>
+
+        <article class="proof-card">
+          <h2>Least document possible.</h2>
+          <p>
+            Werkles should collect the least sensitive evidence that answers the trust question.
+            A scoped proof signal is better than storing raw files.
+          </p>
+          <ul>
+            <li>Driver's license: front/back captured, not public ID display.</li>
+            <li>Face capture: identity match signal, not public face file.</li>
+            <li>Phone: linked account signal, not public phone display.</li>
+            <li>Funds: dated snapshot or range, not a guarantee.</li>
+            <li>License: active status as of lookup date.</li>
+            <li>References: confirmed source, not absolute truth.</li>
+          </ul>
+        </article>
+
+        <article class="proof-card">
+          <h2>Private storage, separate records.</h2>
+          <p>
+            If documents are ever stored, they belong in private object storage, not public site
+            files, GitHub, localStorage, email, chat, or a general profile table.
+          </p>
+          <ul>
+            <li>Encrypted in transit and at rest.</li>
+            <li>Private buckets with signed, expiring access.</li>
+            <li>Metadata stored separately from files.</li>
+            <li>Public profiles show only approved proof fields.</li>
+          </ul>
+        </article>
+
+        <article class="proof-card">
+          <h2>Access is narrow and logged.</h2>
+          <p>
+            Sensitive proof should be visible only to the verification role that needs it, for
+            the shortest time needed to complete review.
+          </p>
+          <ul>
+            <li>Least-privilege admin roles.</li>
+            <li>Audit logs for access and decisions.</li>
+            <li>Deletion or redaction after the review purpose.</li>
+            <li>No selling sensitive verification data.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="proof-process" aria-labelledby="processTitle">
+        <div class="section-heading">
+          <p>Future production flow</p>
+          <h2 id="processTitle">The intended proof architecture.</h2>
+        </div>
+
+        <ol class="proof-steps">
+          <li>
+            <strong>1. Ask for a proof category.</strong>
+            Werkles starts with the account gate: driver's license front, driver's license back,
+            live face capture, and linked phone. Then it requests any added category: funds
+            snapshot, license, background check, work history support, reference check, or business
+            record.
+          </li>
+          <li>
+            <strong>2. Prefer vendor verification.</strong>
+            Identity, background, license, and account checks should use trusted providers where
+            possible. Werkles should receive status, range, date, or result data instead of storing
+            more raw material than needed.
+          </li>
+          <li>
+            <strong>3. Store documents only when unavoidable.</strong>
+            Required files go into private encrypted storage with signed URLs, short access windows,
+            and metadata in a separate verification record.
+          </li>
+          <li>
+            <strong>4. Publish only the badge.</strong>
+            Other members see a Werkles proof badge, category, method, status, date, and scope.
+            They do not get the source documents.
+          </li>
+          <li>
+            <strong>5. Expire and delete.</strong>
+            Proof should have refresh dates, retention rules, and a deletion request path. Funds
+            snapshots, licenses, and background checks should age differently.
+          </li>
+        </ol>
+      </section>
+
+      <section class="proof-warning proof-boundary">
+        <div>
+          <p class="eyebrow">Trust boundary</p>
+          <h2>Proof is evidence, not a promise of future behavior.</h2>
+        </div>
+        <p>
+          Werkles should never imply that a member is honest forever, solvent forever, safe forever,
+          or guaranteed to close a deal. The honest promise is narrower and stronger: this fact was
+          checked by this method, against this source, at this time, and this is what members are
+          allowed to see.
+        </p>
+      </section>
+
+      <section class="proof-warning">
+        <div>
+          <p class="eyebrow">Do not send yet</p>
+          <h2>No sensitive documents by email, chat, text, or social DM.</h2>
+        </div>
+        <p>
+          Until the secure upload flow exists, users should not send Werkles sensitive proof files.
+          That includes bank statements, brokerage statements, tax returns, IDs, Social Security
+          numbers, payroll records, customer lists, private contracts, or personal background files.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Werkles is a partner discovery and verification platform. We do not facilitate any securities transaction, loan, investment, or sale of business. Werkles never holds or transmits funds.</p>
+    </footer>
+  </body>
+</html>
