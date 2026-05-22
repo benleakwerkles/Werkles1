@@ -9,13 +9,7 @@ export default function HomePage() {
     <>
       <header className="site-header">
         <Link className="brand" href="/" aria-label="Werkles home">
-          <span className="brand-mark image-mark">
-            <img src="/assets/werkles-mark-transparent.png" alt="" aria-hidden="true" />
-          </span>
-          <span>
-            <strong>{copy.brand}</strong>
-            <small>{copy.tagline}</small>
-          </span>
+          <img className="brand-wordmark" src="/assets/werkles-wordmark-new.png" alt={copy.brand} />
         </Link>
         <nav aria-label="Primary navigation">
           <Link href="#people">People</Link>
@@ -42,7 +36,7 @@ export default function HomePage() {
           </div>
 
           <aside className="hero-card" aria-label="Werkles people-first signal">
-            <img src="/assets/werkles-logo.png" alt="Werkles logo" />
+            <img src="/assets/werkles-wordmark-new.png" alt="Werkles logo" />
             <div className="hero-card-copy">
               <strong>v0.2</strong>
               <span>{copy.trust.badge}</span>
