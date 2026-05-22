@@ -24,7 +24,7 @@ export default function AuthCallbackPage() {
         return;
       }
 
-      router.replace("/dashboard/profile");
+      router.replace("/onboarding");
     }
 
     confirmAccount();

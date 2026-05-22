@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireUser } from "@/lib/supabase/request";
 import { copy } from "@/lib/copy";
+import { canRequestIntro, requireActiveMembership } from "@/lib/access-weight";
 
 const writableStatuses = new Set(copy.introStatuses);
 
@@ -40,6 +41,24 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const membership = await requireActiveMembership(auth.user.id);
+  if (!membership.ok) {
+    return NextResponse.json({ error: copy.access.membershipRequired }, { status: 402 });
+  }
+
+  const access = await canRequestIntro(auth.user.id, targetUserId);
+  if (!access.ok) {
+    return NextResponse.json(
+      {
+        error: copy.access.insufficientWeight,
+        title: copy.access.insufficientWeightTitle,
+        scout_weight: access.scoutWeight,
+        target_weight: access.targetWeight
+      },
+      { status: 403 }
+    );
+  }
+
   const { data, error } = await auth.supabase
     .from("intro_requests")
     .insert({
@@ -53,6 +72,12 @@ export async function POST(request: NextRequest) {
     .single();
 
   if (error) {
+    if (error.message.toLowerCase().includes("lightweight")) {
+      return NextResponse.json(
+        { error: copy.access.insufficientWeight, title: copy.access.insufficientWeightTitle },
+        { status: 403 }
+      );
+    }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 

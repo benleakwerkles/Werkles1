@@ -15,6 +15,7 @@ export default function HomePage() {
           <Link href="#people">People</Link>
           <Link href="#how">How</Link>
           <Link href="/proof">Proof</Link>
+          <Link href="/membership">Dues</Link>
           <Link href="/login">Login</Link>
           <Link href="#beta">Beta</Link>
         </nav>
@@ -38,7 +39,7 @@ export default function HomePage() {
           <aside className="hero-card" aria-label="Werkles people-first signal">
             <img className="brand-plate" src="/assets/werkles-brand-plate.png" alt="Create with trust. Build to thrive. Built on Trust." />
             <div className="hero-card-copy">
-              <strong>v0.2</strong>
+              <strong>v0.3</strong>
               <span>{copy.trust.badge}</span>
             </div>
             <div className="mini-people" aria-hidden="true">

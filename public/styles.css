@@ -1385,6 +1385,171 @@ input[type="checkbox"] {
   min-height: auto;
 }
 
+textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 11px 12px;
+  color: var(--ink);
+  background: #ffffff;
+  line-height: 1.45;
+}
+
+.onboarding-page,
+.membership-page {
+  color: var(--ink);
+}
+
+.onboarding-hero,
+.membership-hero {
+  display: grid;
+  gap: 10px;
+  width: min(100%, 980px);
+  padding: 20px;
+  border: 1px solid rgba(184, 115, 51, 0.24);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 239, 229, 0.88)),
+    url("assets/werkles-hero-foundry-bubbles.png") center / cover;
+  box-shadow: var(--shadow);
+}
+
+.onboarding-hero p,
+.membership-hero p,
+.membership-trust p,
+.door-card p,
+.plan-card p,
+.deep-audit-card p {
+  margin: 0;
+  max-width: 760px;
+  color: rgba(15, 23, 42, 0.74);
+  line-height: 1.55;
+}
+
+.onboarding-panel,
+.membership-trust,
+.deep-audit-card {
+  width: min(100%, 980px);
+}
+
+.first-weld-grid,
+.membership-grid,
+.door-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.first-weld-grid {
+  grid-template-columns: 160px minmax(220px, 1fr) 140px auto;
+  align-items: end;
+}
+
+.door-section {
+  display: grid;
+  gap: 14px;
+  width: min(100%, 1080px);
+}
+
+.door-grid,
+.membership-grid {
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+}
+
+.door-card,
+.plan-card,
+.deep-audit-card {
+  padding: 18px;
+}
+
+.door-card h3,
+.plan-card h2,
+.deep-audit-card h2 {
+  margin: 0;
+}
+
+.plan-card {
+  min-height: 310px;
+  align-content: space-between;
+}
+
+.plan-card-featured {
+  color: #ffffff;
+  border-color: rgba(52, 211, 153, 0.44);
+  background:
+    linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(32, 21, 17, 0.92)),
+    url("assets/werkles-brand-plate.png") center / cover;
+}
+
+.plan-card-featured p,
+.plan-card-featured .plan-kicker {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.plan-kicker {
+  margin: 0;
+  color: var(--copper);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trust-state-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trust-state-strip span {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  border: 1px solid rgba(184, 115, 51, 0.32);
+  border-radius: 999px;
+  padding: 0 11px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.74);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: capitalize;
+}
+
+.deep-audit-card {
+  color: #ffffff;
+  border-color: rgba(184, 115, 51, 0.5);
+  background:
+    linear-gradient(135deg, rgba(14, 15, 15, 0.92), rgba(15, 23, 42, 0.9)),
+    url("assets/werkles-trust-badge-plate.png") center / cover;
+}
+
+.verification-card {
+  width: min(100%, 980px);
+  padding: 18px;
+}
+
+.verification-card p {
+  margin: 0;
+  max-width: 780px;
+  color: rgba(15, 23, 42, 0.74);
+  line-height: 1.55;
+}
+
+.verification-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.deep-audit-card p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.deep-audit-button:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
 @media (max-width: 1120px) {
   .people-strip,
   .operations-grid,
@@ -1408,6 +1573,12 @@ input[type="checkbox"] {
   .profile-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .first-weld-grid,
+  .door-grid,
+  .membership-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 820px) {
@@ -1421,6 +1592,12 @@ input[type="checkbox"] {
   .profile-grid,
   .operations-grid,
   .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .first-weld-grid,
+  .door-grid,
+  .membership-grid {
     grid-template-columns: 1fr;
   }
 

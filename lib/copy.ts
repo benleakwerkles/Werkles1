@@ -79,6 +79,68 @@ export const copy = {
     loading: "Checking the floorboards.",
     success: "The knock has been made. Now we see who opens the door."
   },
+  onboarding: {
+    headline: "The First Weld",
+    subhead: "Three facts first. Then the machine can route you without asking for your life story at the gate.",
+    lane: "Lane",
+    arena: "Arena",
+    turf: "Turf",
+    doorsHeadline: "Choose your first door.",
+    doors: {
+      quickWeld: {
+        title: "The Quick Weld",
+        body: "Five rapid questions. Enough heat to make your dossier useful without turning this into a tax deposition.",
+        cta: "Run the Quick Weld"
+      },
+      fullAudit: {
+        title: "The Full Audit",
+        body: "Licenses, equipment, work history, capital readiness, and proof posture. Heavier file. Stronger signal.",
+        cta: "Start the Full Audit"
+      },
+      blueprint: {
+        title: "The Blueprint",
+        body: "Tell the machine what you are building in plain language. The poetry can have calluses.",
+        cta: "Open the Blueprint"
+      }
+    },
+    saved: "First weld set. The floor knows where to send you.",
+    zipFailed: "That turf did not resolve cleanly. Check the ZIP and try again."
+  },
+  membership: {
+    eyebrow: "Foundry Dues",
+    headline: "Membership unlocks the doors worth knocking on.",
+    subhead:
+      "Build the dossier for free. Browse the floor. When you are ready to request intros, trigger verification, and carry more weight, pay dues.",
+    monthly: "Monthly",
+    annual: "Lock the Joints",
+    checkout: "Step into the foundry",
+    processing: "Processing your membership. Stripe is stamping the brass plate.",
+    cancelled: "Checkout closed. The foundry door is still warm.",
+    trust:
+      "Membership unlocks access to our verification providers. It does not unlock verification itself - that depends on the credentials you actually have. Werkles cannot make anyone trustworthy. We just make claims harder to fake."
+  },
+  access: {
+    insufficientWeightTitle: "Insufficient Weight",
+    insufficientWeight:
+      "The other side is carrying a Heavyweight Dossier with live verification. Return to the foundry, complete the Full Audit, and secure your membership before knocking on this door.",
+    membershipRequired:
+      "Foundry Dues unlocks intro requests. Build the dossier for free, then secure your membership before knocking."
+  },
+  verification: {
+    requiresMembership:
+      "Verification requires active membership. Step into the foundry and lock your joints first.",
+    sandboxPrepared: "Sandbox Verified",
+    prepared: "Verification Prepared",
+    pending: "Inspecting the steel.",
+    failed: "Something didn't hold. Fix the claim or pull it out."
+  },
+  deepAudit: {
+    title: "Deep Audit",
+    body:
+      "For heavier claims, the API check is only the first clang. Manual lien, license, and background review will live here once the legal lane is cleared.",
+    cta: "Demand a Deep Audit ($150)",
+    placeholder: "Not live yet. This will become a one-time Stripe checkout and private admin queue."
+  },
   actions: {
     pending: "Checking the Blueprint",
     accept: "Lock the Joints",
@@ -91,6 +153,7 @@ export const copy = {
     introSent: "The knock has been made. Now we see who opens the door.",
     introDeclined: "They passed. Their loss, possibly. Keep moving.",
     verificationPending: "Inspecting the steel.",
+    verificationFailed: "Something didn't hold. Fix the claim or pull it out.",
     workspaceCreated: "The joint is locked. Try not to blow up the factory."
   },
   auth: {

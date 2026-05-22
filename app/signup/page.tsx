@@ -20,7 +20,7 @@ export default function SignupPage() {
       return;
     }
 
-    const { error } = await getSupabaseBrowser().auth.signUp({
+    const { data, error } = await getSupabaseBrowser().auth.signUp({
       email,
       password,
       options: {
@@ -28,7 +28,17 @@ export default function SignupPage() {
       }
     });
 
-    setStatus(error ? error.message : "Check your email, then come back to build your profile.");
+    if (error) {
+      setStatus(error.message);
+      return;
+    }
+
+    if (data.session) {
+      window.location.href = "/onboarding";
+      return;
+    }
+
+    setStatus("Check your email, then come back to make the first weld.");
   }
 
   return (

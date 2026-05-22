@@ -20,7 +20,7 @@ export default function LoginPage() {
       return;
     }
 
-    window.location.href = "/dashboard/profile";
+    window.location.href = "/onboarding";
   }
 
   return (

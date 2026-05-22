@@ -2,7 +2,7 @@
 
 This document is the current source of truth for architecture, monetization boundaries, and cross-agent working assumptions.
 
-Current locked spec: Werkles v0.2 final spec and build instructions, May 21, 2026. This supersedes earlier AI handoffs.
+Current locked spec: Werkles v0.3 clean master spec, May 22, 2026. ADR-001, Compliance One-Pager v0.1, and Copy Ratification v0.1 remain in force where they do not conflict with v0.3.
 
 ## Platform
 
@@ -34,7 +34,7 @@ Members see proof status, not source documents.
 
 ## Monetization Boundary
 
-For v0-v1, monetization is subscription only.
+For v0-v1, primary monetization is subscription only through Foundry Dues / Membership.
 
 Werkles should not take:
 
@@ -45,6 +45,12 @@ Werkles should not take:
 - commissions on investments, loans, acquisitions, or business sales
 
 This is a compliance boundary, not just a pricing preference.
+
+Prepared but not fully built secondary engines:
+
+- Tool Shed: vetted vendors buy monthly floor space by arena and turf. Fees must remain flat placement fees, not compensation tied to a user's off-platform outcome.
+- Deep Audit: premium manual verification review with a flat one-time fee. Attorney review is required before production because background/license/lien workflows can trigger notice, consent, retention, and adverse-action obligations.
+- Firing a Flare: future one-time visibility boost for a blueprint. It must remain platform visibility, not a paid promise of capital, intro success, or transaction outcome.
 
 ## Compliance Frame
 
@@ -89,6 +95,18 @@ Locked v0 vendor choices:
 Do not add money movement, lending, securities, broker-dealer, or deal-facilitation features in v0-v1.
 
 ## Product Language
+
+V0.3 language guardrails ban these user-facing terms except inside required legal disclaimers or attorney-approved policy text:
+
+- pitch
+- raise
+- fund / invest / investment
+- deal room / syndicated deal / syndicate
+- return / ROI / equity
+- loan opportunity
+- broker / intermediary / advisor
+
+The word `Syndicate` must not appear in user-facing product copy or navigation.
 
 Approved action copy:
 
@@ -147,6 +165,22 @@ The function returns `target_user_id`, integer `score`, and explainable `factors
 - blocking and quarantine exclusion
 
 It must never return raw financial ranges.
+
+## Access Weight
+
+Access weight is server-derived through `public.access_weight(p_user_id uuid)`.
+
+- Lightweight: quick weld, free tier, no live verification
+- Middleweight: Full Audit / Blueprint completed, or active Membership
+- Heavyweight: live ID verification, live asset verification, and active Membership
+
+The database enforces the first barricade on intro requests: Lightweight users cannot target Heavyweight users. Future contact or message tables must apply the same restrictive policy.
+
+## Membership And Verification
+
+Foundry Dues uses Stripe Billing. Hosted checkout starts the subscription, but the success page never updates profile state. The Stripe webhook is the source of truth for `membership_tier`, `subscription_status`, `stripe_customer_id`, `stripe_subscription_id`, and `current_period_end`.
+
+Verification provider triggers are paid-gated server-side. If the user is not an active member, the API returns `402 Payment Required`. Current verification routes are sandbox stubs and must store only receipt IDs/status flags, never raw documents, SSNs, account numbers, or full reports.
 
 ## Camelot Admin Bootstrap
 
