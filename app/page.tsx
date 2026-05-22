@@ -9,7 +9,7 @@ export default function HomePage() {
     <>
       <header className="site-header">
         <Link className="brand" href="/" aria-label="Werkles home">
-          <img className="brand-wordmark" src="/assets/werkles-wordmark-new.png" alt={copy.brand} />
+          <img className="brand-wordmark" src="/assets/werkles-word-only.png" alt={copy.brand} />
         </Link>
         <nav aria-label="Primary navigation">
           <Link href="#people">People</Link>

@@ -12,11 +12,11 @@
   --copper-dark: #76441f;
   --gold: #d4af37;
   --cream: #f6efe5;
-  --green: #34d399;
+  --green: #2fbf9d;
   --teal: #0ea5b7;
   --blue: #38bdf8;
-  --purple: #7c3aed;
-  --pink: #ff4fa7;
+  --purple: #5b46c8;
+  --pink: #c65b91;
   --coral: #c8612c;
   --acid: #d6ff59;
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
@@ -92,7 +92,7 @@ a {
 
 .brand-wordmark {
   display: block;
-  width: min(228px, 42vw);
+  width: min(188px, 42vw);
   height: 54px;
   border-radius: 6px;
   object-fit: contain;
@@ -225,10 +225,10 @@ nav a {
   border-radius: var(--radius);
   color: #ffffff;
   background:
-    linear-gradient(100deg, rgba(10, 9, 8, 0.96), rgba(30, 21, 17, 0.82) 48%, rgba(8, 15, 18, 0.72)),
-    radial-gradient(circle at 78% 16%, rgba(184, 115, 51, 0.28), transparent 20rem),
-    radial-gradient(circle at 87% 76%, rgba(52, 211, 153, 0.18), transparent 24rem),
-    url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=82");
+    linear-gradient(100deg, rgba(7, 7, 7, 0.98), rgba(20, 16, 13, 0.88) 44%, rgba(8, 10, 11, 0.62)),
+    radial-gradient(circle at 78% 18%, rgba(184, 115, 51, 0.2), transparent 20rem),
+    radial-gradient(circle at 88% 74%, rgba(47, 191, 157, 0.1), transparent 24rem),
+    url("/assets/werkles-hero-foundry-bubbles.png");
   background-position: center;
   background-size: cover;
   box-shadow: var(--glow);
@@ -330,7 +330,7 @@ nav a {
 
 .hero-promise strong,
 .hero-promise em {
-  color: var(--green);
+  color: #41c4a8;
   font-style: normal;
 }
 
@@ -519,7 +519,7 @@ nav a {
   position: absolute;
   inset: 0 0 auto;
   height: 3px;
-  background: linear-gradient(90deg, var(--purple), var(--green), var(--pink));
+  background: linear-gradient(90deg, var(--copper), var(--green), rgba(91, 70, 200, 0.62));
 }
 
 .people-strip span {
@@ -705,7 +705,7 @@ nav a {
   position: absolute;
   inset: 0 0 auto;
   height: 10px;
-  background: linear-gradient(90deg, var(--green), var(--gold), var(--pink), var(--blue), var(--coral));
+  background: linear-gradient(90deg, var(--copper), var(--gold), var(--green), rgba(91, 70, 200, 0.58));
 }
 
 .candidate-top {
