@@ -215,7 +215,7 @@ nav a {
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) minmax(260px, 380px);
+  grid-template-columns: minmax(320px, 1fr) minmax(300px, 520px);
   gap: 20px;
   align-items: end;
   min-height: calc(100vh - 104px);
@@ -353,7 +353,7 @@ nav a {
   z-index: 1;
   display: grid;
   gap: 12px;
-  min-height: 230px;
+  min-height: 260px;
   padding: 22px;
   border: 1px solid rgba(184, 115, 51, 0.42);
   border-radius: var(--radius);
@@ -366,11 +366,28 @@ nav a {
 
 .hero-card img {
   width: 100%;
-  max-width: 310px;
+  max-width: 100%;
   justify-self: center;
   border-radius: 8px;
   background: #11100f;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+}
+
+.brand-plate {
+  aspect-ratio: 1328 / 760;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(184, 115, 51, 0.28);
+}
+
+.trust-plate {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid rgba(184, 115, 51, 0.34);
+  border-radius: 8px;
+  background: #11100f;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.22);
 }
 
 .hero-card-copy {
@@ -1071,7 +1088,7 @@ input[type="checkbox"] {
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) minmax(180px, 280px);
+  grid-template-columns: minmax(320px, 1fr) minmax(260px, 460px);
   gap: 24px;
   align-items: center;
   min-height: 58vh;
@@ -1103,10 +1120,10 @@ input[type="checkbox"] {
 }
 
 .proof-hero img {
-  width: min(100%, 260px);
+  width: min(100%, 420px);
   justify-self: center;
   border-radius: 8px;
-  background: #ffffff;
+  background: #11100f;
   box-shadow: 0 20px 54px rgba(17, 19, 15, 0.28);
 }
 

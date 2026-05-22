@@ -36,7 +36,7 @@ export default function HomePage() {
           </div>
 
           <aside className="hero-card" aria-label="Werkles people-first signal">
-            <img src="/assets/werkles-wordmark-new.png" alt="Werkles logo" />
+            <img className="brand-plate" src="/assets/werkles-brand-plate.png" alt="Create with trust. Build to thrive. Built on Trust." />
             <div className="hero-card-copy">
               <strong>v0.2</strong>
               <span>{copy.trust.badge}</span>
@@ -99,6 +99,7 @@ export default function HomePage() {
               <p>Proof Stack</p>
               <h2>{copy.microcopy.verificationPending}</h2>
             </div>
+            <img className="trust-plate" src="/assets/werkles-trust-badge-plate.png" alt={copy.trust.badge} />
             <div className="gate-list" aria-label="Required account gate">
               <span>Driver&apos;s license front</span>
               <span>Driver&apos;s license back</span>

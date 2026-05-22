@@ -15,6 +15,10 @@ export const metadata: Metadata = {
       follow: false,
       noimageindex: true
     }
+  },
+  icons: {
+    icon: "/assets/werkles-app-icon-board.png",
+    apple: "/assets/werkles-app-icon-board.png"
   }
 };
 
