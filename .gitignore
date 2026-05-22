@@ -1,4 +1,7 @@
 dist/
+node_modules/
+.next/
+tsconfig.tsbuildinfo
 werkles-site.zip
 netlify.toml
 server.log
