@@ -8,6 +8,7 @@ const {
   PUBLIC_BASE_URL,
   GHOST_FORGE_API_KEY,
   ANTHROPIC_API_KEY,
+  ANTHROPIC_MODEL = "claude-3-5-haiku-20241022",
   REPLICATE_API_TOKEN,
   REPLICATE_WEBHOOK_SECRET,
   DEFAULT_REPLICATE_MODEL = "ideogram-ai/ideogram-v3-quality",
@@ -392,7 +393,7 @@ async function generatePromptsWithClaude(request) {
       "content-type": "application/json"
     },
     body: JSON.stringify({
-      model: "claude-3-5-haiku-latest",
+      model: ANTHROPIC_MODEL,
       max_tokens: 2500,
       temperature: 0.5,
       system,

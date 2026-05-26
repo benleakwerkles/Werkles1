@@ -30,6 +30,7 @@ PORT=3000
 PUBLIC_BASE_URL=https://your-ghost-forge-worker.example.com
 GHOST_FORGE_API_KEY=replace-with-long-random-secret
 ANTHROPIC_API_KEY=replace-with-claude-api-key
+ANTHROPIC_MODEL=claude-3-5-haiku-20241022
 REPLICATE_API_TOKEN=replace-with-replicate-api-token
 REPLICATE_WEBHOOK_SECRET=replace-with-replicate-webhook-secret
 DEFAULT_REPLICATE_MODEL=ideogram-ai/ideogram-v3-quality
@@ -130,6 +131,7 @@ curl -X POST "$PUBLIC_BASE_URL/batch/create" \
 - Prefer `MODEL_COSTS_JSON` for every model you allow, for example `{"ideogram-ai/ideogram-v3-quality":0.09}`.
 - Claude request limiting is per worker process through `MAX_BATCH_REQUESTS_PER_HOUR`, plus daily estimated Claude spend in Supabase.
 - Cost estimates are conservative scaffolding, not invoice-grade accounting.
+- Use a stable dated Anthropic model name for `ANTHROPIC_MODEL`. The default is `claude-3-5-haiku-20241022`.
 
 ## Pre-Claude Budget Retest
 
