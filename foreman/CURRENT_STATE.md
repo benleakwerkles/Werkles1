@@ -154,7 +154,10 @@ Status: active local cockpit as of 2026-05-25.
 - Root cause: running worker hardcoded `claude-3-5-haiku-latest`.
 - Local patch applied:
   - `ANTHROPIC_MODEL` env/default support added.
-  - Default set to stable dated model `claude-3-5-haiku-20241022`.
+  - First default `claude-3-5-haiku-20241022` still returned 404 in this account.
+  - Codex queried Anthropic `/v1/models` from Render without printing the API key.
+  - Account-available Haiku model found: `claude-haiku-4-5-20251001`.
+  - Default updated to `claude-haiku-4-5-20251001`.
   - README and Render checklist updated.
 - Local check: `node --check ghost-forge-worker/server.mjs` passed.
 - Next gate: `[AWAITING HUMAN GATE: GHOST_FORGE_MODEL_PATCH_PUSH_DEPLOY_APPROVAL]`

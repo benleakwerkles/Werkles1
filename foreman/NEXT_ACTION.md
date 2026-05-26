@@ -19,8 +19,11 @@ Interpretation:
 - The request reached the Ghost Forge worker.
 - It failed before Replicate image generation.
 - No image was produced.
-- The running worker is using a hardcoded Anthropic model alias: `claude-3-5-haiku-latest`.
-- Local repo patch now makes the Anthropic model configurable and defaults to the stable dated model: `claude-3-5-haiku-20241022`.
+- The original running worker used a hardcoded Anthropic model alias: `claude-3-5-haiku-latest`.
+- First local patch made the model configurable and defaulted to `claude-3-5-haiku-20241022`, but the Anthropic account also returned 404 for that model.
+- Codex queried the account's `/v1/models` endpoint from Render without printing the API key.
+- Available IDs included `claude-haiku-4-5-20251001`.
+- Local repo patch now defaults `ANTHROPIC_MODEL` to account-available Haiku model `claude-haiku-4-5-20251001`.
 - Local syntax check passed with `node --check ghost-forge-worker/server.mjs`.
 
 Files patched locally:

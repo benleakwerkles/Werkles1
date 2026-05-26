@@ -6,7 +6,7 @@ Set these in Render Dashboard. Do not paste values into Codex or chat.
 
 - [x] `GHOST_FORGE_API_KEY` saved privately by Ben
 - [x] `ANTHROPIC_API_KEY` saved privately by Ben
-- [ ] `ANTHROPIC_MODEL=claude-3-5-haiku-20241022`
+- [ ] `ANTHROPIC_MODEL=claude-haiku-4-5-20251001`
 - [x] `REPLICATE_API_TOKEN` saved privately by Ben
 - [x] `REPLICATE_WEBHOOK_SECRET` saved privately by Ben
 - [x] `SUPABASE_URL` saved privately by Ben

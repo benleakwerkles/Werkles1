@@ -12,6 +12,7 @@ Use this inbox for charges that are real but not clean enough to put directly in
 | 2026-05-25 | Midjourney | TBD | Unknown | Werkles, Inc (pending) | Amount and payment source not confirmed | Log in Werkles after receipt/plan confirmation | Needs receipt | Ben statement | Ben said Midjourney is already paid and may still be useful for asset work. |
 | 2026-05-25 | Render | 7.00 | Unknown | Werkles, Inc (pending) | Payment source not confirmed | Keep in Werkles; reimbursement/contribution treatment TBD if paid personally | Needs payment-source classification | Ben statement | Render Starter for `werkles-ghost-forge1`. |
 | 2026-05-25 | Anthropic | 0.02 | Unknown | Werkles, Inc (pending) | Failed API attempt may or may not bill; internal reserve was recorded before model 404 | Reconcile against Anthropic billing later | Needs provider reconciliation | Render shell output | No image generated; error was `claude-3-5-haiku-latest` 404. |
+| 2026-05-25 | Anthropic | 0.02 | Unknown | Werkles, Inc (pending) | Failed retry may or may not bill; internal reserve was recorded before model 404 | Reconcile against Anthropic billing later | Needs provider reconciliation | Render shell output | No image generated; error was `claude-3-5-haiku-20241022` 404. |
 
 ## Inbox Rules
 
