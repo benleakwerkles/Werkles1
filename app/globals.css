@@ -1,1 +1,1697 @@
 @import "../styles.css";
+
+/* Brightened workshop v0.4 — warm paper panels + visible forge atmosphere */
+
+:root {
+  --werkles-draft-hero: url("/assets/draft/ghost-forge/werkles-draft-hero-foundry-v0.1.png");
+  --werkles-draft-proof: url("/assets/draft/ghost-forge/werkles-draft-proof-trust-v0.1.png");
+  --werkles-copper-frame: rgba(159, 102, 51, 0.46);
+  --werkles-copper-frame-soft: rgba(159, 102, 51, 0.28);
+  --werkles-workshop-paper: #f6efe5;
+  --werkles-workshop-paper-elevated: #fffaf2;
+  --werkles-ink-on-paper: #2c231d;
+  --werkles-ink-muted-on-paper: #5c4a3a;
+  --werkles-cockpit-panel:
+    linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(246, 239, 229, 0.98));
+  --panel: var(--werkles-workshop-paper);
+  --paper: var(--werkles-workshop-paper-elevated);
+  --ink: var(--werkles-ink-on-paper);
+  --cream: var(--werkles-ink-on-paper);
+  --line: rgba(159, 102, 51, 0.34);
+  --site-header-scroll-offset: 7.25rem;
+}
+
+html {
+  scroll-padding-top: var(--site-header-scroll-offset);
+}
+
+#top,
+#people,
+#how,
+#beta,
+#forge-preview {
+  scroll-margin-top: var(--site-header-scroll-offset);
+}
+
+body {
+  color: var(--werkles-ink-on-paper);
+  background:
+    radial-gradient(circle at 10% 12%, rgba(246, 173, 85, 0.16), transparent 22rem),
+    radial-gradient(circle at 88% 8%, rgba(24, 197, 174, 0.1), transparent 20rem),
+    linear-gradient(180deg, #ebe2d4 0%, #f6efe5 480px, #f3eadc 100%);
+}
+
+.site-header {
+  color: var(--werkles-ink-on-paper);
+  background:
+    linear-gradient(180deg, rgba(255, 252, 247, 0.94), rgba(246, 239, 229, 0.9));
+  border-color: rgba(159, 102, 51, 0.38);
+  box-shadow: 0 12px 36px rgba(44, 35, 29, 0.1);
+}
+
+.site-header nav a {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.site-header nav a:hover {
+  color: var(--werkles-violet-deep);
+}
+
+.site-footer {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+/* Warm paper panels — middle path vs dark cockpit */
+.ops-card,
+.deck-rail,
+.candidate-card,
+.deal-panel,
+.profile-studio,
+.auth-panel,
+.onboarding-hero,
+.onboarding-panel,
+.membership-hero,
+.membership-trust,
+.door-card,
+.plan-card,
+.pricing-section,
+.profile-editor,
+.verification-card,
+.deep-audit-card,
+.manifesto .how-steps article,
+.people-strip article,
+.proof-callout,
+.proof-card,
+.proof-process,
+.proof-warning,
+.proof-levels,
+.intro-item,
+.candidate-empty {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+  box-shadow: 0 14px 36px rgba(44, 35, 29, 0.1);
+}
+
+.membership-hero,
+.onboarding-hero,
+.pricing-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--werkles-cockpit-panel);
+}
+
+.membership-hero::before,
+.onboarding-hero::before,
+.pricing-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background:
+    linear-gradient(125deg, rgba(246, 239, 229, 0.88), rgba(246, 239, 229, 0.55)),
+    var(--werkles-draft-hero) center / cover;
+}
+
+.membership-hero > *,
+.onboarding-hero > *,
+.pricing-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.membership-hero p,
+.onboarding-hero p,
+.membership-trust p,
+.door-card p,
+.plan-card p,
+.deep-audit-card p,
+.pricing-section p,
+.auth-panel p,
+.ops-card p,
+.candidate-card p,
+.status-line,
+.compliance-note {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.card-heading p,
+.eyebrow,
+.plan-kicker {
+  color: var(--werkles-copper);
+}
+
+.button-outline {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame);
+  background: rgba(255, 252, 247, 0.88);
+}
+
+.dashboard-main,
+.membership-page,
+.pricing-page,
+.onboarding-page {
+  color: var(--werkles-ink-on-paper);
+}
+
+.dashboard-nav a {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(44, 35, 29, 0.72);
+}
+
+.field span,
+.chip-grid legend {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.field input,
+.field select,
+.field textarea,
+textarea {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(255, 252, 247, 0.96);
+  caret-color: var(--werkles-teal-deep);
+}
+
+.field input::placeholder,
+.field textarea::placeholder,
+textarea::placeholder {
+  color: rgba(244, 226, 177, 0.72);
+  opacity: 1;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+textarea:focus {
+  color: var(--werkles-text-primary);
+  border-color: rgba(103, 46, 237, 0.58);
+  background: rgba(5, 4, 4, 0.98);
+  outline: 2px solid rgba(103, 46, 237, 0.42);
+  outline-offset: 1px;
+}
+
+.field select option {
+  color: var(--werkles-text-primary);
+  background: var(--werkles-workshop-night);
+}
+
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus,
+.field textarea:-webkit-autofill,
+.field textarea:-webkit-autofill:hover,
+.field textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--werkles-text-primary);
+  box-shadow: 0 0 0 1000px rgba(5, 4, 4, 0.98) inset;
+  transition: background-color 99999s ease-out 0s;
+}
+
+.operations-grid .ops-card .field input,
+.operations-grid .ops-card .field select,
+.operations-grid .ops-card .field textarea {
+  color: var(--werkles-text-primary);
+  background: rgba(5, 4, 4, 0.92);
+}
+
+.operations-grid .ops-card .field span {
+  color: var(--werkles-text-secondary);
+}
+
+.consent-line span {
+  color: rgba(244, 226, 177, 0.86);
+}
+
+.proof-card li,
+.proof-matrix article,
+.proof-steps li {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(44, 35, 29, 0.72);
+}
+
+.proof-callout strong {
+  color: var(--werkles-ember);
+}
+
+/* Draft Site Asset + UI Pass v0.1 — scoped overrides only */
+
+.draft-review-badge {
+  width: fit-content;
+  max-width: min(100%, 720px);
+  margin: 0 auto 12px;
+  padding: 8px 12px;
+  border: 1px solid rgba(159, 102, 51, 0.28);
+  border-radius: 999px;
+  color: var(--werkles-ink-muted-on-paper);
+  background: rgba(255, 252, 247, 0.88);
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.foundry-cockpit {
+  min-height: 100vh;
+  color: var(--werkles-ink-on-paper);
+}
+
+.foundry-cockpit .site-header,
+.foundry-cockpit .dashboard-nav a,
+.foundry-cockpit .ops-card,
+.foundry-cockpit .candidate-card,
+.foundry-cockpit .plan-card,
+.foundry-cockpit .pricing-card,
+.foundry-cockpit .billing-panel,
+.foundry-cockpit .membership-trust,
+.foundry-cockpit .crucible-hero-card,
+.foundry-cockpit .verification-workflow-card {
+  border-color: var(--werkles-copper-frame-soft);
+}
+
+.foundry-cockpit .dashboard-main,
+.foundry-cockpit .membership-page,
+.foundry-cockpit .pricing-page,
+.foundry-cockpit .proof-main {
+  color: var(--werkles-text-primary);
+}
+
+.foundry-cockpit .dashboard-nav a {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(44, 35, 29, 0.72);
+}
+
+.foundry-cockpit .ops-card,
+.foundry-cockpit .candidate-card,
+.foundry-cockpit .plan-card,
+.foundry-cockpit .pricing-card,
+.foundry-cockpit .billing-panel,
+.foundry-cockpit .membership-trust,
+.foundry-cockpit .crucible-hero-card,
+.foundry-cockpit .verification-workflow-card,
+.foundry-cockpit .pricing-section {
+  color: var(--werkles-text-primary);
+  background: var(--werkles-cockpit-panel);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.foundry-cockpit .membership-hero,
+.foundry-cockpit .pricing-hero,
+.foundry-cockpit .crucible-hero-card {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--werkles-copper-frame);
+}
+
+.foundry-cockpit .membership-hero::before,
+.foundry-cockpit .pricing-hero::before,
+.foundry-cockpit .crucible-hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  background:
+    linear-gradient(125deg, rgba(5, 4, 4, 0.92), rgba(25, 24, 23, 0.72)),
+    var(--werkles-draft-hero) center / cover;
+}
+
+.foundry-cockpit .membership-hero > *,
+.foundry-cockpit .pricing-hero > *,
+.foundry-cockpit .crucible-hero-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.foundry-cockpit .membership-hero p,
+.foundry-cockpit .pricing-hero p,
+.foundry-cockpit .plan-card p,
+.foundry-cockpit .pricing-card p,
+.foundry-cockpit .billing-panel p,
+.foundry-cockpit .membership-trust p,
+.foundry-cockpit .status-line {
+  color: rgba(244, 226, 177, 0.82);
+}
+
+.foundry-cockpit .plan-kicker,
+.foundry-cockpit .card-heading p,
+.foundry-cockpit .eyebrow {
+  color: var(--werkles-ember);
+}
+
+.foundry-cockpit .button-outline {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame);
+  background: rgba(44, 35, 29, 0.62);
+}
+
+.foundry-cockpit .plan-card-featured,
+.foundry-cockpit .pricing-card-featured {
+  border-color: rgba(103, 46, 237, 0.52);
+  box-shadow:
+    inset 0 0 0 1px rgba(24, 197, 174, 0.16),
+    0 20px 54px rgba(0, 0, 0, 0.34);
+}
+
+.foundry-cockpit .pricing-table > span {
+  color: var(--werkles-text-secondary);
+}
+
+.foundry-cockpit .pricing-row strong {
+  color: var(--werkles-text-primary);
+}
+
+.foundry-cockpit .pricing-row > * {
+  color: rgba(244, 226, 177, 0.78);
+}
+
+.foundry-cockpit .compliance-note {
+  color: var(--werkles-text-muted);
+}
+
+.foundry-cockpit .gate-list span {
+  color: var(--werkles-text-primary);
+  border-color: rgba(95, 209, 120, 0.28);
+  background: rgba(1, 94, 81, 0.18);
+}
+
+.foundry-cockpit .trust-state-strip span {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(44, 35, 29, 0.72);
+}
+
+.foundry-cockpit .field span,
+.foundry-cockpit .field input {
+  color: var(--werkles-text-primary);
+}
+
+.foundry-cockpit .field input {
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(5, 4, 4, 0.72);
+}
+
+.foundry-cockpit .candidate-top h2,
+.foundry-cockpit .verified-tag,
+.foundry-cockpit .tag {
+  color: var(--werkles-text-primary);
+}
+
+.foundry-cockpit .score {
+  color: var(--werkles-owl-eye-green);
+  border-color: rgba(95, 209, 120, 0.34);
+  background: rgba(1, 94, 81, 0.22);
+}
+
+.hero.hero--draft-v01 {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame);
+  background:
+    linear-gradient(112deg, rgba(246, 239, 229, 0.55) 0%, rgba(246, 239, 229, 0.2) 42%, rgba(44, 35, 29, 0.35) 100%),
+    radial-gradient(circle at 78% 22%, rgba(159, 102, 51, 0.22), transparent 22rem),
+    radial-gradient(circle at 12% 78%, rgba(2, 145, 126, 0.14), transparent 18rem),
+    var(--werkles-draft-hero) center / cover;
+  box-shadow: 0 22px 56px rgba(44, 35, 29, 0.14);
+}
+
+.hero.hero--draft-v01 h1,
+.hero.hero--draft-v01 .hero-promise {
+  color: var(--werkles-ink-on-paper);
+  text-shadow: none;
+}
+
+.hero.hero--draft-v01 .hero-copy p:not(.eyebrow),
+.hero.hero--draft-v01 .hero-trust {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.hero.hero--draft-v01 .button-ghost {
+  color: var(--werkles-ink-on-paper);
+  border-color: rgba(159, 102, 51, 0.42);
+  background: rgba(255, 252, 247, 0.72);
+}
+
+.home-draft-badge {
+  margin: 0 22px 8px;
+}
+
+main .proof-warning.proof-boundary {
+  color: var(--werkles-ink-on-paper);
+  border-color: rgba(95, 209, 120, 0.32);
+  background:
+    linear-gradient(135deg, rgba(255, 252, 247, 0.92), rgba(246, 239, 229, 0.82)),
+    var(--werkles-draft-proof) center / cover;
+  box-shadow: 0 14px 36px rgba(44, 35, 29, 0.1);
+}
+
+main .proof-warning.proof-boundary p,
+main .proof-warning.proof-boundary h2 {
+  color: var(--werkles-ink-on-paper);
+}
+
+main .proof-warning.proof-boundary .trust-badge {
+  color: var(--werkles-teal-deep);
+  border-color: rgba(2, 145, 126, 0.38);
+  background: rgba(24, 197, 174, 0.12);
+}
+
+.operations-grid .ops-card {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+}
+
+.operations-grid .ops-card p,
+.operations-grid .ops-card .status-line {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.operations-grid .ops-card .button-outline {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame);
+  background: rgba(255, 252, 247, 0.92);
+}
+
+.foundry-cockpit .proof-hero {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame);
+  background:
+    linear-gradient(115deg, rgba(5, 4, 4, 0.92) 0%, rgba(25, 24, 23, 0.78) 52%, rgba(2, 145, 126, 0.18) 100%),
+    var(--werkles-draft-proof) center / cover;
+}
+
+.foundry-cockpit .proof-hero p:not(.eyebrow) {
+  color: rgba(244, 226, 177, 0.88);
+}
+
+.foundry-cockpit .proof-callout,
+.foundry-cockpit .proof-card,
+.foundry-cockpit .proof-process,
+.foundry-cockpit .proof-warning,
+.foundry-cockpit .proof-levels {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
+}
+
+.foundry-cockpit .proof-callout strong {
+  color: var(--werkles-ember);
+}
+
+.foundry-cockpit .proof-callout p,
+.foundry-cockpit .proof-card p,
+.foundry-cockpit .proof-warning p,
+.foundry-cockpit .proof-steps li,
+.foundry-cockpit .proof-matrix p {
+  color: rgba(244, 226, 177, 0.82);
+}
+
+.foundry-cockpit .proof-card li,
+.foundry-cockpit .proof-matrix article,
+.foundry-cockpit .proof-steps li {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(44, 35, 29, 0.72);
+}
+
+.foundry-cockpit .proof-matrix strong,
+.foundry-cockpit .proof-steps strong,
+.foundry-cockpit .proof-card h2,
+.foundry-cockpit .proof-warning h2,
+.foundry-cockpit .section-heading h2 {
+  color: var(--werkles-text-primary);
+}
+
+.foundry-cockpit .proof-warning.proof-gate {
+  border-color: rgba(103, 46, 237, 0.34);
+  background:
+    linear-gradient(135deg, rgba(61, 22, 202, 0.14), rgba(44, 35, 29, 0.92)),
+    var(--werkles-cockpit-panel);
+}
+
+.foundry-cockpit .proof-boundary {
+  border-color: rgba(95, 209, 120, 0.32);
+  background:
+    linear-gradient(135deg, rgba(1, 94, 81, 0.16), rgba(44, 35, 29, 0.92)),
+    var(--werkles-cockpit-panel);
+}
+
+.crucible-shell {
+  position: relative;
+  display: grid;
+  gap: 16px;
+}
+
+.crucible-atmosphere {
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  border: 1px solid var(--werkles-copper-frame);
+  border-radius: var(--radius);
+}
+
+.crucible-atmosphere img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.72;
+}
+
+.crucible-atmosphere figcaption {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 6px 10px;
+  border: 1px solid var(--werkles-copper-frame-soft);
+  border-radius: 999px;
+  color: var(--werkles-text-secondary);
+  background: rgba(5, 4, 4, 0.78);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Draft Site Asset + UI Pass v0.2 — contrast and cockpit extension */
+
+.hero.hero--draft-v01 .hero-copy {
+  padding: clamp(20px, 4vw, 40px);
+  border: 1px solid rgba(159, 102, 51, 0.28);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(255, 252, 247, 0.94), rgba(246, 239, 229, 0.88));
+  box-shadow: 0 20px 48px rgba(44, 35, 29, 0.12);
+}
+
+.hero.hero--draft-v01 .hero-card {
+  border-color: var(--werkles-copper-frame);
+  background: var(--werkles-cockpit-panel);
+  box-shadow: 0 18px 44px rgba(44, 35, 29, 0.12);
+}
+
+.hero.hero--draft-v01 .hero-card-copy strong,
+.hero.hero--draft-v01 .hero-card-copy span {
+  color: var(--werkles-ink-muted-on-paper);
+  text-shadow: none;
+}
+
+.manifesto,
+.people-strip article h2 {
+  color: var(--werkles-ink-on-paper);
+}
+
+.people-strip article p,
+.manifesto .how-steps p {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.status-line {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.foundry-cockpit .status-line,
+.foundry-cockpit .compliance-note {
+  color: rgba(244, 226, 177, 0.9);
+}
+
+.foundry-cockpit .compliance-note {
+  color: var(--werkles-text-secondary);
+}
+
+.foundry-cockpit .onboarding-hero,
+.foundry-cockpit .onboarding-panel,
+.foundry-cockpit .door-card,
+.foundry-cockpit .profile-editor,
+.foundry-cockpit .verification-card,
+.foundry-cockpit .deep-audit-card,
+.foundry-cockpit .intro-item,
+.foundry-cockpit .candidate-empty {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+}
+
+.foundry-cockpit .onboarding-hero p,
+.foundry-cockpit .door-card p,
+.foundry-cockpit .deep-audit-card p,
+.foundry-cockpit .candidate-empty,
+.foundry-cockpit .intro-item span,
+.foundry-cockpit .intro-item small {
+  color: rgba(244, 226, 177, 0.86);
+}
+
+.foundry-cockpit .field select,
+.foundry-cockpit .field textarea {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(5, 4, 4, 0.72);
+}
+
+.foundry-cockpit .consent-line span {
+  color: rgba(244, 226, 177, 0.86);
+}
+
+.auth-shell .auth-panel {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.auth-shell .auth-panel p,
+.auth-shell .auth-panel .status-line {
+  color: rgba(244, 226, 177, 0.86);
+}
+
+.auth-shell .field span,
+.auth-shell .field input {
+  color: var(--werkles-text-primary);
+}
+
+.auth-shell .field input {
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(5, 4, 4, 0.72);
+}
+
+.auth-shell .button-outline {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame);
+  background: rgba(44, 35, 29, 0.62);
+}
+
+.onboarding-page {
+  color: var(--werkles-text-primary);
+}
+
+.onboarding-hero,
+.onboarding-panel,
+.door-card {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+}
+
+.onboarding-hero p,
+.door-card p {
+  color: rgba(244, 226, 177, 0.86);
+}
+
+/* Brightened workshop v0.4 — manifesto + forms */
+
+.manifesto {
+  color: var(--werkles-ink-on-paper);
+  background:
+    linear-gradient(135deg, rgba(184, 115, 51, 0.06), rgba(52, 211, 153, 0.04)),
+    var(--werkles-cockpit-panel);
+  box-shadow: 0 14px 36px rgba(44, 35, 29, 0.1);
+}
+
+.manifesto h2,
+.manifesto p:not(.eyebrow),
+.manifesto .how-steps h3,
+.manifesto .how-steps p,
+.how-steps article h3,
+.how-steps article p {
+  color: var(--werkles-ink-on-paper);
+}
+
+.how-steps article p {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.how-steps article {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(255, 252, 247, 0.72);
+}
+
+.onboarding-page .onboarding-hero,
+.onboarding-page .onboarding-panel,
+.membership-page .membership-hero,
+.membership-page .membership-trust,
+.membership-page .plan-card,
+.pricing-page .pricing-hero,
+.pricing-page .pricing-card,
+.pricing-page .pricing-section {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+}
+
+.onboarding-page .onboarding-hero p,
+.onboarding-page .door-card p,
+.onboarding-page .onboarding-panel p,
+.membership-page .membership-hero p,
+.membership-page .membership-trust p,
+.membership-page .plan-card p,
+.pricing-page .pricing-hero p,
+.pricing-page .pricing-card p,
+.pricing-page .pricing-section p {
+  color: rgba(244, 226, 177, 0.88);
+}
+
+.pricing-page .pricing-row > *,
+.pricing-page .pricing-boundary,
+.pricing-page .pricing-boundary .gate-list span {
+  color: rgba(244, 226, 177, 0.86);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(44, 35, 29, 0.82);
+}
+
+.pricing-page .pricing-row strong {
+  color: var(--werkles-text-primary);
+}
+
+.pricing-page .pricing-boundary {
+  background: var(--werkles-cockpit-panel);
+}
+
+.foundry-cockpit .proof-callout,
+.foundry-cockpit .proof-card,
+.foundry-cockpit .proof-process,
+.foundry-cockpit .proof-warning,
+.foundry-cockpit .proof-levels,
+.foundry-cockpit .proof-matrix article,
+.foundry-cockpit .proof-steps li {
+  color: var(--werkles-text-primary);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+}
+
+.foundry-cockpit .proof-callout p,
+.foundry-cockpit .proof-card p,
+.foundry-cockpit .proof-card li,
+.foundry-cockpit .proof-warning p,
+.foundry-cockpit .proof-steps li,
+.foundry-cockpit .proof-matrix p {
+  color: rgba(244, 226, 177, 0.88);
+}
+
+.plan-card-featured,
+.pricing-card-featured {
+  color: var(--werkles-text-primary);
+  border-color: rgba(103, 46, 237, 0.52);
+  background:
+    linear-gradient(145deg, rgba(61, 22, 202, 0.18), rgba(25, 24, 23, 0.92)),
+    var(--werkles-cockpit-panel);
+}
+
+.plan-card-featured p,
+.plan-card-featured .plan-kicker,
+.pricing-card-featured p,
+.pricing-card-featured .plan-kicker,
+.pricing-card-featured .pricing-price {
+  color: rgba(244, 226, 177, 0.9);
+}
+
+@media (max-width: 720px) {
+  .home-draft-badge {
+    margin-right: 12px;
+    margin-left: 12px;
+  }
+}
+
+/* Maker pass — trust plate on hero card */
+
+.hero-trust-plate {
+  display: grid;
+  gap: 10px;
+  padding: 16px 18px;
+  border: 1px solid rgba(159, 102, 51, 0.32);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(255, 252, 247, 0.96), rgba(246, 239, 229, 0.9));
+  box-shadow: inset 0 0 0 1px rgba(2, 145, 126, 0.12);
+}
+
+.hero-trust-plate__promise {
+  color: var(--werkles-ink-on-paper);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  line-height: 1.25;
+}
+
+.hero-trust-plate__badge {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 40px;
+  align-items: center;
+  padding: 0 14px;
+  border: 1px solid rgba(2, 145, 126, 0.38);
+  border-radius: 999px;
+  color: var(--werkles-teal-deep);
+  background: rgba(24, 197, 174, 0.12);
+  font-size: 0.92rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.trust-plate--css {
+  display: grid;
+  place-items: center;
+  min-height: 88px;
+  padding: 18px;
+  border: 1px solid rgba(159, 102, 51, 0.32);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(255, 252, 247, 0.96), rgba(246, 239, 229, 0.9));
+  box-shadow: inset 0 0 0 1px rgba(2, 145, 126, 0.12);
+}
+
+.trust-plate--css strong {
+  color: var(--werkles-teal-deep);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.brand-plate,
+.trust-plate:not(.trust-plate--css) {
+  object-fit: contain;
+  object-position: center;
+}
+
+.brand-plate {
+  width: 100%;
+  max-height: 220px;
+}
+
+.trust-plate:not(.trust-plate--css) {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+}
+
+.people-strip article {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame-soft);
+  background: var(--werkles-cockpit-panel);
+  box-shadow: 0 14px 36px rgba(44, 35, 29, 0.08);
+}
+
+.people-strip article p {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.hero-card-copy span {
+  color: var(--werkles-ink-muted-on-paper);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.draft-asset-gallery {
+  margin: 28px 22px 0;
+  padding: 22px;
+  border: 1px solid var(--werkles-copper-frame-soft);
+  border-radius: var(--radius);
+  background: var(--werkles-cockpit-panel);
+}
+
+.draft-asset-gallery__header {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.draft-asset-gallery__path code {
+  color: var(--werkles-owl-eye-green);
+  font-size: 0.88rem;
+}
+
+.draft-asset-gallery__subhead {
+  margin: 18px 0 10px;
+  color: var(--werkles-text-secondary);
+  font-size: 0.92rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.draft-asset-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.draft-asset-tile {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.draft-asset-tile__frame {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--werkles-copper-frame-soft);
+  border-radius: calc(var(--radius) - 4px);
+  background: rgba(5, 4, 4, 0.72);
+}
+
+.draft-asset-tile__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.draft-asset-tile__missing {
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  color: var(--werkles-text-muted);
+  text-align: center;
+  font-size: 0.82rem;
+}
+
+.draft-asset-tile__missing code {
+  font-size: 0.72rem;
+  word-break: break-all;
+}
+
+.draft-asset-tile figcaption {
+  display: grid;
+  gap: 4px;
+  font-size: 0.82rem;
+}
+
+.draft-asset-tile figcaption strong {
+  font-size: 0.78rem;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.draft-asset-tile__status {
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.draft-asset-tile__status--landed {
+  color: var(--werkles-owl-eye-green);
+  border: 1px solid rgba(95, 209, 120, 0.35);
+}
+
+.draft-asset-tile__status--planned {
+  color: var(--werkles-text-secondary);
+  border: 1px solid rgba(159, 102, 51, 0.35);
+}
+
+.draft-asset-tile__status--manual {
+  color: #f6ad55;
+  border: 1px solid rgba(246, 173, 85, 0.35);
+}
+
+.draft-asset-tile__route {
+  color: var(--werkles-text-muted);
+  font-size: 0.75rem;
+}
+
+/* Site icon system — PNG from Ghost Forge, SVG fallback until landed */
+
+.site-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-icon__frame {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(159, 102, 51, 0.32);
+  border-radius: 8px;
+  background: rgba(255, 252, 247, 0.88);
+}
+
+.site-icon__frame img,
+.site-icon__frame svg,
+.icon-fallback-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.site-icon--sm .site-icon__frame {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+}
+
+.site-icon--md .site-icon__frame {
+  width: 40px;
+  height: 40px;
+}
+
+.site-icon--lg .site-icon__frame {
+  width: 48px;
+  height: 48px;
+}
+
+.site-icon__label {
+  color: var(--werkles-owl-eye-green);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lane-sigil.site-icon {
+  margin-bottom: 2px;
+}
+
+.site-header nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-icon-wrap .site-icon__frame {
+  width: 16px;
+  height: 16px;
+}
+
+.site-header nav a:hover .site-icon__frame {
+  border-color: rgba(251, 195, 104, 0.55);
+}
+
+.how-steps article {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.how-step-icon {
+  margin-top: 2px;
+}
+
+.verification-workflow-card {
+  display: grid;
+  gap: 12px;
+}
+
+.verification-card-icon .site-icon__frame {
+  width: 44px;
+  height: 44px;
+}
+
+/* Focused UI polish v0.5 — warm paper readability, cockpit alignment */
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% 12%, rgba(246, 173, 85, 0.2), transparent 22rem),
+    radial-gradient(circle at 88% 8%, rgba(24, 197, 174, 0.12), transparent 20rem),
+    radial-gradient(circle at 50% 100%, rgba(159, 102, 51, 0.08), transparent 28rem),
+    linear-gradient(180deg, #e8dfd0 0%, #f6efe5 480px, #f0e8da 100%);
+}
+
+.auth-shell {
+  background:
+    radial-gradient(circle at 18% 14%, rgba(246, 173, 85, 0.14), transparent 18rem),
+    radial-gradient(circle at 82% 8%, rgba(24, 197, 174, 0.1), transparent 16rem),
+    linear-gradient(180deg, rgba(232, 223, 208, 0.55), rgba(246, 239, 229, 0.35)),
+    var(--werkles-draft-hero) center / cover fixed;
+}
+
+.auth-shell .auth-panel,
+.foundry-cockpit .ops-card,
+.foundry-cockpit .plan-card,
+.foundry-cockpit .pricing-card,
+.foundry-cockpit .billing-panel,
+.foundry-cockpit .membership-trust,
+.foundry-cockpit .crucible-hero-card,
+.foundry-cockpit .verification-workflow-card,
+.foundry-cockpit .pricing-section,
+.foundry-cockpit .onboarding-hero,
+.foundry-cockpit .onboarding-panel,
+.foundry-cockpit .door-card,
+.foundry-cockpit .profile-editor,
+.foundry-cockpit .verification-card,
+.foundry-cockpit .deep-audit-card,
+.foundry-cockpit .intro-item,
+.foundry-cockpit .candidate-empty,
+.foundry-cockpit .proof-callout,
+.foundry-cockpit .proof-card,
+.foundry-cockpit .proof-process,
+.foundry-cockpit .proof-warning,
+.foundry-cockpit .proof-levels,
+.foundry-cockpit .proof-matrix article,
+.foundry-cockpit .proof-steps li {
+  color: var(--werkles-ink-on-paper);
+  background: var(--werkles-cockpit-panel);
+  box-shadow: 0 14px 36px rgba(44, 35, 29, 0.1);
+}
+
+.foundry-cockpit,
+.foundry-cockpit .dashboard-main,
+.foundry-cockpit .membership-page,
+.foundry-cockpit .pricing-page,
+.foundry-cockpit .proof-main,
+.foundry-cockpit .onboarding-page {
+  color: var(--werkles-ink-on-paper);
+}
+
+.dashboard-nav a,
+.foundry-cockpit .dashboard-nav a {
+  color: var(--werkles-ink-muted-on-paper);
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(255, 252, 247, 0.94);
+  box-shadow: 0 4px 14px rgba(44, 35, 29, 0.06);
+}
+
+.dashboard-nav a:hover,
+.foundry-cockpit .dashboard-nav a:hover {
+  color: var(--werkles-violet-deep);
+  border-color: rgba(159, 102, 51, 0.42);
+  background: #fffdf8;
+}
+
+.foundry-cockpit .membership-hero p,
+.foundry-cockpit .pricing-hero p,
+.foundry-cockpit .plan-card p,
+.foundry-cockpit .pricing-card p,
+.foundry-cockpit .billing-panel p,
+.foundry-cockpit .membership-trust p,
+.foundry-cockpit .onboarding-hero p,
+.foundry-cockpit .door-card p,
+.foundry-cockpit .deep-audit-card p,
+.foundry-cockpit .candidate-empty,
+.foundry-cockpit .intro-item span,
+.foundry-cockpit .intro-item small,
+.foundry-cockpit .proof-callout p,
+.foundry-cockpit .proof-card p,
+.foundry-cockpit .proof-card li,
+.foundry-cockpit .proof-warning p,
+.foundry-cockpit .proof-steps li,
+.foundry-cockpit .proof-matrix p,
+.foundry-cockpit .status-line,
+.foundry-cockpit .pricing-row > *,
+.auth-shell .auth-panel p,
+.auth-shell .auth-panel .status-line,
+.onboarding-page .onboarding-hero p,
+.onboarding-page .door-card p,
+.onboarding-page .onboarding-panel p,
+.membership-page .membership-hero p,
+.membership-page .membership-trust p,
+.membership-page .plan-card p,
+.pricing-page .pricing-hero p,
+.pricing-page .pricing-card p,
+.pricing-page .pricing-section p {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.foundry-cockpit .plan-kicker,
+.foundry-cockpit .card-heading p,
+.foundry-cockpit .eyebrow,
+.foundry-cockpit .proof-callout strong {
+  color: var(--werkles-copper);
+}
+
+.foundry-cockpit .membership-hero::before,
+.foundry-cockpit .pricing-hero::before,
+.foundry-cockpit .crucible-hero-card::before {
+  opacity: 0.2;
+  background:
+    linear-gradient(125deg, rgba(246, 239, 229, 0.9), rgba(246, 239, 229, 0.58)),
+    var(--werkles-draft-hero) center / cover;
+}
+
+.foundry-cockpit .proof-hero {
+  color: var(--werkles-ink-on-paper);
+  background:
+    linear-gradient(115deg, rgba(246, 239, 229, 0.92) 0%, rgba(246, 239, 229, 0.72) 52%, rgba(24, 197, 174, 0.12) 100%),
+    var(--werkles-draft-proof) center / cover;
+}
+
+.foundry-cockpit .proof-hero p:not(.eyebrow) {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.foundry-cockpit .button-outline,
+.auth-shell .button-outline {
+  color: var(--werkles-ink-on-paper);
+  border-color: var(--werkles-copper-frame);
+  background: rgba(255, 252, 247, 0.92);
+}
+
+.foundry-cockpit .plan-card-featured,
+.foundry-cockpit .pricing-card-featured,
+.plan-card-featured,
+.pricing-card-featured {
+  color: var(--werkles-ink-on-paper);
+  border-color: rgba(103, 46, 237, 0.42);
+  background:
+    linear-gradient(145deg, rgba(103, 46, 237, 0.1), rgba(255, 252, 247, 0.96)),
+    var(--werkles-cockpit-panel);
+  box-shadow:
+    inset 0 0 0 1px rgba(24, 197, 174, 0.14),
+    0 16px 40px rgba(44, 35, 29, 0.12);
+}
+
+.plan-card-featured p,
+.plan-card-featured .plan-kicker,
+.pricing-card-featured p,
+.pricing-card-featured .plan-kicker,
+.pricing-card-featured .pricing-price {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.foundry-cockpit .gate-list span,
+.foundry-cockpit .trust-state-strip span,
+.proof-card li,
+.proof-matrix article,
+.proof-steps li,
+.foundry-cockpit .proof-card li,
+.foundry-cockpit .proof-matrix article,
+.foundry-cockpit .proof-steps li,
+.pricing-page .pricing-row > *,
+.pricing-page .pricing-boundary,
+.pricing-page .pricing-boundary .gate-list span {
+  color: var(--werkles-teal-deep);
+  border-color: rgba(2, 145, 126, 0.28);
+  background: rgba(24, 197, 174, 0.1);
+}
+
+.foundry-cockpit .field span,
+.foundry-cockpit .field input,
+.foundry-cockpit .field select,
+.foundry-cockpit .field textarea,
+.auth-shell .field span,
+.auth-shell .field input,
+.operations-grid .ops-card .field span {
+  color: var(--werkles-ink-on-paper);
+}
+
+.foundry-cockpit .field input,
+.foundry-cockpit .field select,
+.foundry-cockpit .field textarea,
+.auth-shell .field input,
+.operations-grid .ops-card .field input,
+.operations-grid .ops-card .field select,
+.operations-grid .ops-card .field textarea {
+  border-color: var(--werkles-copper-frame-soft);
+  background: rgba(255, 252, 247, 0.96);
+}
+
+.operations-grid .ops-card .field span {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.field input::placeholder,
+.field textarea::placeholder,
+textarea::placeholder {
+  color: rgba(92, 74, 58, 0.58);
+  opacity: 1;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+textarea:focus {
+  color: var(--werkles-ink-on-paper);
+  border-color: rgba(103, 46, 237, 0.48);
+  background: #fffdf8;
+  outline: 2px solid rgba(103, 46, 237, 0.26);
+  outline-offset: 1px;
+}
+
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus,
+.field textarea:-webkit-autofill,
+.field textarea:-webkit-autofill:hover,
+.field textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--werkles-ink-on-paper);
+  box-shadow: 0 0 0 1000px #fffdf8 inset;
+}
+
+.field select option {
+  color: var(--werkles-ink-on-paper);
+  background: var(--werkles-workshop-paper-elevated);
+}
+
+.consent-line span,
+.foundry-cockpit .consent-line span {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.foundry-cockpit .candidate-top h2,
+.foundry-cockpit .verified-tag,
+.foundry-cockpit .tag,
+.foundry-cockpit .pricing-row strong,
+.foundry-cockpit .proof-matrix strong,
+.foundry-cockpit .proof-steps strong,
+.foundry-cockpit .proof-card h2,
+.foundry-cockpit .proof-warning h2,
+.foundry-cockpit .section-heading h2 {
+  color: var(--werkles-ink-on-paper);
+}
+
+.foundry-cockpit .compliance-note {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.workshop-greeter {
+  display: grid;
+  place-items: center;
+  width: fit-content;
+  padding: 8px;
+  border: 1px solid var(--werkles-copper-frame-soft);
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(255, 252, 247, 0.96), rgba(246, 239, 229, 0.9));
+  box-shadow: 0 8px 22px rgba(44, 35, 29, 0.08);
+}
+
+.workshop-greeter img {
+  display: block;
+  object-fit: contain;
+}
+
+.workshop-greeter--sm img {
+  width: 40px;
+  height: 40px;
+}
+
+.workshop-greeter--md img {
+  width: 52px;
+  height: 52px;
+}
+
+.hero-card-greeter {
+  justify-self: start;
+}
+
+.auth-panel-greeter {
+  margin-bottom: 4px;
+}
+
+.site-footer {
+  padding: 18px 22px 28px;
+  border-top: 1px solid rgba(159, 102, 51, 0.22);
+  background: rgba(255, 252, 247, 0.72);
+}
+
+.site-footer p {
+  max-width: 72ch;
+  margin: 0 auto;
+  color: var(--werkles-ink-muted-on-paper);
+  line-height: 1.55;
+}
+
+/* Workshop facets v0.6 — readable ink, mixed-bench atmosphere, panel shifts */
+
+:root {
+  --werkles-hero-scrim: linear-gradient(
+    125deg,
+    rgba(255, 252, 247, 0.96) 0%,
+    rgba(246, 239, 229, 0.88) 48%,
+    rgba(246, 239, 229, 0.72) 100%
+  );
+}
+
+.foundry-cockpit p,
+.foundry-cockpit li,
+.foundry-cockpit .status-line,
+.foundry-cockpit .compliance-note,
+.foundry-cockpit .pricing-row > *,
+.foundry-cockpit .candidate-empty,
+.foundry-cockpit .intro-item span,
+.foundry-cockpit .intro-item small,
+.auth-shell p,
+.auth-shell .status-line,
+.onboarding-page p,
+.membership-page p,
+.pricing-page p,
+.dashboard-main p,
+.proof-main p {
+  color: var(--werkles-ink-muted-on-paper);
+}
+
+.foundry-cockpit h1,
+.foundry-cockpit h2,
+.foundry-cockpit h3,
+.foundry-cockpit strong,
+.foundry-cockpit .pricing-row strong,
+.foundry-cockpit .candidate-top h2,
+.foundry-cockpit .verified-tag,
+.foundry-cockpit .tag,
+.dashboard-main h1,
+.dashboard-main h2,
+.dashboard-main h3,
+.membership-page h1,
+.membership-page h2,
+.pricing-page h1,
+.pricing-page h2,
+.auth-panel h1,
+.hero h1,
+.hero .hero-promise,
+.manifesto h2,
+.people-strip h2,
+.proof-main h2 {
+  color: var(--werkles-ink-on-paper);
+}
+
+.foundry-cockpit .eyebrow,
+.foundry-cockpit .plan-kicker,
+.foundry-cockpit .card-heading p,
+.card-heading p,
+.eyebrow,
+.plan-kicker {
+  color: var(--werkles-copper);
+}
+
+.hero.hero--draft-v01::before,
+.membership-hero::before,
+.pricing-hero::before,
+.foundry-cockpit .membership-hero::before,
+.foundry-cockpit .pricing-hero::before,
+.foundry-cockpit .crucible-hero-card::before {
+  opacity: 0.1;
+  background: var(--werkles-hero-scrim), var(--werkles-draft-hero) center / cover;
+}
+
+.auth-shell {
+  background:
+    radial-gradient(circle at 18% 14%, rgba(103, 46, 237, 0.08), transparent 18rem),
+    radial-gradient(circle at 82% 8%, rgba(24, 197, 174, 0.1), transparent 16rem),
+    linear-gradient(180deg, #ebe2d4 0%, #f6efe5 100%);
+}
+
+.workshop-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.workshop-panel__scrim,
+.workshop-panel__content {
+  position: relative;
+}
+
+.workshop-panel__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.72;
+}
+
+.workshop-panel__content {
+  z-index: 1;
+  display: grid;
+  gap: inherit;
+}
+
+.card-heading--icon {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.workshop-facet--forge { --facet-a: rgba(246, 173, 85, 0.14); --facet-b: rgba(159, 102, 51, 0.1); --facet-accent: #9f6633; }
+.workshop-facet--tinker { --facet-a: rgba(224, 181, 105, 0.16); --facet-b: rgba(159, 102, 51, 0.08); --facet-accent: #c08b52; }
+.workshop-facet--chem { --facet-a: rgba(24, 197, 174, 0.16); --facet-b: rgba(103, 46, 237, 0.08); --facet-accent: #02917e; }
+.workshop-facet--auto { --facet-a: rgba(44, 35, 29, 0.08); --facet-b: rgba(246, 173, 85, 0.12); --facet-accent: #3b342a; }
+.workshop-facet--chip { --facet-a: rgba(103, 46, 237, 0.12); --facet-b: rgba(24, 197, 174, 0.1); --facet-accent: #672eed; }
+.workshop-facet--factory { --facet-a: rgba(159, 102, 51, 0.12); --facet-b: rgba(44, 35, 29, 0.06); --facet-accent: #68411f; }
+.workshop-facet--wonka { --facet-a: rgba(251, 195, 104, 0.18); --facet-b: rgba(103, 46, 237, 0.1); --facet-accent: #e0b569; }
+.workshop-facet--velvet { --facet-a: rgba(103, 46, 237, 0.1); --facet-b: rgba(246, 173, 85, 0.14); --facet-accent: #672eed; }
+.workshop-facet--deck { --facet-a: rgba(2, 145, 126, 0.12); --facet-b: rgba(159, 102, 51, 0.1); --facet-accent: #015e51; }
+.workshop-facet--knock { --facet-a: rgba(246, 173, 85, 0.14); --facet-b: rgba(44, 35, 29, 0.06); --facet-accent: #9f6633; }
+.workshop-facet--blueprint { --facet-a: rgba(103, 46, 237, 0.08); --facet-b: rgba(200, 220, 255, 0.35); --facet-accent: #2a0e8c; }
+.workshop-facet--register { --facet-a: rgba(224, 181, 105, 0.16); --facet-b: rgba(95, 209, 120, 0.1); --facet-accent: #9f6633; }
+
+.workshop-panel__scrim,
+.people-strip article.workshop-facet--tinker,
+.people-strip article.workshop-facet--factory,
+.people-strip article.workshop-facet--register,
+.people-strip article.workshop-facet--wonka,
+.people-strip article.workshop-facet--chem,
+.how-steps article.workshop-facet--blueprint,
+.how-steps article.workshop-facet--chip,
+.how-steps article.workshop-facet--knock,
+.ops-card.workshop-facet--deck {
+  background:
+    radial-gradient(circle at 88% 12%, var(--facet-a), transparent 42%),
+    radial-gradient(circle at 8% 88%, var(--facet-b), transparent 38%),
+    var(--werkles-cockpit-panel);
+}
+
+.workshop-panel__scrim {
+  background:
+    radial-gradient(circle at 90% 10%, var(--facet-a), transparent 45%),
+    radial-gradient(circle at 6% 90%, var(--facet-b), transparent 40%),
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--facet-accent) 8%, transparent) 0 1px,
+      transparent 1px 28px
+    );
+}
+
+.workshop-route--home {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(251, 195, 104, 0.12), transparent 20rem),
+    radial-gradient(circle at 88% 14%, rgba(103, 46, 237, 0.08), transparent 18rem);
+}
+
+.workshop-route--pricing {
+  background:
+    radial-gradient(circle at 80% 0%, rgba(103, 46, 237, 0.08), transparent 22rem),
+    radial-gradient(circle at 10% 100%, rgba(224, 181, 105, 0.12), transparent 20rem);
+}
+
+.workshop-route--pricing .pricing-hero::before {
+  opacity: 0.08;
+  background:
+    var(--werkles-hero-scrim),
+    repeating-linear-gradient(90deg, rgba(103, 46, 237, 0.05) 0 1px, transparent 1px 32px),
+    var(--werkles-draft-hero) center / cover;
+}
+
+.workshop-route--membership {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(103, 46, 237, 0.1), transparent 18rem),
+    radial-gradient(circle at 90% 80%, rgba(246, 173, 85, 0.12), transparent 22rem);
+}
+
+.workshop-route--membership .membership-hero::before {
+  opacity: 0.09;
+  background:
+    var(--werkles-hero-scrim),
+    radial-gradient(circle at 70% 40%, rgba(103, 46, 237, 0.15), transparent 40%);
+}
+
+.workshop-route--dashboard {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(2, 145, 126, 0.1), transparent 18rem),
+    radial-gradient(circle at 85% 70%, rgba(159, 102, 51, 0.1), transparent 20rem);
+}
+
+.workshop-route--crucible {
+  background:
+    radial-gradient(circle at 75% 15%, rgba(24, 197, 174, 0.14), transparent 20rem),
+    radial-gradient(circle at 20% 85%, rgba(103, 46, 237, 0.08), transparent 18rem);
+}
+
+.workshop-route--billing {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(224, 181, 105, 0.14), transparent 24rem);
+}
+
+.workshop-route--proof {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(95, 209, 120, 0.1), transparent 18rem);
+}
+
+.workshop-route--auth {
+  background:
+    radial-gradient(circle at 25% 20%, rgba(251, 195, 104, 0.12), transparent 16rem),
+    radial-gradient(circle at 75% 10%, rgba(24, 197, 174, 0.1), transparent 14rem);
+}
+
+.tier2-accent--elevator {
+  position: relative;
+  overflow: hidden;
+}
+
+.tier2-accent--elevator::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(224, 181, 105, 0.22) 0 2px,
+      transparent 2px 14px
+    ),
+    radial-gradient(circle at 50% 120%, rgba(246, 173, 85, 0.2), transparent 55%);
+}
+
+.crucible-atmosphere--chem {
+  min-height: 160px;
+  border-radius: var(--radius);
+  background: var(--werkles-cockpit-panel);
+}
+
+.crucible-atmosphere__wash {
+  min-height: 160px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(24, 197, 174, 0.22), transparent 45%),
+    radial-gradient(circle at 80% 60%, rgba(103, 46, 237, 0.12), transparent 40%),
+    repeating-linear-gradient(0deg, rgba(2, 145, 126, 0.06) 0 1px, transparent 1px 18px),
+    linear-gradient(135deg, rgba(255, 252, 247, 0.96), rgba(246, 239, 229, 0.88));
+}
+
+.crucible-atmosphere--chem figcaption {
+  color: var(--werkles-ink-muted-on-paper);
+  background: rgba(255, 252, 247, 0.92);
+}
+
+.site-icon__frame {
+  border: 1px solid rgba(159, 102, 51, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 252, 247, 0.96);
+  box-shadow: inset 0 0 0 1px rgba(103, 46, 237, 0.06);
+}
+
+.site-icon__label {
+  color: var(--werkles-teal-deep);
+}
+
+.proof-boundary,
+main .proof-warning.proof-boundary {
+  background:
+    linear-gradient(135deg, rgba(255, 252, 247, 0.96), rgba(246, 239, 229, 0.9)),
+    radial-gradient(circle at 85% 20%, rgba(95, 209, 120, 0.12), transparent 40%);
+}
+
+.proof-boundary::before {
+  content: none;
+}
+
+.static-proof-shell {
+  color: var(--werkles-ink-on-paper);
+  background: rgba(255, 252, 247, 0.94);
+}

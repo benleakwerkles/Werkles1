@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CockpitShell } from "@/components/foundry/cockpit-shell";
 import { copy } from "@/lib/copy";
+import { pricing } from "@/lib/pricing";
+import { routeAtmosphere } from "@/lib/workshop-facets";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 type Plan = "monthly" | "annual";
@@ -47,9 +50,11 @@ export default function MembershipPage() {
   }
 
   return (
-    <main className="dashboard-main membership-page">
+    <CockpitShell>
+      <main className={`dashboard-main membership-page ${routeAtmosphere.membership}`}>
       <nav className="dashboard-nav" aria-label="Membership navigation">
         <Link href="/">Home</Link>
+        <Link href="/pricing">Pricing</Link>
         <Link href="/dashboard">Match deck</Link>
         <Link href="/onboarding">Onboarding</Link>
       </nav>
@@ -62,16 +67,16 @@ export default function MembershipPage() {
 
       <section className="membership-grid" aria-label="Foundry Dues plans">
         <article className="ops-card plan-card">
-          <p className="plan-kicker">Free Dossier</p>
-          <h2>$0</h2>
-          <p>Create your profile, choose your lane, build the dossier, browse the match deck, and read summaries.</p>
-          <Link className="button button-outline" href="/onboarding">Start free</Link>
+          <p className="plan-kicker">{copy.membership.plans.free.kicker}</p>
+          <h2>{copy.membership.plans.free.price}</h2>
+          <p>{copy.membership.plans.free.body}</p>
+          <Link className="button button-outline" href="/onboarding">{copy.membership.plans.free.cta}</Link>
         </article>
 
-        <article className="ops-card plan-card plan-card-featured">
+        <article className="ops-card plan-card plan-card-featured tier2-accent--elevator">
           <p className="plan-kicker">{copy.membership.monthly}</p>
-          <h2>$9.99/mo</h2>
-          <p>Unlock intro requests, workspace access, verification triggers, and the path toward heavier trust weight.</p>
+          <h2>{pricing.foundryDues.monthly.displayPrice}</h2>
+          <p>{copy.membership.plans.monthly.body}</p>
           <button className="button button-light" type="button" onClick={() => startCheckout("monthly")}>
             {copy.membership.checkout}
           </button>
@@ -79,19 +84,20 @@ export default function MembershipPage() {
 
         <article className="ops-card plan-card">
           <p className="plan-kicker">{copy.membership.annual}</p>
-          <h2>$99/yr</h2>
-          <p>Same foundry access, one yearly clang, roughly twenty bucks kept in your pocket.</p>
+          <h2>{pricing.foundryDues.annual.displayPrice}</h2>
+          <p>{copy.membership.plans.annual.body}</p>
           <button className="button button-dark" type="button" onClick={() => startCheckout("annual")}>
-            Lock the Joints
+            Start The Long Run
           </button>
         </article>
       </section>
 
       <section className="ops-card membership-trust">
-        <h2>Trust still has to earn its boots.</h2>
+        <h2>{copy.membership.trustHeadline}</h2>
         <p>{copy.membership.trust}</p>
         <p className="status-line" role="status">{status}</p>
       </section>
-    </main>
+      </main>
+    </CockpitShell>
   );
 }

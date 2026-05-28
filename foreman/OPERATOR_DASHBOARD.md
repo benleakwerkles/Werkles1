@@ -1,25 +1,25 @@
 # Operator Dashboard
 
 - Current phase: Ghost Forge one-prompt setup
-- Current step: Ghost Forge webhook base URL fix approval
+- Current step: Automatic webhook callback proof
 - Current risk level: MEDIUM
-- Current status: One prompt succeeded through Replicate and was uploaded to Supabase after a manual signed webhook replay. Automatic Replicate webhook callback needs a trailing-dot URL fix before future predictions.
-- Last completed gate: Ben approved one-prompt retry after Replicate diagnostic.
-- Next required AI, if any: none
+- Current status: Render `PUBLIC_BASE_URL` cleanup is complete. The live service now sees `https://werkles-ghost-forge1.onrender.com` with no trailing dot, and commit `7b8da42` is deployed.
+- Last completed gate: Ben approved Render `PUBLIC_BASE_URL` cleanup.
+- Next required AI, if any: Codex
 - Exact file to send, if any: none
-- Exact thing Ben must do next: Say `APPROVE GHOST FORGE WEBHOOK BASE URL FIX PUSH DEPLOY` or `STOP GHOST FORGE`.
+- Exact thing Ben must do next: Say `APPROVE ONE PROMPT WEBHOOK AUTO-CALLBACK TEST` or `STOP GHOST FORGE`.
 - APPLY allowed: No
 - APPLY blocked because:
-  - webhook base URL fix needs human approval before push/deploy
+  - one real auto-callback test creates a Replicate prediction and may spend credit
 - PUSH allowed: No
 - PUSH blocked because:
-  - push remains blocked until Ben approves the webhook base URL fix push/deploy
+  - no code change is currently required
 - Handoff warnings:
   - do not use Ben's normal browser unless Ben explicitly asks
   - do not print or request secrets in chat
   - spend sources of truth are `foreman/SPEND_LEDGER_INDEX.md`, the company ledgers, `foreman/COMMINGLING_UNTANGLING_PLAYBOOK.md`, `foreman/UNCLASSIFIED_SPEND_INBOX.md`, and `foreman/REIMBURSEMENT_AND_INTERCOMPANY_LOG.md` until separate Google Sheet creation/update is approved
 - Blockers:
-  - automatic Replicate webhook callback has a malformed trailing-dot URL
+  - automatic webhook callback has not been proven with a new post-cleanup prediction
   - background image generation is not approved
-  - no background batch generation until automatic webhook callback is fixed and Ben approves a batch budget
-- Plain English: The forge made its first image. The remaining bug is plumbing: future Replicate callbacks need `https://werkles-ghost-forge1.onrender.com/webhook/...`, not `https://werkles-ghost-forge1.onrender.com./webhook/...`.
+  - no background batch generation until automatic callback is proven and Ben approves a batch budget
+- Plain English: The provider-side URL is finally clean, not just tolerated by code. The next useful proof is one paid prompt to confirm Replicate calls the webhook automatically without manual replay.

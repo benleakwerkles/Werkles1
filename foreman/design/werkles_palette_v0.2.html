@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Werkles Palette v0.2</title>
+<style>
+body{margin:0;background:#050404;color:#F4E2B1;font-family:Georgia,serif;padding:48px 32px;min-height:100vh}
+h1{font-size:32px;letter-spacing:.04em;margin:0 0 8px;background:linear-gradient(90deg,#672EED 0%,#18C5AE 100%);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.sub{color:#9F6633;margin:0 0 8px;font-style:italic}
+.version{color:#6D5B46;margin:0 0 48px;font-size:13px;font-family:ui-monospace,monospace}
+.note{background:#191817;border-left:3px solid #672EED;padding:16px 20px;margin:0 0 40px;color:#F4E2B1;font-size:14px;line-height:1.6;max-width:900px}
+.note strong{color:#18C5AE}
+h2{font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:#C08B52;border-bottom:1px solid #3B342A;padding-bottom:8px;margin:48px 0 24px}
+.row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.sw{background:#191817;border:1px solid #2C231D;border-radius:6px;overflow:hidden}
+.chip{height:90px;display:flex;align-items:flex-end;padding:10px 14px;font-family:ui-monospace,monospace;font-size:12px;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.meta{padding:12px 14px}
+.name{font-family:ui-monospace,monospace;font-size:13px;color:#E0B569;margin-bottom:4px}
+.desc{font-size:12px;line-height:1.5;color:#C08B52}
+.grad{height:120px;border-radius:6px;margin-bottom:8px;border:1px solid #2C231D}
+.gname{font-family:ui-monospace,monospace;font-size:13px;color:#E0B569;margin-bottom:4px}
+.gdesc{font-size:12px;color:#C08B52;margin-bottom:16px;line-height:1.5}
+.preview{display:flex;gap:16px;margin-top:24px;flex-wrap:wrap}
+.btn{padding:14px 28px;border-radius:8px;font-family:Georgia,serif;font-size:15px;font-weight:600;color:#F4E2B1;border:none;cursor:pointer;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.btn-violet{background:linear-gradient(180deg,#672EED 0%,#3D16CA 60%,#2A0E8C 100%);box-shadow:0 1px 0 rgba(255,255,255,.1) inset,0 4px 16px rgba(61,22,202,.4)}
+.btn-teal{background:linear-gradient(180deg,#18C5AE 0%,#02917E 60%,#015E51 100%);box-shadow:0 1px 0 rgba(255,255,255,.1) inset,0 4px 16px rgba(2,145,126,.4)}
+.btn-copper{background:linear-gradient(180deg,#C08B52 0%,#9F6633 100%);color:#191817;text-shadow:none}
+.btn-ghost{background:transparent;border:1px solid #3B342A;color:#C08B52}
+</style></head><body>
+<h1>WERKLES — Palette v0.2</h1>
+<p class="sub">Sampled from werkles app icon + workshop banner + helper avatar</p>
+<p class="version">supersedes v0.1 — corrected after icon sampling</p>
+<div class="note"><strong>The correction:</strong> v0.1 treated violet and teal as small-dose "magical glow" accents sampled from background pipes and gears in environmental art. The app icon makes clear they're the hero brand colors — the W itself is a violet+teal duochrome. v0.2 promotes them to brand mark status with full gradient ranges, and demotes forge-orange / owl-eye-green to atmosphere and mascot roles respectively. Copper becomes the supporting "bezel" metal rather than the primary brand color.</div>
+<h2>Brand mark (the hero duochrome)</h2><div class="row">
+<div class="sw"><div class="chip" style="background:#3D16CA;color:#F4E2B1">#3D16CA</div><div class="meta"><div class="name">--werkles-violet</div><div class="desc">Brand violet. The left half of the W. Use for primary brand presence, headers, and the 'V' side of any dual-state UI.</div></div></div>
+<div class="sw"><div class="chip" style="background:#672EED;color:#F4E2B1">#672EED</div><div class="meta"><div class="name">--werkles-violet-bright</div><div class="desc">Lit / hovered violet. Highlight edges, focus rings on violet surfaces, gradient peaks.</div></div></div>
+<div class="sw"><div class="chip" style="background:#2A0E8C;color:#F4E2B1">#2A0E8C</div><div class="meta"><div class="name">--werkles-violet-deep</div><div class="desc">Pressed / shadowed violet. Button active states, deep gradient bases.</div></div></div>
+<div class="sw"><div class="chip" style="background:#02917E;color:#F4E2B1">#02917E</div><div class="meta"><div class="name">--werkles-teal</div><div class="desc">Brand teal. The right half of the W. Equal partner to violet — never subordinate.</div></div></div>
+<div class="sw"><div class="chip" style="background:#18C5AE;color:#050404">#18C5AE</div><div class="meta"><div class="name">--werkles-teal-bright</div><div class="desc">Lit / hovered teal. Highlight edges, focus rings on teal surfaces, gradient peaks.</div></div></div>
+<div class="sw"><div class="chip" style="background:#015E51;color:#F4E2B1">#015E51</div><div class="meta"><div class="name">--werkles-teal-deep</div><div class="desc">Pressed / shadowed teal. Button active states, deep gradient bases.</div></div></div>
+</div>
+<h2>Foundations (dark surface — the icon plate)</h2><div class="row">
+<div class="sw"><div class="chip" style="background:#050404;color:#F4E2B1">#050404</div><div class="meta"><div class="name">--werkles-forge-black</div><div class="desc">App background base. The icon's true deep black.</div></div></div>
+<div class="sw"><div class="chip" style="background:#191817;color:#F4E2B1">#191817</div><div class="meta"><div class="name">--werkles-workshop-night</div><div class="desc">Primary surface / cards. The icon's mid-dark plate.</div></div></div>
+<div class="sw"><div class="chip" style="background:#2C231D;color:#F4E2B1">#2C231D</div><div class="meta"><div class="name">--werkles-smoke</div><div class="desc">Elevated surfaces, panels. Warmer mid from environmental art.</div></div></div>
+<div class="sw"><div class="chip" style="background:#3B342A;color:#F4E2B1">#3B342A</div><div class="meta"><div class="name">--werkles-iron</div><div class="desc">Borders, dividers, muted UI chrome.</div></div></div>
+</div>
+<h2>Frame metals (supporting — the bezel)</h2><div class="row">
+<div class="sw"><div class="chip" style="background:#9F6633;color:#F4E2B1">#9F6633</div><div class="meta"><div class="name">--werkles-copper</div><div class="desc">Workshop copper. Frames, badges, gear motifs. The 'bezel' around digital content.</div></div></div>
+<div class="sw"><div class="chip" style="background:#C08B52;color:#050404">#C08B52</div><div class="meta"><div class="name">--werkles-copper-light</div><div class="desc">Lifted copper. Hovers on copper surfaces, decorative highlights.</div></div></div>
+<div class="sw"><div class="chip" style="background:#E0B569;color:#050404">#E0B569</div><div class="meta"><div class="name">--werkles-brass-bright</div><div class="desc">Lit metal edges, blueprint linework, decorative accents.</div></div></div>
+<div class="sw"><div class="chip" style="background:#685141;color:#F4E2B1">#685141</div><div class="meta"><div class="name">--werkles-blueprint-tan</div><div class="desc">Etched-blueprint linework on dark, faint background motifs.</div></div></div>
+</div>
+<h2>Atmosphere accents (small-dose, contextual)</h2><div class="row">
+<div class="sw"><div class="chip" style="background:#F6AD55;color:#050404">#F6AD55</div><div class="meta"><div class="name">--werkles-forge-orange</div><div class="desc">Forge fire. Warmth, hearth, environmental glow. NOT a primary CTA color anymore — brand violet/teal own that.</div></div></div>
+<div class="sw"><div class="chip" style="background:#FBC368;color:#050404">#FBC368</div><div class="meta"><div class="name">--werkles-ember</div><div class="desc">Lantern, candlelight, hover warmth.</div></div></div>
+<div class="sw"><div class="chip" style="background:#5FD178;color:#050404">#5FD178</div><div class="meta"><div class="name">--werkles-owl-eye-green</div><div class="desc">Mascot signature. Success states. Use where the owl is present or where 'something just worked' is the message.</div></div></div>
+</div>
+<h2>Text on dark</h2><div class="row">
+<div class="sw"><div class="chip" style="background:#F4E2B1;color:#050404">#F4E2B1</div><div class="meta"><div class="name">--werkles-text-primary</div><div class="desc">Primary body text. Warm cream — never pure white.</div></div></div>
+<div class="sw"><div class="chip" style="background:#C08B52;color:#050404">#C08B52</div><div class="meta"><div class="name">--werkles-text-secondary</div><div class="desc">Muted text, captions, secondary info.</div></div></div>
+<div class="sw"><div class="chip" style="background:#6D5B46;color:#F4E2B1">#6D5B46</div><div class="meta"><div class="name">--werkles-text-muted</div><div class="desc">Disabled, hints, lowest emphasis.</div></div></div>
+</div>
+<h2>Gradients</h2>
+<div class="gname">--werkles-grad-brand-mark</div><div class="gdesc">The W gradient. Used at the brand mark itself, hero moments, splash screens.</div><div class="grad" style="background:linear-gradient(90deg, #3D16CA 0%, #672EED 45%, #18C5AE 55%, #02917E 100%)"></div>
+<div class="gname">--werkles-grad-violet-vertical</div><div class="gdesc">Violet button surface, primary CTA on violet side.</div><div class="grad" style="background:linear-gradient(180deg, #672EED 0%, #3D16CA 60%, #2A0E8C 100%)"></div>
+<div class="gname">--werkles-grad-teal-vertical</div><div class="gdesc">Teal button surface, primary CTA on teal side.</div><div class="grad" style="background:linear-gradient(180deg, #18C5AE 0%, #02917E 60%, #015E51 100%)"></div>
+<div class="gname">--werkles-grad-forge-radial</div><div class="gdesc">Atmospheric hero background. Marketing only, not app chrome.</div><div class="grad" style="background:radial-gradient(circle at 70% 80%, #F6AD55 0%, #2C231D 60%, #050404 100%)"></div>
+<h2>Button preview</h2><div class="preview">
+<button class="btn btn-violet">Primary action</button>
+<button class="btn btn-teal">Secondary action</button>
+<button class="btn btn-copper">Tertiary</button>
+<button class="btn btn-ghost">Cancel</button>
+</div>
+</body></html>

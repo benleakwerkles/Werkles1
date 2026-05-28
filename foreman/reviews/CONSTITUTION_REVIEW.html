@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Werkles Constitution Review</title>
+  <style>
+    :root {
+      --forge-bg: #0A0908;
+      --forge-panel: #161412;
+      --copper-base: #B87333;
+      --cream-text: #F5E6D3;
+      --heat-purple: #9333EA;
+      --patina-green: #2DD4BF;
+      --forge-orange: #EA580C;
+      --muted: #b9a58e;
+      --line: rgba(184, 115, 51, 0.38);
+      --paper: rgba(245, 230, 211, 0.055);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(147, 51, 234, 0.16), transparent 30rem),
+        radial-gradient(circle at 88% 12%, rgba(45, 212, 191, 0.12), transparent 26rem),
+        linear-gradient(135deg, #0A0908 0%, #15110f 45%, #070605 100%);
+      color: var(--cream-text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    header {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(22, 20, 18, 0.94), rgba(10, 9, 8, 0.95));
+      padding: 28px;
+      box-shadow: 0 22px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      max-width: 820px;
+    }
+
+    h2 {
+      color: var(--cream-text);
+      font-size: clamp(1.45rem, 3vw, 2.35rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      color: var(--patina-green);
+      font-size: 1.05rem;
+      margin: 24px 0 10px;
+    }
+
+    a {
+      color: var(--patina-green);
+    }
+
+    .gate {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 10px 14px;
+      border: 1px solid var(--copper-base);
+      color: var(--cream-text);
+      background: rgba(184, 115, 51, 0.14);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      max-width: 820px;
+      font-size: 1.08rem;
+      margin: 18px 0 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    section,
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(22, 20, 18, 0.9);
+      padding: 22px;
+    }
+
+    section {
+      margin-top: 18px;
+    }
+
+    .wide {
+      grid-column: 1 / -1;
+    }
+
+    .half {
+      grid-column: span 6;
+    }
+
+    .third {
+      grid-column: span 4;
+    }
+
+    .file-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .file-list li,
+    .checklist li,
+    .questions li {
+      border-left: 3px solid var(--copper-base);
+      background: var(--paper);
+      padding: 10px 12px;
+      margin-bottom: 8px;
+    }
+
+    .checklist,
+    .questions {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .status-yes {
+      color: var(--patina-green);
+      font-weight: 800;
+    }
+
+    .status-review {
+      color: var(--forge-orange);
+      font-weight: 800;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+      padding: 18px;
+      color: var(--cream-text);
+      background: rgba(10, 9, 8, 0.7);
+      border: 1px solid rgba(184, 115, 51, 0.26);
+      font: 0.94rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .source-section {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .source-section h2 {
+      padding: 22px 22px 0;
+    }
+
+    .source-section .summary {
+      padding: 0 22px 18px;
+      color: var(--muted);
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .decision {
+      border: 1px solid var(--line);
+      background: rgba(10, 9, 8, 0.55);
+      padding: 18px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--cream-text);
+    }
+
+    .approve {
+      border-color: var(--patina-green);
+    }
+
+    .patches {
+      border-color: var(--forge-orange);
+    }
+
+    .no-go {
+      border-color: var(--heat-purple);
+    }
+
+    .kicker {
+      color: var(--copper-base);
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      font-size: 0.76rem;
+      margin-bottom: 8px;
+    }
+
+    .review-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .review-field {
+      border: 1px solid rgba(184, 115, 51, 0.28);
+      background: rgba(10, 9, 8, 0.45);
+      padding: 14px;
+    }
+
+    .review-field label {
+      display: block;
+      font-weight: 900;
+      color: var(--patina-green);
+      margin-bottom: 8px;
+    }
+
+    .review-field textarea,
+    .review-field select {
+      width: 100%;
+      color: var(--cream-text);
+      background: rgba(10, 9, 8, 0.82);
+      border: 1px solid rgba(184, 115, 51, 0.45);
+      padding: 10px 12px;
+      font: inherit;
+    }
+
+    .field-help,
+    .form-rules {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0 0 10px;
+    }
+
+    .form-rules {
+      border-left: 3px solid var(--forge-orange);
+      background: rgba(234, 88, 12, 0.09);
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+
+    .form-rules strong {
+      color: var(--cream-text);
+    }
+
+    .review-field textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .review-row {
+      display: grid;
+      grid-template-columns: minmax(180px, 240px) 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .copy-button {
+      width: 100%;
+      border: 1px solid var(--copper-base);
+      background: linear-gradient(135deg, rgba(184, 115, 51, 0.95), rgba(234, 88, 12, 0.88));
+      color: #0A0908;
+      cursor: pointer;
+      font-weight: 950;
+      padding: 14px 18px;
+      text-transform: uppercase;
+    }
+
+    .copy-status {
+      color: var(--patina-green);
+      font-weight: 800;
+      margin-top: 10px;
+      min-height: 1.5em;
+    }
+
+    code {
+      color: var(--patina-green);
+      background: rgba(45, 212, 191, 0.08);
+      padding: 0.08rem 0.25rem;
+    }
+
+    @media (max-width: 820px) {
+      .half,
+      .third {
+        grid-column: 1 / -1;
+      }
+
+      .decision-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .review-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="gate">[AWAITING HUMAN GATE: CONSTITUTION_REVIEW]</div>
+      <h1>Werkles Constitution Review</h1>
+      <p class="subtitle">A local inspection page for the v0.2 Constitution split. This page is a review artifact only. It does not alter source law, apply SQL, deploy anything, create Projects/Gems, or move the machine past the gate.</p>
+    </header>
+
+    <section>
+      <h2>Files Created / Modified</h2>
+      <ul class="file-list">
+        <li><code>company/WERKLES_CONSTITUTION.md</code> - parent law, Operator Boundary, AI cousin map, cockpit files, negative commitments, final law.</li>
+        <li><code>company/WERKLES_ETHOS.md</code> - archetypes, Worker lane caution, anti-gatekeeper maxims.</li>
+        <li><code>company/WERKLES_PRODUCT_THESIS.md</code> - what Werkles is and is not.</li>
+        <li><code>company/WERKLES_MONETIZATION.md</code> - Foundry Dues, Armory, Drafting Table, Crucible, Sponsored Anvils, Iron Firewall.</li>
+        <li><code>company/WERKLES_TRUST_AND_COMPLIANCE.md</code> - verification boundaries, zero-knowledge posture, RLS/server boundaries, deletion, webhook gospel.</li>
+        <li><code>company/WERKLES_MATCHING_RULES.md</code> - explainable matching, Multi-Member Blueprint Pattern, Lock the Joints, momentum rules.</li>
+        <li><code>company/WERKLES_UX_LAW.md</code> - Iron Palette, interface law, component feel, people over avatars, empty states.</li>
+        <li><code>company/WERKLES_BRAND_VOICE.md</code> - Mythic Capitalism, lexicon, blacklist, tone guidance.</li>
+        <li><code>company/WERKLES_OPEN_QUESTIONS.md</code> - unresolved items needing Operator/legal/design/engineering review.</li>
+        <li><code>company/WERKLES_CODE_AND_ARCHITECTURE.md</code> - Article IX architecture standards, design token source of truth, webhook and secret rules.</li>
+        <li><code>foreman/AI_COUSINS_PROTOCOL.md</code> - updated cousin source-file references.</li>
+        <li><code>foreman/NEXT_ACTION.md</code> - remains at the Constitution review gate.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>One-Page Summary</h2>
+      <p>The Constitution split turns one large source of law into clean repo documents under <code>company/</code>. The controlling law is now easier to inspect by domain: parent law, ethos, thesis, money, trust, matching, UX, voice, architecture, and open questions.</p>
+      <p>Werkles remains a partner-discovery and verification-gated networking platform. It does not broker transactions, hold funds, sell trust, or make users verify each other. It keeps the mythic industrial voice while setting explicit boundaries around money, verification, sponsored placements, data storage, and AI cousin authority.</p>
+      <p>The gate is intentionally still closed. These files are review drafts awaiting Operator approval, patch request, or NO-GO.</p>
+    </section>
+
+    <section>
+      <h2>File-By-File Summary</h2>
+      <div class="grid">
+        <div class="card third">
+          <div class="kicker">Parent Law</div>
+          <strong>WERKLES_CONSTITUTION.md</strong>
+          <p>Defines Mythic Capitalism, Iron Palette control, Article IX standards, Operator boundaries, AI cousin map, cockpit files, negative commitments, and final platform law.</p>
+        </div>
+        <div class="card third">
+          <div class="kicker">Ethos</div>
+          <strong>WERKLES_ETHOS.md</strong>
+          <p>Names Spark, Builder, Worker, Operator, Backer, and Connector. Preserves "One percent of nothing is nothing" and the anti-gatekeeper posture.</p>
+        </div>
+        <div class="card third">
+          <div class="kicker">Product</div>
+          <strong>WERKLES_PRODUCT_THESIS.md</strong>
+          <p>States that Werkles is private partner discovery with verification-gated networking, not a bank, lender, broker, adviser, employer, or social theater network.</p>
+        </div>
+        <div class="card third">
+          <div class="kicker">Money</div>
+          <strong>WERKLES_MONETIZATION.md</strong>
+          <p>Defines Foundry Dues, Armory, Drafting Table, Crucible, Sponsored Anvils, and Iron Firewall while blocking transaction-fee poison.</p>
+        </div>
+        <div class="card third">
+          <div class="kicker">Trust</div>
+          <strong>WERKLES_TRUST_AND_COMPLIANCE.md</strong>
+          <p>Sets scoped verification, zero-knowledge storage, RLS/server boundaries, deletion concerns, and signed-webhook truth.</p>
+        </div>
+        <div class="card third">
+          <div class="kicker">Matching</div>
+          <strong>WERKLES_MATCHING_RULES.md</strong>
+          <p>Requires explainable matching, supports multi-member Blueprints, avoids lending-adjacent "co-sign" language, and leaves momentum rules open.</p>
+        </div>
+        <div class="card third">
+          <div class="kicker">UX</div>
+          <strong>WERKLES_UX_LAW.md</strong>
+          <p>Controls the Iron Palette, component feel, people-centric profile presentation, and useful mythic empty states.</p>
+        </div>
+        <div class="card third">
+          <div class="kicker">Voice</div>
+          <strong>WERKLES_BRAND_VOICE.md</strong>
+          <p>Defines Mythic Capitalism, approved terms, banned terms, and the rule that clear beats clever around risk.</p>
+        </div>
+        <div class="card third">
+          <div class="kicker">Open Items</div>
+          <strong>WERKLES_OPEN_QUESTIONS.md</strong>
+          <p>Captures unresolved pricing, momentum, deletion/anonymization, Worker protection, naming, sponsor, and palette reconciliation questions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Review Checklist</h2>
+      <ul class="checklist">
+        <li><span class="status-review">Review:</span> Wonka / Bunyan / Wozniak / Buffett / Joe MacMillan preserved. Current files explicitly preserve Wonka and Joe MacMillan; Bunyan, Wozniak, and Buffett are not named in the split and require Operator review if they must be explicit.</li>
+        <li><span class="status-yes">Yes:</span> "1% of Nothing is Nothing" preserved as "One percent of nothing is nothing."</li>
+        <li><span class="status-review">Review:</span> "Climb whose ladder to what top?" is not quoted verbatim. It is intentionally reframed through anti-MBA-priesthood and anti-gatekeeper language.</li>
+        <li><span class="status-yes">Yes:</span> Iron Palette controlling.</li>
+        <li><span class="status-yes">Yes:</span> Old palette non-controlling and marked legacy/marketing reconciliation only.</li>
+        <li><span class="status-yes">Yes:</span> Foundry Dues / Armory / Drafting Table / Crucible / Sponsored Anvils / Iron Firewall included.</li>
+        <li><span class="status-yes">Yes:</span> Verification avoids pay-to-play trust.</li>
+        <li><span class="status-yes">Yes:</span> No ACK command.</li>
+        <li><span class="status-yes">Yes:</span> No role confusion; cousins remain mapped and subordinate to Operator gates.</li>
+        <li><span class="status-yes">Yes:</span> No SQL/deploy/project setup included.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Open Questions Requiring Ben Approval</h2>
+      <ul class="questions">
+        <li>Pricing finality: exact Foundry Dues pricing, annual discounting, trials, and cancellation policy.</li>
+        <li>Momentum mechanics: exact 48-hour and 96-hour escalation, reminder, expiry, and action rules.</li>
+        <li>Deletion/anonymization: soft-delete, hard-delete, Former Member anonymization, receipt deletion, audit retention, privacy-law handling.</li>
+        <li>Worker lane protection: confidentiality warnings, employer-duty language, discoverability controls, retaliation safety, lawful boundary reminders.</li>
+        <li>"Lock the Joints" naming collision: preserve, scope, or rename one use.</li>
+        <li>Sponsored Anvils: disclosure labels, conflict handling, vendor qualification, opt-out/ranking controls, separation from matching integrity.</li>
+        <li>Legacy palette reconciliation: archive, reconcile, or restyle old light-mode/indigo/emerald/lavender assets under the Iron Palette.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Operator Review Form</h2>
+      <p>This form is local-only cockpit tooling. It does not save, patch, approve, push, deploy, apply SQL, or become source law. Use it to shape a clean request, then paste the copied packet into chat.</p>
+      <div class="form-rules">
+        <strong>How to use the action dropdowns:</strong>
+        <br>Leave an item on <strong>Unreviewed - keep open</strong> when you have not decided yet. Choose <strong>Keep open - safe to keep building</strong> when the question is unresolved but should not block current work. Choose <strong>Patch docs now - use notes below</strong> when you want Codex to edit the Constitution files from your notes. Choose <strong>Resolve with decision now - use notes as law</strong> only when your notes are the actual decision that should close the question.
+        <br><br>If a section has no notes, it stays open. Blank sections are not treated as approval, rejection, or Commander silence.
+      </div>
+      <div class="review-form" id="operator-review-form">
+        <div class="review-field review-row">
+          <div>
+            <label for="pricing-status">Pricing Finality</label>
+            <p class="field-help">Decide whether pricing can stay open while build work continues, or whether you want final pricing language patched into law now.</p>
+            <select id="pricing-status">
+              <option>Unreviewed - keep open</option>
+              <option>Keep open - safe to keep building</option>
+              <option>Patch docs now - use notes below</option>
+              <option>Resolve with decision now - use notes as law</option>
+            </select>
+          </div>
+          <textarea id="pricing-notes" placeholder="Notes: Foundry Dues amount, annual discount, trials, cancellation policy, or what should remain open."></textarea>
+        </div>
+
+        <div class="review-field review-row">
+          <div>
+            <label for="momentum-status">48h / 96h Momentum</label>
+            <p class="field-help">This can remain open until intro flows are built. Resolve now only if you want exact timing mechanics locked.</p>
+            <select id="momentum-status">
+              <option>Unreviewed - keep open</option>
+              <option>Keep open - safe to keep building</option>
+              <option>Patch docs now - use notes below</option>
+              <option>Resolve with decision now - use notes as law</option>
+            </select>
+          </div>
+          <textarea id="momentum-notes" placeholder="Notes: Escalation, expiry, reminders, explicit action rules, and whether silence ever advances anything."></textarea>
+        </div>
+
+        <div class="review-field review-row">
+          <div>
+            <label for="deletion-status">Deletion / Anonymization</label>
+            <p class="field-help">This is legal/compliance-sensitive. It may stay open, but real launch work will need attorney-reviewed implementation rules.</p>
+            <select id="deletion-status">
+              <option>Unreviewed - keep open</option>
+              <option>Keep open - safe to keep building</option>
+              <option>Patch docs now - use notes below</option>
+              <option>Resolve with decision now - use notes as law</option>
+            </select>
+          </div>
+          <textarea id="deletion-notes" placeholder="Notes: Soft delete, hard delete, Former Member anonymization, verification receipt deletion, audit retention."></textarea>
+        </div>
+
+        <div class="review-field review-row">
+          <div>
+            <label for="worker-status">Worker Lane Protection</label>
+            <p class="field-help">This can guide copy and onboarding now. More exact legal language can stay open until employment-duty review.</p>
+            <select id="worker-status">
+              <option>Unreviewed - keep open</option>
+              <option>Keep open - safe to keep building</option>
+              <option>Patch docs now - use notes below</option>
+              <option>Resolve with decision now - use notes as law</option>
+            </select>
+          </div>
+          <textarea id="worker-notes" placeholder="Notes: Confidentiality, employer duties, discoverability, retaliation safety, and lawful boundary reminders."></textarea>
+        </div>
+
+        <div class="review-field review-row">
+          <div>
+            <label for="naming-status">Lock The Joints Naming</label>
+            <p class="field-help">Use this if the phrase should be reserved for one specific action, or if one flow needs a different name.</p>
+            <select id="naming-status">
+              <option>Unreviewed - keep open</option>
+              <option>Keep open - safe to keep building</option>
+              <option>Patch docs now - use notes below</option>
+              <option>Resolve with decision now - use notes as law</option>
+            </select>
+          </div>
+          <textarea id="naming-notes" placeholder="Notes: Keep phrase everywhere, scope it to one flow, or rename one use."></textarea>
+        </div>
+
+        <div class="review-field review-row">
+          <div>
+            <label for="sponsor-status">Sponsored Anvils</label>
+            <p class="field-help">This can stay open for later vendor work. Patch now if you want stronger sponsor boundaries in source law.</p>
+            <select id="sponsor-status">
+              <option>Unreviewed - keep open</option>
+              <option>Keep open - safe to keep building</option>
+              <option>Patch docs now - use notes below</option>
+              <option>Resolve with decision now - use notes as law</option>
+            </select>
+          </div>
+          <textarea id="sponsor-notes" placeholder="Notes: Disclosure, conflicts, qualification, opt-out/ranking controls, and separation from matching integrity."></textarea>
+        </div>
+
+        <div class="review-field review-row">
+          <div>
+            <label for="palette-status">Legacy Palette</label>
+            <p class="field-help">The Iron Palette already controls. Use this only for what to do with old marketing or light-mode assets.</p>
+            <select id="palette-status">
+              <option>Unreviewed - keep open</option>
+              <option>Keep open - safe to keep building</option>
+              <option>Patch docs now - use notes below</option>
+              <option>Resolve with decision now - use notes as law</option>
+            </select>
+          </div>
+          <textarea id="palette-notes" placeholder="Notes: Archive old light-mode assets, reconcile marketing material, or restyle everything under Iron Palette."></textarea>
+        </div>
+
+        <div class="review-field">
+          <label for="general-notes">Other Constitution Patch Notes</label>
+          <p class="field-help">Use this for anything that does not fit the open-question buckets.</p>
+          <textarea id="general-notes" placeholder="Notes: Anything else Ben wants patched before Constitution approval."></textarea>
+        </div>
+
+        <button class="copy-button" type="button" id="copy-review-packet">Copy Review Packet</button>
+        <div class="copy-status" id="copy-status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="source-section">
+      <h2>company/WERKLES_CONSTITUTION.md</h2>
+      <p class="summary">Full source content for parent law review.</p>
+      <pre># Werkles Constitution
+
+Status: v0.2 review draft
+
+This is parent law for Werkles. It governs the product, the company posture, AI cousin coordination, and the limits around trust, money, verification, deployment, and Operator burden.
+
+## Article I - Voice And Parent Law
+
+Werkles is built in the voice of Mythic Capitalism: practical rebellion, industrial warmth, dream logic with steel under it, and respect for people who actually build.
+
+Werkles speaks to users as co-conspirators, not consumers. It is allowed to be strange, funny, and alive. It is not allowed to be foggy, guru-coded, predatory, or fake-deep.
+
+The controlling visual law is the Iron Palette:
+
+| Token | Hex |
+| --- | --- |
+| `forge-bg` | `#0A0908` |
+| `forge-panel` | `#161412` |
+| `copper-base` | `#B87333` |
+| `cream-text` | `#F5E6D3` |
+| `heat-purple` | `#9333EA` |
+| `patina-green` | `#2DD4BF` |
+| `forge-orange` | `#EA580C` |
+
+The old indigo, emerald, lavender, cream, and light-mode palette may be referenced only as legacy marketing reconciliation. It is not controlling product law.
+
+## Article IX - Code And Architecture Standards
+
+Code must preserve legal posture, data boundaries, and operator clarity before convenience.
+
+`lib/design-tokens.ts` is the source of truth for design tokens. Build tooling emits or feeds Tailwind and web CSS variables from that source. Components must not hard-code hex values.
+
+Provider truth comes from signed webhooks, not happy-path frontend redirects. Subscription status, verification status, payment status, and other sensitive state changes are updated only through trusted server-side paths that verify provider payloads.
+
+Secrets stay out of repo files, chat, screenshots, logs, and browser-visible code.
+
+## Article X - Operator Boundary
+
+Ben is the Operator, not the courier.
+
+Every AI cousin must ask before requesting Ben's labor:
+
+- Can this be a file?
+- Can this be a script?
+- Can this be a checklist?
+- Can this be one exact command?
+- Can this be reduced to a human-only gate?
+
+Human-only gates are:
+
+- login
+- account creation
+- OAuth approval
+- billing or credit card action
+- private secret entry
+- final create/save/share approval
+- explicit GO / NO-GO / PUSH / DEPLOY approval
+
+Do not make Ben a copy/paste mule.
+
+## Article XI - AI Cousin Role Map
+
+The AI cousin system exists to make the work sharper, safer, and lighter on the Operator.
+
+| Cousin | Role | Lane |
+| --- | --- | --- |
+| ChatGPT / Comptroller | final review, synthesis, GO / NO-GO framing | legal, product, risk, release judgment |
+| Codex / Foreman | repo work, files, scripts, checks, handoffs, cockpit state | implementation and coordination |
+| Claude / Ender | prose, UX flows, narrative structure, product language | copy and experience |
+| DeepSeek / Bean | adversarial audit | engineering, compliance, exploit paths |
+| Gemini / Skybro | architecture and product exploration | options, systems, matching logic |
+| Perplexity / Computer | research and current-world checks | vendors, docs, pricing, policy |
+| Midjourney / Image Sniper | visual exploration only | mood, art direction, image prompts |
+
+No cousin is the Operator. No cousin may bypass gates. No cousin may invent repo state.
+
+## Article XII - Cockpit Files
+
+Repo cockpit files are source of truth. Chat memory is lower trust than repo files.
+
+Core cockpit files and directories:
+
+- `foreman/CURRENT_STATE.md`
+- `foreman/NEXT_ACTION.md`
+- `foreman/OPERATOR_DASHBOARD.md`
+- `foreman/GO_NO_GO_LOG.md`
+- `foreman/OPERATOR_LOG.md`
+- `foreman/HANDOFF_SCHEMA.md`
+- `foreman/DESIGN_SYSTEM.md`
+- `foreman/handoffs/inbox/`
+- `foreman/handoffs/outbox/`
+- `foreman/handoffs/processed/`
+
+If a fact matters, it belongs in a repo file or a handoff packet. If a handoff starts in a fresh AI thread, the packet and cockpit files must carry the context.
+
+## Article XIII - Negative Commitments
+
+Werkles must not:
+
+- hold, move, escrow, pool, or transmit funds between users
+- charge transaction fees, success fees, carried interest, or percentages of user outcomes
+- solicit securities transactions
+- broker loans or investments
+- imply that paid status equals stronger trust
+- sell pay-to-play verification signals
+- hide sponsored placement
+- override user trust or matching integrity for sponsor revenue
+- store raw SSNs, full bank account numbers, full ID documents, or unnecessary sensitive documents
+- make users verify each other
+- make Ben carry large copy/paste workflows that files or scripts can handle
+
+## Article XIV - Final Law
+
+Werkles is a partner discovery and verification-gated networking platform.
+
+It helps people find possible collaborators, inspect claims, and decide whether to open a conversation. It does not make the deal, sell the deal, finance the deal, hold the money, recommend the transaction, or replace lawyers, accountants, insurers, lenders, or regulators.
+
+The machine may be hungry. It still obeys the gates.</pre>
+    </section>
+
+    <section class="source-section">
+      <h2>company/WERKLES_ETHOS.md</h2>
+      <p class="summary">Full source content for ethos review.</p>
+      <pre># Werkles Ethos
+
+Status: v0.2 review draft
+
+## Article II - Archetypes
+
+Werkles respects the people who bring the missing piece.
+
+The core archetypes are:
+
+- Spark: a live idea, opportunity, lead, place, customer, or strange opening that needs structure.
+- Builder: a trade-capable operator or creator who can make the work real.
+- Worker: an opportunity-seeker or floor-level practitioner exploring a lawful next move.
+- Operator: the scheduling, licensing, delivery, quoting, field-management, and execution engine.
+- Backer: capital or practical resources without a throne.
+- Connector: sales, books, vendors, rooms, customers, hiring, and social voltage.
+
+The Worker lane must be handled carefully. Werkles respects workers and opportunity-seekers while requiring users to honor existing obligations, confidentiality, lawful boundaries, and employment duties.
+
+Builder and Worker may share the same respect in the brand voice. They must not be carelessly collapsed in schema, matching, or compliance-sensitive copy.
+
+## Article III - Anti-Gatekeeper Maxims
+
+One percent of nothing is nothing.
+
+Build your own factory. On your own clock.
+
+The MBA priesthood does not own ambition.
+
+Money is useful. Money is not a crown.
+
+Sweat is not low status.
+
+Proof matters. Claims still need steel.
+
+Werkles exists to make gatekeeping harder, not to create a new gatekeeper with better lighting.</pre>
+    </section>
+
+    <section class="source-section">
+      <h2>company/WERKLES_MONETIZATION.md</h2>
+      <p class="summary">Full source content for monetization review.</p>
+      <pre># Werkles Monetization
+
+Status: v0.2 review draft
+
+## Article V - Money Without Poisoning The Machine
+
+Werkles monetizes by selling useful software, access, tools, and disclosed services. It does not monetize user transactions.
+
+## Foundry Dues
+
+Foundry Dues is the core membership.
+
+Legal label: Membership subscription.
+
+Principle:
+
+- one core tier
+- no lane priced above another lane
+- no "Pro" tier that buys social rank
+- no transaction-based compensation
+- no success fee
+- no percentage of capital, revenue, equity, loan, sale, or outcome
+
+Pricing finality remains open in `WERKLES_OPEN_QUESTIONS.md`.
+
+Membership unlocks access to platform features and verification providers. It does not unlock verification itself. Verification depends on the credentials, records, identity, work history, funds, licenses, or other claims the user actually has.
+
+## Armory
+
+The Armory may sell tools, templates, education, guides, and software helpers that make builders more capable.
+
+The Armory must not sell legal certainty, financial advice, guaranteed results, or compliance shortcuts.
+
+## Drafting Table
+
+The Drafting Table may offer planning workflows, dossier assistance, Blueprint setup, and collaboration scaffolding.
+
+The Drafting Table must not become a deal room where Werkles structures, recommends, negotiates, or brokers a user transaction.
+
+## Crucible
+
+The Crucible is the verification workflow lane.
+
+Verification must not become pay-to-play trust. Werkles may charge reasonable market/service rates for verification workflows, but must not sell stronger trust signals merely because a user pays more.
+
+Werkles verifies what it can through providers, records, receipts, and claim checks. It must be clear when a signal is strong, weak, expired, self-reported, or not checked.
+
+## Sponsored Anvils
+
+Sponsored Anvils are disclosed placements for vendors, tools, venues, services, or partners that may help users after fit is found.
+
+Sponsored placements must be clearly disclosed, must not imply endorsement as the only correct choice, and must not override user trust or matching integrity.
+
+Sponsor disclosure and conflict rules remain open in `WERKLES_OPEN_QUESTIONS.md`.
+
+## Iron Firewall
+
+Werkles NEVER takes a percentage of capital raised, success fees, or equity.
+
+Werkles never holds, moves, or escrows money between users. The deal is theirs to make.
+
+Werkles charges for software, access, and disclosed services. User transactions happen off-platform with user-selected advisers.</pre>
+    </section>
+
+    <section class="source-section">
+      <h2>company/WERKLES_UX_LAW.md</h2>
+      <p class="summary">Full source content for UX review.</p>
+      <pre># Werkles UX Law
+
+Status: v0.2 review draft
+
+## Article VIII - Interface Law
+
+Werkles should feel like a private industrial cockpit, not a pastel SaaS brochure.
+
+The Iron Palette controls:
+
+| Token | Hex |
+| --- | --- |
+| `forge-bg` | `#0A0908` |
+| `forge-panel` | `#161412` |
+| `copper-base` | `#B87333` |
+| `cream-text` | `#F5E6D3` |
+| `heat-purple` | `#9333EA` |
+| `patina-green` | `#2DD4BF` |
+| `forge-orange` | `#EA580C` |
+
+The old indigo, emerald, lavender, cream, and light-mode palette is legacy/marketing reconciliation only. It is not controlling law.
+
+## Component Feel
+
+Components should feel useful, weighty, and direct:
+
+- heavy buttons
+- clear states
+- sharp hierarchy
+- compact dashboards
+- no nested decorative cards
+- no generic team-collab fluff
+- no fragile glassmorphism that hurts readability
+
+## People Over Avatars
+
+Werkles is people-centric.
+
+Show real work, roles, proof posture, arena, turf, and intent. Avoid reducing users to toy avatars or empty profile badges.
+
+## Empty States
+
+Empty states should be alive but useful.
+
+Examples:
+
+- "Nothing in the deck worth wasting your time on. Broaden the search or sharpen the ask."
+- "The machine is coughing. Feed it better information."
+- "Inspecting the steel."
+
+Tone is allowed. Confusion is not.</pre>
+    </section>
+
+    <section class="source-section">
+      <h2>company/WERKLES_TRUST_AND_COMPLIANCE.md</h2>
+      <p class="summary">Full source content for trust and compliance review.</p>
+      <pre># Werkles Trust And Compliance
+
+Status: v0.2 review draft
+
+## Article VI - Trust, Data, And Compliance
+
+Werkles verifies users. Users do not verify each other.
+
+Verification claims must be scoped honestly:
+
+- identity can be checked through an identity provider
+- phone ownership can be checked through a phone provider
+- funds can be checked through a funds provider
+- licenses can be checked against available records
+- background checks require proper consent and legal review
+- references and work history can be partially checked but remain gameable
+
+## Zero-Knowledge Posture
+
+Werkles should store receipts and statuses, not raw sensitive material.
+
+Do not store:
+
+- raw SSNs
+- full bank account numbers
+- full ID documents
+- unnecessary pay stubs
+- unnecessary tax documents
+- unnecessary background report contents
+
+Store only what is needed to prove a workflow happened, expire it, and audit access.
+
+## RLS And Server Boundaries
+
+All user data tables need row-level security or server-only isolation.
+
+Service role keys stay server-side only.
+
+User trust state, membership state, verification state, and payment state are server-derived. Users cannot write their own trust tier.
+
+## Deletion And Anonymization
+
+Deletion/anonymization must preserve lawful user deletion rights while keeping non-identifying Blueprint structure where legally allowed.
+
+Implementation details remain open in `WERKLES_OPEN_QUESTIONS.md`.
+
+## Webhook Gospel
+
+Provider callbacks are truth only after signature verification.
+
+Subscription status, verification status, payment status, and image-generation worker status must not be granted by the frontend success page alone.
+
+Webhook handlers must:
+
+- verify raw-body signatures when supported
+- fail closed
+- be idempotent
+- avoid logging secrets
+- update server-side state only after trust checks pass
+
+## Momentum And Lock The Joints
+
+The old "co-sign" vocabulary is not law. "Lock the Joints" or another non-lending term should be used.
+
+Momentum automation must not auto-add users to Blueprints merely because everyone was silent. The preferred open direction is 48-hour escalation and 96-hour expiry, not silent auto-approval.</pre>
+    </section>
+
+    <section>
+      <h2>Operator Decision</h2>
+      <p>Select one path in chat after review. The gate stays closed until Ben says otherwise.</p>
+      <div class="decision-grid">
+        <div class="decision approve">APPROVE</div>
+        <div class="decision patches">REQUEST PATCHES</div>
+        <div class="decision no-go">NO-GO</div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const reviewFields = [
+      ["Pricing Finality", "pricing-status", "pricing-notes"],
+      ["48h / 96h Momentum", "momentum-status", "momentum-notes"],
+      ["Deletion / Anonymization", "deletion-status", "deletion-notes"],
+      ["Worker Lane Protection", "worker-status", "worker-notes"],
+      ["Lock The Joints Naming", "naming-status", "naming-notes"],
+      ["Sponsored Anvils", "sponsor-status", "sponsor-notes"],
+      ["Legacy Palette", "palette-status", "palette-notes"],
+      ["Other Constitution Patch Notes", null, "general-notes"]
+    ];
+
+    function getValue(id) {
+      const element = document.getElementById(id);
+      return element ? element.value.trim() : "";
+    }
+
+    function buildReviewPacket() {
+      const lines = [
+        "REQUEST PATCHES - CONSTITUTION_REVIEW",
+        "",
+        "Gate: [AWAITING HUMAN GATE: CONSTITUTION_REVIEW]",
+        "",
+        "Review form rule: blank sections and sections marked Unreviewed remain open. Do not treat them as approved, rejected, resolved, or intentionally disregarded.",
+        "",
+        "Patch areas:"
+      ];
+
+      reviewFields.forEach(([label, statusId, notesId]) => {
+        const status = statusId ? getValue(statusId) : "Notes";
+        const notes = getValue(notesId);
+        lines.push("");
+        lines.push(`## ${label}`);
+        lines.push(`Status: ${status}`);
+        lines.push("Notes:");
+        if (notes) {
+          lines.push(notes);
+        } else if (status.startsWith("Unreviewed")) {
+          lines.push("(no instruction supplied; keep this open and do not treat it as reviewed)");
+        } else {
+          lines.push("(no notes supplied)");
+        }
+      });
+
+      lines.push("");
+      lines.push("Instruction:");
+      lines.push("Patch only the Constitution/company source files needed to address these notes. Do not push, deploy, apply SQL, create Projects/Gems, or move past the human gate.");
+
+      return lines.join("\n");
+    }
+
+    async function copyReviewPacket() {
+      const packet = buildReviewPacket();
+      const status = document.getElementById("copy-status");
+
+      try {
+        await navigator.clipboard.writeText(packet);
+        status.textContent = "Review packet copied. Paste it into chat when ready.";
+      } catch (error) {
+        status.textContent = "Clipboard blocked by browser. Select and copy the generated text manually from the prompt.";
+        window.prompt("Copy review packet:", packet);
+      }
+    }
+
+    document.getElementById("copy-review-packet").addEventListener("click", copyReviewPacket);
+  </script>
+</body>
+</html>

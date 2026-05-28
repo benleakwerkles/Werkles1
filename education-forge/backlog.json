@@ -1,0 +1,80 @@
+{
+  "version": "0.1",
+  "source": "Operator approved Parallel Forge Start, 2026-05-25",
+  "defaultStatus": "queued",
+  "topics": [
+    {
+      "id": "brrrr-gurus-leave-out",
+      "title": "BRRRR: what gurus leave out",
+      "lane": "real-estate-operator",
+      "status": "queued"
+    },
+    {
+      "id": "hard-money-costs-traps",
+      "title": "Hard money lending: real costs and traps",
+      "lane": "capital-literacy",
+      "status": "queued"
+    },
+    {
+      "id": "private-money-vs-hard-money",
+      "title": "Private money vs hard money",
+      "lane": "capital-literacy",
+      "status": "queued"
+    },
+    {
+      "id": "dscr-loans-what-can-go-wrong",
+      "title": "DSCR loans: what can go wrong",
+      "lane": "capital-literacy",
+      "status": "queued"
+    },
+    {
+      "id": "sops-for-small-operators",
+      "title": "SOPs for small operators",
+      "lane": "operator-basics",
+      "status": "queued"
+    },
+    {
+      "id": "passive-income-lie",
+      "title": "The passive income lie",
+      "lane": "anti-guru",
+      "status": "queued"
+    },
+    {
+      "id": "construction-estimating-basics",
+      "title": "Construction estimating basics",
+      "lane": "operator-basics",
+      "status": "queued"
+    },
+    {
+      "id": "working-capital-traps",
+      "title": "Working capital traps",
+      "lane": "operator-finance",
+      "status": "queued"
+    },
+    {
+      "id": "sweat-equity-splits",
+      "title": "Sweat equity splits",
+      "lane": "partnership-basics",
+      "status": "queued"
+    },
+    {
+      "id": "llc-operating-agreement-basics",
+      "title": "LLC operating agreement basics",
+      "lane": "partnership-basics",
+      "status": "queued"
+    },
+    {
+      "id": "seller-financing-basics",
+      "title": "Seller financing basics",
+      "lane": "capital-literacy",
+      "status": "queued"
+    },
+    {
+      "id": "buying-job-vs-freedom",
+      "title": "Buying a job vs buying freedom",
+      "lane": "anti-guru",
+      "status": "queued"
+    }
+  ]
+}
+

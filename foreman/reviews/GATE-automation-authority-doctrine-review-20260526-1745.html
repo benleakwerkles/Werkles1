@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gate Review - Automation Authority Doctrine</title>
+  <style>
+    :root {
+      --bg: #11100e;
+      --panel: #1f1d1a;
+      --panel-2: #28241f;
+      --line: #4c4136;
+      --text: #f3ead8;
+      --muted: #c8bca8;
+      --copper: #bd7b4a;
+      --green: #52b788;
+      --red: #e15d4f;
+      --gold: #e0a247;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    main {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 { margin: 0; letter-spacing: 0; }
+    h1 { font-size: 30px; line-height: 1.1; }
+    h2 { font-size: 18px; margin-bottom: 10px; }
+    h3 { font-size: 14px; margin-bottom: 8px; }
+    p, li, td { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+      gap: 14px;
+      align-items: start;
+    }
+    .panel, .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 15px;
+      margin-bottom: 14px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .metric-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+    .metric-value {
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .pill {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      margin: 3px 5px 3px 0;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .pill.green { border-color: rgba(82,183,136,.7); color: #c9f0da; }
+    .pill.red { border-color: rgba(225,93,79,.7); color: #ffd1cc; }
+    .pill.gold { border-color: rgba(224,162,71,.7); color: #ffe0ab; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    th {
+      color: var(--text);
+      background: var(--panel-2);
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .footer {
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 18px;
+      padding-top: 14px;
+      font-size: 13px;
+    }
+    @media (max-width: 860px) {
+      .grid, .metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="pill gold">Tier 1 gate review</span>
+      <span class="pill red">Human review required</span>
+      <h1>Automation Authority Doctrine</h1>
+      <p>This dashboard reviews the doctrine that decides when AI workers proceed and when Ben must personally decide.</p>
+    </header>
+
+    <section class="metrics">
+      <div class="metric">
+        <div class="metric-label">Confidence</div>
+        <div class="metric-value">MEDIUM</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Gate</div>
+        <div class="metric-value">Doctrine Review</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Spend</div>
+        <div class="metric-value">$0 authorized</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Runtime</div>
+        <div class="metric-value">No live execution</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div>
+        <section class="panel">
+          <h2>Confidence Justification</h2>
+          <p>Confidence is medium. The doctrine now clearly separates non-gate technical proofs from human gates, and shims point to cockpit sources instead of duplicating gate law. Confidence is not high because this is self-modifying doctrine and should be reviewed by Ben before being treated as settled operating law.</p>
+        </section>
+
+        <section class="panel">
+          <h2>Unknowns</h2>
+          <ul>
+            <li>Whether every doctrine/protocol change should always get a Tier 1 dashboard.</li>
+            <li>Whether the default bounded repair limit of 2 attempts is right.</li>
+            <li>Whether future staging deploys should stay Tier 1.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>Blast Radius</h2>
+          <table>
+            <thead><tr><th>Area</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td>AI worker behavior</td><td>Changes when workers stop for Ben.</td></tr>
+              <tr><td>Gate review UI</td><td>Tier 1 gates get static dashboards; Tier 2 gets Markdown only.</td></tr>
+              <tr><td>Cursor/Agents</td><td>Classify gates by cockpit docs, without approving for Ben.</td></tr>
+              <tr><td>Ghost Forge</td><td>Technical proof is complete; batch generation remains blocked.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel">
+          <h2>Files Changed</h2>
+          <ul>
+            <li><code>foreman/HUMAN_GATES.md</code></li>
+            <li><code>foreman/AI_COUSINS_PROTOCOL.md</code></li>
+            <li><code>foreman/LANES.md</code></li>
+            <li><code>foreman/BUDGET.md</code></li>
+            <li><code>foreman/NEXT_ACTION.md</code></li>
+            <li><code>foreman/platform-instructions/CODEX_FOREMAN_INSTRUCTIONS.md</code></li>
+            <li><code>AGENTS.md</code></li>
+            <li><code>.cursorrules</code></li>
+            <li><code>.cursor/rules/foreman-cockpit.mdc</code></li>
+            <li><code>foreman/gates/APPROVAL_LOG.md</code></li>
+          </ul>
+        </section>
+      </div>
+
+      <aside>
+        <section class="panel">
+          <h2>Systems Affected</h2>
+          <p>Repo cockpit process, AI cousin handoffs, Cursor/Agents repo instructions, gate review UI protocol, and Ghost Forge governance. No runtime service was touched.</p>
+        </section>
+
+        <section class="panel">
+          <h2>Budget / Spend</h2>
+          <p>No paid calls are authorized by this gate. Spend/batch gates require a complete lane in <code>foreman/BUDGET.md</code>.</p>
+        </section>
+
+        <section class="panel">
+          <h2>Lane Status</h2>
+          <p><span class="pill green">Doctrine maintenance approved</span></p>
+          <p><span class="pill green">Gate Review UI Protocol approved for this patch</span></p>
+          <p><span class="pill red">Ghost Forge batch blocked</span></p>
+        </section>
+
+        <section class="panel">
+          <h2>Known Risks</h2>
+          <ul>
+            <li>Over-review could slow the machine.</li>
+            <li>Under-review could bypass judgment.</li>
+            <li>Unclassified gates default to Tier 1, which is safe but heavier.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>What Remains Blocked</h2>
+          <ul>
+            <li>Batch/background image generation.</li>
+            <li>Creative approval of generated assets.</li>
+            <li>Deploy, push, SQL/schema/RLS/policy changes.</li>
+            <li>Secrets, billing, public launch, or production data mutation.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>Decision Phrases</h2>
+          <p><code>APPROVE AUTOMATION AUTHORITY DOCTRINE</code></p>
+          <p><code>REJECT AUTOMATION AUTHORITY DOCTRINE</code></p>
+          <p><code>PATCH AUTOMATION AUTHORITY DOCTRINE: &lt;notes&gt;</code></p>
+        </section>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      This is a local static review artifact. It does not approve doctrine, push, deploy, apply SQL, enter secrets, run Ghost Forge, run Bellows, mutate app code, generate images, or publish anything.
+    </footer>
+  </main>
+</body>
+</html>

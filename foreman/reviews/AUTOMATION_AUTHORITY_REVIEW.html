@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Werkles Automation Authority Review</title>
+  <style>
+    :root {
+      --forge-black: #11100e;
+      --iron: #1a1917;
+      --panel: #22201d;
+      --panel-2: #2a2723;
+      --line: #4a4036;
+      --cream: #f3ead8;
+      --muted: #c8bca8;
+      --copper: #bd7b4a;
+      --teal: #02917e;
+      --violet: #3d16ca;
+      --danger: #e15d4f;
+      --warning: #e0a247;
+      --ok: #52b788;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--forge-black);
+      color: var(--cream);
+      line-height: 1.45;
+    }
+
+    a {
+      color: var(--cream);
+      text-decoration-color: var(--copper);
+      text-underline-offset: 3px;
+    }
+
+    .shell {
+      width: min(1240px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 0 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: 30px;
+      line-height: 1.1;
+      max-width: 760px;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      background: var(--iron);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .metric,
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--iron);
+      box-shadow: 0 18px 44px var(--shadow);
+    }
+
+    .metric {
+      padding: 14px;
+      min-height: 96px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .metric-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .decision {
+      border-left: 4px solid var(--copper);
+    }
+
+    .gate-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .gate-column {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 14px;
+    }
+
+    .gate-column.stop {
+      border-color: rgba(225, 93, 79, 0.5);
+    }
+
+    .gate-column.go {
+      border-color: rgba(82, 183, 136, 0.5);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li {
+      margin: 6px 0;
+      color: var(--muted);
+    }
+
+    code {
+      color: var(--cream);
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--cream);
+      padding: 6px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pill.ok {
+      border-color: rgba(82, 183, 136, 0.6);
+      color: #c9f0da;
+    }
+
+    .pill.stop {
+      border-color: rgba(225, 93, 79, 0.65);
+      color: #ffd1cc;
+    }
+
+    .pill.warn {
+      border-color: rgba(224, 162, 71, 0.65);
+      color: #ffe0ab;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--cream);
+      background: var(--panel-2);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .classifier {
+      display: grid;
+      gap: 8px;
+    }
+
+    .question-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: var(--panel);
+    }
+
+    .verdict {
+      min-width: 116px;
+      border-radius: 6px;
+      padding: 7px 9px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .verdict.go {
+      background: rgba(82, 183, 136, 0.14);
+      color: #c9f0da;
+      border: 1px solid rgba(82, 183, 136, 0.55);
+    }
+
+    .verdict.stop {
+      background: rgba(225, 93, 79, 0.14);
+      color: #ffd1cc;
+      border: 1px solid rgba(225, 93, 79, 0.55);
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 10px 12px;
+      margin-top: 8px;
+    }
+
+    summary {
+      cursor: pointer;
+      color: var(--cream);
+      font-weight: 750;
+    }
+
+    .review-list label {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 9px;
+      align-items: start;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(74, 64, 54, 0.55);
+      color: var(--muted);
+    }
+
+    .review-list label:last-child {
+      border-bottom: 0;
+    }
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      accent-color: var(--teal);
+    }
+
+    .file-map {
+      display: grid;
+      gap: 8px;
+    }
+
+    .file-map a {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 9px 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 920px) {
+      .status-strip,
+      .grid,
+      .gate-board {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+      }
+
+      .question-row {
+        grid-template-columns: 1fr;
+      }
+
+      .verdict {
+        width: fit-content;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">Review artifact</span>
+        <h1>Automation Authority Doctrine</h1>
+        <p>Human gates are for authority, judgment, money, credentials, public exposure, production data, and irreversible moves. Routine technical proof belongs to approved lanes.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill warn">Human review required</span>
+        <span class="pill ok">No deploy</span>
+        <span class="pill ok">No push</span>
+        <span class="pill ok">No SQL</span>
+      </div>
+    </header>
+
+    <section class="status-strip" aria-label="Status summary">
+      <div class="metric">
+        <div class="metric-label">Doctrine</div>
+        <div class="metric-value">Draft</div>
+        <div class="metric-note">Review before treating as settled law.</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Ghost Forge</div>
+        <div class="metric-value">Proof Passed</div>
+        <div class="metric-note">Webhook callback completed.</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Next Gate</div>
+        <div class="metric-value">Creative + Budget</div>
+        <div class="metric-note">Batch work remains blocked.</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Cursor Role</div>
+        <div class="metric-value">Classifier</div>
+        <div class="metric-note">Cursor may classify, not approve.</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div>
+        <section class="panel decision">
+          <h2>Core Doctrine</h2>
+          <p>Ben is the Operator and decision-maker. AI workers automate mechanical work, keep scope in cockpit files, and stop only for true authority boundaries.</p>
+          <div class="pill-row">
+            <span class="pill ok">Proceed inside approved lane</span>
+            <span class="pill ok">Use written scope</span>
+            <span class="pill ok">Respect budget</span>
+            <span class="pill stop">Stop at true gates</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Gate Classifier</h2>
+          <div class="gate-board">
+            <div class="gate-column go">
+              <h3>Not A Human Gate Inside Approved Scope</h3>
+              <ul>
+                <li>typecheck</li>
+                <li>build</li>
+                <li>configured non-interactive lint</li>
+                <li>health check</li>
+                <li>local route load</li>
+                <li>webhook callback proof</li>
+                <li>one test request inside approved budget</li>
+                <li>dry run</li>
+                <li>upload-path proof</li>
+                <li>scaffold verification</li>
+              </ul>
+            </div>
+            <div class="gate-column stop">
+              <h3>Human Gate</h3>
+              <ul>
+                <li>login, OAuth, or account creation</li>
+                <li>billing or credit card action</li>
+                <li>private secret entry</li>
+                <li>live deploy</li>
+                <li>git push or merge</li>
+                <li>SQL/schema apply</li>
+                <li>RLS or policy changes</li>
+                <li>production data mutation</li>
+                <li>external or public launch</li>
+                <li>legal/compliance approval</li>
+                <li>creative direction approval</li>
+                <li>spend above approved budget</li>
+                <li>destructive or irreversible changes</li>
+                <li>draft promotion to approved/published</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Lane Status</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Lane</th>
+                <th>Status</th>
+                <th>Allowed Now</th>
+                <th>Stop Condition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ghost Forge One-Prompt Technical Proof</td>
+                <td><span class="pill ok">APPROVED, COMPLETED</span></td>
+                <td>Status documentation only. No more paid prompts under current scope.</td>
+                <td>Completed callback proof. Fresh scope required for another paid test.</td>
+              </tr>
+              <tr>
+                <td>Ghost Forge Batch Asset Generation</td>
+                <td><span class="pill stop">BLOCKED</span></td>
+                <td>None.</td>
+                <td>Await creative direction and explicit batch budget approval.</td>
+              </tr>
+              <tr>
+                <td>Doctrine And Cockpit Maintenance</td>
+                <td><span class="pill ok">APPROVED</span></td>
+                <td>Local doctrine and cockpit review artifacts.</td>
+                <td>Stop after review packet and dashboard are prepared.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel">
+          <h2>Budget Controls</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Lane</th>
+                <th>Per Test</th>
+                <th>Per Run</th>
+                <th>Daily Cap</th>
+                <th>Paid Calls</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ghost Forge One-Prompt Technical Proof</td>
+                <td>$0.25</td>
+                <td>$0.25</td>
+                <td>$1.00</td>
+                <td>Completed; zero remaining under current scope.</td>
+              </tr>
+              <tr>
+                <td>Ghost Forge Batch Asset Generation</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>No.</td>
+              </tr>
+              <tr>
+                <td>Doctrine And Cockpit Maintenance</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>No.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <aside>
+        <section class="panel">
+          <h2>Quick Tests</h2>
+          <div class="classifier">
+            <div class="question-row">
+              <span>Run a local typecheck inside current scope?</span>
+              <span class="verdict go">PROCEED</span>
+            </div>
+            <div class="question-row">
+              <span>Run one more paid Ghost Forge prompt now?</span>
+              <span class="verdict stop">STOP</span>
+            </div>
+            <div class="question-row">
+              <span>Open provider dashboard to the right page?</span>
+              <span class="verdict go">PROCEED</span>
+            </div>
+            <div class="question-row">
+              <span>Enter a private provider key?</span>
+              <span class="verdict stop">STOP</span>
+            </div>
+            <div class="question-row">
+              <span>Approve generated brand asset direction?</span>
+              <span class="verdict stop">STOP</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Ghost Forge Proof</h2>
+          <p>The callback proof succeeded and the output stayed review-only.</p>
+          <ul>
+            <li>Batch: <code>09e7c950-92bd-4469-ad2e-f355c367fdb6</code></li>
+            <li>Output: <code>98fd5fa4-0841-436a-94bc-b168b37cdf64</code></li>
+            <li>Prediction: <code>g7ka1m0701rmt0cycqvssjdq48</code></li>
+            <li>Storage: private Supabase bucket path recorded in <code>NEXT_ACTION.md</code></li>
+            <li>Creative approval: not granted</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>Red-Team Questions</h2>
+          <details open>
+            <summary>Money and scope</summary>
+            <ul>
+              <li>Are budgets strict enough?</li>
+              <li>Should paid tests always require a fresh cockpit entry?</li>
+              <li>Should repair attempts be lower than 2?</li>
+            </ul>
+          </details>
+          <details>
+            <summary>Production safety</summary>
+            <ul>
+              <li>Is production data mutation blocked strongly enough?</li>
+              <li>Should staging deploys be treated differently from production deploys?</li>
+              <li>Should dashboard navigation be allowed when no secret entry occurs?</li>
+            </ul>
+          </details>
+          <details>
+            <summary>Creative approval</summary>
+            <ul>
+              <li>Does the doctrine clearly protect draft outputs?</li>
+              <li>Should test images be hidden from brand approval workflows?</li>
+              <li>Should creative approval always name a style packet?</li>
+            </ul>
+          </details>
+        </section>
+
+        <section class="panel">
+          <h2>Review Checklist</h2>
+          <div class="review-list">
+            <label><input type="checkbox"> Human gates list is complete.</label>
+            <label><input type="checkbox"> Technical proof rules are strict enough.</label>
+            <label><input type="checkbox"> Lanes are clear enough for AI workers.</label>
+            <label><input type="checkbox"> Budgets are clear enough for paid calls.</label>
+            <label><input type="checkbox"> Cursor/Agents classify but do not approve gates.</label>
+            <label><input type="checkbox"> Draft outputs cannot become approved by silence.</label>
+            <label><input type="checkbox"> Ghost Forge next gate is creative direction plus batch budget.</label>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Source Files</h2>
+          <div class="file-map">
+            <a href="../HUMAN_GATES.md">foreman/HUMAN_GATES.md</a>
+            <a href="../LANES.md">foreman/LANES.md</a>
+            <a href="../BUDGET.md">foreman/BUDGET.md</a>
+            <a href="../NEXT_ACTION.md">foreman/NEXT_ACTION.md</a>
+            <a href="../AI_COUSINS_PROTOCOL.md">foreman/AI_COUSINS_PROTOCOL.md</a>
+            <a href="../../company/WERKLES_CONSTITUTION.md">company/WERKLES_CONSTITUTION.md</a>
+            <a href="AUTOMATION_AUTHORITY_REVIEW_PACKET.md">Review packet</a>
+          </div>
+        </section>
+      </aside>
+    </section>
+
+    <section class="panel">
+      <h2>Possible Decisions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Decision</th>
+            <th>Meaning</th>
+            <th>Phrase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Approve doctrine</td>
+            <td>Doctrine becomes the working automation authority rule set.</td>
+            <td><code>APPROVE AUTOMATION AUTHORITY DOCTRINE</code></td>
+          </tr>
+          <tr>
+            <td>Revise doctrine</td>
+            <td>Doctrine stays draft and Codex patches the listed concern.</td>
+            <td><code>REVISE AUTOMATION AUTHORITY DOCTRINE: &lt;notes&gt;</code></td>
+          </tr>
+          <tr>
+            <td>Pause doctrine</td>
+            <td>No further automation authority changes until Ben restarts the lane.</td>
+            <td><code>PAUSE AUTOMATION AUTHORITY DOCTRINE</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="footer">
+      This dashboard is a local review artifact. It does not approve doctrine, push, deploy, apply SQL, run Ghost Forge, run Bellows, generate images, enter secrets, or publish anything.
+    </footer>
+  </main>
+</body>
+</html>

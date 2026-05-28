@@ -1,0 +1,26 @@
+TO: CODEX FOREMAN
+FROM: Ben on Sally — Maker prepared this handoff
+
+Ben approved tonight: VERIFY GHOST FORGE v0.2 ICONS FIRST
+
+Sally = local machine only. Ghost Forge runs on Render (werkles-ghost-forge1), not on Sally.
+
+1) Open and follow exactly:
+   C:\Users\benle\Desktop\github\Werkles\foreman\handoffs\outbox\TO_CODEX_GHOST_FORGE_ICONS_FIRST_v0.2.md
+
+2) Read cockpit sources in that packet (batch v0.2, inventory status, budget, human gates).
+
+3) Run Ghost Forge on Render, ONE prompt per request, icons first:
+   - Phase A: icon-lane-builder through icon-lane-spark → public/assets/draft/icons/
+   - Phase B: icon-proof, icon-dues, icon-deck, icon-knock
+   - Phase C: icon-step-dossier, icon-step-fit, icon-step-knock
+   - Stop at daily cap or 429; log in foreman/ghost-forge/DRAFT_SITE_ASSET_RESULTS_v0.2.md
+
+4) Save PNGs into Sally's repo paths above. Do not generate images locally on Sally.
+
+5) When files are on disk, update ACTIVE_AGENT + NEXT_ACTION. Tell Ben to paste in Cursor on Sally:
+   ASSETS_LANDED v0.2
+
+Branch: ben-sandbox. No push. No deploy. No SQL. No secrets in chat.
+
+Maker stripped hook-engine on Sally — repo ready for icon wiring after you land files.

@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { WorkshopGreeter } from "@/components/foundry/workshop-greeter";
+import { routeAtmosphere } from "@/lib/workshop-facets";
 import { copy } from "@/lib/copy";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 export default function LoginPage() {
-  const [status, setStatus] = useState("Use the account you created for Werkles.");
+  const [status, setStatus] = useState(copy.auth.loginIdle);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -24,10 +26,12 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="auth-shell">
+    <main className={`auth-shell ${routeAtmosphere.auth}`}>
       <section className="auth-panel">
+        <WorkshopGreeter className="auth-panel-greeter" />
         <p className="eyebrow">{copy.brand}</p>
         <h1>{copy.auth.loginTitle}</h1>
+        <p>{copy.auth.loginSubhead}</p>
         <form className="form-stack" onSubmit={handleSubmit}>
           <label className="field">
             <span>Email</span>

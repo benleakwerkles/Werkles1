@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { WorkshopGreeter } from "@/components/foundry/workshop-greeter";
+import { routeAtmosphere } from "@/lib/workshop-facets";
 import { copy } from "@/lib/copy";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 export default function SignupPage() {
-  const [status, setStatus] = useState("Activation will still require ID, face capture, phone, and proof gates.");
+  const [status, setStatus] = useState(copy.auth.signupIdle);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,10 +44,12 @@ export default function SignupPage() {
   }
 
   return (
-    <main className="auth-shell">
+    <main className={`auth-shell ${routeAtmosphere.auth}`}>
       <section className="auth-panel">
+        <WorkshopGreeter className="auth-panel-greeter" />
         <p className="eyebrow">{copy.brand}</p>
         <h1>{copy.auth.signupTitle}</h1>
+        <p>{copy.auth.signupSubhead}</p>
         <form className="form-stack" onSubmit={handleSubmit}>
           <label className="field">
             <span>Email</span>
@@ -59,7 +63,7 @@ export default function SignupPage() {
             <span>Confirm password</span>
             <input name="confirm" type="password" autoComplete="new-password" required minLength={8} />
           </label>
-          <button className="button button-dark" type="submit">Create account</button>
+          <button className="button button-dark" type="submit">{copy.auth.signupCta}</button>
           <p className="status-line" role="status">{status}</p>
         </form>
         <Link className="button button-outline" href="/login">I already have an account</Link>

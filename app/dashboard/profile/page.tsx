@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
+import { CockpitShell } from "@/components/foundry/cockpit-shell";
 import { copy } from "@/lib/copy";
 import { deriveAccessWeight } from "@/lib/access-weight-client";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
@@ -173,20 +174,21 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="dashboard-main">
+    <CockpitShell>
+      <main className="dashboard-main">
       <nav className="dashboard-nav" aria-label="Dashboard navigation">
         <Link href="/dashboard">Match deck</Link>
-        <Link href="/dashboard/blueprints">Blueprints</Link>
+        <Link href="/dashboard/blueprints">{copy.dashboard.workshops.navLabel}</Link>
         <Link href="/dashboard/intros">Intros</Link>
       </nav>
 
       <section className="ops-card profile-editor">
         <div className="card-heading">
-          <p>Profile</p>
-          <h1>Name what you bring. Name what you need.</h1>
+          <p>{copy.dashboard.profile.kicker}</p>
+          <h1>{copy.dashboard.profile.headline}</h1>
         </div>
         <div className="trust-state-strip" aria-label="Trust state">
-          <span>{deriveAccessWeight(profile)} dossier</span>
+          <span>{deriveAccessWeight(profile)} Foundry record</span>
           <span>Membership: {profile.membership_tier || "free"}</span>
           <span>ID: {profile.id_status || "none"}</span>
           <span>Assets: {profile.funds_status || "none"}</span>
@@ -255,7 +257,7 @@ export default function ProfilePage() {
             </select>
           </label>
           <label className="field">
-            <span>Dossier depth</span>
+            <span>{copy.dashboard.profile.depthLabel}</span>
             <select name="profile_depth" defaultValue={profile.profile_depth || "quick_weld"}>
               <option value="quick_weld">Quick Weld</option>
               <option value="full_audit">Full Audit</option>
@@ -301,12 +303,9 @@ export default function ProfilePage() {
       <section className="ops-card verification-card">
         <div className="card-heading">
           <p>Verification Gates</p>
-          <h2>Sandbox first. Live steel later.</h2>
+          <h2>{copy.dashboard.profile.verificationHeadline}</h2>
         </div>
-        <p>
-          Foundry Dues unlocks the provider doors. The current buttons only prepare sandbox receipts
-          and server-owned status fields.
-        </p>
+        <p>{copy.dashboard.profile.verificationBody}</p>
         <div className="verification-actions">
           <button className="button button-outline" type="button" onClick={() => triggerVerification("identity")}>
             Prepare ID Check
@@ -331,6 +330,7 @@ export default function ProfilePage() {
           Status: {profile.deep_audit_status || "none"}. {copy.deepAudit.placeholder}
         </p>
       </section>
-    </main>
+      </main>
+    </CockpitShell>
   );
 }

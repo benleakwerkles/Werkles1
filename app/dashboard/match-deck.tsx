@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { SiteIcon } from "@/components/foundry/site-icon";
 import { copy } from "@/lib/copy";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 
@@ -14,7 +15,7 @@ export default function MatchDeck() {
   const [blueprintId, setBlueprintId] = useState("");
   const [matches, setMatches] = useState<MatchRow[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [status, setStatus] = useState("Enter a blueprint UUID to call the Supabase matching function.");
+  const [status, setStatus] = useState(copy.dashboard.matchDeck.placeholder);
 
   async function loadMatches() {
     const { data: sessionData } = await getSupabaseBrowser().auth.getSession();
@@ -26,7 +27,7 @@ export default function MatchDeck() {
     }
 
     if (!blueprintId) {
-      setStatus("Blueprint UUID is required.");
+      setStatus(copy.dashboard.matchDeck.workshopRequired);
       return;
     }
 
@@ -44,20 +45,23 @@ export default function MatchDeck() {
 
     setMatches(result.matches || []);
     setActiveIndex(0);
-    setStatus(result.matches?.length ? "Production match factors loaded." : copy.actions.decline);
+    setStatus(result.matches?.length ? copy.dashboard.matchDeck.loaded : copy.microcopy.noMatches);
   }
 
   const active = matches[activeIndex];
 
   return (
     <section className="dashboard-grid">
-      <article className="ops-card">
-        <div className="card-heading">
-          <p>Match Deck</p>
-          <h1>Production matching, one blueprint at a time.</h1>
+      <article className="ops-card workshop-facet--deck">
+        <div className="card-heading card-heading--icon">
+          <SiteIcon icon="icon-deck" size="md" />
+          <div>
+            <p>{copy.dashboard.matchDeck.kicker}</p>
+            <h1>{copy.dashboard.matchDeck.headline}</h1>
+          </div>
         </div>
         <label className="field">
-          <span>Blueprint UUID</span>
+          <span>Workshop UUID</span>
           <input
             value={blueprintId}
             onChange={(event) => setBlueprintId(event.target.value)}
@@ -110,7 +114,7 @@ export default function MatchDeck() {
             </div>
           </>
         ) : (
-          <div className="candidate-empty">No production matches loaded yet.</div>
+          <div className="candidate-empty">{copy.dashboard.matchDeck.empty}</div>
         )}
       </article>
     </section>

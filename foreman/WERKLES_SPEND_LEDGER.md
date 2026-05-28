@@ -34,6 +34,10 @@ Rule: Background image generation stays blocked until the one-prompt loop succee
 | 2026-05-25 | Werkles, Inc (pending) | Replicate + Anthropic | Ghost Forge one-prompt test | Estimate / pending | 0.22 | one-time | Approved, blocked by model patch deploy | Repo config | Estimate uses `$0.20` image reserve plus `$0.02` Claude reserve. Actual provider billing may differ and must be reconciled later. |
 | 2026-05-25 | Werkles, Inc (pending) | Anthropic | Failed Ghost Forge one-prompt attempt | Internal reserve / possible provider check | 0.02 | one-time | Failed before image generation | Render shell output | Request reached worker and failed with `Claude prompt generation failed 404: model: claude-3-5-haiku-latest`. No Replicate image generation occurred. Actual Anthropic billing needs provider reconciliation. |
 | 2026-05-25 | Werkles, Inc (pending) | Anthropic | Failed Ghost Forge one-prompt retry after first model patch | Internal reserve / possible provider check | 0.02 | one-time | Failed before image generation | Render shell output | Request reached worker and failed with `Claude prompt generation failed 404: model: claude-3-5-haiku-20241022`. No Replicate image generation occurred. Account model list later showed `claude-haiku-4-5-20251001` is available. |
+| 2026-05-26 | Werkles, Inc (pending) | Anthropic | Successful prompt generation before Replicate credit block | Actual / API usage | 0.000761 | one-time | Actual recorded in Supabase | Ghost Forge DB query | Claude generated the one-prompt payload using `claude-haiku-4-5-20251001`; Replicate then blocked image generation for insufficient credit. |
+| 2026-05-26 | Werkles, Inc (pending) | Replicate | One-prompt image attempt | Estimate / reserved, not spent | 0.20 | one-time | Blocked by insufficient credit | Ghost Forge DB query | Batch `bfd1dbf7-478d-484c-b2ba-ff57dbaf760e`; output `75735fdc-c80b-4cc6-9a9a-7fd7161fa900` failed before prediction creation. Actual image spend `$0.00`. |
+| 2026-05-26 | Werkles, Inc (pending) | Anthropic | Credited retry prompt generation before Replicate credit block | Actual / API usage | 0.000741 | one-time | Actual recorded in Supabase | Ghost Forge DB query | Delta from `$0.000761` to `$0.001502`; Replicate still returned 402 after Ben said credit was done. |
+| 2026-05-26 | Werkles, Inc (pending) | Replicate | Credited retry one-prompt image attempt | Estimate / reserved, not spent | 0.20 | one-time | Blocked by insufficient credit | Ghost Forge DB query | Batch `9d0ba70e-f117-40d1-a724-07b33e27529d`; output `b5044f75-bd7b-41ca-9acf-615cd97e3b28` failed before prediction creation. Actual image spend `$0.00`. |
 | 2026-05-25 | Werkles, Inc (pending) | Midjourney | Image generation subscription | Actual / recurring | TBD | likely monthly | Active | Ben statement | Ben said Midjourney is already paid. Keep until Ghost Forge completes one-image loop; amount and plan need receipt/provider confirmation. |
 
 ## Monthly Run Rate Snapshot
@@ -46,6 +50,7 @@ Known recurring run rate:
 Known one-time pending test exposure:
 
 - Ghost Forge one-prompt retry after model patch: estimated `$0.22`, with daily provider caps in place
+- Current recorded actual provider usage: Claude `$0.001502`; Replicate image actual `$0.00`
 
 ## Reconciliation Rules
 

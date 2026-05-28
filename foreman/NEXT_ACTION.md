@@ -1,58 +1,43 @@
-[AWAITING HUMAN GATE: GHOST_FORGE_WEBHOOK_BASE_URL_FIX_APPROVAL]
+# NEXT ACTION
 
-One-prompt retry after Replicate diagnostic was approved and completed.
+[ACTIVE: SITE ICONS + UI/UX — MAKER ON SALLY]
 
-Result:
+Yesterday lost to Codex browser repair loop. Today: **visible site work + icon assets.**
 
-- Batch ID: `5d544518-17ae-4ad9-a5ed-19a502d42e62`
-- Output ID: `0c31e055-9092-43a6-902b-427e7e7f96be`
-- Replicate prediction ID: `0e7weaey99rmt0cycq6ackes4r`
-- Replicate status: `succeeded`
-- Batch status: `completed`
-- Output status: `completed`
-- Supabase storage path: `5d544518-17ae-4ad9-a5ed-19a502d42e62/hero-background/0c31e055-9092-43a6-902b-427e7e7f96be.png`
-- Content type: `image/png`
-- Byte size: `1460620`
-- Estimated image spend: `$0.20`
+## Maker (Cursor on Sally) — today
 
-Important finding:
+- [x] **Brightened workshop v0.4** — warm paper panels, visible forge atmosphere (middle path vs image 1)
+- [x] Unified `SiteIcon` — PNG + SVG fallback
+- [x] Wired: header nav, `#people` lanes, `#how` steps, crucible verification cards
+- [ ] Wire icons on pricing/membership/dashboard nav when Ben confirms priority
+- [ ] Replace forge preview gallery rows when PNGs land
 
-- Replicate generation worked.
-- The automatic webhook callback did not work because the generated webhook URL had a malformed trailing-dot host:
-  - `https://werkles-ghost-forge1.onrender.com./webhook/replicate?...`
-- Codex manually replayed the signed webhook from Render Shell for this one already-created prediction.
-- The manual replay used Render environment secrets in-place, did not print secrets, did not create another prediction, and returned:
-  - `200 {"ok":true,"handled":"completed",...}`
+## Icon assets (Sally PowerShell — no Codex browser)
 
-Local patch prepared, not pushed and not deployed:
+Drop Ghost Forge PNGs into: `public/assets/draft/icons/`
 
-- `ghost-forge-worker/server.mjs`
-  - Adds `normalizedPublicBaseUrl()` and uses it when building Replicate webhook URLs.
-  - Strips trailing slashes and trailing dots from `PUBLIC_BASE_URL`.
-- `ghost-forge-worker/README.md`
-  - Documents that `PUBLIC_BASE_URL` should have no trailing slash or dot.
-- `ghost-forge-worker/render-env-checklist.md`
-  - Adds the same trailing-dot warning.
-
-NEXT HUMAN ACTION:
-
-Ben says one of:
-
-```text
-APPROVE GHOST FORGE WEBHOOK BASE URL FIX PUSH DEPLOY
+```powershell
+cd C:\Users\benle\Desktop\github\Werkles
+$env:PUBLIC_BASE_URL = "https://werkles-ghost-forge1.onrender.com"
+$env:GHOST_FORGE_API_KEY = "..."   # local session only
+.\scripts\foreman\ghost-forge-icon-from-sally.ps1 -Icon builder
 ```
 
-or
+Icons auto-swap from SVG fallback to PNG when filenames match `lib/site-icons.ts`.
 
-```text
-STOP GHOST FORGE
+Priority filenames tonight: `icon-lane-*`, `icon-step-*`, `icon-check-*`, `icon-proof-v0.1.png`
+
+## Preview site
+
+```powershell
+cd C:\Users\benle\Desktop\github\Werkles
+npm run dev
 ```
 
-If approved, Codex should syntax-check, commit/push only the webhook base URL fix and cockpit updates, manually deploy Render, then run one narrow webhook URL verification. Do not run background/batch generation.
+## Codex
 
-Still blocked:
+Optional for logging only. **Do not** resume browser MCP repair. See `foreman/EMERGENCY_BYPASS.md`.
 
-- Automatic Replicate webhook callback for future predictions.
-- Background/batch image generation.
+## Hard stops
 
-Do not enter, print, save, request, or paste secrets into chat. Do not enter billing or credit card information.
+no push | no deploy | no SQL | no secrets in chat

@@ -33,7 +33,7 @@ export default function OnboardingPage() {
     const user = await currentUser();
     if (!user) {
       setBusy(false);
-      setStatus("Log in before opening a dossier.");
+      setStatus(copy.onboarding.loginRequired);
       return;
     }
 
@@ -144,7 +144,7 @@ export default function OnboardingPage() {
   async function saveBlueprint(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusy(true);
-    setStatus("Rolling out the blueprint.");
+    setStatus("Rolling out the Workshop.");
     const user = await currentUser();
     if (!user) {
       setBusy(false);
@@ -157,7 +157,7 @@ export default function OnboardingPage() {
 
     if (narrative.length < 20) {
       setBusy(false);
-      setStatus("Give the blueprint at least one real paragraph.");
+      setStatus(copy.onboarding.workshopMinLength);
       return;
     }
 
@@ -242,10 +242,10 @@ export default function OnboardingPage() {
               </button>
             </article>
             <article className="ops-card door-card">
-              <h3>{copy.onboarding.doors.blueprint.title}</h3>
-              <p>{copy.onboarding.doors.blueprint.body}</p>
+              <h3>{copy.onboarding.doors.workshop.title}</h3>
+              <p>{copy.onboarding.doors.workshop.body}</p>
               <button className="button button-outline" type="button" onClick={() => chooseDepth("blueprint")}>
-                {copy.onboarding.doors.blueprint.cta}
+                {copy.onboarding.doors.workshop.cta}
               </button>
             </article>
           </div>
@@ -297,12 +297,12 @@ export default function OnboardingPage() {
       {phase === "blueprint" && (
         <section className="ops-card onboarding-panel">
           <div className="card-heading">
-            <p>The Blueprint</p>
+            <p>The Workshop</p>
             <h2>Tell the machine what wants to exist.</h2>
           </div>
           <form className="form-stack" onSubmit={saveBlueprint}>
             <label className="field">
-              <span>Blueprint narrative</span>
+              <span>Workshop narrative</span>
               <textarea
                 name="blueprint_narrative"
                 rows={8}
@@ -311,7 +311,7 @@ export default function OnboardingPage() {
               />
             </label>
             <button className="button button-light" type="submit" disabled={busy}>
-              Save Blueprint
+              Save Workshop
             </button>
             <p className="status-line" role="status">{status}</p>
           </form>

@@ -1,24 +1,48 @@
 :root {
   color-scheme: dark;
-  --bg: #0d0f10;
-  --panel: #f6f5f3;
-  --paper: #f6f5f3;
+  --werkles-violet: #3d16ca;
+  --werkles-violet-bright: #672eed;
+  --werkles-violet-deep: #2a0e8c;
+  --werkles-teal: #02917e;
+  --werkles-teal-bright: #18c5ae;
+  --werkles-teal-deep: #015e51;
+  --werkles-forge-black: #050404;
+  --werkles-workshop-night: #191817;
+  --werkles-smoke: #2c231d;
+  --werkles-iron: #3b342a;
+  --werkles-copper: #9f6633;
+  --werkles-copper-light: #c08b52;
+  --werkles-brass-bright: #e0b569;
+  --werkles-blueprint-tan: #685141;
+  --werkles-forge-orange: #f6ad55;
+  --werkles-ember: #fbc368;
+  --werkles-owl-eye-green: #5fd178;
+  --werkles-text-primary: #f4e2b1;
+  --werkles-text-secondary: #c08b52;
+  --werkles-text-muted: #6d5b46;
+  --werkles-grad-brand-mark: linear-gradient(90deg, #3d16ca 0%, #672eed 45%, #18c5ae 55%, #02917e 100%);
+  --werkles-grad-violet-vertical: linear-gradient(180deg, #672eed 0%, #3d16ca 60%, #2a0e8c 100%);
+  --werkles-grad-teal-vertical: linear-gradient(180deg, #18c5ae 0%, #02917e 60%, #015e51 100%);
+  --werkles-grad-forge-radial: radial-gradient(circle at 70% 80%, #f6ad55 0%, #2c231d 60%, #050404 100%);
+  --bg: var(--werkles-forge-black);
+  --panel: #f7f0e3;
+  --paper: #f7f0e3;
   --ink: #101316;
-  --forge: #141211;
-  --charcoal: #1d1b19;
-  --muted: #6d756f;
-  --line: #d8d0c5;
-  --copper: #b87333;
-  --copper-dark: #76441f;
-  --gold: #d4af37;
-  --cream: #f6efe5;
-  --green: #2fbf9d;
-  --teal: #0ea5b7;
-  --blue: #38bdf8;
-  --purple: #5b46c8;
+  --forge: var(--werkles-workshop-night);
+  --charcoal: var(--werkles-smoke);
+  --muted: #6d675d;
+  --line: #d9cbb7;
+  --copper: var(--werkles-copper);
+  --copper-dark: #68411f;
+  --gold: var(--werkles-brass-bright);
+  --cream: var(--werkles-text-primary);
+  --green: var(--werkles-owl-eye-green);
+  --teal: var(--werkles-teal);
+  --blue: var(--werkles-teal-bright);
+  --purple: var(--werkles-violet);
   --pink: #c65b91;
-  --coral: #c8612c;
-  --acid: #d6ff59;
+  --coral: var(--werkles-forge-orange);
+  --acid: var(--werkles-ember);
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
   --glow: 0 18px 58px rgba(184, 115, 51, 0.28);
   --radius: 8px;
@@ -178,10 +202,10 @@ nav a {
 .button-dark,
 .segment.is-active,
 .round-action.loud {
-  color: #ffffff;
-  border-color: rgba(244, 192, 126, 0.5);
-  background: linear-gradient(135deg, var(--copper-dark), var(--copper) 54%, #2f1910);
-  box-shadow: 0 12px 28px rgba(184, 115, 51, 0.25);
+  color: var(--werkles-text-primary);
+  border-color: rgba(103, 46, 237, 0.62);
+  background: var(--werkles-grad-violet-vertical);
+  box-shadow: 0 12px 28px rgba(61, 22, 202, 0.32);
 }
 
 .header-cta {
@@ -194,10 +218,10 @@ nav a {
 }
 
 .button-light {
-  color: #201610;
-  border-color: rgba(244, 192, 126, 0.62);
-  background: linear-gradient(135deg, #f3c48a, var(--copper) 58%, #7d441f);
-  box-shadow: 0 16px 34px rgba(184, 115, 51, 0.35);
+  color: var(--werkles-text-primary);
+  border-color: rgba(24, 197, 174, 0.62);
+  background: var(--werkles-grad-teal-vertical);
+  box-shadow: 0 16px 34px rgba(2, 145, 126, 0.35);
 }
 
 .button-ghost {
@@ -1550,6 +1574,151 @@ textarea {
   cursor: not-allowed;
 }
 
+.pricing-page,
+.pricing-stack,
+.crucible-shell {
+  display: grid;
+  gap: 16px;
+}
+
+.pricing-hero h1,
+.crucible-hero-card h1,
+.billing-panel h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4.4rem);
+  line-height: 0.95;
+}
+
+.pricing-card {
+  min-height: 280px;
+}
+
+.pricing-card-featured {
+  color: var(--werkles-text-primary);
+  border-color: rgba(103, 46, 237, 0.52);
+  background:
+    linear-gradient(145deg, rgba(5, 4, 4, 0.94), rgba(25, 24, 23, 0.9)),
+    var(--werkles-grad-brand-mark);
+}
+
+.pricing-card-featured p,
+.pricing-card-featured .plan-kicker {
+  color: rgba(244, 226, 177, 0.82);
+}
+
+.pricing-price {
+  margin: 6px 0;
+  color: var(--werkles-violet);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-weight: 950;
+  line-height: 1;
+}
+
+.pricing-card-featured .pricing-price {
+  color: var(--werkles-text-primary);
+}
+
+.pricing-section {
+  min-height: auto;
+}
+
+.pricing-table {
+  display: grid;
+  grid-template-columns: 1.1fr 0.8fr 0.9fr 1.8fr;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--line);
+}
+
+.pricing-table-crucible {
+  grid-template-columns: 1fr 0.7fr 2fr;
+}
+
+.pricing-table > span {
+  padding: 10px;
+  color: var(--werkles-text-primary);
+  background: var(--werkles-workshop-night);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.pricing-row {
+  display: contents;
+}
+
+.pricing-row > * {
+  padding: 10px;
+  color: #27312b;
+  background: #ffffff;
+  line-height: 1.45;
+}
+
+.pricing-row strong {
+  color: var(--ink);
+}
+
+.pricing-boundary {
+  border-color: rgba(103, 46, 237, 0.28);
+  background:
+    linear-gradient(135deg, rgba(61, 22, 202, 0.09), rgba(2, 145, 126, 0.08)),
+    #ffffff;
+}
+
+.crucible-hero-card {
+  min-height: auto;
+  color: var(--werkles-text-primary);
+  border-color: rgba(24, 197, 174, 0.38);
+  background:
+    linear-gradient(145deg, rgba(5, 4, 4, 0.94), rgba(25, 24, 23, 0.9)),
+    var(--werkles-grad-forge-radial);
+}
+
+.crucible-hero-card .card-heading p,
+.crucible-hero-card .status-line {
+  color: rgba(244, 226, 177, 0.78);
+}
+
+.crucible-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.verification-workflow-card {
+  min-height: 270px;
+  align-content: space-between;
+}
+
+.verification-workflow-card button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.verification-card-meta {
+  display: grid;
+  gap: 8px;
+}
+
+.verification-card-meta span {
+  min-height: 34px;
+  padding: 8px 10px;
+  border: 1px solid rgba(2, 145, 126, 0.18);
+  border-radius: 7px;
+  color: #075f45;
+  background: #ddf7ea;
+  font-size: 0.84rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.billing-panel {
+  width: min(100%, 980px);
+  min-height: auto;
+}
+
 @media (max-width: 1120px) {
   .people-strip,
   .operations-grid,
@@ -1576,7 +1745,8 @@ textarea {
 
   .first-weld-grid,
   .door-grid,
-  .membership-grid {
+  .membership-grid,
+  .crucible-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -1597,8 +1767,15 @@ textarea {
 
   .first-weld-grid,
   .door-grid,
-  .membership-grid {
+  .membership-grid,
+  .crucible-grid,
+  .pricing-table,
+  .pricing-table-crucible {
     grid-template-columns: 1fr;
+  }
+
+  .pricing-table > span {
+    display: none;
   }
 
   .site-header {

@@ -1,4 +1,4 @@
-# Current State
+﻿# Current State
 
 Ghost Forge branch is pushed:
 
@@ -78,7 +78,7 @@ v0.1 superseded and removed.
 - v0.1 tokens removed (no conflicting aliases): yes
 - Unrelated local changes touched: no
 - Secrets in any file or log: no
-- Current NEXT_ACTION: [AWAITING HUMAN GATE: next product packet — palette locked, components not yet built]
+- Current NEXT_ACTION: [AWAITING HUMAN GATE: next product packet â€” palette locked, components not yet built]
 
 ## Constitution Open-Questions Patches
 
@@ -92,7 +92,7 @@ v0.1 superseded and removed.
 - Article V #5 Sponsored Anvils additional rules added: yes
 - Article VIII palette law preserved during open-question patch: confirmed yes (no palette law changed)
 - Unrelated local changes touched: no
-- Current NEXT_ACTION after this packet: [AWAITING HUMAN GATE: pricing lockdown — see TO_OPERATOR_werkles_pricing_audit.md]
+- Current NEXT_ACTION after this packet: [AWAITING HUMAN GATE: pricing lockdown â€” see TO_OPERATOR_werkles_pricing_audit.md]
 
 ## Pricing
 
@@ -100,8 +100,8 @@ Source of truth: company/PRICING.md
 Status: v0.1 LOCKED for Tier 1 surfaces (Foundry Dues, Armory anchors, Crucible passthrough, Drafting Table bundling). Tier 2 surfaces (Sponsored Anvils, affiliates) have principles locked but specific rates deferred until launch metro is chosen and vendors are negotiated.
 
 Anchors:
-- Foundry Dues — Monthly: $9.99/mo
-- Foundry Dues — Annual: $99/yr (flavor name: "The Long Run")
+- Foundry Dues â€” Monthly: $9.99/mo
+- Foundry Dues â€” Annual: $99/yr (flavor name: "The Long Run")
 - The Armory: $9.99 / $19 / $29 / $49 / $99 bundle anchors with member discounts
 - The Crucible: passthrough + $5 handling fee max
 - The Drafting Table: bundled into Foundry Dues for members
@@ -287,3 +287,82 @@ Status: active local cockpit as of 2026-05-25.
   - `ghost-forge-worker/server.mjs` now normalizes `PUBLIC_BASE_URL` before composing webhook URLs.
   - `ghost-forge-worker/README.md` and `ghost-forge-worker/render-env-checklist.md` document no trailing slash/dot for `PUBLIC_BASE_URL`.
 - Next gate: `[AWAITING HUMAN GATE: GHOST_FORGE_WEBHOOK_BASE_URL_FIX_APPROVAL]`
+
+## Ghost Forge Webhook Base URL Fix Deploy
+
+- Ben approved the webhook base URL fix with:
+  - `Approve`
+- Local checks:
+  - `node --check ghost-forge-worker/server.mjs` passed.
+  - `git diff --check` passed for the scoped fix files.
+- Commit created and pushed:
+  - `7b8da42 Fix Ghost Forge webhook base URL`
+- Render manual deploy:
+  - Service: `werkles-ghost-forge1`
+  - Deployed commit: `7b8da425423091070e9a591d64f0952010f2ecdb`
+  - Render log showed: `Your service is live`
+- Dry verification from Render Web Shell:
+  - Live `server.mjs` contains `normalizedPublicBaseUrl()`.
+  - No Replicate prediction was created.
+  - No image was generated.
+  - No secrets were printed.
+- Verification output:
+  - Raw Render env value: `https://werkles-ghost-forge1.onrender.com.`
+  - Normalized public base URL: `https://werkles-ghost-forge1.onrender.com`
+  - Preview webhook URL: `https://werkles-ghost-forge1.onrender.com/webhook/replicate?output_id=diagnostic-output`
+  - `malformed_trailing_dot`: `false`
+- Interpretation:
+  - Code-side webhook URL normalization is live.
+  - Render still stores the non-secret `PUBLIC_BASE_URL` with a trailing dot.
+  - The provider env should be cleaned up even though the worker now tolerates it.
+- Next gate: `[AWAITING HUMAN GATE: RENDER_PUBLIC_BASE_URL_ENV_CLEANUP_APPROVAL]`
+
+## Ghost Forge Render Public Base URL Cleanup
+
+- Ben approved:
+  - `APPROVE RENDER PUBLIC_BASE_URL CLEANUP`
+- Codex updated the non-secret Render env value:
+  - From: `https://werkles-ghost-forge1.onrender.com.`
+  - To: `https://werkles-ghost-forge1.onrender.com`
+- Render reported:
+  - `Updated environment variables for this service.`
+- Codex redeployed the current commit so the running container would use the cleaned value:
+  - `7b8da42 Fix Ghost Forge webhook base URL`
+- Render deploy result:
+  - Service went live.
+  - Instance: `bt7nf`
+  - Log showed: `Ghost Forge worker listening on port 3000`
+  - Log showed: `Your service is live`
+- Running Render Web Shell verification:
+
+```json
+{
+  "public_base_url": "https://werkles-ghost-forge1.onrender.com",
+  "has_trailing_dot": false,
+  "is_exact": true
+}
+```
+
+- No secrets were printed, saved in repo, or requested in chat.
+- No new Replicate prediction was created.
+- No image was generated.
+- No billing, OAuth, or account setting was touched.
+- Next gate: `[AWAITING HUMAN GATE: GHOST_FORGE_AUTO_CALLBACK_TEST_APPROVAL]`
+
+## Draft Site Asset + UI Pass v0.1
+
+- Approval: `APPROVE DRAFT SITE ASSET + UI PASS v0.1`
+- Branch: `ben-sandbox`
+- Ghost Forge attempted approved draft generation.
+- Running service cap: `MAX_PROMPTS_PER_BATCH=1`, so 10 images could not be generated as one batch.
+- Provider/worker throttles limited this run to 2 usable draft images.
+- Completed local draft assets:
+  - `public/assets/draft/ghost-forge/werkles-draft-hero-foundry-v0.1.png`
+  - `public/assets/draft/ghost-forge/werkles-draft-proof-trust-v0.1.png`
+- Result record: `foreman/ghost-forge/DRAFT_SITE_ASSET_RESULTS_v0.1.md`
+- Cursor/Claude packet: `foreman/handoffs/outbox/TO_CURSOR_CLAUDE_DRAFT_SITE_UI_PASS_v0.1.md`
+- Local app status before UI pass:
+  - `npm run typecheck` passed.
+  - Dev server live at `http://localhost:3000`.
+  - Routes `/`, `/proof`, `/membership`, `/pricing`, `/dashboard`, `/dashboard/billing`, `/dashboard/crucible` returned `200`.
+- Next action: `[READY FOR CURSOR_CLAUDE_UI_PASS_V0_1]`

@@ -1,0 +1,30 @@
+# Werkles Cursor Rules
+
+Repo cockpit files are source of truth:
+
+1. `foreman/HUMAN_GATES.md`
+2. `foreman/LANES.md`
+3. `foreman/BUDGET.md`
+4. `foreman/NEXT_ACTION.md`
+5. `foreman/AI_COUSINS_PROTOCOL.md`
+6. platform instruction shims
+
+Ben is the Operator, not the manual coding labor or copy/paste mule.
+
+If Codex or another AI asks permission for an action that `foreman/HUMAN_GATES.md` classifies as a non-gate technical proof inside approved scope, respond in substance:
+
+```text
+PROCEED: not a human gate.
+```
+
+If `foreman/HUMAN_GATES.md` classifies the action as a true human gate, respond in substance:
+
+```text
+STOP: HUMAN GATE.
+```
+
+Cursor must not approve human gates on Ben's behalf.
+
+Do not duplicate gate lists here. Update cockpit files instead.
+
+Do not enter, print, save, request, or expose secrets.

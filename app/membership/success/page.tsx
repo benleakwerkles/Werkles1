@@ -11,7 +11,7 @@ export default function MembershipSuccessPage() {
           The webhook is the source of truth. If the badge takes a minute to show,
           that is the register settling, not the floor rejecting you.
         </p>
-        <Link className="button button-dark" href="/dashboard/profile">Back to your dossier</Link>
+        <Link className="button button-dark" href="/dashboard/profile">{copy.dashboard.profile.backToRecord}</Link>
       </section>
     </main>
   );

@@ -13,7 +13,9 @@ export function getStripe() {
 }
 
 export function getFoundryDuesPriceId(plan: "monthly" | "annual") {
-  return plan === "annual"
-    ? requireEnv("STRIPE_YEARLY_PRICE_ID")
-    : requireEnv("STRIPE_MONTHLY_PRICE_ID");
+  if (plan === "annual") {
+    return process.env.STRIPE_FOUNDRY_DUES_ANNUAL_PRICE_ID || requireEnv("STRIPE_YEARLY_PRICE_ID");
+  }
+
+  return process.env.STRIPE_FOUNDRY_DUES_MONTHLY_PRICE_ID || requireEnv("STRIPE_MONTHLY_PRICE_ID");
 }
