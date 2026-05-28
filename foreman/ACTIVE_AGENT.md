@@ -1,20 +1,20 @@
 # Active Agent
 
 ## Active Writer
-**Maker (Cursor on Sally)** — site icons + UI/UX today.
+**Ben (Sally)** — Squibb cutout + Tier 3 icon batch execution.
 
-Codex optional for Ghost Forge API runs only. No browser MCP repair.
+**Maker (Cursor)** — wire Squibb PNGs when landed; hold copy unless Ben patches.
 
-## Today
-- `SiteIcon` system: PNG auto-wires when files land in `public/assets/draft/icons/`
-- Fallback SVG until then
-- Wired: home nav, lanes, how-steps, crucible cards
+Codex optional for Ghost Forge logging only. No browser MCP repair.
 
-## Ben runs icons (PowerShell on Sally)
-`.\scripts\foreman\ghost-forge-icon-from-sally.ps1 -Icon builder`
+## Approved (2026-05-28)
+- Site style v0.6 → `foreman/SITE_STYLE_APPROVED_v0.6.md`
+- One canonical Squibb → `foreman/MASCOT_RULES.md`
+- Batch v0.2 direction → `foreman/ghost-forge/DRAFT_SITE_ASSET_BATCH_v0.2.md`
+
+## Ben runs next
+1. Squibb cutout → `public/assets/mascot/`
+2. `.\scripts\foreman\ghost-forge-icon-from-sally.ps1 -Icon builder`
 
 ## Preview
-`npm run dev` on Sally
-
-## After PNGs drop
-Icons swap in automatically — no code change if filenames match `lib/site-icons.ts`.
+`npm.cmd run dev` → http://localhost:3000

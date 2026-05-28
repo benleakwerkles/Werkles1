@@ -1,12 +1,12 @@
 # Mascot Assets
 
-This directory holds character mascot assets for Werkles. Source of truth for character rules is pending merge from the Claude owl update packet, expected to live at `foreman/MASCOT_RULES.md` or the final approved mascot rules file.
+This directory holds character mascot assets for Werkles. Source of truth: **`foreman/MASCOT_RULES.md`** (approved 2026-05-28).
 
 ## Characters
 
-### Brass - the Crucible foreman
+### Squibb — canonical product owl (files: `brass-foreman-*.png`)
 
-The owl in a workshop suit, brass goggles, tool-belt, gesturing. He inspects. He does not vouch.
+The owl in a workshop suit, brass goggles, tool-belt, gesturing. He inspects. He does not vouch. One character for product UI and education voice.
 
 Required asset files:
 

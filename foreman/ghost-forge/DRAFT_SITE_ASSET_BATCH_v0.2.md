@@ -1,6 +1,6 @@
 # Draft Site Asset Batch v0.2
 
-Status: PREP — READY FOR FOREMAN GENERATION AFTER BEN REVIEW
+Status: **APPROVED DIRECTION** — Ben 2026-05-28 (`one batch direction`). Execute Tier 3 icons first, then atmosphere upgrades. Mixed-facet workshop energy per `foreman/SITE_STYLE_APPROVED_v0.6.md` — not heavy industrial forge only.
 
 Prior batch: `DRAFT_SITE_ASSET_BATCH_v0.1.md` (2 of 10 atmosphere plates landed)
 

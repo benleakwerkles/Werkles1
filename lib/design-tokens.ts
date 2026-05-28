@@ -43,7 +43,7 @@ export const designTokens = {
     proofTrust: "/assets/draft/ghost-forge/werkles-draft-proof-trust-v0.1.png",
     proofTrustV2: "/assets/draft/ghost-forge/werkles-draft-proof-trust-v0.2.png",
     manifest: "foreman/ghost-forge/DRAFT_SITE_ASSET_BATCH_v0.2.md",
-    status: "DRAFT_REVIEW_ONLY"
+    status: "APPROVED_DIRECTION_v0.6"
   },
   rules: [
     "Pure white (#FFFFFF) is forbidden; use the warm-cream text token.",
