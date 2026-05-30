@@ -1,0 +1,27 @@
+TO: PETRA (ChatGPT Comptroller)
+FROM: Ben on Sally — Maker prepared this packet
+
+Crew check-in: home UI atmosphere is stabilizing. Ready to pivot toward functionality — need Comptroller scope before Codex or Maker open APP_INFRA work.
+
+1) Open and follow exactly:
+   C:\Users\benle\Desktop\github\Werkles\foreman\handoffs\outbox\TO_PETRA_COMPTROLLER_CREW_CHECKIN_v0.1.md
+
+2) Read cockpit sources listed in that packet (especially APP_INFRA_UX_START_PACKET, SITE_STYLE_APPROVED_v0.6, DRAFT_SITE_ASSET_RESULTS_v0.2, HUMAN_GATES, LANES, BUDGET).
+
+3) Reply using the VERDICT block format at the bottom of the packet. Pick:
+   - first APP_INFRA slice (A–E or custom)
+   - Gate 05: RESUME | PAUSE | STOP
+   - UI commit timing
+   - whether Codex syncs cockpit + writes handoff
+   - whether Maker stays on UI or switches to your slice
+
+Context snapshot:
+- Gates 01–04 complete (16 icons + hero/proof v0.2 on disk)
+- Gate 05: 12/40 landed, stopped on Render 429
+- Header W+erkles lockup is winner — do not chase style-variant W for header
+- CURRENT_STATE.md and OPERATOR_DASHBOARD.md are stale — Codex should sync after your verdict
+- Large local diff on main — push is human gate
+
+No deploy. No push. No SQL. No secrets in chat. No new spend unless you open it in LANES/BUDGET.
+
+When done, Ben pastes your VERDICT back to Maker or Codex on Sally.

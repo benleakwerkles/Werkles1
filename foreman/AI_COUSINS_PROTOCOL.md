@@ -131,6 +131,19 @@ Failure of a technical proof inside an approved lane is not automatically a huma
 
 If an action is classified as a non-gate technical proof under `foreman/HUMAN_GATES.md`, do not trigger the Gate Review UI Protocol. Log a normal status line and continue inside the approved lane.
 
+## Cursor / Maker IDE regression (2026-05-29)
+
+Known failure mode: Cursor/Maker settings may revert from **Allow Everything** to **Allowlist**. If routine non-gate actions begin prompting again, first check **Cursor Settings → Agents → Run Mode** before changing doctrine.
+
+Symptoms mistaken for human gates:
+
+- read-only health checks
+- budget diagnostics
+- approved Ghost Forge probes inside budget
+- build/typecheck/local route checks
+
+Do not treat IDE approval prompts as Foreman human gates. Do not rewrite cockpit doctrine for a settings regression.
+
 When an `[AWAITING HUMAN GATE]` is reached, classify it as Tier 1 or Tier 2 using `foreman/HUMAN_GATES.md`. Any unclassified human gate defaults to Tier 1 until Ben reclassifies it.
 
 Tier 1 gates require gate-specific static HTML and Markdown review artifacts. Tier 2 gates require concise Markdown only unless Ben asks for a dashboard.

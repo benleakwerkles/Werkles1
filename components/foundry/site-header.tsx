@@ -1,12 +1,14 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/foundry/brand-mark";
 import { NavIcon } from "@/components/foundry/site-icon";
 import { copy } from "@/lib/copy";
 
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <Link className="brand" href="/" aria-label="Werkles home">
-        <img className="brand-wordmark" src="/assets/werkles-word-only.png" alt={copy.brand} />
+      <Link className="brand brand--tight" href="/" aria-label="Werkles home">
+        <BrandMark size="header" presentation="board" />
+        <span className="brand-word brand-word--workshop-serif">erkles</span>
       </Link>
       <nav aria-label="Primary navigation">
         <Link href="/#people"><NavIcon icon="nav-people" />People</Link>

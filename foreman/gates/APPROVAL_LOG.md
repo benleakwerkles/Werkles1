@@ -14,4 +14,6 @@ Chat approval alone is not durable. Human gate decisions are recorded here when 
 | 2026-05-28T19:30:00-04:00 | Site Style v0.6 | foreman/SITE_STYLE_APPROVED_v0.6.md; app/globals.css; lib/design-tokens.ts; lib/workshop-facets.ts | Approve site style | APPROVED | [AWAITING: TIER3_ICON_PNG_LAND] |
 | 2026-05-28T19:30:00-04:00 | Canonical Squibb | foreman/MASCOT_RULES.md; public/assets/mascot/README.md | one canonical Squibb | APPROVED | [AWAITING: SQUIBB_CUTOUT_LAND] |
 | 2026-05-28T19:30:00-04:00 | Ghost Forge Batch v0.2 Direction | foreman/ghost-forge/DRAFT_SITE_ASSET_BATCH_v0.2.md; foreman/BUDGET.md | one batch direction | APPROVED | [IN PROGRESS: GHOST_FORGE_V0_2_EXECUTION] |
+| 2026-05-29T00:00:00-04:00 | Maker autonomy reset | foreman/HUMAN_GATES.md; foreman/NEXT_ACTION.md | STOP. read-only probes are not human gates; run approved work without re-asking | APPROVED | [IN PROGRESS: GHOST_FORGE_GATE_05] |
+| 2026-05-29T00:00:00-04:00 | Autonomous non-human-gate execution | foreman/HUMAN_GATES.md; foreman/NEXT_ACTION.md | stop stopping me for non human gates; cleared the budget and said to go for a few batches | APPROVED | [IN PROGRESS: GHOST_FORGE_GATE_05 + V0_2 BATCHES] |
 

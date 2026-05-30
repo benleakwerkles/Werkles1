@@ -1,6 +1,6 @@
 param(
   [Parameter(Mandatory = $true)]
-  [ValidateSet("builder", "operator", "backer", "connector", "spark", "proof", "dues", "deck", "knock")]
+  [ValidateSet("builder", "operator", "backer", "connector", "spark", "proof", "dues", "deck", "knock", "armory", "dossier", "blueprint", "register", "step-dossier", "step-fit", "step-knock")]
   [string]$Icon,
 
   [string]$BaseUrl = $env:PUBLIC_BASE_URL,
@@ -12,16 +12,28 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+. (Join-Path $PSScriptRoot "ghost-forge-lib.ps1")
+
+$repoRoot = Get-GhostForgeRepoRoot
+Import-GhostForgeEnvFile
+
 $iconPrompts = @{
   builder   = "Single brass hammer with tiny spark, icon centered, transparent background, copper and steel, no text, 64x64 app icon"
   operator  = "Single brass gear overlapping calendar plate, icon centered, transparent background, no text, 64x64 app icon"
-  backer    = "Single fuel canister or runway tank in brass, no dollar sign, transparent background, no text, 64x64 app icon"
+  backer    = "Single brass runway rail or backing weight on anvil corner, capital support metaphor, no fuel canister, no gas can, no dollar sign, transparent background, no text, 64x64 app icon"
   connector = "Single network node with connecting wires in copper, transparent background, no text, 64x64 app icon"
   spark     = "Single unlit fuse catching flame tip in brass holder, transparent background, no text, 64x64 app icon"
   proof     = "Brass inspection stamp and shield, transparent background, no text, 64x64 app icon"
   dues      = "Brass membership token or turnstile coin, transparent background, no text, 64x64 app icon"
   deck      = "Stack of brass dossier cards, transparent background, no text, 64x64 app icon"
   knock     = "Brass door knocker, transparent background, no text, 64x64 app icon"
+  armory    = "Small armory drawer pull with tiny blueprint scroll, transparent background, no text, 64x64 app icon"
+  dossier   = "Closed brass dossier folder with copper clasp, transparent background, no text, 64x64 app icon"
+  blueprint = "Rolled blueprint tube with copper cap, transparent background, no text, 64x64 app icon"
+  register       = "Brass cash register drawer closed, no readable numbers, transparent background, no text, 64x64 app icon"
+  "step-dossier" = "Open dossier folder with blank papers, brass, transparent background, no text, 64x64 app icon"
+  "step-fit"     = "Brass calipers measuring fit, transparent background, no text, 64x64 app icon"
+  "step-knock"   = "Brass knocker mid-swing on door plate, transparent background, no text, 64x64 app icon"
 }
 
 $iconFiles = @{
@@ -34,18 +46,27 @@ $iconFiles = @{
   dues      = "icon-dues-v0.1.png"
   deck      = "icon-deck-v0.1.png"
   knock     = "icon-knock-v0.1.png"
+  armory    = "icon-armory-v0.1.png"
+  dossier   = "icon-dossier-v0.1.png"
+  blueprint = "icon-blueprint-v0.1.png"
+  register       = "icon-register-v0.1.png"
+  "step-dossier" = "icon-step-dossier-v0.1.png"
+  "step-fit"     = "icon-step-fit-v0.1.png"
+  "step-knock"   = "icon-step-knock-v0.1.png"
 }
 
 if (-not $BaseUrl) {
-  $BaseUrl = "https://werkles-ghost-forge1.onrender.com"
+  $BaseUrl = Get-GhostForgeBaseUrl
+} else {
+  $BaseUrl = Get-GhostForgeBaseUrl -BaseUrl $BaseUrl
 }
 
 if (-not $env:GHOST_FORGE_API_KEY) {
-  Write-Error "Set GHOST_FORGE_API_KEY in this PowerShell session. Do not paste it in chat."
+  Write-Error "Set GHOST_FORGE_API_KEY in ghost-forge-worker/.env. Do not paste it in chat."
   exit 1
 }
 
-$base = $BaseUrl.TrimEnd("/").TrimEnd(".")
+$base = $BaseUrl
 $targetFile = $iconFiles[$Icon]
 $brief = "Werkles Ghost Forge micro icon. $($iconPrompts[$Icon]). Dark industrial optimism, enchanted foundry, not pastel SaaS, not cartoon mascot."
 
@@ -64,12 +85,17 @@ $body = @{
 } | ConvertTo-Json -Depth 5
 
 $headers = @{
-  Authorization = "Bearer $env:GHOST_FORGE_API_KEY"
+  Authorization  = "Bearer $env:GHOST_FORGE_API_KEY"
   "Content-Type" = "application/json"
 }
 
 try {
-  $create = Invoke-RestMethod -Method Post -Uri "$base/batch/create" -Headers $headers -Body $body -TimeoutSec 120
+  $createResponse = Invoke-GhostForgeApi -Method POST -Path "/batch/create" -Headers $headers -Body $body -TimeoutSec 180
+  if (-not $createResponse.Ok) {
+    Write-Error "batch/create failed: $($createResponse.StatusCode) $($createResponse.Body)"
+    exit 1
+  }
+  $create = $createResponse.Json
 } catch {
   Write-Error "batch/create failed: $($_.Exception.Message)"
   exit 1
@@ -88,7 +114,12 @@ $deadline = (Get-Date).AddMinutes($MaxWaitMinutes)
 while ((Get-Date) -lt $deadline) {
   Start-Sleep -Seconds $PollSeconds
   try {
-    $status = Invoke-RestMethod -Method Get -Uri "$base/batches/$batchId" -Headers @{ Authorization = "Bearer $env:GHOST_FORGE_API_KEY" } -TimeoutSec 60
+    $poll = Invoke-GhostForgeApi -Method GET -Path "/batches/$batchId" -Headers @{ Authorization = "Bearer $env:GHOST_FORGE_API_KEY" } -TimeoutSec 60
+    if (-not $poll.Ok) {
+      Write-Warning "Poll failed: $($poll.StatusCode)"
+      continue
+    }
+    $status = $poll.Json
   } catch {
     Write-Warning "Poll failed: $($_.Exception.Message)"
     continue
@@ -99,11 +130,23 @@ while ((Get-Date) -lt $deadline) {
   Write-Host "Batch status: $batchStatus | output: $($output.status)"
 
   if ($batchStatus -eq "completed" -and $output.status -eq "completed") {
-    Write-Host ""
-    Write-Host "DONE. Save to repo as:"
-    Write-Host "  public/assets/draft/icons/$targetFile"
-    Write-Host "Supabase storage_path:"
-    Write-Host "  $($output.storage_path)"
+    $destDir = Join-Path $repoRoot "public\assets\draft\icons"
+    $destPath = Join-Path $destDir $targetFile
+    New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+
+    if ($output.source_url) {
+      Save-GhostForgeDownload -Uri $output.source_url -OutFile $destPath -TimeoutSec 120
+      Write-Host ""
+      Write-Host "DONE. Saved:"
+      Write-Host "  $destPath"
+    } else {
+      Write-Host ""
+      Write-Host "DONE. Download source_url missing - copy manually from Supabase:"
+      Write-Host "  public/assets/draft/icons/$targetFile"
+      Write-Host "Supabase storage_path:"
+      Write-Host "  $($output.storage_path)"
+    }
+
     Write-Host ""
     Write-Host "Then tell Cursor: ASSETS_LANDED v0.2"
     $status | ConvertTo-Json -Depth 8
@@ -117,5 +160,5 @@ while ((Get-Date) -lt $deadline) {
   }
 }
 
-Write-Error "Timed out after $MaxWaitMinutes minutes. Batch may still complete on Render — check GET /batches/$batchId"
+Write-Error "Timed out after $MaxWaitMinutes minutes. Batch may still complete on Render - check GET /batches/$batchId"
 exit 1

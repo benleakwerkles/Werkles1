@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { copy } from "@/lib/copy";
 import { WorkshopGreeter } from "@/components/foundry/workshop-greeter";
+import { WorkshopMomentEyebrow } from "@/components/foundry/workshop-moment-eyebrow";
 
 export function HeroStatic() {
   return (
     <section className="hero hero--draft-v01">
       <div className="hero-copy">
-        <p className="eyebrow">{copy.hero.eyebrow}</p>
+        <WorkshopMomentEyebrow />
         <h1>{copy.hero.headline}</h1>
         <p>{copy.hero.subhead}</p>
         <p className="hero-promise">{copy.hero.brandPromise}</p>

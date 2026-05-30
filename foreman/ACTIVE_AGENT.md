@@ -1,11 +1,15 @@
 # Active Agent
 
 ## Active Writer
-**Ben (Sally)** — Squibb cutout + Tier 3 icon batch execution.
+**Maker (Cursor)** — Gate 05 style-variant batch in flight; Ghost Forge diagnostics/batches inside `foreman/BUDGET.md`.
 
-**Maker (Cursor)** — wire Squibb PNGs when landed; hold copy unless Ben patches.
+**Ben (Sally)** — Squibb cutout when ready; restore Cursor **Run Mode → Allow Everything** if routine probes start prompting again.
 
 Codex optional for Ghost Forge logging only. No browser MCP repair.
+
+## Known failure mode (2026-05-29)
+
+Cursor/Maker settings may revert from **Allow Everything** to **Allowlist**. If routine non-gate actions begin prompting again, first check **Cursor Settings → Agents → Run Mode** before changing doctrine.
 
 ## Approved (2026-05-28)
 - Site style v0.6 → `foreman/SITE_STYLE_APPROVED_v0.6.md`
@@ -14,7 +18,12 @@ Codex optional for Ghost Forge logging only. No browser MCP repair.
 
 ## Ben runs next
 1. Squibb cutout → `public/assets/mascot/`
-2. `.\scripts\foreman\ghost-forge-icon-from-sally.ps1 -Icon builder`
+2. Confirm Cursor **Run Mode = Allow Everything** after updates (see Known failure mode above)
+
+## Maker runs now
+1. **Gate 05** — `.\scripts\foreman\ghost-forge-gate-05-style-variants.ps1 -Phase all` (in progress)
+2. Log → `foreman/ghost-forge/gate-05-style-variants-run.log`
+3. Wire Squibb bust when PNGs land
 
 ## Preview
 `npm.cmd run dev` → http://localhost:3000

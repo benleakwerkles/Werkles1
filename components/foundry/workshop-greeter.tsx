@@ -1,16 +1,18 @@
+import { BrandMark } from "@/components/foundry/brand-mark";
+
 type WorkshopGreeterProps = {
   size?: "sm" | "md";
   className?: string;
 };
 
-/** Decorative brand mark — warm placeholder until Brass/Squibb cutouts land. */
+/** Decorative brand mark — canonical W app icon board (Squibb cutout is separate). */
 export function WorkshopGreeter({ size = "sm", className = "" }: WorkshopGreeterProps) {
   return (
     <div
       className={`workshop-greeter workshop-greeter--${size}${className ? ` ${className}` : ""}`}
       aria-hidden="true"
     >
-      <img src="/assets/werkles-mark-transparent.png" alt="" width={size === "md" ? 52 : 40} height={size === "md" ? 52 : 40} />
+      <BrandMark size={size === "md" ? "md" : "sm"} />
     </div>
   );
 }

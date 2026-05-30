@@ -19,13 +19,14 @@ Set these in Render Dashboard. Do not paste values into Codex or chat.
 - [x] `PORT=3000`
 - [x] `SUPABASE_BUCKET=ghost-forge`
 - [x] `MAX_PROMPTS_PER_BATCH=1`
-- [x] `DAILY_BUDGET_USD=1.00`
+- [ ] `DAILY_BUDGET_USD=5.00` — **set on Render now**; daily image spend cap (raise to `10.00` for Gate 05 style batch ~$8). NOT the same as cost-per-image.
 - [x] `DAILY_CLAUDE_BUDGET_USD=1.00`
+- [x] `DEFAULT_COST_PER_IMAGE_USD=0.20` — **must stay ~0.20**; do not set to 5.00 when raising daily budget
 - [x] `DEFAULT_COST_PER_IMAGE_USD=0.20`
 - [x] `REPLICATE_CONCURRENCY=1`
 - [x] `REPLICATE_WAVE_DELAY_MS=2000`
 - [x] `MAX_IMAGE_BYTES=26214400`
-- [x] `MAX_BATCH_REQUESTS_PER_HOUR=3`
+- [ ] `MAX_BATCH_REQUESTS_PER_HOUR=12` — **set on Render now** (Gate 02 needs >3/hour; current `3` causes 429)
 - [x] `DEFAULT_REPLICATE_MODEL=ideogram-ai/ideogram-v3-quality`
 - [x] `MODEL_COSTS_JSON={"ideogram-ai/ideogram-v3-quality":0.20}`
 

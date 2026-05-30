@@ -27,15 +27,16 @@ Anchor: `lane-ghost-forge-one-prompt-technical-proof`
 Anchor: `lane-ghost-forge-batch-asset-generation`
 
 - Paid calls allowed: `yes`
-- Max cost per test: `$3.00`
-- Max cost per run: `$3.00`
-- Daily cap: `$3.00`
-- Max prompts per run: `12`
-- Max combined image + Claude spend tonight: `$3.00`
+- Max cost per test: `$0.20`
+- Max cost per run: `$10.00`
+- Daily cap: `$10.00`
+- Max prompts per run: `40`
+- Max combined image + Claude spend tonight: `$10.00`
 - Stop condition when budget is exceeded:
   - Stop immediately. Do not retry, expand spend, change providers, add credit, or ask Ben to paste billing details.
 - Notes:
   - Approved by Ben on 2026-05-27 for `VERIFY GHOST FORGE v0.2 ICONS FIRST`.
+  - Ben re-approved autonomous batch execution on 2026-05-29 (Gate 05 style variants + v0.2 batches).
   - Generate icons first, draft/review only.
   - Stop at `429`, daily cap, or budget cap.
   - Generated assets are not final brand approval and must not be published without later approval.

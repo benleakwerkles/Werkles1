@@ -5,6 +5,7 @@
 | **Sally** | This computer. Local repo, dev server, Explorer, clipboard. |
 | **Maker** | Cursor (bounded UI writer on Sally). Structure, CSS, wiring — not Ghost Forge runs. |
 | **Codex** | Foreman. Record keeper + Ghost Forge operator via Render. Not Sally. |
+| **Petra** | ChatGPT Comptroller in Cockpit/Ayes. Scope, gates, GO/NO-GO — not implementation. |
 | **Ghost Forge** | Cloud worker on Render (`werkles-ghost-forge1`). Image generation happens there, not on Sally. |
 
 **Sally's job tonight:** run the launcher script, paste into Codex, wait for PNGs on disk.  
@@ -12,6 +13,24 @@
 **Maker's job (after):** wire icons when Ben says `ASSETS_LANDED v0.2`.
 
 Do not run local image generation on Sally (no SD, no ComfyUI, no batch GPU).
+
+---
+
+# Handoff launcher — Petra crew check-in (functionality pivot)
+
+## Quick launch on Sally
+
+PowerShell — opens packet + copies paste block to clipboard:
+
+```powershell
+Get-Content "C:\Users\benle\Desktop\github\Werkles\foreman\handoffs\outbox\PETRA_PASTE_BLOCK.txt" | Set-Clipboard
+Start-Process "C:\Users\benle\Desktop\github\Werkles\foreman\handoffs\outbox\TO_PETRA_COMPTROLLER_CREW_CHECKIN_v0.1.md"
+```
+
+## Paste into Petra / ChatGPT Comptroller (Ctrl+V after script)
+
+- [PETRA_PASTE_BLOCK.txt](file:///C:/Users/benle/Desktop/github/Werkles/foreman/handoffs/outbox/PETRA_PASTE_BLOCK.txt)
+- Full packet: [TO_PETRA_COMPTROLLER_CREW_CHECKIN_v0.1.md](file:///C:/Users/benle/Desktop/github/Werkles/foreman/handoffs/outbox/TO_PETRA_COMPTROLLER_CREW_CHECKIN_v0.1.md)
 
 ---
 

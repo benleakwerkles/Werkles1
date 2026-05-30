@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import {
   draftAssetInventory,
   ghostForgeDraftFolder,
+  styleVariantInventory,
   type DraftAssetRecord
 } from "@/lib/draft-asset-inventory";
 import { iconDropFolder, siteIcons } from "@/lib/site-icons";
@@ -70,6 +71,12 @@ export function DraftAssetGallery() {
       <h3 className="draft-asset-gallery__subhead">Micro icons (Tier 3)</h3>
       <div className="draft-asset-gallery__grid">
         {iconAssets.map((asset) => (
+          <DraftAssetTile key={asset.id} asset={asset} />
+        ))}
+      </div>
+      <h3 className="draft-asset-gallery__subhead">Style variants (Gate 05 — line / enamel / blueprint / etched)</h3>
+      <div className="draft-asset-gallery__grid draft-asset-gallery__grid--variants">
+        {styleVariantInventory.map((asset) => (
           <DraftAssetTile key={asset.id} asset={asset} />
         ))}
       </div>

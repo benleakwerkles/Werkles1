@@ -82,7 +82,10 @@ app.get("/health", (_req, res) => {
   res.json({
     ok: true,
     service: "ghost-forge-worker",
-    renderer: "replicate"
+    renderer: "replicate",
+    daily_budget_usd: config.dailyBudgetUsd,
+    max_batch_requests_per_hour: config.maxBatchRequestsPerHour,
+    default_cost_per_image_usd: config.defaultCostPerImageUsd
   });
 });
 
@@ -269,6 +272,84 @@ app.get("/batches/:id", async (req, res) => {
     });
   } catch (error) {
     logError("GET /batches/:id failed", error);
+    res.status(error.statusCode || 500).json({
+      ok: false,
+      error: error.message || "Internal error"
+    });
+  }
+});
+
+app.post("/batch/preflight", async (req, res) => {
+  try {
+    assertInternalAuth(req);
+
+    const request = normalizeBatchRequest(req.body);
+    const preflightImageCost = estimateImageCostForRequest(request);
+
+    await checkDailyImageBudget(preflightImageCost);
+
+    const today = new Date().toISOString().slice(0, 10);
+    const { data: spend, error: spendError } = await supabase
+      .from("ghost_forge_spend")
+      .select("estimated_amount_usd, actual_amount_usd")
+      .eq("date", today)
+      .maybeSingle();
+
+    if (spendError) throw new Error(`Spend lookup failed: ${spendError.message}`);
+
+    const estimated = Number(spend?.estimated_amount_usd || 0);
+
+    res.json({
+      ok: true,
+      would_accept: true,
+      estimated_image_cost_usd: preflightImageCost,
+      daily_budget_usd: config.dailyBudgetUsd,
+      spend_today_estimated_usd: estimated,
+      room_before_402_usd: Math.max(0, config.dailyBudgetUsd - estimated - preflightImageCost)
+    });
+  } catch (error) {
+    logError("POST /batch/preflight failed", error);
+    res.status(error.statusCode || 500).json({
+      ok: false,
+      error: error.message || "Internal error"
+    });
+  }
+});
+
+app.get("/diagnostics/budget", async (req, res) => {
+  try {
+    assertInternalAuth(req);
+
+    const today = new Date().toISOString().slice(0, 10);
+    const { data: spend, error: spendError } = await supabase
+      .from("ghost_forge_spend")
+      .select("estimated_amount_usd, actual_amount_usd")
+      .eq("date", today)
+      .maybeSingle();
+
+    if (spendError) throw new Error(`Spend lookup failed: ${spendError.message}`);
+
+    const estimated = Number(spend?.estimated_amount_usd || 0);
+    const actual = Number(spend?.actual_amount_usd || 0);
+    const nextIconCost = config.defaultCostPerImageUsd;
+
+    res.json({
+      ok: true,
+      checked_at: new Date().toISOString(),
+      date_utc: today,
+      daily_budget_usd: config.dailyBudgetUsd,
+      daily_claude_budget_usd: config.dailyClaudeBudgetUsd,
+      default_cost_per_image_usd: config.defaultCostPerImageUsd,
+      max_batch_requests_per_hour: config.maxBatchRequestsPerHour,
+      spend_today: {
+        estimated_amount_usd: estimated,
+        actual_amount_usd: actual
+      },
+      next_single_icon_preflight_usd: nextIconCost,
+      room_before_402_usd: Math.max(0, config.dailyBudgetUsd - estimated - nextIconCost)
+    });
+  } catch (error) {
+    logError("GET /diagnostics/budget failed", error);
     res.status(error.statusCode || 500).json({
       ok: false,
       error: error.message || "Internal error"
