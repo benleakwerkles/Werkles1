@@ -7,6 +7,10 @@
 
 Codex optional for Ghost Forge logging only. No browser MCP repair.
 
+## Execution Context
+
+The active writer must declare its execution context before file-system, repo-state, runtime, or deployment claims, per `foreman/EXECUTION_CONTEXT_RULES.md`. A `CURSOR_CLOUD_CONTAINER` writer can act on `/workspace`, GitHub branches/PRs, and committed state, but must request a `LOCAL_SALLY_WINDOWS` check for any Sally-local filesystem, `.env`, or dev-server evidence rather than claiming it directly.
+
 ## Known failure mode (2026-05-29)
 
 Cursor/Maker settings may revert from **Allow Everything** to **Allowlist**. If routine non-gate actions begin prompting again, first check **Cursor Settings → Agents → Run Mode** before changing doctrine.
