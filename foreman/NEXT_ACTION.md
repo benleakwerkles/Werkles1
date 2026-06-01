@@ -18,6 +18,7 @@ Both Operator-approved and recorded in `foreman/gates/APPROVAL_LOG.md`.
 ## Active human gate
 
 - **APP_INFRA-01 — Functional Surface Review** remains the active human gate unless already closed. Before opening new app work, confirm current cockpit state and review packet status. (Maps to `[AWAITING HUMAN GATE: APP_INFRA_REVIEW]` in `foreman/APP_INFRA_UX_START_PACKET.md`; Comptroller/Petra packet at `foreman/handoffs/outbox/TO_PETRA_COMPTROLLER_CREW_CHECKIN_v0.2.md` / `PETRA_PASTE_BLOCK_v0.2.txt`.)
+- **Gate link console:** run `node scripts/foreman/foreman-control-server.mjs` → http://127.0.0.1:4317 for the Human Gates Console (APP_INFRA preview routes, repo/PRs, provider dashboards; SAFE/HUMAN GATE/BLOCKED). Read-only; see `foreman/control-panel/README.md`.
 
 ## Pending (not Ghost Forge)
 

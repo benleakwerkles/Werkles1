@@ -41,7 +41,15 @@ Cockpit sync: 2026-05-31 (refreshed by Maker/Cursor from repo facts + `TO_PETRA_
 - PUSH to `main` / merge / deploy: No — human gate. Feature-branch pushes + draft PRs for review are the review mechanism; merge to `main` remains Ben's gate.
 - Human gates (per `foreman/NEXT_ACTION.md`, Ben 2026-05-29): login/OAuth, billing/credit card, secrets in chat, push to main/deploy/SQL/production-data mutation, creative final brand lock, spend above approved lane caps.
 
-## Human Gates — clickable (knock these out in the background)
+## Human Gates Console
+
+Interactive version: run the Foreman Control Panel and open **http://127.0.0.1:4317** —
+
+```bash
+node scripts/foreman/foreman-control-server.mjs
+```
+
+It renders this Human Gates Console as clickable link cards (APP_INFRA preview routes, repo/PRs, and provider dashboards), color-coded **SAFE LINK / HUMAN GATE / BLOCKED**. Read-only: opening a link never performs a gated action; no secrets are shown. See `foreman/control-panel/README.md`. The table below is the static mirror.
 
 These are the Ben-only gates blocking the current infra + asset run. Each row gives the exact provider page so there is no menu-hunting. **Never paste any secret/key/token/password into a chat window** — enter it only in the provider page or your own local terminal. Secret/env var *names* are safe to say; *values* are not.
 
@@ -61,6 +69,17 @@ These are the Ben-only gates blocking the current infra + asset run. Each row gi
 After clearing a gate, say the matching phrase (e.g. `PROVIDER LOGIN DONE`, `replicate credit done`, `APPROVE STRIPE PRODUCT PREP`) so the run can resume. Record durable approvals in `foreman/gates/APPROVAL_LOG.md`.
 
 Detail/no-secret kit for the Ghost Forge provider path: `foreman/PROVIDER_LOGIN_FOR_GHOST_FORGE.md`.
+
+### APP_INFRA review links (in the console)
+
+The console also surfaces APP_INFRA-01 review surfaces (require the dev server on the build machine):
+
+- Homepage `http://localhost:3000/` · Pricing `/pricing` · Membership `/membership`
+- Crucible `http://localhost:3000/dashboard/crucible` · Billing `/dashboard/billing`
+- Login `/login` · Proof `/proof` · Bellows `/bellows` (route not present yet — expect 404)
+- Review packet: `foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` (not created yet)
+- Repo `https://github.com/benleakwerkles/Werkles1` · PRs `/pulls` · PR #3 (merged) · PR #4 (merged)
+- Provider dashboards (open = safe; change = human gate): Vercel, Render (`werkles-ghost-forge1`), Supabase, Stripe (products/webhooks). Generic links are labeled GENERIC in the console.
 
 ## Handoff warnings
 
