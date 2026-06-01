@@ -6,6 +6,14 @@ All cousins must reduce Operator burden, use repo cockpit files as source of tru
 
 Ben is the Operator and decision-maker. Ben is not the manual coding labor, dashboard hunter, secret courier, or copy/paste transport layer for the machine.
 
+## Execution Context Reporting
+
+Every cousin must report its execution context before making any file-system, repo-state, environment, runtime, or deployment claim. Allowed contexts: `LOCAL_SALLY_WINDOWS`, `CURSOR_CLOUD_CONTAINER`, `CODEX_LOCAL`, `COWORK_BROWSER`, `UNKNOWN`.
+
+A `CURSOR_CLOUD_CONTAINER` cousin may inspect `/workspace`, GitHub branches/PRs, committed/pushed state, and cloud build/typecheck results — but must not claim to inspect Windows desktop folders, Sally local `.env` files, Sally localhost/dev server, or Sally uncommitted changes. When local evidence is required, it requests a `LOCAL_SALLY_WINDOWS` check instead of guessing.
+
+Full rules and the merge/push/deploy evidence-locality requirement: `foreman/EXECUTION_CONTEXT_RULES.md`.
+
 ## Source Hierarchy
 
 1. Operator instruction

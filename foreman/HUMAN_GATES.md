@@ -274,6 +274,12 @@ Codex must not ask Ben to paste secrets into chat. Codex must not enter, print, 
 
 If a provider screen requires a secret value, Codex stops with the page staged and tells Ben exactly which field needs Ben-only private entry.
 
+## Execution Context And Evidence Locality
+
+Every agent must report its execution context before making file-system, repo-state, environment, runtime, or deployment claims. See `foreman/EXECUTION_CONTEXT_RULES.md` for the full rules and allowed contexts.
+
+Before any merge, push, or deploy recommendation, the agent must identify whether the required evidence is cloud-side, local Sally-side, or both. A `CURSOR_CLOUD_CONTAINER` agent must not assert local Windows working-tree state, local `.env` contents, or local dev-server state; if such local evidence is required for the gate, it must request a `LOCAL_SALLY_WINDOWS` check and mark the recommendation CONDITIONAL until that evidence is supplied. This does not lower any existing gate: push/merge/deploy remain human gates.
+
 ## Cursor Bulk-Work Authority
 
 Promoting Cursor / Smart Factory from smoke-test writer to real bulk-work writer is a human gate because it changes write authority.
