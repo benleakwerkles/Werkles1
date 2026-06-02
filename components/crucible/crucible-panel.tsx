@@ -3,14 +3,24 @@
 import { useState } from "react";
 import { crucibleChecks, crucibleTrustCopy, type CrucibleCheck } from "@/lib/crucible";
 import { copy } from "@/lib/copy";
+import { isAppInfraPreview } from "@/lib/app-infra-preview";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
+import { InfraPreviewBanner } from "@/components/foundry/infra-preview-banner";
 import { VerificationCard } from "./verification-card";
 
 export function CruciblePanel() {
-  const [status, setStatus] = useState("Ready for inspection.");
+  const preview = isAppInfraPreview();
+  const [status, setStatus] = useState(
+    preview ? copy.infraPreview.crucible : "Ready for inspection."
+  );
   const [busyKey, setBusyKey] = useState<string | null>(null);
 
   async function startCheck(check: CrucibleCheck) {
+    if (preview) {
+      setStatus(copy.infraPreview.sandboxActionDisabled);
+      return;
+    }
+
     if (!check.route) {
       setStatus("The forge is not wired for this check yet.");
       return;
@@ -51,6 +61,8 @@ export function CruciblePanel() {
         <figcaption>{copy.uiPass.draftBadge}</figcaption>
       </figure>
 
+      <InfraPreviewBanner detail={copy.infraPreview.crucible} />
+
       <div className="ops-card crucible-hero-card workshop-facet--chem">
         <div className="card-heading">
           <p>{copy.uiPass.cockpitEyebrow}</p>
@@ -70,6 +82,7 @@ export function CruciblePanel() {
             key={check.key}
             check={check}
             busy={busyKey === check.key}
+            previewDisabled={preview}
             onStart={startCheck}
           />
         ))}

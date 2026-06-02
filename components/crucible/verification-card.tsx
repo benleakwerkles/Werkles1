@@ -8,15 +8,17 @@ type VerificationCardProps = {
   state?: CrucibleState;
   onStart?: (check: CrucibleCheck) => void;
   busy?: boolean;
+  previewDisabled?: boolean;
 };
 
 export function VerificationCard({
   check,
   state = check.state as CrucibleState,
   onStart,
-  busy = false
+  busy = false,
+  previewDisabled = false
 }: VerificationCardProps) {
-  const canStart = Boolean(check.route && onStart && !busy);
+  const canStart = Boolean(check.route && onStart && !busy && !previewDisabled);
 
   return (
     <article className="ops-card verification-workflow-card">
@@ -36,7 +38,11 @@ export function VerificationCard({
         disabled={!canStart}
         onClick={() => onStart?.(check)}
       >
-        {busy ? "Inspecting..." : check.cta}
+        {previewDisabled
+          ? "Sandbox action disabled in preview"
+          : busy
+            ? "Inspecting..."
+            : check.cta}
       </button>
     </article>
   );

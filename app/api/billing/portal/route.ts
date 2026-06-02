@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isAppInfraPreview } from "@/lib/app-infra-preview";
 import { requireUser } from "@/lib/supabase/request";
 
 export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
+  if (isAppInfraPreview()) {
+    return NextResponse.json(
+      { error: "Billing portal is disabled during APP_INFRA preview." },
+      { status: 403 }
+    );
+  }
+
   const auth = await requireUser(request);
   if ("response" in auth) return auth.response;
 

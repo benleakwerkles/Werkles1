@@ -15,7 +15,7 @@ export const copy = {
       "A private floor for Builders, Operators, Backers, Connectors, and Sparks looking for serious fit, not guru fog.",
     brandPromise: "Create with trust. Build to thrive.",
     primaryCta: "Enter the Foundry",
-    secondaryCta: "Inspect the deck",
+    secondaryCta: "See how it works",
     trustLine: "Proof signals. Private knocks. No public shouting into the void."
   },
   lanes: {
@@ -183,7 +183,9 @@ export const copy = {
       kicker: "Billing",
       headline: "The brass register tells the truth after Stripe signs it.",
       idle: "Checking the brass register.",
-      portalBlocked: "Billing portal is gated. No live portal session is created in this pass."
+      portalBlocked: "Billing portal is gated. No live portal session is created in this pass.",
+      previewShell:
+        "Billing shell preview. No live payment action is enabled."
     },
     profile: {
       kicker: "Foundry record",
@@ -261,6 +263,15 @@ export const copy = {
     verificationPending: "Inspecting the steel.",
     verificationFailed: "Something did not hold. Fix the claim or pull it out.",
     workspaceCreated: "The joint is locked. Try not to blow up The Forge."
+  },
+  infraPreview: {
+    banner: "APP_INFRA preview — no live provider calls",
+    login: "Login preview only. Sign-in is disabled until APP_INFRA-01 approval.",
+    signup: "Sign-up preview only. Account creation is disabled until APP_INFRA-01 approval.",
+    crucible: "Crucible preview — sandbox actions disabled; no profile writes.",
+    billing: "Billing shell preview. No live payment action is enabled.",
+    membershipCheckout: "Paid checkout is disabled during APP_INFRA preview.",
+    sandboxActionDisabled: "Sandbox action disabled in preview."
   },
   uiPass: {
     draftBadge: "Draft visual — review only, not final brand approval",

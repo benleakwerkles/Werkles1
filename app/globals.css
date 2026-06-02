@@ -946,6 +946,19 @@ main .proof-warning.proof-boundary .trust-badge {
     var(--werkles-cockpit-panel);
 }
 
+.infra-preview-banner {
+  display: block;
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(159, 102, 51, 0.55);
+  border-radius: var(--radius);
+  background: rgba(255, 248, 235, 0.94);
+  color: var(--werkles-ink-on-paper);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
 .crucible-shell {
   position: relative;
   display: grid;

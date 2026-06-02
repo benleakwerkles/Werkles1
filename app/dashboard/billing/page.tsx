@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CockpitShell } from "@/components/foundry/cockpit-shell";
+import { InfraPreviewBanner } from "@/components/foundry/infra-preview-banner";
 import { copy } from "@/lib/copy";
 import { pricing } from "@/lib/pricing";
 import { routeAtmosphere } from "@/lib/workshop-facets";
+import { isAppInfraPreview } from "@/lib/app-infra-preview";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 type BillingProfile = {
@@ -15,11 +17,23 @@ type BillingProfile = {
   stripe_customer_id?: string | null;
 };
 
+const PREVIEW_PROFILE: BillingProfile = {
+  membership_tier: "free",
+  subscription_status: "preview",
+  current_period_end: null,
+  stripe_customer_id: null
+};
+
 export default function BillingPage() {
-  const [profile, setProfile] = useState<BillingProfile | null>(null);
-  const [status, setStatus] = useState(copy.dashboard.billing.idle);
+  const preview = isAppInfraPreview();
+  const [profile, setProfile] = useState<BillingProfile | null>(preview ? PREVIEW_PROFILE : null);
+  const [status, setStatus] = useState(
+    preview ? copy.dashboard.billing.previewShell : copy.dashboard.billing.idle
+  );
 
   useEffect(() => {
+    if (preview) return;
+
     async function loadBilling() {
       try {
         const supabase = getSupabaseBrowser();
@@ -49,7 +63,7 @@ export default function BillingPage() {
     }
 
     loadBilling();
-  }, []);
+  }, [preview]);
 
   async function openPortal() {
     setStatus(copy.dashboard.billing.portalBlocked);
@@ -66,10 +80,12 @@ export default function BillingPage() {
       </nav>
 
       <section className="ops-card billing-panel">
+        <InfraPreviewBanner detail={copy.infraPreview.billing} />
         <div className="card-heading">
           <p>{copy.dashboard.billing.kicker}</p>
           <h1>{copy.dashboard.billing.headline}</h1>
         </div>
+        {preview ? <p className="muted">{copy.dashboard.billing.previewShell}</p> : null}
         <div className="trust-state-strip">
           <span>Tier: {profile?.membership_tier || "free"}</span>
           <span>Status: {profile?.subscription_status || "none"}</span>
@@ -86,7 +102,7 @@ export default function BillingPage() {
             ? new Date(profile.current_period_end).toLocaleDateString()
             : "not set"}
         </p>
-        <button className="button button-outline" type="button" onClick={openPortal}>
+        <button className="button button-outline" type="button" onClick={openPortal} disabled={preview}>
           Prepare billing portal
         </button>
         <p className="status-line" role="status">{status}</p>
