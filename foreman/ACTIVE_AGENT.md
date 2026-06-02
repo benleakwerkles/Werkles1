@@ -1,29 +1,31 @@
 # Active Agent
 
-## Active Writer
-**Maker (Cursor)** — Gate 05 style-variant batch in flight; Ghost Forge diagnostics/batches inside `foreman/BUDGET.md`.
+## Effective gate
 
-**Ben (Sally)** — Squibb cutout when ready; restore Cursor **Run Mode → Allow Everything** if routine probes start prompting again.
+`[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`
 
-Codex optional for Ghost Forge logging only. No browser MCP repair.
+## Active writer
 
-## Known failure mode (2026-05-29)
+**Ben (Operator)** — read review packet; record APPROVE / PATCH / NO-GO in approval log.
 
-Cursor/Maker settings may revert from **Allow Everything** to **Allowlist**. If routine non-gate actions begin prompting again, first check **Cursor Settings → Agents → Run Mode** before changing doctrine.
+**Maker (Cursor)** — **parked.** Review packet delivered. No feature work until Ben human gate.
 
-## Approved (2026-05-28)
-- Site style v0.6 → `foreman/SITE_STYLE_APPROVED_v0.6.md`
-- One canonical Squibb → `foreman/MASCOT_RULES.md`
-- Batch v0.2 direction → `foreman/ghost-forge/DRAFT_SITE_ASSET_BATCH_v0.2.md`
+**Petra (Comptroller)** — crew-checkin **GO_WITH_CONDITIONS** (2026-05-31). GATE_05 PAUSE. UI_COMMIT HOLD.
 
-## Ben runs next
-1. Squibb cutout → `public/assets/mascot/`
-2. Confirm Cursor **Run Mode = Allow Everything** after updates (see Known failure mode above)
+**Codex** — idle until APP_INFRA-01 human gate closes.
 
-## Maker runs now
-1. **Gate 05** — `.\scripts\foreman\ghost-forge-gate-05-style-variants.ps1 -Phase all` (in progress)
-2. Log → `foreman/ghost-forge/gate-05-style-variants-run.log`
-3. Wire Squibb bust when PNGs land
+## Deliverable
+
+`foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` — Maker recommends **PATCH**.
+
+## Gate 05 / Ghost Forge
+
+**PAUSE** — no image spend.
 
 ## Preview
-`npm.cmd run dev` → http://localhost:3000
+
+http://localhost:3000 or https://werkles.com
+
+## Foreman
+
+http://localhost:4317 — operator infra (accepted); not blocking APP_INFRA-01 decision.

@@ -7,6 +7,25 @@ werkles-site.zip
 netlify.toml
 server.log
 server.err.log
+
+# Env — keep tracked examples
 .env
-.env.local
+.env.*
+!.env.example
+
+# Local overrides
+*.local
+
+# Foreman runtime / operator noise (quarantine — do not commit)
+foreman/.edge-aeye-crew-profile/
+foreman/**/.local_token
+foreman/control-panel/foreman-control.pid
+foreman/**/*.log
+foreman/**/*.png
+foreman/**/debug/
+foreman/**/tmp/
+
+# Local scratch
+sandbox/
+
 supabase/.temp

@@ -1,0 +1,159 @@
+{
+  "version": "0.1",
+  "generated_at": "2026-05-30T22:08:27.098Z",
+  "month": "2026-05",
+  "doctrine": {
+    "module": "local_operator_cockpit",
+    "not_bank_connection": true,
+    "not_accounting_finalization": true,
+    "does_not_move_money": true,
+    "does_not_create_cards": true,
+    "no_account_or_card_secrets": true,
+    "no_secrets_in_repo": true
+  },
+  "month_to_date_by_entity": [
+    {
+      "entity_id": "unknown",
+      "entity_name": "Unknown / Needs Classification",
+      "amount_usd": 299
+    },
+    {
+      "entity_id": "kind_sir_corporate",
+      "entity_name": "Kind Sir Corporate",
+      "amount_usd": 89
+    },
+    {
+      "entity_id": "werkles",
+      "entity_name": "Werkles",
+      "amount_usd": 49.5
+    }
+  ],
+  "spend_by_bucket": [
+    {
+      "bucket_id": "unknown",
+      "bucket_name": "Unknown",
+      "amount_usd": 299
+    },
+    {
+      "bucket_id": "ai_api",
+      "bucket_name": "AI / API",
+      "amount_usd": 131.5
+    },
+    {
+      "bucket_id": "hosting_infra",
+      "bucket_name": "Hosting / infrastructure",
+      "amount_usd": 7
+    }
+  ],
+  "ai_api_spend_this_month_usd": 131.5,
+  "unclassified_count": 2,
+  "needs_classification": [
+    {
+      "id": "sample-003",
+      "date": "2026-05-20",
+      "merchant": "SAMPLE — Claude API on wrong entity",
+      "amount": 89,
+      "status": "needs_classification"
+    },
+    {
+      "id": "sample-004",
+      "date": "2026-05-22",
+      "merchant": "SAMPLE — Unknown SaaS",
+      "amount": 299,
+      "status": "needs_classification"
+    }
+  ],
+  "mismatch_warnings": [
+    {
+      "rule_id": "werkles_ai_on_wrong_entity",
+      "severity": "high",
+      "message": "Werkles AI/API spend paid by Kind Sir or Valley accounts",
+      "entry_id": "sample-003",
+      "merchant": "SAMPLE — Claude API on wrong entity",
+      "date": "2026-05-20",
+      "amount": 89
+    },
+    {
+      "rule_id": "unknown_merchant_or_entity",
+      "severity": "low",
+      "message": "Unknown merchant or unknown entity",
+      "entry_id": "sample-004",
+      "merchant": "SAMPLE — Unknown SaaS",
+      "date": "2026-05-22",
+      "amount": 299
+    },
+    {
+      "rule_id": "large_unknown_bucket",
+      "severity": "high",
+      "message": "Transaction over threshold with unknown bucket",
+      "entry_id": "sample-004",
+      "amount": 299,
+      "merchant": "SAMPLE — Unknown SaaS",
+      "date": "2026-05-22"
+    },
+    {
+      "rule_id": "unknown_entity_over_threshold",
+      "severity": "medium",
+      "message": "Unknown entity over alert threshold",
+      "entry_id": "sample-004",
+      "amount": 299,
+      "merchant": "SAMPLE — Unknown SaaS",
+      "date": "2026-05-22"
+    }
+  ],
+  "mismatch_warning_count": 4,
+  "reimbursement_queue": [
+    {
+      "id": "sample-reimb-001",
+      "ledger_entry_id": "sample-003",
+      "from_entity": "ben_personal",
+      "to_entity": "werkles",
+      "amount_usd": 89,
+      "status": "draft",
+      "notes": "SAMPLE — does not submit reimbursement"
+    }
+  ],
+  "reimbursement_queue_count": 1,
+  "recurring_saas": [
+    {
+      "id": "sample-saas-001",
+      "name": "SAMPLE — GitHub Pro",
+      "entity_owner": "werkles",
+      "spend_bucket": "saas_tools",
+      "amount_usd": 4,
+      "billing_cycle": "monthly",
+      "last_reviewed_at": null,
+      "notes": "SAMPLE — needs review"
+    }
+  ],
+  "recurring_saas_needing_review": [
+    {
+      "id": "sample-saas-001",
+      "name": "SAMPLE — GitHub Pro",
+      "entity_owner": "werkles",
+      "spend_bucket": "saas_tools",
+      "amount_usd": 4,
+      "billing_cycle": "monthly",
+      "last_reviewed_at": null,
+      "notes": "SAMPLE — needs review"
+    }
+  ],
+  "recurring_saas_review_count": 1,
+  "human_gates": [
+    "create bank account",
+    "create virtual card",
+    "change billing method",
+    "pay vendor",
+    "transfer funds",
+    "submit reimbursement",
+    "classify final legal/tax treatment",
+    "connect/reconnect financial accounts",
+    "import real bank data from new source",
+    "store any secret or full account/card number"
+  ],
+  "thresholds": {
+    "unknown_entity_alert_usd": 25,
+    "large_uncategorized_alert_usd": 250,
+    "recurring_review_interval_days": 30
+  }
+}

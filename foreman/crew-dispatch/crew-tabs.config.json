@@ -1,0 +1,81 @@
+{
+  "workspaceName": "Werkles Aeye Crew",
+  "mode": "edge-dispatch-bay",
+  "autoSend": false,
+  "humanSendGate": true,
+  "courier": {
+    "script": "scripts/foreman/relay-courier.ps1",
+    "cli": "scripts/foreman/relay-courier.mjs",
+    "lib": "scripts/foreman/relay-courier-lib.mjs",
+    "profileDir": "foreman/.edge-aeye-crew-profile",
+    "automates": ["tab focus", "clipboard", "ctrl+v", "policy verify"],
+    "neverAutomates": ["send", "submit", "post", "deploy", "push", "sql"]
+  },
+  "tabs": [
+    {
+      "id": "PETRA",
+      "name": "Petra / ChatGPT",
+      "tabIndex": 1,
+      "url": "https://chatgpt.com/",
+      "pasteBlock": "foreman/handoffs/outbox/PETRA_PASTE_BLOCK.txt"
+    },
+    {
+      "id": "SKYBRO",
+      "name": "Skybro / Gemini",
+      "tabIndex": 2,
+      "url": "https://gemini.google.com/",
+      "pasteBlock": "foreman/handoffs/outbox/SKYBRO_PASTE_BLOCK.txt"
+    },
+    {
+      "id": "ENDER",
+      "name": "Ender / Claude",
+      "tabIndex": 3,
+      "url": "https://claude.ai/",
+      "pasteBlock": "foreman/handoffs/outbox/ENDER_PASTE_BLOCK.txt"
+    },
+    {
+      "id": "BEAN",
+      "name": "Bean / DeepSeek",
+      "tabIndex": 4,
+      "url": "https://chat.deepseek.com/",
+      "pasteBlock": "foreman/handoffs/outbox/BEAN_PASTE_BLOCK.txt"
+    },
+    {
+      "id": "COMPUTER",
+      "name": "Computer / Perplexity",
+      "tabIndex": 5,
+      "url": "https://www.perplexity.ai/",
+      "pasteBlock": "foreman/handoffs/outbox/COMPUTER_PASTE_BLOCK.txt"
+    },
+    {
+      "id": "FOREMAN",
+      "name": "Foreman Control Panel",
+      "tabIndex": 6,
+      "url": "http://localhost:4317"
+    },
+    {
+      "id": "GITHUB",
+      "name": "GitHub",
+      "tabIndex": 7,
+      "url": "https://github.com/benleakwerkles/Werkles1"
+    },
+    {
+      "id": "RENDER",
+      "name": "Render",
+      "tabIndex": 8,
+      "url": "https://dashboard.render.com/"
+    },
+    {
+      "id": "SUPABASE",
+      "name": "Supabase",
+      "tabIndex": 9,
+      "url": "https://supabase.com/dashboard"
+    },
+    {
+      "id": "WERKLES",
+      "name": "Werkles",
+      "tabIndex": 10,
+      "url": "https://werkles.com/"
+    }
+  ]
+}

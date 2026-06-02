@@ -1,0 +1,18 @@
+{
+  "version": "0.1",
+  "description": "Spend classification buckets — operator cockpit only",
+  "buckets": [
+    { "id": "ai_api", "display_name": "AI / API" },
+    { "id": "image_generation", "display_name": "Image generation" },
+    { "id": "saas_tools", "display_name": "SaaS tools" },
+    { "id": "legal_formation", "display_name": "Legal / formation" },
+    { "id": "trademark_ip", "display_name": "Trademark / IP" },
+    { "id": "hosting_infra", "display_name": "Hosting / infrastructure" },
+    { "id": "domain_email_workspace", "display_name": "Domain / email / Workspace" },
+    { "id": "rd", "display_name": "R&D" },
+    { "id": "marketing_assets", "display_name": "Marketing assets" },
+    { "id": "construction_real_estate", "display_name": "Construction / real estate" },
+    { "id": "admin_overhead", "display_name": "Admin / overhead" },
+    { "id": "unknown", "display_name": "Unknown" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "description": "Recurring SaaS subscriptions — review cadence in mismatch-rules thresholds",
+  "subscriptions": [
+    {
+      "id": "sample-saas-001",
+      "name": "SAMPLE — GitHub Pro",
+      "entity_owner": "werkles",
+      "spend_bucket": "saas_tools",
+      "amount_usd": 4,
+      "billing_cycle": "monthly",
+      "last_reviewed_at": null,
+      "notes": "SAMPLE — needs review"
+    }
+  ]
+}

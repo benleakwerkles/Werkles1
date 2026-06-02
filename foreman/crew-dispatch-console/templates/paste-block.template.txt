@@ -1,0 +1,23 @@
+TO: {{ROLE_TITLE}}
+FROM: Ben on Sally — Crew Dispatch Console v2
+
+Mission: {{MISSION_LABEL}}
+{{MISSION_DESCRIPTION}}
+
+1) Open and follow exactly:
+   {{PACKET_ABSPATH}}
+
+2) Read cockpit sources:
+{{COCKPIT_LIST}}
+
+3) {{ROLE_ACTION}}
+
+Context snapshot (auto from cockpit {{GENERATED_AT}}):
+{{STATUS_SNIPPET}}
+
+Hard stops: no deploy | no push | no SQL | no secrets in chat | no provider spend unless LANES/BUDGET open it.
+
+---
+STOP BEFORE SEND — Doctrine v2
+This block was copied to clipboard only. Ben must paste manually into {{ROLE_PLATFORM}}.
+Do NOT auto-submit, auto-send, or trigger Power Automate Send actions.

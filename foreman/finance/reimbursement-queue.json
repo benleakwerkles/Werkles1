@@ -1,0 +1,15 @@
+{
+  "version": "0.1",
+  "description": "Reimbursement tracking — does not submit reimbursements",
+  "queue": [
+    {
+      "id": "sample-reimb-001",
+      "ledger_entry_id": "sample-003",
+      "from_entity": "ben_personal",
+      "to_entity": "werkles",
+      "amount_usd": 89,
+      "status": "draft",
+      "notes": "SAMPLE — does not submit reimbursement"
+    }
+  ]
+}

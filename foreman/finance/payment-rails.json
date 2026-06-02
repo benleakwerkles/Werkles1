@@ -1,0 +1,81 @@
+{
+  "version": "0.1",
+  "description": "Placeholder payment rails — masks only, no secrets",
+  "doctrine": {
+    "module": "local_operator_cockpit_spend_tracker",
+    "not_bank_connection": true,
+    "not_accounting_finalization": true,
+    "does_not_move_money": true,
+    "does_not_create_cards": true,
+    "no_account_or_card_secrets": true,
+    "human_gate_for_new_rails": true
+  },
+  "rails": [
+    {
+      "id": "werkles_ai_api_card_planned",
+      "display_name": "Werkles AI/API card (planned)",
+      "entity_owner": "werkles",
+      "rail_type": "virtual_card",
+      "institution": "TBD",
+      "masked_identifier": "planned",
+      "intended_use": "AI/API spend for Werkles lanes only",
+      "status": "planned",
+      "notes": "Not created — human gate required"
+    },
+    {
+      "id": "werkles_saas_tools_card_planned",
+      "display_name": "Werkles SaaS tools card (planned)",
+      "entity_owner": "werkles",
+      "rail_type": "virtual_card",
+      "institution": "TBD",
+      "masked_identifier": "planned",
+      "intended_use": "SaaS subscriptions for Werkles",
+      "status": "planned",
+      "notes": "Not created — human gate required"
+    },
+    {
+      "id": "werkles_legal_admin_card_planned",
+      "display_name": "Werkles legal/admin card (planned)",
+      "entity_owner": "werkles",
+      "rail_type": "credit_card",
+      "institution": "TBD",
+      "masked_identifier": "planned",
+      "intended_use": "Legal, formation, trademark, admin",
+      "status": "planned",
+      "notes": "Not created — human gate required"
+    },
+    {
+      "id": "valley_vanguard_rd_card_planned",
+      "display_name": "Valley Vanguard R&D card (planned)",
+      "entity_owner": "valley_vanguard",
+      "rail_type": "credit_card",
+      "institution": "TBD",
+      "masked_identifier": "planned",
+      "intended_use": "Valley Vanguard R&D and trading research",
+      "status": "planned",
+      "notes": "Not created — human gate required"
+    },
+    {
+      "id": "kind_sir_admin_card_planned",
+      "display_name": "Kind Sir admin/operating card (planned)",
+      "entity_owner": "kind_sir_corporate",
+      "rail_type": "checking",
+      "institution": "TBD",
+      "masked_identifier": "planned",
+      "intended_use": "Kind Sir operating and construction admin",
+      "status": "planned",
+      "notes": "Not created — human gate required"
+    },
+    {
+      "id": "unknown_current_business_card",
+      "display_name": "Current business card (unassigned rail)",
+      "entity_owner": "unknown",
+      "rail_type": "credit_card",
+      "institution": "Unknown",
+      "masked_identifier": "...XXXX",
+      "intended_use": "Needs classification — do not store full number in repo",
+      "status": "unknown",
+      "notes": "Replace mask when Ben classifies rail in human gate session"
+    }
+  ]
+}

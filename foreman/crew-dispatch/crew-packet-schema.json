@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "aeye-crew-relay/v0.1",
+  "description": "Canonical schema for AEYE crew dispatch packets and cousin responses.",
+  "cockpitSourceFiles": [
+    "foreman/NEXT_ACTION.md",
+    "foreman/CURRENT_STATE.md"
+  ],
+  "outgoingPacket": {
+    "requiredFields": [
+      "schemaVersion",
+      "cousin",
+      "packet_id",
+      "generated_at",
+      "nextActionHash",
+      "source_files_included",
+      "REQUIRED_RESPONSE_FIELDS"
+    ],
+    "optionalFields": [
+      "currentStateHash",
+      "role_lane",
+      "human_gate_required"
+    ]
+  },
+  "response": {
+    "requiredFields": [
+      "schemaVersion",
+      "cousin",
+      "source_packet_id",
+      "source_packet_file",
+      "generated_at",
+      "nextActionHash",
+      "CONFIDENCE",
+      "VERDICT",
+      "UNKNOWNS"
+    ],
+    "optionalFields": [
+      "currentStateHash",
+      "summary",
+      "recommendations",
+      "flags_for_ben"
+    ],
+    "confidenceValues": ["HIGH", "LOW"],
+    "benReviewTriggers": {
+      "confidenceLow": true,
+      "unknownsOutsideLane": [
+        "outside lane",
+        "outside my lane",
+        "not my lane",
+        "unsure",
+        "outside scope"
+      ]
+    }
+  },
+  "cousins": {
+    "PETRA": {
+      "lane": "gate verdict / routing — not implementation patches",
+      "filenamePrefix": "FROM_PETRA_"
+    },
+    "SKYBRO": {
+      "lane": "infra / ops — not SQL apply or deploy execution",
+      "filenamePrefix": "FROM_SKYBRO_"
+    },
+    "ENDER": {
+      "lane": "product / UX — not SQL, billing, security, or deploy execution",
+      "filenamePrefix": "FROM_ENDER_"
+    },
+    "BEAN": {
+      "lane": "hostile audit / hardening — not deploy execution",
+      "filenamePrefix": "FROM_BEAN_"
+    },
+    "COMPUTER": {
+      "lane": "doctrine synthesis — not unsourced deploy decisions",
+      "filenamePrefix": "FROM_COMPUTER_"
+    }
+  },
+  "overreachWarnings": {
+    "BEAN": [
+      { "pattern": "\\bdeploy\\b", "message": "Bean recommending deploy — human gate required" },
+      { "pattern": "\\bpush to (main|prod)\\b", "message": "Bean recommending push — human gate required" }
+    ],
+    "SKYBRO": [
+      { "pattern": "\\bapply sql\\b|\\brun sql\\b|\\bsql migration\\b", "message": "Skybro recommending SQL apply — human gate required" },
+      { "pattern": "\\bdeploy\\b", "message": "Skybro recommending deploy — human gate required" }
+    ],
+    "ENDER": [
+      { "pattern": "\\bapply sql\\b|\\brun sql\\b", "message": "Ender recommending SQL — human gate required" },
+      { "pattern": "\\bbilling\\b|\\bpayment rail\\b", "message": "Ender touching billing — human gate required" },
+      { "pattern": "\\bsecurity audit\\b|\\brotate secrets\\b", "message": "Ender touching security — human gate required" },
+      { "pattern": "\\bdeploy\\b", "message": "Ender recommending deploy — human gate required" }
+    ],
+    "COMPUTER": [
+      { "pattern": "\\bdeploy now\\b|\\bship to prod\\b", "message": "Computer making unsourced deploy decision — human gate required" },
+      { "pattern": "\\bnew doctrine:\\b", "message": "Computer issuing unsourced doctrine — Ben review" }
+    ],
+    "PETRA": [
+      { "pattern": "```[\\s\\S]*?(diff|patch|\\.tsx|\\.ts|\\.mjs)", "message": "Petra producing implementation patch instead of gate verdict — Ben review" },
+      { "pattern": "\\bimplementation patch\\b|\\bcode fix\\b", "message": "Petra overreach into implementation — Ben review" }
+    ]
+  },
+  "REQUIRED_RESPONSE_FIELDS": [
+    "schemaVersion",
+    "cousin",
+    "source_packet_id",
+    "source_packet_file",
+    "generated_at",
+    "nextActionHash",
+    "CONFIDENCE",
+    "VERDICT",
+    "UNKNOWNS"
+  ],
+  "EXTENDED_RESPONSE_FIELDS": [
+    "platform",
+    "role",
+    "requested_action",
+    "target_files",
+    "lane",
+    "DO_NOT"
+  ],
+  "EXTENDED_HEADER_ALIASES": {
+    "SOURCE": "cousin",
+    "PLATFORM": "platform",
+    "ROLE": "role",
+    "IN_REPLY_TO": "source_packet_id",
+    "GENERATED_AT": "generated_at",
+    "CURRENT_STATE_HASH": "currentStateHash",
+    "NEXT_ACTION_HASH": "nextActionHash",
+    "REQUESTED_ACTION": "requested_action",
+    "TARGET_FILES": "target_files",
+    "LANE": "lane",
+    "CONFIDENCE": "CONFIDENCE",
+    "UNKNOWNS": "UNKNOWNS",
+    "DO_NOT": "DO_NOT"
+  },
+  "outboxLifecycle": {
+    "sentDir": "foreman/handoffs/outbox/sent",
+    "archiveDir": "foreman/handoffs/outbox/archive",
+    "archiveAfterDays": 30,
+    "doNotSendIfStale": true
+  },
+  "networkCommands": {
+    "ROLE_AWARENESS_SYNC": {
+      "version": "v0.1",
+      "description": "First Edge network command — all cousins acknowledge lane and relay doctrine",
+      "issuerScript": "foreman/crew-dispatch/crew-relay-network-command.mjs",
+      "roleCards": "foreman/crew-dispatch/crew-network-roles.json",
+      "latestManifest": "foreman/crew-dispatch/LATEST_NETWORK_COMMAND.json",
+      "cousinsInScope": ["PETRA", "SKYBRO", "ENDER", "BEAN", "COMPUTER"]
+    }
+  }
+}

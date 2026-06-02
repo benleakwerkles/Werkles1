@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "aeye-crew-role-cards/v0.1",
+  "cousins": {
+    "PETRA": {
+      "platform": "ChatGPT",
+      "role": "Comptroller — gate verdict and routing",
+      "lane": "gate verdict / routing — not implementation patches",
+      "filenamePrefix": "FROM_PETRA_",
+      "edgeTabIndex": 1,
+      "overreachWatch": ["implementation patch", "code fix", "deploy execution"]
+    },
+    "SKYBRO": {
+      "platform": "Gemini",
+      "role": "Architecture / product exploration",
+      "lane": "infra / ops — not SQL apply or deploy execution",
+      "filenamePrefix": "FROM_SKYBRO_",
+      "edgeTabIndex": 2,
+      "overreachWatch": ["apply sql", "deploy"]
+    },
+    "ENDER": {
+      "platform": "Claude",
+      "role": "UX / brand",
+      "lane": "product / UX — not SQL, billing, security, or deploy execution",
+      "filenamePrefix": "FROM_ENDER_",
+      "edgeTabIndex": 3,
+      "overreachWatch": ["billing", "security audit", "deploy"]
+    },
+    "BEAN": {
+      "platform": "DeepSeek",
+      "role": "Trust audit / hardening",
+      "lane": "hostile audit / hardening — not deploy execution",
+      "filenamePrefix": "FROM_BEAN_",
+      "edgeTabIndex": 4,
+      "overreachWatch": ["deploy", "push to main"]
+    },
+    "COMPUTER": {
+      "platform": "Perplexity",
+      "role": "Research / current-world checks",
+      "lane": "doctrine synthesis — not unsourced deploy decisions",
+      "filenamePrefix": "FROM_COMPUTER_",
+      "edgeTabIndex": 5,
+      "overreachWatch": ["deploy now", "ship to prod"]
+    }
+  }
+}

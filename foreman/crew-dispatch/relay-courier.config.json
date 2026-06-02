@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "relay-courier/v0.1",
+  "description": "Deterministic local browser courier — not an AI cousin.",
+  "repoRoot": "C:\\Users\\benle\\Desktop\\github\\Werkles",
+  "edgeProfileDir": "foreman/.edge-aeye-crew-profile",
+  "tabsConfig": "foreman/crew-dispatch/crew-tabs.config.json",
+  "dispatchPolicy": "foreman/crew-dispatch/dispatch-policy.json",
+  "contextHealth": "foreman/crew-dispatch/context-health.json",
+  "relayLock": "foreman/crew-dispatch/RELAY_LOCK.json",
+  "sendLog": "foreman/crew-dispatch/SEND_LOG.md",
+  "courierLog": "foreman/crew-dispatch/RELAY_COURIER_LOG.md",
+  "autoSendRateLimitFile": "foreman/crew-dispatch/.autosend-rate-limit.json",
+  "playwright": {
+    "enabled": true,
+    "preferOverPowerShell": true,
+    "package": "playwright"
+  },
+  "fallback": {
+    "engine": "powershell",
+    "script": "foreman/crew-dispatch/crew-edge-courier.ps1"
+  },
+  "neverAutomates": ["send", "submit", "post", "deploy", "push", "sql"]
+}

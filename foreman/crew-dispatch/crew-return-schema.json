@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "aeye-crew-return/v0.1",
+  "description": "Required headers for cousin responses — intake source of truth alongside crew-packet-schema.json",
+  "requiredHeaders": [
+    "SOURCE",
+    "PLATFORM",
+    "ROLE",
+    "IN_REPLY_TO",
+    "GENERATED_AT",
+    "CURRENT_STATE_HASH",
+    "NEXT_ACTION_HASH",
+    "REQUESTED_ACTION",
+    "TARGET_FILES",
+    "LANE",
+    "CONFIDENCE",
+    "UNKNOWNS",
+    "DO_NOT"
+  ],
+  "metadataFieldMap": {
+    "SOURCE": "cousin",
+    "PLATFORM": "platform",
+    "ROLE": "role",
+    "IN_REPLY_TO": "source_packet_id",
+    "GENERATED_AT": "generated_at",
+    "CURRENT_STATE_HASH": "currentStateHash",
+    "NEXT_ACTION_HASH": "nextActionHash",
+    "REQUESTED_ACTION": "requested_action",
+    "TARGET_FILES": "target_files",
+    "LANE": "lane",
+    "CONFIDENCE": "CONFIDENCE",
+    "UNKNOWNS": "UNKNOWNS",
+    "DO_NOT": "DO_NOT"
+  },
+  "confidenceValues": ["HIGH", "LOW"],
+  "neverAutoMerge": true,
+  "staleStatus": "STALE_DO_NOT_APPLY",
+  "mergeConflictsPath": "foreman/handoffs/merge-conflicts.md",
+  "processedSummariesDir": "foreman/handoffs/inbox/processed"
+}

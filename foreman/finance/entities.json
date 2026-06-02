@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "description": "Legal/operating entities for spend classification — not tax finalization",
+  "entities": [
+    { "id": "kind_sir_holdings", "display_name": "Kind Sir Holdings", "group": "kind_sir" },
+    { "id": "kind_sir_corporate", "display_name": "Kind Sir Corporate", "group": "kind_sir" },
+    { "id": "kind_sir_real_estate", "display_name": "Kind Sir Real Estate", "group": "kind_sir" },
+    { "id": "kind_sir_concrete", "display_name": "Kind Sir Concrete", "group": "kind_sir" },
+    { "id": "kind_sir_insulation", "display_name": "Kind Sir Insulation", "group": "kind_sir" },
+    { "id": "valley_vanguard", "display_name": "Valley Vanguard", "group": "valley" },
+    { "id": "valley_microfutures", "display_name": "Valley Microfutures", "group": "valley" },
+    { "id": "werkles", "display_name": "Werkles", "group": "werkles" },
+    { "id": "ben_personal", "display_name": "Ben Personal / Owner Draw", "group": "personal" },
+    { "id": "unknown", "display_name": "Unknown / Needs Classification", "group": "unknown" }
+  ]
+}

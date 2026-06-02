@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "aeye-dispatch-policy/v0.1",
+  "description": "Dispatch classification and AUTO_SEND guards for Relay Courier.",
+  "classes": {
+    "AUTO_SEND": {
+      "id": "CLASS_A",
+      "label": "AUTO_SEND",
+      "description": "Locked-template, low-risk operational sync only.",
+      "allowedTemplates": [
+        "ROLE_AWARENESS_SYNC",
+        "CREW_ROUTING_UPDATE",
+        "COCKPIT_STATUS_SYNC",
+        "GATE_SUMMARY_SYNC"
+      ],
+      "allowedCousins": ["PETRA", "SKYBRO", "ENDER", "BEAN", "COMPUTER"],
+      "requiresFreshHashes": true,
+      "requiresHealthyContext": true,
+      "maxPacketBytes": 32768,
+      "rateLimit": {
+        "maxPerCousin": 3,
+        "windowMinutes": 10
+      }
+    },
+    "AUTO_LOAD_HUMAN_SEND": {
+      "id": "CLASS_B",
+      "label": "AUTO_LOAD_HUMAN_SEND",
+      "description": "Load into target tab, stop before Send.",
+      "defaultForUnclassified": true
+    },
+    "BLOCKED": {
+      "id": "CLASS_C",
+      "label": "BLOCKED",
+      "description": "Never load or send.",
+      "markers": ["DO_NOT_SEND", "CLASS_C", "BLOCKED_PACKET"]
+    }
+  },
+  "blockedContent": {
+    "structuralMarkers": ["DO_NOT_SEND", "NEVER_SEND", "CLASS_C_BLOCKED"],
+    "filenamePatterns": ["\\.env", "credentials", "secret", "token", "service-role"],
+    "neverLoadPatterns": [
+      "sk_live_",
+      "sk_test_",
+      "service_role",
+      "SUPABASE_SERVICE",
+      "BEGIN PRIVATE KEY",
+      "oauth_token",
+      "refresh_token"
+    ]
+  },
+  "secretScan": {
+    "primaryDefense": "dispatch_class_and_structural_markers",
+    "regexSecondaryOnly": true,
+    "regexPatterns": [
+      "\\b(?:sk|pk)_(?:live|test)_[A-Za-z0-9]{10,}\\b",
+      "\\beyJ[A-Za-z0-9_-]{20,}\\.[A-Za-z0-9_-]+",
+      "\\b(?:api[_-]?key|secret|password|token)\\s*[:=]\\s*['\"][^'\"\\s]{8,}"
+    ]
+  },
+  "approvedLockedTemplates": {
+    "ROLE_AWARENESS_SYNC": {
+      "dispatchClass": "AUTO_SEND",
+      "manifest": "foreman/crew-dispatch/LATEST_NETWORK_COMMAND.json",
+      "issuerScript": "foreman/crew-dispatch/crew-relay-network-command.mjs"
+    }
+  }
+}

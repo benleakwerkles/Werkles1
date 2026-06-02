@@ -1,25 +1,50 @@
 # Operator Dashboard
 
-- Current phase: Ghost Forge one-prompt setup
-- Current step: Automatic webhook callback proof
-- Current risk level: MEDIUM
-- Current status: Render `PUBLIC_BASE_URL` cleanup is complete. The live service now sees `https://werkles-ghost-forge1.onrender.com` with no trailing dot, and commit `7b8da42` is deployed.
-- Last completed gate: Ben approved Render `PUBLIC_BASE_URL` cleanup.
-- Next required AI, if any: Codex
-- Exact file to send, if any: none
-- Exact thing Ben must do next: Say `APPROVE ONE PROMPT WEBHOOK AUTO-CALLBACK TEST` or `STOP GHOST FORGE`.
-- APPLY allowed: No
-- APPLY blocked because:
-  - one real auto-callback test creates a Replicate prediction and may spend credit
-- PUSH allowed: No
-- PUSH blocked because:
-  - no code change is currently required
-- Handoff warnings:
-  - do not use Ben's normal browser unless Ben explicitly asks
-  - do not print or request secrets in chat
-  - spend sources of truth are `foreman/SPEND_LEDGER_INDEX.md`, the company ledgers, `foreman/COMMINGLING_UNTANGLING_PLAYBOOK.md`, `foreman/UNCLASSIFIED_SPEND_INBOX.md`, and `foreman/REIMBURSEMENT_AND_INTERCOMPANY_LOG.md` until separate Google Sheet creation/update is approved
-- Blockers:
-  - automatic webhook callback has not been proven with a new post-cleanup prediction
-  - background image generation is not approved
-  - no background batch generation until automatic callback is proven and Ben approves a batch budget
-- Plain English: The provider-side URL is finally clean, not just tolerated by code. The next useful proof is one paid prompt to confirm Replicate calls the webhook automatically without manual replay.
+- **Current phase:** APP_INFRA-01 — Ben human gate
+- **Current step:** Read review packet → record APPROVE / PATCH / NO-GO
+- **Current risk level:** LOW (decision only) / MEDIUM if PATCH opens auth/billing work later
+- **Effective gate:** `[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`
+
+## Petra crew-checkin
+
+**GO_WITH_CONDITIONS** — APP_INFRA-01 is the slice. Infrastructure and visual exploration are **not** the next action.
+
+| Petra line | Status |
+|------------|--------|
+| GATE_05 | **PAUSE** |
+| UI_COMMIT | **HOLD** |
+| Maker review packet | **Done** — see below |
+| Codex | Cockpit sync only |
+
+## Review packet
+
+**`foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md`**
+
+Maker recommendation: **PATCH** (marketing/pricing/Bellows OK; login/membership/billing need preview mock or explicit Ben acceptance of live sandbox wiring).
+
+## Ben — next hands
+
+1. Read the review packet
+2. Optional: walk http://localhost:3000 routes listed in packet
+3. Record verdict in `foreman/gates/APPROVAL_LOG.md`
+
+## APPLY / PUSH / DEPLOY
+
+**No** — all blocked.
+
+## Plain English
+
+Maker finished the functional surface walkthrough. Pricing and public shells look aligned. Login and membership still talk to real providers when env is configured — Ben must decide if that’s PATCH or acceptable for preview. Ghost Forge stays parked.
+
+## Imagery doctrine (wired — not active gate)
+
+**`foreman/IMAGERY_DIRECTION.md`** is canonical. Viable with restrained grammar — transformation via cards, props, formation states, subtle motion; **not** morphing.
+
+| Artifact | Path |
+|----------|------|
+| Doctrine | `foreman/IMAGERY_DIRECTION.md` |
+| Ghost Forge prompts | `foreman/ghost-forge/IMAGERY_PROMPT_TEMPLATE.md` (Gate 05 **PAUSE**) |
+| Ender wire packet | `foreman/handoffs/outbox/TO_ENDER_IMAGERY_DIRECTION_WIRE_v0.1.md` |
+| Dashboard card | Foreman @ :4317 — Imagery Doctrine |
+
+**No new assets.** **UI_COMMIT HOLD.** APP_INFRA-01 remains the product gate.

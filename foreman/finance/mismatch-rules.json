@@ -1,0 +1,86 @@
+{
+  "version": "0.1",
+  "thresholds": {
+    "unknown_entity_alert_usd": 25,
+    "large_uncategorized_alert_usd": 250,
+    "recurring_review_interval_days": 30
+  },
+  "rules": [
+    {
+      "id": "werkles_ai_on_wrong_entity",
+      "severity": "high",
+      "description": "Werkles AI/API spend paid by Kind Sir or Valley accounts",
+      "match": {
+        "spend_buckets": ["ai_api", "image_generation"],
+        "actual_entities": ["kind_sir_holdings", "kind_sir_corporate", "kind_sir_real_estate", "kind_sir_concrete", "kind_sir_insulation", "valley_vanguard", "valley_microfutures"],
+        "expected_entity": "werkles"
+      }
+    },
+    {
+      "id": "valley_rd_on_werkles",
+      "severity": "high",
+      "description": "Valley Vanguard / Valley Microfutures R&D paid by Werkles",
+      "match": {
+        "spend_buckets": ["rd"],
+        "actual_entities": ["werkles"],
+        "expected_entities": ["valley_vanguard", "valley_microfutures"]
+      }
+    },
+    {
+      "id": "kind_sir_ops_on_werkles",
+      "severity": "medium",
+      "description": "Kind Sir operating spend paid by Werkles",
+      "match": {
+        "spend_buckets": ["construction_real_estate", "admin_overhead"],
+        "actual_entities": ["werkles"],
+        "expected_entity_prefix": "kind_sir_"
+      }
+    },
+    {
+      "id": "personal_reimbursement",
+      "severity": "medium",
+      "description": "Personal card/company expense needing reimbursement",
+      "match": {
+        "actual_entities": ["ben_personal"],
+        "reimbursable": true,
+        "status_not": ["resolved"]
+      }
+    },
+    {
+      "id": "unknown_merchant_or_entity",
+      "severity": "low",
+      "description": "Unknown merchant or unknown entity",
+      "match": {
+        "any_unknown": true
+      }
+    },
+    {
+      "id": "recurring_saas_no_entity",
+      "severity": "medium",
+      "description": "Recurring SaaS without assigned entity",
+      "match": {
+        "recurring": true,
+        "spend_buckets": ["saas_tools"],
+        "actual_entities": ["unknown"]
+      }
+    },
+    {
+      "id": "large_unknown_bucket",
+      "severity": "high",
+      "description": "Transaction over threshold with unknown bucket",
+      "match": {
+        "spend_buckets": ["unknown"],
+        "amount_gte_threshold": "large_uncategorized_alert_usd"
+      }
+    },
+    {
+      "id": "unknown_entity_over_threshold",
+      "severity": "medium",
+      "description": "Unknown entity over alert threshold",
+      "match": {
+        "actual_entities": ["unknown"],
+        "amount_gte_threshold": "unknown_entity_alert_usd"
+      }
+    }
+  ]
+}

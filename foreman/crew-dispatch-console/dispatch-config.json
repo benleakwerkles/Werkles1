@@ -1,0 +1,206 @@
+{
+  "version": "2.1",
+  "repoRoot": "C:\\Users\\benle\\Desktop\\github\\Werkles",
+  "doctrine": {
+    "stopsBeforeSend": true,
+    "humanSendOnly": [
+      "paste into AI chat",
+      "submit forms",
+      "email",
+      "HTTP POST to provider APIs",
+      "deploy",
+      "push",
+      "SQL apply"
+    ]
+  },
+  "edgeWorkspace": {
+    "name": "Werkles Crew Dispatch",
+    "profileHint": "Microsoft Edge → Workspaces → Save all tabs as workspace",
+    "fixedTabOrder": [
+      {
+        "order": 1,
+        "id": "cockpit-dashboard",
+        "label": "Dispatch Dashboard",
+        "kind": "local-file",
+        "path": "foreman/crew-dispatch-console/dashboard.html"
+      },
+      {
+        "order": 2,
+        "id": "morale-preview",
+        "label": "Werkles morale preview",
+        "kind": "url",
+        "url": "https://werkles.com"
+      },
+      {
+        "order": 3,
+        "id": "local-preview",
+        "label": "Sally localhost",
+        "kind": "url",
+        "url": "http://localhost:3000"
+      },
+      {
+        "order": 4,
+        "id": "petra",
+        "label": "Petra (Comptroller)",
+        "kind": "url",
+        "url": "https://chatgpt.com",
+        "notes": "ChatGPT project / Cockpit thread — paste block only; no auto-send"
+      },
+      {
+        "order": 5,
+        "id": "codex",
+        "label": "Codex Foreman",
+        "kind": "url",
+        "url": "https://chatgpt.com/codex",
+        "notes": "Codex thread — paste block only; no auto-send"
+      },
+      {
+        "order": 6,
+        "id": "github",
+        "label": "Werkles1 repo",
+        "kind": "url",
+        "url": "https://github.com/benleakwerkles/Werkles1"
+      },
+      {
+        "order": 7,
+        "id": "render-ghost-forge",
+        "label": "Ghost Forge Render",
+        "kind": "url",
+        "url": "https://dashboard.render.com/web/srv-d8a8icf7f7vs73ct7ep0"
+      }
+    ],
+    "outsideEdge": [
+      {
+        "id": "maker",
+        "label": "Maker (Cursor)",
+        "notes": "Desktop app — not an Edge tab; keep on Sally beside Edge workspace"
+      }
+    ]
+  },
+  "cockpitSources": [
+    "foreman/NEXT_ACTION.md",
+    "foreman/ACTIVE_AGENT.md",
+    "foreman/HUMAN_GATES.md",
+    "foreman/LANES.md",
+    "foreman/BUDGET.md",
+    "foreman/OPERATOR_DASHBOARD.md",
+    "foreman/CURRENT_STATE.md"
+  ],
+  "roles": [
+    {
+      "id": "petra",
+      "label": "Petra",
+      "title": "ChatGPT Comptroller",
+      "platform": "ChatGPT / Cockpit / Ayes",
+      "instructions": "foreman/platform-instructions/CHATGPT_PROJECT_INSTRUCTIONS.md",
+      "packetPrefix": "TO_PETRA",
+      "pasteBlockSuffix": "PETRA_PASTE_BLOCK.txt",
+      "tabId": "petra"
+    },
+    {
+      "id": "codex",
+      "label": "Codex",
+      "title": "Foreman",
+      "platform": "Codex",
+      "instructions": "foreman/platform-instructions/CODEX_FOREMAN_INSTRUCTIONS.md",
+      "packetPrefix": "TO_CODEX",
+      "pasteBlockSuffix": "CODEX_PASTE_BLOCK.txt",
+      "tabId": "codex"
+    },
+    {
+      "id": "maker",
+      "label": "Maker",
+      "title": "Cursor bounded writer",
+      "platform": "Cursor on Sally",
+      "instructions": "foreman/handoffs/outbox/TO_CURSOR_CLAUDE_DRAFT_SITE_UI_PASS_v0.1.md",
+      "packetPrefix": "TO_MAKER",
+      "pasteBlockSuffix": "MAKER_PASTE_BLOCK.txt",
+      "tabId": "maker"
+    },
+    {
+      "id": "ender",
+      "label": "Ender",
+      "title": "Claude UX / brand",
+      "platform": "Claude",
+      "instructions": "foreman/platform-instructions/CLAUDE_ENDER_PROJECT_INSTRUCTIONS.md",
+      "packetPrefix": "TO_CLAUDE",
+      "pasteBlockSuffix": "ENDER_PASTE_BLOCK.txt",
+      "tabId": null
+    },
+    {
+      "id": "bean",
+      "label": "Bean",
+      "title": "DeepSeek trust audit",
+      "platform": "DeepSeek",
+      "instructions": "foreman/platform-instructions/DEEPSEEK_BEAN_INSTRUCTIONS.md",
+      "packetPrefix": "TO_BEAN",
+      "pasteBlockSuffix": "BEAN_PASTE_BLOCK.txt",
+      "tabId": null
+    }
+  ],
+  "missions": {
+    "crew-checkin": {
+      "label": "Crew check-in (functionality pivot)",
+      "description": "Petra scopes APP_INFRA slice; Codex syncs cockpit; Maker waits for verdict",
+      "primaryRole": "petra",
+      "cockpitExtras": [
+        "foreman/APP_INFRA_UX_START_PACKET.md",
+        "foreman/SITE_STYLE_APPROVED_v0.6.md",
+        "foreman/ghost-forge/DRAFT_SITE_ASSET_RESULTS_v0.2.md",
+        "foreman/handoffs/outbox/TO_PETRA_COMPTROLLER_CREW_CHECKIN_v0.1.md"
+      ]
+    },
+    "ghost-forge-resume": {
+      "label": "Ghost Forge Gate 05 resume",
+      "description": "Codex resumes style-variant batch — ONLY when Gate 05 PAUSE lifted",
+      "primaryRole": "codex",
+      "cockpitExtras": [
+        "foreman/ghost-forge/GATE_05_STYLE_VARIANTS.md",
+        "foreman/ghost-forge/IMAGERY_PROMPT_TEMPLATE.md",
+        "foreman/IMAGERY_DIRECTION.md",
+        "foreman/ghost-forge/gate-05-style-variants-run.log",
+        "foreman/handoffs/outbox/TO_CODEX_GHOST_FORGE_ICONS_FIRST_v0.2.md"
+      ]
+    },
+    "morale-preview": {
+      "label": "Morale preview verification",
+      "description": "Operator verifies werkles.com after deploy; Maker on polish only if asked",
+      "primaryRole": "maker",
+      "cockpitExtras": [
+        "foreman/SITE_STYLE_APPROVED_v0.6.md"
+      ]
+    },
+    "app-infra-slice": {
+      "label": "APP_INFRA slice execution",
+      "description": "After Petra verdict — Codex handoff + Maker implementation",
+      "primaryRole": "maker",
+      "cockpitExtras": [
+        "foreman/APP_INFRA_UX_START_PACKET.md"
+      ]
+    },
+    "ender-imagery-direction": {
+      "label": "Ender imagery direction wire",
+      "description": "UX/brand review of IMAGERY_DIRECTION — placements, static vs motion, formation beats. No assets, no UI commit.",
+      "primaryRole": "ender",
+      "cockpitExtras": [
+        "foreman/IMAGERY_DIRECTION.md",
+        "foreman/ghost-forge/IMAGERY_PROMPT_TEMPLATE.md",
+        "foreman/SITE_STYLE_APPROVED_v0.6.md",
+        "foreman/SITE_MAP.md",
+        "foreman/handoffs/outbox/TO_ENDER_IMAGERY_DIRECTION_WIRE_v0.1.md"
+      ]
+    }
+  },
+  "paths": {
+    "outbox": "foreman/handoffs/outbox",
+    "console": "foreman/crew-dispatch-console",
+    "dashboardJson": "foreman/crew-dispatch-console/DISPATCH_DASHBOARD.json",
+    "dashboardMd": "foreman/crew-dispatch-console/DISPATCH_DASHBOARD.md",
+    "dashboardHtml": "foreman/crew-dispatch-console/dashboard.html",
+    "latestDispatchJson": "foreman/crew-dispatch-console/LATEST_DISPATCH.json",
+    "latestDispatchMd": "foreman/crew-dispatch-console/LATEST_DISPATCH.md",
+    "openThisPacket": "foreman/handoffs/outbox/OPEN_THIS_PACKET.md",
+    "dispatchGoCmd": "crew-dispatch.bat",
+    "dispatchGoCmdConsole": "foreman/crew-dispatch-console/DISPATCH_GO.cmd"
+  }
+}

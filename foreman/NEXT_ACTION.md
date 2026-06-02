@@ -1,62 +1,75 @@
 # NEXT ACTION
 
-[ACTIVE: GHOST FORGE GATE 05 — STYLE VARIANTS]
+**Effective gate:** `[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`
 
-Maker running full Gate 05 (40 images). Log: `foreman/ghost-forge/gate-05-style-variants-run.log`. Review: `http://localhost:3000/#forge-preview`
+---
 
-[ACTIVE: AUTONOMOUS EXECUTION — NON-HUMAN GATES ONLY]
+## Petra verdict — crew-checkin (2026-05-31)
 
-Ben (2026-05-29): **Do not stop for non-human gates.** Budget cleared for Ghost Forge batches. Human gates only: login/OAuth, billing/CC, secrets in chat, push/deploy/SQL/production data, creative final lock, spend above approved lane caps.
+**VERDICT: GO_WITH_CONDITIONS**
 
-## Known failure mode — Cursor settings regression (2026-05-29)
+**SLICE:** APP_INFRA-01 — Functional Surface Review.
 
-Root cause found: Cursor/Maker approval setting reverted from **Allow Everything** to **Allowlist**, causing routine read-only probes and approved Ghost Forge diagnostics to prompt again.
+The next action is **not** more infrastructure and **not** more visual exploration. Review existing functional surfaces; Ben decides APPROVE / PATCH / NO-GO.
 
-**Fix first:** Cursor Settings → Agents → Run Mode → restore **Allow Everything**.
+**GATE_05:** **PAUSE** — no Ghost Forge image spend until APP_INFRA-01 closes or separate budget/render gate opens.
 
-Record: *Known failure mode: Cursor/Maker settings may revert from Allow Everything to Allowlist. If routine non-gate actions begin prompting again, first check this setting before changing doctrine.*
+**UI_COMMIT:** **HOLD** — no new UI commit until APP_INFRA-01 produces APPROVE or PATCH.
 
-Ben restoring setting. Do not change doctrine for IDE regression.
+**Imagery doctrine wired (2026-05-31):** `foreman/IMAGERY_DIRECTION.md` → Ender packet, Ghost Forge prompt template, Foreman dashboard card. **Viable** with restrained grammar; transformation via cards/props/formation — **not** morphing. **No new assets.** Does not supersede APP_INFRA-01 as active product gate.
 
-[ACTIVE: ASSET EXECUTION — SQUIBB CUTOUT + GHOST FORGE TIER 3]
+**Maker deliverable:** `foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` — **produced** (Maker recommends **PATCH**).
 
-Ben approved (2026-05-28): **site style v0.6**, **one canonical Squibb**, **batch v0.2 direction**. See `foreman/gates/APPROVAL_LOG.md`.
+---
 
-## Ben (Sally) — next hands
+## Ben (Operator) — next hands
 
-1. **Squibb cutout** — `coolowl.png` → `public/assets/mascot/brass-foreman-full.png` + bust per `foreman/MASCOT_RULES.md` → say `ASSETS_LANDED`
-2. **Tier 3 icons** — Ghost Forge from Sally (budget gate):
+1. Read **`foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md`**
+2. Walk routes if desired — http://localhost:3000 (or https://werkles.com)
+3. Record human gate in **`foreman/gates/APPROVAL_LOG.md`:** APPROVE / PATCH / NO-GO
+4. Foreman Dashboard — http://localhost:4317 (operator infra — accepted, not this gate’s work)
 
-```powershell
-cd C:\Users\benle\Desktop\github\Werkles
-$env:PUBLIC_BASE_URL = "https://werkles-ghost-forge1.onrender.com"
-$env:GHOST_FORGE_API_KEY = "..."   # local session only
-.\scripts\foreman\ghost-forge-icon-from-sally.ps1 -Icon builder
-```
+**STOP BEFORE SEND** on Aeye packets unless separately requested.
 
-Drop PNGs: `public/assets/draft/icons/` (filenames in `lib/site-icons.ts`).
+---
 
-3. **Preview** — `npm.cmd run dev` → http://localhost:3000
+## Maker (Cursor) — parked
 
-4. **Push** — when ready: `git push origin main` (6 commits ahead; human gate)
+- Review packet **complete** — no feature patches until Ben human gate
+- **No** deploy, push, SQL, secrets, Ghost Forge, Education Forge, auth provider setup, Stripe products
+- Routine local route checks / typecheck / build = non-gates
 
-## Approved batch order (v0.2)
+---
 
-1. Tier 3 lane + step + check + nav icons (pairs; respect rate limits)
-2. A01/A02 atmosphere upgrades (mixed-facet workshop, heavy paper scrim)
-3. A03–A10 route plates one at a time
-4. Tier 2 Squibb cutouts — **manual only**, not Ghost Forge
+## Codex — parked
 
-## Maker (Cursor)
+- Cockpit synced with crew-checkin verdict
+- Handoff only after Ben closes APP_INFRA-01 human gate
 
-- **Gate 05 in progress** — style variants (4 styles × 10 assets)
-- Wire Squibb bust when PNGs land (replace `WorkshopGreeter` W-mark where appropriate)
-- Remove draft-review badge when Ben says final brand lock
+---
 
-## Codex
+## Conditions (active)
 
-Log runs to `foreman/ghost-forge/DRAFT_SITE_ASSET_RESULTS_v0.2.md`. No browser MCP.
+- No new app feature work until Ben records human gate (review packet satisfies Maker deliverable)
+- No auth provider setup
+- No Stripe live products
+- No provider calls from automation
+- No Ghost Forge spend
+- No Bellows content generation
+- No push / deploy / SQL / secrets
+
+---
+
+## Gate 05 — PAUSE
+
+| Metric | Value |
+|--------|--------|
+| Landed | 12/40 style variants |
+| Status | **PAUSE** |
+| Resume | Separate approval only |
+
+---
 
 ## Hard stops
 
-no deploy | no SQL | no secrets in chat | no Bellows unless Ben opens gate
+no deploy | no push | no SQL | no secrets | no Ghost Forge | no Education Forge worker | no external Aeye Send unless separately requested

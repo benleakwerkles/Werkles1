@@ -194,6 +194,56 @@ export function sha256Text(text) {
   return createHash("sha256").update(String(text), "utf8").digest("hex");
 }
 
+/** Raw buffer SHA-256 (lowercase hex). Does not normalize line endings. */
+export function sha256Buffer(buffer) {
+  return createHash("sha256").update(buffer).digest("hex");
+}
+
+/** Cockpit / relay hash: reads raw file bytes — no UTF-8 or line-ending normalization. */
+export function sha256FileRaw(relativePath) {
+  const target = abs(relativePath);
+  if (!fs.existsSync(target)) return null;
+  return sha256Buffer(fs.readFileSync(target));
+}
+
+export function truncateHash(hash, length = 12) {
+  if (!hash) return "(missing)";
+  if (hash.length <= length) return hash;
+  return `${hash.slice(0, length)}...`;
+}
+
+/** Self-test: generator/intake hash parity on NEXT_ACTION.md (same raw read twice). */
+export function runCockpitHashSelfTest() {
+  const nextAction = "foreman/NEXT_ACTION.md";
+  const currentState = "foreman/CURRENT_STATE.md";
+  const failures = [];
+  let nextActionHash = null;
+  let currentStateHash = null;
+
+  if (!exists(nextAction)) {
+    failures.push("NEXT_ACTION.md missing");
+  } else {
+    const first = sha256FileRaw(nextAction);
+    const second = sha256FileRaw(nextAction);
+    nextActionHash = first;
+    if (first !== second) failures.push("hash parity failed: two reads of NEXT_ACTION.md differ");
+    if (!first || first.length !== 64) failures.push("NEXT_ACTION.md hash invalid");
+  }
+
+  if (exists(currentState)) {
+    currentStateHash = sha256FileRaw(currentState);
+  }
+
+  return {
+    ok: failures.length === 0,
+    failures,
+    nextActionHash,
+    currentStateHash,
+    nextActionHashTrunc: truncateHash(nextActionHash),
+    currentStateHashTrunc: truncateHash(currentStateHash),
+  };
+}
+
 export function sha256File(relativePath) {
   return sha256Text(read(relativePath));
 }
