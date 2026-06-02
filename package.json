@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "relay:install": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/foreman/install-relay-courier.ps1",
+    "relay:self-test": "node scripts/foreman/relay-courier.mjs self-test",
+    "foreman": "node scripts/foreman/foreman-control-server.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",
@@ -25,6 +28,7 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9.27.0",
     "eslint-config-next": "^15.3.2",
+    "playwright": "^1.60.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3"
