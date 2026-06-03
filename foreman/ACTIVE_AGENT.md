@@ -2,21 +2,21 @@
 
 ## Effective gate
 
-`[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`
+`[IN PROGRESS: SUPABASE_AUTH_STRIPE_TEST_WIRING]`
 
 ## Active writer
 
-**Ben (Operator)** — read review packet; record APPROVE / PATCH / NO-GO in approval log.
+**Ben (Operator)** — Supabase Auth + Stripe test wiring per `foreman/gates/OAUTH_STRIPE_OPERATOR_CHECKLIST.md`.
 
-**Maker (Cursor)** — **parked.** Review packet delivered. No feature work until Ben human gate.
+**Maker (Cursor)** — **parked** for provider consoles and secret entry. Mechanical prep only when scoped.
 
-**Petra (Comptroller)** — crew-checkin **GO_WITH_CONDITIONS** (2026-05-31). GATE_05 PAUSE. UI_COMMIT HOLD.
+**Petra (Comptroller)** — APP_INFRA-01 human gate **closed** (Ben APPROVE). GATE_05 **PAUSE**. UI_COMMIT **OPEN**.
 
-**Codex** — idle until APP_INFRA-01 human gate closes.
+**Codex** — cockpit sync on request after provider milestones.
 
 ## Deliverable
 
-`foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` — Maker recommends **PATCH**.
+APP_INFRA-01 **APPROVED** — `foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` · app `02bf718`.
 
 ## Gate 05 / Ghost Forge
 
@@ -24,8 +24,8 @@
 
 ## Preview
 
-http://localhost:3000 or https://werkles.com
+http://localhost:3000 or https://werkles.com (`APP_INFRA_PREVIEW = true` until Ben flips for test wiring)
 
 ## Foreman
 
-http://localhost:4317 — operator infra (accepted); not blocking APP_INFRA-01 decision.
+http://localhost:4317 — operator infra (accepted).

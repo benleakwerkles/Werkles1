@@ -1,9 +1,9 @@
 # Operator Dashboard
 
-- **Current phase:** APP_INFRA-01 — Ben human gate
-- **Current step:** Read review packet → record APPROVE / PATCH / NO-GO
-- **Current risk level:** LOW (decision only) / MEDIUM if PATCH opens auth/billing work later
-- **Effective gate:** `[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`
+- **Current phase:** Supabase Auth + Stripe test wiring
+- **Current step:** `foreman/gates/OAUTH_STRIPE_OPERATOR_CHECKLIST.md`
+- **Current risk level:** MEDIUM (provider consoles; Ben-only secrets)
+- **Effective gate:** `[IN PROGRESS: SUPABASE_AUTH_STRIPE_TEST_WIRING]`
 
 ## Petra crew-checkin
 
@@ -12,21 +12,21 @@
 | Petra line | Status |
 |------------|--------|
 | GATE_05 | **PAUSE** |
-| UI_COMMIT | **HOLD** |
-| Maker review packet | **Done** — see below |
+| UI_COMMIT | **OPEN** |
+| APP_INFRA-01 | **APPROVED** (2026-06-03) |
 | Codex | Cockpit sync only |
 
 ## Review packet
 
 **`foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md`**
 
-Maker recommendation: **PATCH** (marketing/pricing/Bellows OK; login/membership/billing need preview mock or explicit Ben acceptance of live sandbox wiring).
+Ben **APPROVED** preview-gated functional surfaces (commit `02bf718`).
 
 ## Ben — next hands
 
-1. Read the review packet
-2. Optional: walk http://localhost:3000 routes listed in packet
-3. Record verdict in `foreman/gates/APPROVAL_LOG.md`
+1. `foreman/gates/OAUTH_STRIPE_OPERATOR_CHECKLIST.md` — Supabase redirect URLs + keys
+2. Stripe test products, webhook, test checkout
+3. Record each provider milestone in `foreman/gates/APPROVAL_LOG.md`
 
 ## APPLY / PUSH / DEPLOY
 
@@ -34,7 +34,7 @@ Maker recommendation: **PATCH** (marketing/pricing/Bellows OK; login/membership/
 
 ## Plain English
 
-Maker finished the functional surface walkthrough. Pricing and public shells look aligned. Login and membership still talk to real providers when env is configured — Ben must decide if that’s PATCH or acceptable for preview. Ghost Forge stays parked.
+APP_INFRA-01 closed with preview-safe surfaces approved. Next slice is Supabase + Stripe **test** wiring (operator checklist). Ghost Forge stays parked.
 
 ## Imagery doctrine (wired — not active gate)
 
@@ -47,4 +47,4 @@ Maker finished the functional surface walkthrough. Pricing and public shells loo
 | Ender wire packet | `foreman/handoffs/outbox/TO_ENDER_IMAGERY_DIRECTION_WIRE_v0.1.md` |
 | Dashboard card | Foreman @ :4317 — Imagery Doctrine |
 
-**No new assets.** **UI_COMMIT HOLD.** APP_INFRA-01 remains the product gate.
+**No new assets.** **UI_COMMIT OPEN.** Gate 05 spend still **PAUSE**.

@@ -1,8 +1,9 @@
 # APP_INFRA-01 — Functional Surface Review
 
-**Gate:** `[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`  
+**Gate:** `[CLOSED — APPROVED 2026-06-03]` → next: `[IN PROGRESS: SUPABASE_AUTH_STRIPE_TEST_WIRING]`  
 **Reviewer:** Maker (Cursor)  
 **Review date:** 2026-05-31  
+**Ben verdict:** **APPROVE** (2026-06-03) — `foreman/gates/APPROVAL_LOG.md`  
 **Petra slice:** APP_INFRA-01 — Functional Surface Review (`GO_WITH_CONDITIONS`, crew-checkin)  
 **Preview method:** `npm run dev` → http://localhost:3000 (HTTP 200 on all scoped routes)  
 **Pricing source checked:** `lib/pricing.ts` ↔ `company/PRICING.md` v0.1  
@@ -19,7 +20,7 @@ All eight scoped routes **load successfully** (HTTP 200). Pricing display anchor
 
 **Maker recommendation (2026-05-31):** **PATCH** — approve the static/marketing surfaces and pricing manifest; patch-gate auth/membership/billing to preview/mock mode **or** explicitly accept live sandbox wiring before APP_INFRA functional sign-off.
 
-**Post-patch (2026-06-02):** Preview-mode implementation landed locally — see §13. Awaiting Ben human gate record.
+**Post-patch (2026-06-02):** Preview-mode implementation — commit `02bf718`. **Ben APPROVED** 2026-06-03 — see §13.
 
 ---
 
@@ -197,7 +198,7 @@ No 404s or runtime crashes observed on scoped routes during review.
 - No provider calls from Maker ✓
 - Gate 05 / Ghost Forge: **PAUSE**
 - UI commit: **HOLD**
-- Next human gate unchanged: **`[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`** — Ben records APPROVE / PATCH / NO-GO in `foreman/gates/APPROVAL_LOG.md`
+- Human gate **closed:** Ben **APPROVE** (2026-06-03) — next **`[IN PROGRESS: SUPABASE_AUTH_STRIPE_TEST_WIRING]`**
 
 ---
 
@@ -213,13 +214,13 @@ No 404s or runtime crashes observed on scoped routes during review.
 
 ## 13. Post-patch update (2026-06-02)
 
-**Maker pass:** APP_INFRA preview-mode patch finished and split from B/C/D lanes (local only; not committed).
+**Maker pass:** APP_INFRA preview-mode patch — commit `02bf718` on `rescue/sally-dirty-worktree-2026-06-01`.
 
 ### Preview gate
 
 | Control | Location | Behavior |
 |---------|----------|----------|
-| `APP_INFRA_PREVIEW` | `lib/app-infra-preview.ts` | `true` — flip to `false` only after Ben **APPROVE** |
+| `APP_INFRA_PREVIEW` | `lib/app-infra-preview.ts` | `true` — Ben **APPROVED** gate; flip to `false` when starting test wiring / go-live prep |
 
 ### Route status when preview is **on**
 
@@ -249,12 +250,10 @@ No 404s or runtime crashes observed on scoped routes during review.
 - `/pricing` not in header nav (optional; unchanged)
 - `/auth/callback` — not gated (OAuth/email confirm path; low traffic during preview walk)
 - Flip `APP_INFRA_PREVIEW` to `false` re-enables live wiring — intentional post-approval escape hatch
-- **UI_COMMIT: HOLD** — Ben human gate still required before merge/commit of app UI
+- **UI_COMMIT: OPEN** (2026-06-03) — push/deploy still separate human gates
 
-### Updated Maker recommendation
+### Ben verdict (2026-06-03)
 
-**Ready for Ben APPROVE** of preview-gated functional surfaces **if** route walk confirms banners and disabled controls match intent.
+**APPROVE** — `APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW: APPROVE` recorded in `foreman/gates/APPROVAL_LOG.md`.
 
-Record in `foreman/gates/APPROVAL_LOG.md`: **APPROVE** (accept preview mode) / **PATCH** (more tweaks) / **NO-GO**.
-
-**NO-GO** only if Ben requires shipping with preview flag off before provider wiring is explicitly accepted separately.
+**Next operator slice:** `foreman/gates/OAUTH_STRIPE_OPERATOR_CHECKLIST.md` — Supabase Auth + Stripe test mode.

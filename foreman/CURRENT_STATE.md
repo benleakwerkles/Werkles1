@@ -1,20 +1,19 @@
 ﻿# Current State
 
-Status: synced 2026-05-31 (Petra crew-checkin GO_WITH_CONDITIONS; APP_INFRA-01 review packet produced)
+Status: synced 2026-06-03 (Ben APPROVE — APP_INFRA-01 functional surface review closed)
 
 ## Effective gate
 
-`[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`
+`[IN PROGRESS: SUPABASE_AUTH_STRIPE_TEST_WIRING]`
 
-Ben reads `foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` and records APPROVE / PATCH / NO-GO.
+Operator guide: `foreman/gates/OAUTH_STRIPE_OPERATOR_CHECKLIST.md`
 
-## Petra crew-checkin (2026-05-31)
+## APP_INFRA-01 (closed)
 
-- **VERDICT:** GO_WITH_CONDITIONS
-- **SLICE:** APP_INFRA-01 functional surface review
-- **GATE_05:** PAUSE
-- **UI_COMMIT:** HOLD
-- **Maker review packet:** `foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` — recommendation **PATCH**
+- **Ben verdict:** **APPROVE** (2026-06-03) — `foreman/gates/APPROVAL_LOG.md`
+- **App commit:** `02bf718` — preview-safe surfaces (`APP_INFRA_PREVIEW = true`)
+- **UI_COMMIT:** **OPEN**
+- **GATE_05:** **PAUSE** (separate render gate still required for Ghost Forge spend)
 
 ## Morale deploy (complete)
 
@@ -25,31 +24,23 @@ Ben reads `foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` and record
 
 Foreman Control Panel, Relay Courier, dispatch policy, context health, return paths, Bean hardening, Finance scaffold — accepted prior gate.
 
-## APP_INFRA-01 review summary
+## APP_INFRA-01 review summary (post-patch + APPROVE)
 
 | Area | Result |
 |------|--------|
-| Route loads (8/8) | PASS — HTTP 200 local |
+| Route loads (8/8) | PASS |
 | Pricing anchors | PASS vs `company/PRICING.md` |
-| Bellows | PASS — learning shell, not Education Forge worker |
-| Login preview-only | FAIL — live Supabase auth when env set |
-| Membership | PATCH — Stripe checkout wired when authenticated |
-| Crucible | PARTIAL — sandbox APIs; not read-only mock UI |
-| Billing shell | PARTIAL — portal blocked; live profile reads |
+| Bellows shell | PASS |
+| Login / signup / membership / billing / crucible | PASS under preview gate |
+| API POST guards | PASS when preview on |
 
 ## Ghost Forge / Gate 05
 
-**PAUSE** — do not resume image spend until APP_INFRA-01 closes or separate gate opens.
+**PAUSE** — separate budget/render gate before image spend resumes.
 
 ## Imagery doctrine (wired 2026-05-31)
 
-**Source:** `foreman/IMAGERY_DIRECTION.md` · Ghost Forge prompts: `foreman/ghost-forge/IMAGERY_PROMPT_TEMPLATE.md`
-
-**Recorded:** viable with restrained visual grammar. Transformation via **cards, formation states, props, subtle motion** — **not** literal magical morphing.
-
-**Ender wire packet:** `foreman/handoffs/outbox/TO_ENDER_IMAGERY_DIRECTION_WIRE_v0.1.md` — placement/motion review only; **UI_COMMIT HOLD**; no new assets.
-
-**Foreman dashboard:** Imagery Doctrine card @ http://localhost:4317
+**Source:** `foreman/IMAGERY_DIRECTION.md` · **UI_COMMIT OPEN** for lane work; Gate 05 spend still paused.
 
 ## Hard stops
 

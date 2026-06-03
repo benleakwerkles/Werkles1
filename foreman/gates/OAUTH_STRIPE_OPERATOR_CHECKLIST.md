@@ -3,7 +3,7 @@
 Status: **operator session guide** — Ben-only provider consoles  
 Record decisions in `foreman/gates/APPROVAL_LOG.md`. Never paste secrets into chat or repo.
 
-**Prerequisite:** Close **`[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`** first unless you explicitly override Petra conditions.
+**Prerequisite:** **`[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]`** — **closed** (Ben APPROVE 2026-06-03).
 
 **Current app auth:** Supabase **email + password** (`/login`, `/signup`). Social OAuth is optional future work — Google Cloud steps below apply only if you enable a provider.
 
@@ -11,7 +11,7 @@ Record decisions in `foreman/gates/APPROVAL_LOG.md`. Never paste secrets into ch
 
 ## Session order
 
-1. [ ] APP_INFRA-01 verdict recorded
+1. [x] APP_INFRA-01 verdict recorded (APPROVE 2026-06-03)
 2. [ ] Supabase Auth URL config + keys → Vercel
 3. [ ] Stripe **test mode** — products/prices → webhook → secrets → test checkout
 4. [ ] Stripe **live mode** — only after test webhook + checkout pass

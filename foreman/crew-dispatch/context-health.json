@@ -1,13 +1,13 @@
 {
   "schemaVersion": "context-health/v0.1",
-  "updatedAt": "2026-05-26T00:00:00.000Z",
-  "expectedGate": "[AWAITING HUMAN GATE: APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW]",
+  "updatedAt": "2026-06-03T04:57:50.000Z",
+  "expectedGate": "[IN PROGRESS: SUPABASE_AUTH_STRIPE_TEST_WIRING]",
   "sourceBundleVersion": "aeye-crew-relay/v0.1",
   "cousins": {
     "PETRA": {
       "platform": "ChatGPT",
       "role": "Comptroller / gate verdict",
-      "chatPurpose": "Awaiting APP_INFRA slice + crew routing verdict",
+      "chatPurpose": "APP_INFRA-01 closed; Supabase + Stripe test wiring slice",
       "lastPacketId": null,
       "lastPacketTimestamp": null,
       "lastKnownGate": null,
