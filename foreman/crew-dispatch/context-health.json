@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "context-health/v0.1",
+  "updatedAt": "2026-06-03T04:57:50.000Z",
+  "expectedGate": "[IN PROGRESS: SUPABASE_AUTH_STRIPE_TEST_WIRING]",
+  "sourceBundleVersion": "aeye-crew-relay/v0.1",
+  "cousins": {
+    "PETRA": {
+      "platform": "ChatGPT",
+      "role": "Comptroller / gate verdict",
+      "chatPurpose": "APP_INFRA-01 closed; Supabase + Stripe test wiring slice",
+      "lastPacketId": null,
+      "lastPacketTimestamp": null,
+      "lastKnownGate": null,
+      "sourceBundleHash": null,
+      "contextLoad": "MEDIUM",
+      "resetRecommended": false,
+      "resetReason": null,
+      "bootPacketPath": null,
+      "status": "OK"
+    },
+    "SKYBRO": {
+      "platform": "Gemini",
+      "role": "Architecture / product exploration",
+      "chatPurpose": "Network role awareness pending",
+      "lastPacketId": null,
+      "lastPacketTimestamp": null,
+      "lastKnownGate": null,
+      "sourceBundleHash": null,
+      "contextLoad": "LOW",
+      "resetRecommended": false,
+      "resetReason": null,
+      "bootPacketPath": null,
+      "status": "OK"
+    },
+    "ENDER": {
+      "platform": "Claude",
+      "role": "UX / brand",
+      "chatPurpose": "Network role awareness pending",
+      "lastPacketId": null,
+      "lastPacketTimestamp": null,
+      "lastKnownGate": null,
+      "sourceBundleHash": null,
+      "contextLoad": "LOW",
+      "resetRecommended": false,
+      "resetReason": null,
+      "bootPacketPath": null,
+      "status": "OK"
+    },
+    "BEAN": {
+      "platform": "DeepSeek",
+      "role": "Trust audit / hardening",
+      "chatPurpose": "Network role awareness pending",
+      "lastPacketId": null,
+      "lastPacketTimestamp": null,
+      "lastKnownGate": null,
+      "sourceBundleHash": null,
+      "contextLoad": "LOW",
+      "resetRecommended": false,
+      "resetReason": null,
+      "bootPacketPath": null,
+      "status": "OK"
+    },
+    "COMPUTER": {
+      "platform": "Perplexity",
+      "role": "Research / current-world checks",
+      "chatPurpose": "Network role awareness pending",
+      "lastPacketId": null,
+      "lastPacketTimestamp": null,
+      "lastKnownGate": null,
+      "sourceBundleHash": null,
+      "contextLoad": "LOW",
+      "resetRecommended": false,
+      "resetReason": null,
+      "bootPacketPath": null,
+      "status": "OK"
+    }
+  },
+  "resetTriggers": [
+    "major gate change",
+    "doctrine/protocol change",
+    "style/positioning reset",
+    "after 3+ large packets",
+    "stale response hash",
+    "cousin contradiction with repo cockpit",
+    "user says cousin seems confused",
+    "context load CRITICAL",
+    "24 hours high-velocity work unless explicitly continued"
+  ]
+}

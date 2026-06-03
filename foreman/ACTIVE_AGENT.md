@@ -1,33 +1,31 @@
 # Active Agent
 
-## Active Writer
-**Maker (Cursor)** — Gate 05 style-variant batch in flight; Ghost Forge diagnostics/batches inside `foreman/BUDGET.md`.
+## Effective gate
 
-**Ben (Sally)** — Squibb cutout when ready; restore Cursor **Run Mode → Allow Everything** if routine probes start prompting again.
+`[IN PROGRESS: SUPABASE_AUTH_STRIPE_TEST_WIRING]`
 
-Codex optional for Ghost Forge logging only. No browser MCP repair.
+## Active writer
 
-## Execution Context
+**Ben (Operator)** — Supabase Auth + Stripe test wiring per `foreman/gates/OAUTH_STRIPE_OPERATOR_CHECKLIST.md`.
 
-The active writer must declare its execution context before file-system, repo-state, runtime, or deployment claims, per `foreman/EXECUTION_CONTEXT_RULES.md`. A `CURSOR_CLOUD_CONTAINER` writer can act on `/workspace`, GitHub branches/PRs, and committed state, but must request a `LOCAL_SALLY_WINDOWS` check for any Sally-local filesystem, `.env`, or dev-server evidence rather than claiming it directly.
+**Maker (Cursor)** — **parked** for provider consoles and secret entry. Mechanical prep only when scoped.
 
-## Known failure mode (2026-05-29)
+**Petra (Comptroller)** — APP_INFRA-01 human gate **closed** (Ben APPROVE). GATE_05 **PAUSE**. UI_COMMIT **OPEN**.
 
-Cursor/Maker settings may revert from **Allow Everything** to **Allowlist**. If routine non-gate actions begin prompting again, first check **Cursor Settings → Agents → Run Mode** before changing doctrine.
+**Codex** — cockpit sync on request after provider milestones.
 
-## Approved (2026-05-28)
-- Site style v0.6 → `foreman/SITE_STYLE_APPROVED_v0.6.md`
-- One canonical Squibb → `foreman/MASCOT_RULES.md`
-- Batch v0.2 direction → `foreman/ghost-forge/DRAFT_SITE_ASSET_BATCH_v0.2.md`
+## Deliverable
 
-## Ben runs next
-1. Squibb cutout → `public/assets/mascot/`
-2. Confirm Cursor **Run Mode = Allow Everything** after updates (see Known failure mode above)
+APP_INFRA-01 **APPROVED** — `foreman/reviews/APP_INFRA_01_FUNCTIONAL_SURFACE_REVIEW.md` · app `02bf718`.
 
-## Maker runs now
-1. **Gate 05** — `.\scripts\foreman\ghost-forge-gate-05-style-variants.ps1 -Phase all` (in progress)
-2. Log → `foreman/ghost-forge/gate-05-style-variants-run.log`
-3. Wire Squibb bust when PNGs land
+## Gate 05 / Ghost Forge
+
+**PAUSE** — no image spend.
 
 ## Preview
-`npm.cmd run dev` → http://localhost:3000
+
+http://localhost:3000 or https://werkles.com (`APP_INFRA_PREVIEW = true` until Ben flips for test wiring)
+
+## Foreman
+
+http://localhost:4317 — operator infra (accepted).
