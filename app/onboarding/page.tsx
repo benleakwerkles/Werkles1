@@ -27,26 +27,26 @@ export default function OnboardingPage() {
 
   async function saveFirstWeld(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = new FormData(event.currentTarget);
     setBusy(true);
     setStatus("Heating the first weld.");
 
     try {
-      const supabase = getSupabaseBrowser();
-      const { data: sessionData } = await supabase.auth.getSession();
-      const token = sessionData.session?.access_token;
-
-      if (!token) {
-        setStatus(copy.onboarding.loginRequired);
-        return;
-      }
-
-      const form = new FormData(event.currentTarget);
       const lane = String(form.get("lane") || "Builder");
       const arena = String(form.get("arena") || "").trim();
       const turf = String(form.get("turf") || "").replace(/\D/g, "").slice(0, 5);
 
       if (!arena || turf.length !== 5) {
         setStatus("Arena and a valid ZIP are required.");
+        return;
+      }
+
+      const supabase = getSupabaseBrowser();
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
+
+      if (!token) {
+        setStatus(copy.onboarding.loginRequired);
         return;
       }
 
@@ -101,6 +101,7 @@ export default function OnboardingPage() {
 
   async function saveQuickWeld(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = new FormData(event.currentTarget);
     setBusy(true);
     setStatus("Locking the quick weld.");
     const user = await currentUser();
@@ -110,7 +111,6 @@ export default function OnboardingPage() {
       return;
     }
 
-    const form = new FormData(event.currentTarget);
     const { error } = await getSupabaseBrowser()
       .from("profiles")
       .update({
@@ -135,21 +135,20 @@ export default function OnboardingPage() {
 
   async function saveBlueprint(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const narrative = String(form.get("blueprint_narrative") || "").trim();
+
+    if (narrative.length < 20) {
+      setStatus(copy.onboarding.workshopMinLength);
+      return;
+    }
+
     setBusy(true);
     setStatus("Rolling out the Workshop.");
     const user = await currentUser();
     if (!user) {
       setBusy(false);
       setStatus("Log in before saving.");
-      return;
-    }
-
-    const form = new FormData(event.currentTarget);
-    const narrative = String(form.get("blueprint_narrative") || "").trim();
-
-    if (narrative.length < 20) {
-      setBusy(false);
-      setStatus(copy.onboarding.workshopMinLength);
       return;
     }
 
