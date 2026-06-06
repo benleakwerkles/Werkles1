@@ -18,6 +18,7 @@ server.err.log
 
 # Foreman runtime / operator noise (quarantine — do not commit)
 foreman/.edge-aeye-crew-profile/
+foreman/.edge-playwright-autonomous-sandbox/
 foreman/**/.local_token
 foreman/control-panel/foreman-control.pid
 foreman/**/*.log
@@ -27,5 +28,17 @@ foreman/**/tmp/
 
 # Local scratch
 sandbox/
+.cursor/
+
+# Ghost Forge import scratch (Cursor workspace paths — not repo assets)
+public/assets/draft/ghost-forge/_import/
+
+# Education Forge generated output
+foreman/education-forge-output/
+
+# Dispatch console runtime snapshots (regenerated locally)
+foreman/crew-dispatch-console/DISPATCH_DASHBOARD.json
+foreman/crew-dispatch-console/LATEST_DISPATCH.json
+foreman/crew-dispatch-console/dashboard.html
 
 supabase/.temp
