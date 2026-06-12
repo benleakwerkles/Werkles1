@@ -1,0 +1,19 @@
+{
+  "windowTitleRegex": "Dink|Codex",
+  "allowButton": {
+    "x": 0,
+    "y": 0,
+    "label": "Allow / Proceed / Continue for classified non-gates only"
+  },
+  "stopButton": {
+    "x": 0,
+    "y": 0,
+    "label": "Cancel / Dismiss / Stop"
+  },
+  "notes": [
+    "Copy this file to sally-dink-non-gate-clicker.local.json and fill Sally-local screen coordinates.",
+    "Keep Dink/Codex in the fixed Sally position before using -LiveClick.",
+    "Only click Allow after the prompt is classified as PROCEED: not a human gate.",
+    "Do not use this for login, OAuth, secrets, billing, push, merge, deploy, SQL, production data, final approval, or unknown prompts."
+  ]
+}

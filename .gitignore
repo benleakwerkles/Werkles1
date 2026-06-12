@@ -9,4 +9,5 @@ server.log
 server.err.log
 .env
 .env.local
+scripts/foreman/*.local.json
 supabase/.temp

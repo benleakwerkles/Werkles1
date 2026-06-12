@@ -34,6 +34,34 @@ Start-Process "C:\Users\benle\Desktop\github\Werkles\foreman\handoffs\outbox\TO_
 
 ---
 
+# Handoff launcher — Dink/Codex non-gate click relief
+
+## Quick launch on Sally
+
+PowerShell — copies the focused non-gate agent paste block, opens the packet, and creates the local coordinate config if missing:
+
+```powershell
+& "C:\Users\benle\Desktop\github\Werkles\scripts\foreman\open-sally-dink-non-gate-agent.ps1"
+```
+
+## Paste into the focused local agent
+
+- [SALLY_DINK_NON_GATE_PASTE_BLOCK.txt](file:///C:/Users/benle/Desktop/github/Werkles/foreman/handoffs/outbox/SALLY_DINK_NON_GATE_PASTE_BLOCK.txt)
+- Full packet: [TO_SALLY_DINK_NON_GATE_AGENT_v0.1.md](file:///C:/Users/benle/Desktop/github/Werkles/foreman/handoffs/outbox/TO_SALLY_DINK_NON_GATE_AGENT_v0.1.md)
+
+## Local coordinate helper
+
+Copy/edit local coordinates only on Sally:
+
+```powershell
+.\scripts\foreman\sally-dink-non-gate-clicker.ps1 -Click Allow
+.\scripts\foreman\sally-dink-non-gate-clicker.ps1 -Click Allow -LiveClick
+```
+
+Only use `-LiveClick` after the prompt has been classified as `PROCEED: not a human gate.` Stop at true or unknown gates.
+
+---
+
 # Handoff launcher — Ghost Forge v0.2 icons first
 
 ## Quick launch on Sally
