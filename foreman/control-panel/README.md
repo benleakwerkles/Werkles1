@@ -28,6 +28,13 @@ Gate types (color-coded):
 
 Links that are not project-exact are tagged **GENERIC LINK**.
 
+## GD Status Layer (V1)
+
+The console renders a **GD Status Layer** at the top: crew/task entries with a current state chip and a legend. Visible states: **Received, Thinking, Blocked, Failed, Response Incoming, Complete** ("Thinking" and "Response Incoming" pulse; respects `prefers-reduced-motion`).
+
+- V1 uses a sample feed (`statusItems` in `scripts/foreman/foreman-control-server.mjs`) — UI only; wire to a real source later.
+- `GET /status` returns the status model as read-only JSON for future polling.
+
 ## Safety (by construction)
 
 - Read-only. The page is static HTML built from a data model in `scripts/foreman/foreman-control-server.mjs`.
