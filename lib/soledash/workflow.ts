@@ -22,8 +22,8 @@ export type NextStep = {
   rank: 1 | 2 | 3;
   title: string;
   why: string;
-  agent: string;
-  benMustApprove: boolean;
+  owner: string;
+  humanGateRequired: boolean;
 };
 
 export type Concern = {
@@ -69,19 +69,56 @@ type SessionRecord = {
   hostname: string;
 };
 
-function readSession(): SessionRecord | null {
+export type VisitSnapshot = {
+  timestamp: string;
+  commit: string;
+  receiptCount: number;
+  urgentGateCount: number;
+};
+
+type SessionFile = {
+  lastSession?: SessionRecord;
+  lastVisit?: VisitSnapshot;
+  updatedAt?: string;
+};
+
+function readSessionFile(): SessionFile {
   try {
-    const raw = JSON.parse(fs.readFileSync(SESSION_FILE, "utf8")) as { lastSession?: SessionRecord };
-    return raw.lastSession ?? null;
+    return JSON.parse(fs.readFileSync(SESSION_FILE, "utf8")) as SessionFile;
   } catch {
-    return null;
+    return {};
+  }
+}
+
+function readSession(): SessionRecord | null {
+  return readSessionFile().lastSession ?? null;
+}
+
+export function readPreviousVisit(): VisitSnapshot | null {
+  return readSessionFile().lastVisit ?? null;
+}
+
+export function writeVisitSnapshot(snapshot: VisitSnapshot) {
+  try {
+    const file = readSessionFile();
+    fs.mkdirSync(path.dirname(SESSION_FILE), { recursive: true });
+    fs.writeFileSync(
+      SESSION_FILE,
+      JSON.stringify({ ...file, lastVisit: snapshot, updatedAt: new Date().toISOString() }, null, 2)
+    );
+  } catch {
+    /* best-effort */
   }
 }
 
 export function writeSession(record: SessionRecord) {
   try {
+    const file = readSessionFile();
     fs.mkdirSync(path.dirname(SESSION_FILE), { recursive: true });
-    fs.writeFileSync(SESSION_FILE, JSON.stringify({ lastSession: record, updatedAt: new Date().toISOString() }, null, 2));
+    fs.writeFileSync(
+      SESSION_FILE,
+      JSON.stringify({ ...file, lastSession: record, updatedAt: new Date().toISOString() }, null, 2)
+    );
   } catch {
     /* best-effort */
   }
@@ -216,8 +253,8 @@ export function buildNextSteps(input: {
     rank: 1,
     title: input.missionTitle,
     why: input.missionWhy,
-    agent: "Maker (Cursor) + Ben (Operator)",
-    benMustApprove: false
+    owner: "Maker (Cursor) + Ben (Operator)",
+    humanGateRequired: false
   };
 
   const step2: NextStep = input.workingTreeDirty
@@ -225,23 +262,23 @@ export function buildNextSteps(input: {
         rank: 2,
         title: "Clean up working tree before next lane",
         why: "Dirty tree hides real state and blocks safe commits.",
-        agent: "Dink (local hands)",
-        benMustApprove: false
+        owner: "Dink (local hands)",
+        humanGateRequired: false
       }
     : input.unpushedCount > 0
       ? {
           rank: 2,
           title: `Review ${input.unpushedCount} unpushed commit(s) on snapshot`,
           why: "Snapshot branch work should be reviewed before push — push is a human gate.",
-          agent: "Ben (Operator)",
-          benMustApprove: true
+          owner: "Ben (Operator)",
+          humanGateRequired: true
         }
       : {
           rank: 2,
           title: "Run localhost proof on current branch",
           why: "Confirms the snapshot still builds and previews before directing crew.",
-          agent: "Maker / Dink",
-          benMustApprove: false
+          owner: "Maker / Dink",
+          humanGateRequired: false
         };
 
   const step3: NextStep = petraPending
@@ -249,15 +286,15 @@ export function buildNextSteps(input: {
         rank: 3,
         title: "Send or answer Petra synthesis / GO-NO-GO packet",
         why: "Comptroller verdict gates production-facing moves.",
-        agent: "Petra (Comptroller)",
-        benMustApprove: true
+        owner: "Petra (Comptroller)",
+        humanGateRequired: true
       }
     : {
         rank: 3,
         title: "Review effective gate and redirect if stale",
         why: `Gate ${input.effectiveGate} may need Operator APPROVE / REDIRECT / DEFER.`,
-        agent: "Ben + Speaker (diagnosis)",
-        benMustApprove: true
+        owner: "Ben (Operator)",
+        humanGateRequired: true
       };
 
   return [step1, step2, step3];

@@ -6,21 +6,33 @@ import path from "node:path";
 import "server-only";
 
 import {
+  buildAllClear,
+  buildNeedsYouNow,
+  buildSinceLastVisit,
+  buildSquibbCue,
+  buildSystemPosture,
+  buildWorkItems,
+  type AllClearState,
+  type NeedsYouNow,
+  type SinceLastVisit,
+  type SoleDashV12View,
+  type SquibbCue,
+  type SystemPosture,
+  type WorkItem
+} from "@/lib/soledash/v12-workflow";
+import {
   buildConcerns,
   buildLastWorkedHere,
   buildMachineCard,
   buildNextSteps,
   buildUrgentGates,
   readPreviousSession,
+  readPreviousVisit,
   snapshotCurrentSession,
-  STACK_BOUNDARIES,
   summarizeCrew,
-  type Concern,
+  writeVisitSnapshot,
   type LastWorkedHere,
-  type MachineCard,
-  type NextStep,
-  type StackBoundary,
-  type UrgentGate
+  type MachineCard
 } from "@/lib/soledash/workflow";
 
 const ROOT = process.cwd();
@@ -52,23 +64,19 @@ export type CrewBlock = {
 };
 
 export type SoleDashData = {
-  version: "v1.1";
+  version: "v1.2";
   machineCard: MachineCard;
   lastWorkedHere: LastWorkedHere;
-  nextSteps: NextStep[];
-  concerns: Concern[];
-  urgentGates: UrgentGate[];
-  humanGateLabels: readonly string[];
+  needsYouNow: NeedsYouNow | null;
+  posture: SystemPosture;
+  sinceLastVisit: SinceLastVisit;
+  workItems: WorkItem[];
+  squibb: SquibbCue | null;
+  allClear: AllClearState | null;
   crew: CrewBlock[];
   outbox: HandoffEntry[];
   inbox: HandoffEntry[];
   receipts: HandoffEntry[];
-  stackBoundaries: StackBoundary[];
-  plumbing: {
-    foreman: string;
-    gimpdash: string;
-    speaker: string;
-  };
   sources: { path: string; loaded: boolean }[];
 };
 
@@ -254,23 +262,6 @@ function parseMission(nextAction: string | null): { title: string; why: string; 
   return { title: primary, why, hardStops };
 }
 
-function parseMarkdownBullets(section: string | null | undefined): string[] {
-  if (!section) return [];
-  return section
-    .split("\n")
-    .map((line) => line.replace(/^-\s+/, "").trim())
-    .filter((line) => line.length > 0 && !line.startsWith("#"));
-}
-
-function readLastSuccess(): LocalhostStatusRecord | null {
-  try {
-    const raw = JSON.parse(fs.readFileSync(STATUS_FILE, "utf8")) as { lastSuccess?: LocalhostStatusRecord };
-    return raw.lastSuccess ?? null;
-  } catch {
-    return null;
-  }
-}
-
 function writeLastSuccess(record: LocalhostStatusRecord) {
   try {
     fs.mkdirSync(STATUS_DIR, { recursive: true });
@@ -345,6 +336,15 @@ function findStaleOutbox(): HandoffEntry | null {
   return all.find((item) => new Date(item.modifiedAt).getTime() < weekAgo) ?? null;
 }
 
+function petraPending(nextAction: string | null): boolean {
+  if (!nextAction) return false;
+  return (
+    /TO_PETRA.*unsent|unsent.*TO_PETRA|Petra — pending|Petra synthesis packet pending/i.test(
+      nextAction
+    ) || (nextAction.includes("TO_PETRA") && /pending|unsent|unanswered/i.test(nextAction))
+  );
+}
+
 export async function loadSoleDashData(): Promise<SoleDashData> {
   const nextAction = readRepoFile("foreman/NEXT_ACTION.md");
   const humanGates = readRepoFile("foreman/HUMAN_GATES.md");
@@ -412,15 +412,6 @@ export async function loadSoleDashData(): Promise<SoleDashData> {
     latestReceipt
   });
 
-  snapshotCurrentSession({
-    task: missionParsed.title,
-    tool: lastWorkedHere.tool,
-    commit: `${commit.slice(0, 12)} — ${commitSubject}`,
-    receipt: latestReceipt?.name ?? null,
-    status: lastWorkedHere.status,
-    branch
-  });
-
   const nextSteps = buildNextSteps({
     missionTitle: missionParsed.title,
     missionWhy: missionParsed.why,
@@ -451,24 +442,83 @@ export async function loadSoleDashData(): Promise<SoleDashData> {
     nextAction
   });
 
-  return {
-    version: "v1.1",
-    machineCard,
-    lastWorkedHere,
+  const previousVisit = readPreviousVisit();
+  let commitDelta = 0;
+  if (previousVisit && previousVisit.commit !== commit) {
+    const count = git(["rev-list", "--count", `${previousVisit.commit}..${commit}`]);
+    const n = Number.parseInt(count, 10);
+    commitDelta = Number.isFinite(n) ? n : 1;
+  }
+
+  const sinceLastVisit = buildSinceLastVisit({
+    previousVisit,
+    currentCommit: commit,
+    receiptCount: receipts.length,
+    urgentGateCount: urgentGates.length,
+    commitDelta
+  });
+
+  const needsYouNow = buildNeedsYouNow({
+    unpushedCount: unpushed,
+    petraPending: petraPending(nextAction),
+    missionTitle: missionParsed.title,
+    missionWhy: missionParsed.why,
+    urgentGates
+  });
+
+  const posture = buildSystemPosture({ needsYouNow, machineCard, concerns, urgentGates });
+
+  const crew = buildCrewBlocks(cousins, nextAction);
+  const outbox = listOutbox((n) => /^TO_[A-Z]/i.test(n) && !n.startsWith("OPEN_"), 8);
+  const inbox = listInbox((n) => !["README.md", "FROM_CURSOR_READ_ME.md"].includes(n), 8);
+
+  const workItems = buildWorkItems({
+    needsYouNow,
     nextSteps,
     concerns,
     urgentGates,
-    humanGateLabels: ["APPROVE", "REDIRECT", "DEFER"],
-    crew: buildCrewBlocks(cousins, nextAction),
-    outbox: listOutbox((n) => /^TO_[A-Z]/i.test(n) && !n.startsWith("OPEN_"), 8),
-    inbox: listInbox((n) => !["README.md", "FROM_CURSOR_READ_ME.md"].includes(n), 8),
+    crew,
+    outbox,
+    inbox,
     receipts,
-    stackBoundaries: STACK_BOUNDARIES,
-    plumbing: {
-      foreman: "http://127.0.0.1:4317",
-      gimpdash: "http://127.0.0.1:4317/#gimpdash",
-      speaker: "http://127.0.0.1:4317/#gd-speaker"
-    },
+    workingTreeDirty,
+    unpushedCount: unpushed,
+    missionTitle: missionParsed.title
+  });
+
+  const squibb = buildSquibbCue({ posture, concerns, needsYouNow, nextSteps, machineCard });
+  const allClear = buildAllClear({ needsYouNow, posture, crew });
+
+  writeVisitSnapshot({
+    timestamp: new Date().toISOString(),
+    commit,
+    receiptCount: receipts.length,
+    urgentGateCount: urgentGates.length
+  });
+
+  snapshotCurrentSession({
+    task: missionParsed.title,
+    tool: lastWorkedHere.tool,
+    commit: `${commit.slice(0, 12)} — ${commitSubject}`,
+    receipt: latestReceipt?.name ?? null,
+    status: lastWorkedHere.status,
+    branch
+  });
+
+  return {
+    version: "v1.2",
+    machineCard,
+    lastWorkedHere,
+    needsYouNow,
+    posture,
+    sinceLastVisit,
+    workItems,
+    squibb,
+    allClear,
+    crew,
+    outbox,
+    inbox,
+    receipts,
     sources: [
       { path: "foreman/NEXT_ACTION.md", loaded: Boolean(nextAction) },
       { path: "foreman/ACTIVE_AGENT.md", loaded: Boolean(activeAgent) },
@@ -480,3 +530,5 @@ export async function loadSoleDashData(): Promise<SoleDashData> {
     ]
   };
 }
+
+export type { SoleDashV12View };
