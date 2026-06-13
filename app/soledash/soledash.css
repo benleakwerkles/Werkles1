@@ -5,6 +5,152 @@
   font-family: "Segoe UI", system-ui, sans-serif;
 }
 
+.sole-dash-layout a {
+  color: #8fd4ff;
+}
+
+.soledash-top-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.soledash-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.soledash-step {
+  background: #0f1419;
+  border: 1px solid #243040;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.soledash-step-head {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.soledash-step-rank {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #f4c56a;
+}
+
+.soledash-step h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.soledash-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  margin-right: 0.35rem;
+}
+
+.soledash-badge--high {
+  background: #4a2020;
+  color: #f0a8a8;
+}
+
+.soledash-badge--medium {
+  background: #3a3018;
+  color: #f0c878;
+}
+
+.soledash-badge--low {
+  background: #1a3028;
+  color: #8fd4a0;
+}
+
+.soledash-concerns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.soledash-concerns li {
+  margin-bottom: 0.65rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.soledash-concerns strong {
+  display: block;
+  color: #e8edf2;
+}
+
+.soledash-concerns span:last-child {
+  color: #9aabb8;
+}
+
+.soledash-warnings {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  color: #f0a878;
+  font-size: 0.82rem;
+}
+
+.soledash-crew-summary {
+  color: #8fd4ff;
+  font-size: 0.82rem;
+  margin: 0 0 0.35rem;
+}
+
+.soledash-details summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.soledash-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.soledash-details--section {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #243040;
+}
+
+.soledash-list--compact li {
+  margin-bottom: 0.45rem;
+  padding-bottom: 0.45rem;
+}
+
+.soledash-excerpt--copy {
+  max-height: 6rem;
+  user-select: all;
+}
+
+.soledash-stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.soledash-stack li {
+  margin-bottom: 0.5rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.soledash-stack strong {
+  color: #f4c56a;
+}
+
+
 .sole-dash-layout body {
   margin: 0;
 }

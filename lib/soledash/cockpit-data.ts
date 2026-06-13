@@ -5,6 +5,24 @@ import path from "node:path";
 
 import "server-only";
 
+import {
+  buildConcerns,
+  buildLastWorkedHere,
+  buildMachineCard,
+  buildNextSteps,
+  buildUrgentGates,
+  readPreviousSession,
+  snapshotCurrentSession,
+  STACK_BOUNDARIES,
+  summarizeCrew,
+  type Concern,
+  type LastWorkedHere,
+  type MachineCard,
+  type NextStep,
+  type StackBoundary,
+  type UrgentGate
+} from "@/lib/soledash/workflow";
+
 const ROOT = process.cwd();
 const STATUS_DIR = path.join(ROOT, "foreman", "soledash");
 const STATUS_FILE = path.join(STATUS_DIR, "LAST_LOCALHOST_STATUS.json");
@@ -14,6 +32,7 @@ export type HandoffEntry = {
   relPath: string;
   modifiedAt: string;
   excerpt: string;
+  fullText: string;
 };
 
 export type LocalhostStatusRecord = {
@@ -27,44 +46,24 @@ export type LocalhostStatusRecord = {
 export type CrewBlock = {
   id: string;
   label: string;
+  summary: string;
   note: string;
   outbox: HandoffEntry[];
 };
 
 export type SoleDashData = {
-  readback: {
-    machine: string;
-    werklesName: string;
-    repo: string;
-    branch: string;
-    commit: string;
-    commitSubject: string;
-    workingTree: string;
-    executionContext: string;
-  };
-  mission: {
-    effectiveGate: string;
-    title: string;
-    why: string;
-    hardStops: string[];
-  };
-  humanGate: {
-    effectiveGate: string;
-    labels: readonly string[];
-    note: string;
-    conflictPrecedence: string[];
-    benMustApprove: string[];
-    activeConditions: string[];
-    doctrineRef: string;
-  };
-  localhost: {
-    current: LocalhostStatusRecord;
-    lastSuccess: LocalhostStatusRecord | null;
-  };
+  version: "v1.1";
+  machineCard: MachineCard;
+  lastWorkedHere: LastWorkedHere;
+  nextSteps: NextStep[];
+  concerns: Concern[];
+  urgentGates: UrgentGate[];
+  humanGateLabels: readonly string[];
   crew: CrewBlock[];
   outbox: HandoffEntry[];
   inbox: HandoffEntry[];
   receipts: HandoffEntry[];
+  stackBoundaries: StackBoundary[];
   plumbing: {
     foreman: string;
     gimpdash: string;
@@ -147,7 +146,7 @@ function git(args: string[]): string {
   }
 }
 
-function excerpt(text: string, max = 220): string {
+function excerpt(text: string, max = 160): string {
   const flat = text.replace(/\r\n/g, "\n").trim();
   const slice = flat.slice(0, max);
   return flat.length > max ? `${slice}…` : slice;
@@ -172,7 +171,8 @@ function listHandoffsInDir(
         name,
         relPath: `${relPrefix}/${name}`,
         modifiedAt: stat.mtime.toISOString(),
-        excerpt: excerpt(raw)
+        excerpt: excerpt(raw),
+        fullText: raw
       };
     })
     .sort((a, b) => b.modifiedAt.localeCompare(a.modifiedAt))
@@ -197,20 +197,12 @@ function listInbox(filter: (name: string) => boolean, limit = 6): HandoffEntry[]
   );
 }
 
-function listAllOutbox(limit = 10): HandoffEntry[] {
-  return listOutbox((name) => /^TO_[A-Z]/i.test(name) && !name.startsWith("OPEN_"), limit);
-}
-
-function listAllInbox(limit = 10): HandoffEntry[] {
-  return listInbox((name) => !["README.md", "FROM_CURSOR_READ_ME.md"].includes(name), limit);
-}
-
 function listReceipts(limit = 10): HandoffEntry[] {
   const inbox = listInbox((name) => /^FROM_/i.test(name), limit);
   const processed = listHandoffsInDir(
     path.join(ROOT, "foreman", "handoffs", "inbox", "processed"),
     "foreman/handoffs/inbox/processed",
-    (name) => /^FROM_/i.test(name) || name.includes("__FROM_"),
+    (name) => name.includes("__FROM_") || name.endsWith(".md"),
     limit
   );
   return [...inbox, ...processed]
@@ -227,10 +219,10 @@ function parseWerklesMachine(topology: string | null): string {
   return host;
 }
 
-function parseEffectiveGate(nextAction: string | null): string {
-  if (!nextAction) return "UNKNOWN";
-  const match = nextAction.match(/\*\*Effective gate:\*\*\s*`?\[([^\]]+)\]`?/i);
-  return match?.[1]?.trim() ?? "UNKNOWN";
+function parseEffectiveGate(nextAction: string | null, activeAgent: string | null): string {
+  const fromNext = nextAction?.match(/\*\*Effective gate:\*\*\s*`?\[([^\]]+)\]`?/i)?.[1]?.trim();
+  const fromActive = activeAgent?.match(/## Effective gate[\s\S]*?`?\[([^\]]+)\]`?/i)?.[1]?.trim();
+  return fromNext ?? fromActive ?? "UNKNOWN";
 }
 
 function parseMission(nextAction: string | null): { title: string; why: string; hardStops: string[] } {
@@ -270,30 +262,6 @@ function parseMarkdownBullets(section: string | null | undefined): string[] {
     .filter((line) => line.length > 0 && !line.startsWith("#"));
 }
 
-function parseNumberedList(section: string | null | undefined): string[] {
-  if (!section) return [];
-  return section
-    .split("\n")
-    .map((line) => line.replace(/^\d+\.\s+/, "").trim())
-    .filter((line) => line.length > 0 && !line.startsWith("#"));
-}
-
-function parseHumanGateContext(humanGates: string | null, nextAction: string | null, effectiveGate: string) {
-  const precedenceBlock = humanGates?.match(/## Conflict Precedence[\s\S]*?(?=##|$)/i)?.[0];
-  const approveBlock = humanGates?.match(/## Ben Must Approve[\s\S]*?(?=##|$)/i)?.[0];
-  const conditionsBlock = nextAction?.match(/## Conditions \(active\)[\s\S]*?(?=##|$)/i)?.[0];
-
-  return {
-    effectiveGate,
-    labels: ["APPROVE", "REDIRECT", "DEFER"],
-    note: "v1 read-only. Buttons label Operator intent — write-back wiring is a later gate.",
-    conflictPrecedence: parseNumberedList(precedenceBlock),
-    benMustApprove: parseMarkdownBullets(approveBlock),
-    activeConditions: parseMarkdownBullets(conditionsBlock),
-    doctrineRef: "foreman/HUMAN_GATES.md"
-  };
-}
-
 function readLastSuccess(): LocalhostStatusRecord | null {
   try {
     const raw = JSON.parse(fs.readFileSync(STATUS_FILE, "utf8")) as { lastSuccess?: LocalhostStatusRecord };
@@ -312,15 +280,14 @@ function writeLastSuccess(record: LocalhostStatusRecord) {
       "utf8"
     );
   } catch {
-    /* local status file is best-effort */
+    /* best-effort */
   }
 }
 
-async function probeLocalhost(): Promise<{ current: LocalhostStatusRecord; lastSuccess: LocalhostStatusRecord | null }> {
+async function probeLocalhost(): Promise<LocalhostStatusRecord> {
   const port = process.env.PORT?.trim() || "3000";
   const url = `http://127.0.0.1:${port}/`;
   const checkedAt = new Date().toISOString();
-  const lastSuccess = readLastSuccess();
 
   try {
     const res = await fetch(url, {
@@ -337,12 +304,9 @@ async function probeLocalhost(): Promise<{ current: LocalhostStatusRecord; lastS
       httpStatus: res.status
     };
     if (ok) writeLastSuccess(current);
-    return { current, lastSuccess: ok ? current : lastSuccess };
+    return current;
   } catch {
-    return {
-      current: { ok: false, port, checkedAt, url: `http://localhost:${port}/`, httpStatus: 0 },
-      lastSuccess
-    };
+    return { ok: false, port, checkedAt, url: `http://localhost:${port}/`, httpStatus: 0 };
   }
 }
 
@@ -358,13 +322,27 @@ function buildCrewBlocks(cousins: string | null, nextAction: string | null): Cre
           ? cousins?.match(/LOCAL HANDS READBACK[\s\S]*?(?=##|$)/i)?.[0]
           : null;
 
+    const outbox = listOutbox((name) => def.outboxFilter.test(name), 3);
     return {
       id: def.id,
       label: def.label,
-      note: excerpt(nextSection ?? protocolSection ?? def.fallbackNote, 200),
-      outbox: listOutbox((name) => def.outboxFilter.test(name), 3)
+      summary: summarizeCrew(outbox),
+      note: excerpt(nextSection ?? protocolSection ?? def.fallbackNote, 140),
+      outbox
     };
   });
+}
+
+function unpushedCommitCount(): number {
+  const count = git(["rev-list", "--count", "@{u}..HEAD"]);
+  const n = Number.parseInt(count, 10);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function findStaleOutbox(): HandoffEntry | null {
+  const all = listOutbox((n) => /^TO_PETRA_/i.test(n), 5);
+  const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  return all.find((item) => new Date(item.modifiedAt).getTime() < weekAgo) ?? null;
 }
 
 export async function loadSoleDashData(): Promise<SoleDashData> {
@@ -372,44 +350,120 @@ export async function loadSoleDashData(): Promise<SoleDashData> {
   const humanGates = readRepoFile("foreman/HUMAN_GATES.md");
   const topology = readRepoFile("foreman/MACHINE_TOPOLOGY.md");
   const cousins = readRepoFile("foreman/AI_COUSINS_PROTOCOL.md");
+  const activeAgent = readRepoFile("foreman/ACTIVE_AGENT.md");
 
   const branch = git(["branch", "--show-current"]) || "UNKNOWN";
   const commit = git(["rev-parse", "HEAD"]) || "UNKNOWN";
   const commitSubject = git(["log", "-1", "--format=%s"]) || "UNKNOWN";
+  const commitDate = git(["log", "-1", "--format=%cI"]) || "";
   const porcelain = git(["status", "--porcelain"]);
-  const workingTree = porcelain
+  const workingTreeDirty = Boolean(porcelain);
+  const workingTree = workingTreeDirty
     ? `dirty (${porcelain.split("\n").filter(Boolean).length} entries)`
     : "clean";
 
   const localhost = await probeLocalhost();
-  const host = os.hostname();
+  const hostname = os.hostname();
   const werklesName = parseWerklesMachine(topology);
   const missionParsed = parseMission(nextAction);
-  const effectiveGate = parseEffectiveGate(nextAction);
+  const effectiveGate = parseEffectiveGate(nextAction, activeAgent);
+  const gateFromActive = activeAgent?.match(/## Effective gate[\s\S]*?`?\[([^\]]+)\]`?/i)?.[1]?.trim();
+  const gateFromNext = nextAction?.match(/\*\*Effective gate:\*\*\s*`?\[([^\]]+)\]`?/i)?.[1]?.trim();
+  const gateMismatch = Boolean(gateFromActive && gateFromNext && gateFromActive !== gateFromNext);
+
+  const benMustApprove =
+    humanGates?.match(/## Ben Must Approve[\s\S]*?(?=##|$)/i)?.[0].split("\n")
+      .filter((l) => l.startsWith("- "))
+      .map((l) => l.replace(/^-\s+/, "").trim()) ?? [];
+
+  const activeConditions =
+    nextAction?.match(/## Conditions \(active\)[\s\S]*?(?=##|$)/i)?.[0].split("\n")
+      .filter((l) => l.startsWith("- "))
+      .map((l) => l.replace(/^-\s+/, "").trim()) ?? [];
+
+  const receipts = listReceipts(12);
+  const latestReceipt = receipts[0] ?? null;
+  const unpushed = unpushedCommitCount();
+  const executionContext =
+    process.env.EXECUTION_CONTEXT?.trim() ||
+    (process.env.CURSOR_CLOUD === "1" ? "CURSOR_CLOUD_CONTAINER" : "LOCAL_SALLY_WINDOWS");
+
+  const machineCard = buildMachineCard({
+    werklesName,
+    hostname,
+    repo: ROOT,
+    branch,
+    commit,
+    commitSubject,
+    workingTree,
+    workingTreeDirty,
+    executionContext,
+    localhost,
+    topology,
+    expectedBranch: "snapshot/sally-good-werkles-2026-06-12"
+  });
+
+  const lastWorkedHere = buildLastWorkedHere({
+    previousSession: readPreviousSession(),
+    activeAgent,
+    commit,
+    commitSubject,
+    commitDate,
+    latestReceipt
+  });
+
+  snapshotCurrentSession({
+    task: missionParsed.title,
+    tool: lastWorkedHere.tool,
+    commit: `${commit.slice(0, 12)} — ${commitSubject}`,
+    receipt: latestReceipt?.name ?? null,
+    status: lastWorkedHere.status,
+    branch
+  });
+
+  const nextSteps = buildNextSteps({
+    missionTitle: missionParsed.title,
+    missionWhy: missionParsed.why,
+    workingTreeDirty,
+    unpushedCount: unpushed,
+    effectiveGate,
+    nextAction
+  });
+
+  const concerns = buildConcerns({
+    workingTreeDirty,
+    unpushedCount: unpushed,
+    branch,
+    werklesName,
+    hostname,
+    topology,
+    localhostOk: localhost.ok,
+    executionContext,
+    machineWarnings: machineCard.warnings,
+    staleOutbox: findStaleOutbox(),
+    gateMismatch
+  });
+
+  const urgentGates = buildUrgentGates({
+    hardStops: missionParsed.hardStops,
+    activeConditions,
+    benMustApprove,
+    nextAction
+  });
 
   return {
-    readback: {
-      machine: host,
-      werklesName,
-      repo: ROOT,
-      branch,
-      commit,
-      commitSubject,
-      workingTree,
-      executionContext: "LOCAL_SALLY_WINDOWS"
-    },
-    mission: {
-      effectiveGate,
-      title: missionParsed.title,
-      why: missionParsed.why,
-      hardStops: missionParsed.hardStops
-    },
-    humanGate: parseHumanGateContext(humanGates, nextAction, effectiveGate),
-    localhost,
+    version: "v1.1",
+    machineCard,
+    lastWorkedHere,
+    nextSteps,
+    concerns,
+    urgentGates,
+    humanGateLabels: ["APPROVE", "REDIRECT", "DEFER"],
     crew: buildCrewBlocks(cousins, nextAction),
-    outbox: listAllOutbox(12),
-    inbox: listAllInbox(10),
-    receipts: listReceipts(12),
+    outbox: listOutbox((n) => /^TO_[A-Z]/i.test(n) && !n.startsWith("OPEN_"), 8),
+    inbox: listInbox((n) => !["README.md", "FROM_CURSOR_READ_ME.md"].includes(n), 8),
+    receipts,
+    stackBoundaries: STACK_BOUNDARIES,
     plumbing: {
       foreman: "http://127.0.0.1:4317",
       gimpdash: "http://127.0.0.1:4317/#gimpdash",
@@ -417,12 +471,12 @@ export async function loadSoleDashData(): Promise<SoleDashData> {
     },
     sources: [
       { path: "foreman/NEXT_ACTION.md", loaded: Boolean(nextAction) },
+      { path: "foreman/ACTIVE_AGENT.md", loaded: Boolean(activeAgent) },
       { path: "foreman/HUMAN_GATES.md", loaded: Boolean(humanGates) },
       { path: "foreman/MACHINE_TOPOLOGY.md", loaded: Boolean(topology) },
       { path: "foreman/handoffs/inbox/", loaded: fs.existsSync(path.join(ROOT, "foreman/handoffs/inbox")) },
       { path: "foreman/handoffs/outbox/", loaded: fs.existsSync(path.join(ROOT, "foreman/handoffs/outbox")) },
-      { path: "foreman/AI_COUSINS_PROTOCOL.md", loaded: Boolean(cousins) },
-      { path: "foreman/EXECUTION_CONTEXT_RULES.md", loaded: Boolean(readRepoFile("foreman/EXECUTION_CONTEXT_RULES.md")) }
+      { path: "foreman/AI_COUSINS_PROTOCOL.md", loaded: Boolean(cousins) }
     ]
   };
 }

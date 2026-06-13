@@ -1,2 +1,3 @@
-# Runtime localhost probe written by SoleDash v1 (local machine state).
+# Runtime local machine state (SoleDash v1+).
 LAST_LOCALHOST_STATUS.json
+OPERATOR_SESSION.json
