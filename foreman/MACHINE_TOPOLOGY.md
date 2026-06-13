@@ -12,14 +12,102 @@ Status: cockpit reference — **machine registry + forge roles**. Pairs with `fo
 
 ---
 
+## Canonical Workstation Software Stack
+
+Required on Aeye workstations:
+
+- Cursor
+- Git
+- Node LTS
+- GitHub Desktop
+- Microsoft PowerToys
+- FancyZones
+- PowerToys Run
+- Text Extractor
+- Always On Top
+- Keyboard Manager
+- File Locksmith
+- Peek
+- Hosts File Editor
+- Mouse Without Borders when useful
+- Google Drive for Desktop
+
+## Google Drive Rules
+
+Google Drive = Warehouse.
+
+GitHub Repo = Factory.
+
+Drive stores documents.
+
+Git stores code.
+
+Do not:
+
+- put the Werkles repo inside Google Drive
+- put Google Drive inside the Werkles repo
+- sync `node_modules`
+- sync `.git`
+- sync `.next`
+- sync local build artifacts
+- mix company archives with code workspaces
+
+Recommended structure:
+
+```text
+Code:
+C:\Users\<user>\Desktop\github\Werkles
+
+Documents:
+Google Drive\Werkles
+Google Drive\Kind Sir
+```
+
+## Company Drive Structure
+
+Werkles Drive:
+
+- VDR
+- Speaker
+- Bellows
+- Images
+- Legal
+- Research
+- Handoffs
+- Investor Materials
+
+Kind Sir Drive:
+
+- Accounting
+- Contracts
+- Operations
+- HR
+- Historical Records
+
+## Machine Roles
+
+- Betsy: Primary Forge
+- Doss: Mobile/Mirror Forge
+- Sally: Archive / Snapshot Surface
+
+## Guardrails
+
+No workstation may:
+
+- place repos inside Drive
+- place Drive inside repos
+- mix company archives with code workspaces
+
+---
+
 ## Machine registry
 
 | Human name | Windows hostname | Primary repo path | Current branch | Current commit | Forge role | Localhost | Evidence |
 |------------|------------------|-------------------|----------------|----------------|------------|-----------|----------|
-| **Sally** | `DESKTOP-SJSJMNK` | `C:\Users\benle\Desktop\github\Werkles` | `rescue/sally-dirty-worktree-2026-06-01` | `8ba905b` | **mirror forge** | `:3000` running on host (live) | Live readback 2026-06-12 on `DESKTOP-SJSJMNK`; historical: `foreman/reviews/WORKTREE_STABILIZATION_2026-06-01.md`, `FROM_DINK_BETSY_SETUP_RECORD_V1.md` |
-| **Sally** *(second surface, same host)* | `DESKTOP-SJSJMNK` | `C:\Dev\Werkles` | `snapshot/sally-good-werkles-2026-06-12` | `437792b` | **mirror forge** (snapshot lane) | shares host `:3000` (live) | Live readback 2026-06-12 on `DESKTOP-SJSJMNK` |
+| **Sally** | `DESKTOP-SJSJMNK` | `C:\Users\benle\Desktop\github\Werkles` | `rescue/sally-dirty-worktree-2026-06-01` | `8ba905b` | **archive/snapshot surface** | `:3000` running on host (live) | Live readback 2026-06-12 on `DESKTOP-SJSJMNK`; historical: `foreman/reviews/WORKTREE_STABILIZATION_2026-06-01.md`, `FROM_DINK_BETSY_SETUP_RECORD_V1.md` |
+| **Sally** *(second surface, same host)* | `DESKTOP-SJSJMNK` | `C:\Dev\Werkles` | `snapshot/sally-good-werkles-2026-06-12` | `437792b` | **archive/snapshot surface** (snapshot lane) | shares host `:3000` (live) | Live readback 2026-06-12 on `DESKTOP-SJSJMNK` |
 | **Betsy** | `DESKTOP-KTBH0LA` | **UNKNOWN** | **UNKNOWN** | **UNKNOWN** | **primary forge** (intended) | **UNKNOWN** | Operator prior readback only — **no live readback this session** |
-| **Doss** | `BLDER` | `C:\Users\BenLeak\Desktop\github\Werkles` | `snapshot/sally-good-werkles-2026-06-12` | `8411561` | **mirror/mobile forge** | `/soledash` → Foreman `:4317` (200 OK) | Live readback 2026-06-12 on hostname `BLDER`; formerly referenced as BLDer; launcher `C:\Users\BenLeak\Desktop\soledash.cmd` |
+| **Doss** | `BLDER` | `C:\Users\BenLeak\Desktop\github\Werkles` | `snapshot/sally-good-werkles-2026-06-12` | `8411561` | **mobile/mirror forge** | `/soledash` → Foreman `:4317` (200 OK) | Live readback 2026-06-12 on hostname `BLDER`; formerly referenced as BLDer; launcher `C:\Users\BenLeak\Desktop\soledash.cmd` |
 | **Atlas** | **UNKNOWN** | vault path per `foreman/ATLAS_MACHINE_PLAN.md` | n/a (not a git writer) | n/a | **archive forge** | n/a | Plan doc only — no live readback recorded |
 
 ### Sally work-surface detail (live 2026-06-12, host `DESKTOP-SJSJMNK`)
@@ -46,7 +134,7 @@ Intended primary path per Dink critical-path note: `C:\Users\benle\Desktop\githu
 | Primary repo path | `C:\Users\BenLeak\Desktop\github\Werkles` |
 | Branch | `snapshot/sally-good-werkles-2026-06-12` |
 | Commit | `8411561` |
-| Forge role | **mirror/mobile forge** |
+| Forge role | **mobile/mirror forge** |
 | Launcher | `C:\Users\BenLeak\Desktop\soledash.cmd` |
 | Localhost | `http://localhost:3000/soledash` redirects to Foreman cockpit at `:4317` — **200 OK** |
 
@@ -69,15 +157,15 @@ Intended primary path per Dink critical-path note: `C:\Users\benle\Desktop\githu
 | Role | Meaning | Typical machine |
 |------|---------|-----------------|
 | **primary forge** | Main app/UI build, local dev server, primary commits | Betsy (when live-verified) |
-| **mirror forge** | Relay/coordination, rescue lanes, snapshot lanes, crew bay | Sally |
-| **mirror/mobile forge** | Portable mirror surface; snapshot lane + SoleDash launcher | Doss |
+| **mobile/mirror forge** | Portable mirror surface; snapshot lane + SoleDash launcher | Doss |
+| **archive/snapshot surface** | Archive work, snapshots, historical records, non-primary local surfaces | Sally |
 | **archive forge** | Backups, asset vault, non-critical jobs — not canon writer | Atlas |
 
 Legacy permission matrix (unchanged intent):
 
 | Name | Source of truth? | Active writer? | May deploy/push/SQL/secrets/money? |
 |------|------------------|----------------|------------------------------------|
-| **Sally** | No (mirrors repo) | Only when named in `foreman/ACTIVE_AGENT.md` | No automatically — human gates apply |
+| **Sally** | No (archive/snapshot surface) | Only when named in `foreman/ACTIVE_AGENT.md` | No automatically — human gates apply |
 | **Betsy** | No (mirrors repo) | Yes, when named active writer | Push/deploy/SQL/secrets remain human gates |
 | **Doss** | No (mirrors repo) | Snapshot lane when named | No automatically — human gates apply |
 | **Atlas** | **No** | **No** | **No** |

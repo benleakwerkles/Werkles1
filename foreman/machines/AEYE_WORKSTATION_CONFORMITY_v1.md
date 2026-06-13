@@ -1,14 +1,27 @@
-﻿# Aeye Workstation Conformity v1
+﻿# Aeye Workstation Standard v1.1 - Google Drive Integration
 
 Date: 2026-06-13
-Mission: Aeye Workstation Conformity Build v1
+Mission: Aeye Workstation Standard v1.1 - Google Drive Integration
 Scope: Infrastructure only. No Werkles app code, Node/npm, homepage, SoleDash, Speaker, matching engine, BIOS, drivers, paid apps, account logins, or security settings were changed.
 
-## Standard
+## Canonical Workstation Software Stack
 
-Standard utilities:
+Required:
 
+- Cursor
+- Git
+- Node LTS
+- GitHub Desktop
 - Microsoft PowerToys
+- FancyZones
+- PowerToys Run
+- Text Extractor
+- Always On Top
+- Keyboard Manager
+- File Locksmith
+- Peek
+- Hosts File Editor
+- Mouse Without Borders when useful
 - Google Drive for Desktop
 
 Required PowerToys baseline:
@@ -23,21 +36,71 @@ Required PowerToys baseline:
 - Hosts File Editor
 - Mouse Without Borders only if needed/available and explicitly paired across machines
 
-Required Google Drive for Desktop baseline:
+## Google Drive Rules
+
+Google Drive = Warehouse.
+
+GitHub Repo = Factory.
+
+Drive stores documents.
+
+Git stores code.
 
 - Use streaming by default.
 - Pin active folders offline only when needed.
 - Do not mirror entire business drives unless explicitly approved.
 - Do not place the Werkles repo inside Google Drive.
+- Do not place Google Drive inside the Werkles repo.
 - Do not place Kind Sir repo or archive folders inside the Werkles repo.
 - Do not sync `node_modules`, `.next`, `.git`, or local dev artifacts.
 - Keep Drive content separate from code workspaces.
+- Keep company archives separate from code workspaces.
 
-Machine standard:
+Recommended structure:
 
-- Betsy = primary forge
-- Doss = mobile/mirror forge
-- Sally = archive/snapshot surface
+```text
+Code:
+C:\Users\<user>\Desktop\github\Werkles
+
+Documents:
+Google Drive\Werkles
+Google Drive\Kind Sir
+```
+
+## Company Drive Structure
+
+Werkles Drive:
+
+- VDR
+- Speaker
+- Bellows
+- Images
+- Legal
+- Research
+- Handoffs
+- Investor Materials
+
+Kind Sir Drive:
+
+- Accounting
+- Contracts
+- Operations
+- HR
+- Historical Records
+
+## Machine Roles
+
+- Betsy: Primary Forge
+- Doss: Mobile/Mirror Forge
+- Sally: Archive / Snapshot Surface
+
+## Guardrails
+
+No workstation may:
+
+- place repos inside Drive
+- place Drive inside repos
+- mix company archives with code workspaces
 
 ## Summary
 
@@ -117,6 +180,16 @@ Machine standard:
 - Reboot needed: no reboot indicated by installer or verification
 - Differences from other machines: Doss is the only machine live-conformed in this session; Betsy and Sally remain pending local hands
 
+### Sally
+
+- PowerToys installed: unknown
+- Version: unknown
+- Enabled modules: unknown
+- Missing modules: unknown
+- Admin prompts: none from this session
+- Reboot needed: unknown
+- Differences from other machines: cannot compare until Sally-local readback is performed
+
 ## Google Drive for Desktop Verification
 
 ### Betsy
@@ -145,16 +218,6 @@ Machine standard:
 - Offline pinning: active folders only when needed
 - Drive/code separation: must keep Drive content separate from code workspaces
 - Differences from other machines: pending Sally-local readback
-
-### Sally
-
-- PowerToys installed: unknown
-- Version: unknown
-- Enabled modules: unknown
-- Missing modules: unknown
-- Admin prompts: none from this session
-- Reboot needed: unknown
-- Differences from other machines: cannot compare until Sally-local readback is performed
 
 ## Missing Modules Matrix
 

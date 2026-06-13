@@ -49,6 +49,88 @@ Full rules and the merge/push/deploy evidence-locality requirement: `foreman/EXE
 | Bean @ Sally | Hostile audit / failure modes |
 | Petra | Synthesis / red-team / GO-NO-GO |
 
+## Canonical Workstation Software Stack
+
+Required on Aeye workstations:
+
+- Cursor
+- Git
+- Node LTS
+- GitHub Desktop
+- Microsoft PowerToys
+- FancyZones
+- PowerToys Run
+- Text Extractor
+- Always On Top
+- Keyboard Manager
+- File Locksmith
+- Peek
+- Hosts File Editor
+- Mouse Without Borders when useful
+- Google Drive for Desktop
+
+Machine roles:
+
+- Betsy: Primary Forge
+- Doss: Mobile/Mirror Forge
+- Sally: Archive / Snapshot Surface
+
+## Google Drive Rules
+
+Google Drive = Warehouse.
+
+GitHub Repo = Factory.
+
+Drive stores documents.
+
+Git stores code.
+
+Recommended structure:
+
+```text
+Code:
+C:\Users\<user>\Desktop\github\Werkles
+
+Documents:
+Google Drive\Werkles
+Google Drive\Kind Sir
+```
+
+Werkles Drive:
+
+- VDR
+- Speaker
+- Bellows
+- Images
+- Legal
+- Research
+- Handoffs
+- Investor Materials
+
+Kind Sir Drive:
+
+- Accounting
+- Contracts
+- Operations
+- HR
+- Historical Records
+
+## Guardrails
+
+No workstation may:
+
+- place repos inside Drive
+- place Drive inside repos
+- mix company archives with code workspaces
+- put the Werkles repo inside Google Drive
+- put Google Drive inside the Werkles repo
+- sync `node_modules`
+- sync `.git`
+- sync `.next`
+- sync local build artifacts
+
+Google Drive account login, sync scope changes, full business-drive mirroring, or offline pinning broad folders require explicit Operator approval.
+
 ## LOCAL HANDS READBACK (mandatory)
 
 **Hard crew rule.** Not a suggestion.
