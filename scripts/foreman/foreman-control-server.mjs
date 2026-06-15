@@ -444,10 +444,140 @@ function pageHtml() {
 </body></html>`;
 }
 
+// --- Field Mode (mobile) -------------------------------------------------
+// Thumb-first, read-only mobile view answering: what moved, what came back,
+// what needs me, what can I fire next. FIRE has no live relay backend on this
+// build, so it is labeled SIMULATED (no fake action).
+const RELAY_BACKEND_CONNECTED = false; // no relay-courier wired on this branch
+
+function fieldHumanGates() {
+  const out = [];
+  for (const sec of sections) {
+    for (const c of sec.cards) {
+      if (c.gate === GATE.GATE || c.gate === GATE.BLOCKED) {
+        out.push({ name: c.name, purpose: c.purpose, manual: true, status: c.status });
+      }
+    }
+  }
+  return out;
+}
+
+function fieldBlockers() {
+  return statusItems
+    .filter((s) => s.state === STATE.BLOCKED)
+    .map((s) => ({ blocker: s.detail, owner: s.actor, next: "Operator decision — see foreman/NEXT_ACTION.md" }));
+}
+
+function fieldModeHtml() {
+  const fireTag = RELAY_BACKEND_CONNECTED ? "" : ` <span class="fm-sim">SIMULATED</span>`;
+  const relayCards = getOutbox().map((p) => `
+      <div class="fm-card fm-relay">
+        <div class="fm-card-top"><span class="fm-name">${esc(p.subject)}</span>${stateChip(p.state)}</div>
+        <div class="fm-meta">to <b>${esc(p.actor)}</b> · ${fmtTime(p.time)}</div>
+        <div class="fm-actions">
+          <button class="fm-btn fm-fire" onclick="return fmFire(this)" data-name="${esc(p.subject)}">FIRE${fireTag}</button>
+          <button class="fm-btn fm-hold" onclick="return fmHold(this)">HOLD</button>
+          <a class="fm-btn fm-open" href="/receipts" target="_blank" rel="noopener">OPEN RECEIPT</a>
+        </div>
+      </div>`).join("") || `<div class="fm-empty">No active relay cards.</div>`;
+
+  const receipts = getInbox().map((r) => `
+      <div class="fm-card fm-receipt">
+        <div class="fm-card-top"><span class="fm-name">${esc(r.subject)}</span>${stateChip(r.state)}</div>
+        <div class="fm-meta">from <b>${esc(r.actor)}</b> · ${fmtTime(r.time)}</div>
+        <a class="fm-btn fm-open" href="/inbox" target="_blank" rel="noopener">OPEN</a>
+      </div>`).join("") || `<div class="fm-empty">No receipts returned yet.</div>`;
+
+  const gates = fieldHumanGates().map((g) => `
+      <div class="fm-card fm-gate">
+        <div class="fm-card-top"><span class="fm-name">${esc(g.name)}</span><span class="fm-redgate">RED GATE — BEN ONLY</span></div>
+        <div class="fm-meta">${esc(g.purpose)}</div>
+        <div class="fm-meta fm-muted">${esc(g.status || "")}</div>
+      </div>`).join("") || `<div class="fm-empty">No open human gates.</div>`;
+
+  const blockers = fieldBlockers().map((b) => `
+      <div class="fm-card fm-blocker">
+        <div class="fm-name">${esc(b.blocker)}</div>
+        <div class="fm-meta">owner: <b>${esc(b.owner)}</b></div>
+        <div class="fm-meta fm-muted">next: ${esc(b.next)}</div>
+      </div>`).join("") || `<div class="fm-empty">No blockers.</div>`;
+
+  const relayBanner = RELAY_BACKEND_CONNECTED
+    ? ""
+    : `<div class="fm-banner">Relay backend not connected — FIRE is <b>SIMULATED</b> on this build (nothing is sent).</div>`;
+
+  return `<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SoleDash — Field Mode</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#14110e; color:#efe7da; font:16px/1.45 system-ui, sans-serif; -webkit-text-size-adjust:100%; }
+  header { position:sticky; top:0; background:#1d1813; border-bottom:2px solid #5a3a1f; padding:12px 16px; }
+  h1 { margin:0; font-size:18px; color:#e8c79a; }
+  .fm-sub { font-size:12px; color:#cdbfa9; margin-top:2px; }
+  .fm-banner { margin:10px 16px 0; padding:8px 12px; background:#3a2a12; border:1px solid #8a5a00; border-radius:10px; font-size:13px; color:#fbe6c5; }
+  main { padding:12px 16px 40px; }
+  h2 { font-size:14px; color:#e8c79a; margin:20px 0 8px; letter-spacing:.03em; }
+  .fm-card { background:#1e1813; border:1px solid #3a2f22; border-left:4px solid #5a3a1f; border-radius:12px; padding:14px; margin-bottom:10px; }
+  .fm-relay { border-left-color:#2e9e5b; }
+  .fm-gate { border-left-color:#c0392b; }
+  .fm-blocker { border-left-color:#c98a1e; }
+  .fm-card-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .fm-name { font-weight:700; font-size:15px; color:#f3ead9; word-break:break-word; }
+  .fm-meta { font-size:13px; color:#cdbfa9; margin-top:4px; }
+  .fm-muted { color:#a99b85; }
+  .fm-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .fm-btn { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:0 16px; border-radius:12px; font-size:15px; font-weight:700; border:0; text-decoration:none; cursor:pointer; }
+  .fm-fire { background:#e8c79a; color:#14110e; }
+  .fm-hold { background:#2a241d; color:#e8c79a; border:1px solid #5a3a1f; }
+  .fm-open { background:#26303f; color:#cfe0ff; }
+  .fm-sim { font-size:10px; background:#8a5a00; color:#fff; border-radius:6px; padding:1px 5px; margin-left:6px; }
+  .fm-redgate { font-size:11px; font-weight:800; color:#fff; background:#8a1f1f; border-radius:8px; padding:3px 8px; white-space:nowrap; }
+  .state-chip { font-size:11px; font-weight:700; padding:2px 10px; border-radius:999px; white-space:nowrap; }
+  .fm-empty { color:#776a57; font-style:italic; padding:8px 2px; }
+  .chip-legend { font-size:11px; color:#8a7d68; margin-top:24px; }
+</style></head>
+<body>
+<header>
+  <h1>SoleDash — Field Mode</h1>
+  <div class="fm-sub">What moved · what came back · what needs me · what I can fire</div>
+</header>
+${relayBanner}
+<main>
+  <h2>1 · ACTIVE RELAY CARDS</h2>
+  ${relayCards}
+  <h2>2 · RECEIPTS RETURNED</h2>
+  ${receipts}
+  <h2>3 · HUMAN GATES</h2>
+  ${gates}
+  <h2>4 · BLOCKERS</h2>
+  ${blockers}
+  <div class="chip-legend">Read-only field view. States are file-derived/sample (not a live feed). FIRE is simulated on this build.</div>
+</main>
+<script>
+  function fmFire(btn){
+    var name = btn.getAttribute('data-name') || 'this card';
+    if(!confirm('FIRE ' + name + '?\\n\\nRelay backend is NOT connected on this build — this will NOT actually send.')) return false;
+    alert('SIMULATED: no relay backend connected. Nothing was sent. (Wire relay-courier to enable live FIRE.)');
+    return false;
+  }
+  function fmHold(btn){ btn.textContent = 'HELD'; btn.disabled = true; return false; }
+</script>
+</body></html>`;
+}
+
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && (req.url === "/" || req.url.startsWith("/?"))) {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
     res.end(pageHtml());
+    return;
+  }
+  if (req.method === "GET" && (req.url === "/field" || req.url.startsWith("/field?"))) {
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(fieldModeHtml());
     return;
   }
   if (req.method === "GET" && req.url === "/health") {
