@@ -10,10 +10,34 @@ function stateClass(state: string): string {
   return state.toLowerCase().replace(/\s+/g, "-");
 }
 
+function formatReceiptReadable(receipt: Record<string, unknown>): { label: string; value: string }[] {
+  const rows: { label: string; value: string }[] = [];
+  const pick = (key: string, label: string) => {
+    const v = receipt[key];
+    if (v == null || v === "") return;
+    rows.push({ label, value: String(v) });
+  };
+  pick("card_name", "Card");
+  pick("status", "Status");
+  pick("packet_id", "Packet ID");
+  pick("timestamp", "Fired at");
+  pick("updated_at", "Updated");
+  pick("success", "Success");
+  pick("blocker", "Blocker");
+  pick("error", "Error");
+  pick("packet_path", "Packet path");
+  pick("receipt_path", "Receipt path");
+  pick("outbound_path", "Outbound path");
+  pick("next_action", "Next action");
+  pick("next_missing_integration", "Missing integration");
+  return rows;
+}
+
 export function AutomaticaRelayGrid({ onRefresh }: { onRefresh?: () => void | Promise<void> }) {
   const [cards, setCards] = useState<RelayCardView[]>([]);
   const [loading, setLoading] = useState(true);
   const [firingId, setFiringId] = useState<string | null>(null);
+  const [confirmCard, setConfirmCard] = useState<RelayCardView | null>(null);
   const [receiptModal, setReceiptModal] = useState<Record<string, unknown> | null>(null);
   const [dirs, setDirs] = useState({ packet_dir: "", receipt_dir: "" });
 
@@ -101,7 +125,7 @@ export function AutomaticaRelayGrid({ onRefresh }: { onRefresh?: () => void | Pr
 
               <dl className="auto-relay__meta">
                 <div>
-                  <dt>Target</dt>
+                  <dt>Aeye / machine</dt>
                   <dd>
                     {card.targetAgent} · {card.targetComputer}
                   </dd>
@@ -135,7 +159,7 @@ export function AutomaticaRelayGrid({ onRefresh }: { onRefresh?: () => void | Pr
                   type="button"
                   className="auto-relay__fire"
                   disabled={!canFire || firingId !== null}
-                  onClick={() => void fire(card.id)}
+                  onClick={() => setConfirmCard(card)}
                 >
                   {firingId === card.id ? "FIRING…" : "FIRE"}
                 </button>
@@ -159,6 +183,48 @@ export function AutomaticaRelayGrid({ onRefresh }: { onRefresh?: () => void | Pr
         })}
       </div>
 
+      {confirmCard ? (
+        <div className="auto-relay__modal-backdrop" role="presentation" onClick={() => setConfirmCard(null)}>
+          <div
+            className="auto-relay__modal auto-relay__modal--confirm"
+            role="dialog"
+            aria-label="Confirm fire"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="auto-relay__modal-head">
+              <h3>Confirm FIRE</h3>
+              <button type="button" onClick={() => setConfirmCard(null)}>
+                Cancel
+              </button>
+            </div>
+            <p className="auto-relay__confirm-name">{confirmCard.name}</p>
+            <p className="auto-relay__confirm-target">
+              {confirmCard.targetAgent} · {confirmCard.targetComputer}
+            </p>
+            {confirmCard.blocker ? (
+              <p className="auto-relay__blocker">BLOCKER: {confirmCard.blocker}</p>
+            ) : null}
+            <div className="auto-relay__confirm-actions">
+              <button type="button" className="auto-relay__receipt" onClick={() => setConfirmCard(null)}>
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="auto-relay__fire"
+                disabled={firingId !== null}
+                onClick={() => {
+                  const id = confirmCard.id;
+                  setConfirmCard(null);
+                  void fire(id);
+                }}
+              >
+                Confirm FIRE
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       {receiptModal ? (
         <div className="auto-relay__modal-backdrop" role="presentation" onClick={() => setReceiptModal(null)}>
           <div
@@ -173,7 +239,18 @@ export function AutomaticaRelayGrid({ onRefresh }: { onRefresh?: () => void | Pr
                 Close
               </button>
             </div>
-            <pre className="auto-relay__modal-body">{JSON.stringify(receiptModal, null, 2)}</pre>
+            <dl className="auto-relay__receipt-readable">
+              {formatReceiptReadable(receiptModal).map((row) => (
+                <div key={row.label}>
+                  <dt>{row.label}</dt>
+                  <dd>{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <details className="auto-relay__receipt-raw">
+              <summary>Raw JSON</summary>
+              <pre className="auto-relay__modal-body">{JSON.stringify(receiptModal, null, 2)}</pre>
+            </details>
           </div>
         </div>
       ) : null}

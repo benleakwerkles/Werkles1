@@ -56,6 +56,11 @@ import { CommandActionsPanel } from "@/components/soledash/command-actions";
 import { OperatorBar, type DispatchStatus, type OperatorCousinTarget } from "@/components/soledash/operator-bar";
 import { PetraEmptyLinkFire } from "@/components/soledash/petra-empty-link-fire";
 import { AutomaticaRelayGrid } from "@/components/soledash/automatica-relay-grid";
+import {
+  MobileFrontierPanel,
+  MobileHandsPanel,
+  MobileReceiptList
+} from "@/components/soledash/mobile-field-command";
 import { MockTestBanner, MockTestHarness } from "@/components/soledash/mock-test-harness";
 import {
   executeMockTest,
@@ -467,6 +472,7 @@ export function DecisionSurface({ initialView, homeView = null }: DecisionSurfac
   const [reactions, setReactions] = useState<ReactionEntry[]>([]);
   const [optionBoardStates, setOptionBoardStates] = useState<Record<string, OptionBoardState>>({});
   const knownReceiptKeysRef = useRef<Set<string>>(new Set());
+  const mobileHandReasonRef = useRef("");
   const operatorBarInputRef = useRef<HTMLTextAreaElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const queueSectionRef = useRef<HTMLElement>(null);
@@ -479,6 +485,11 @@ export function DecisionSurface({ initialView, homeView = null }: DecisionSurfac
       setFleetStateLoaded(true);
     }
   }, [isHome, homeView?.fleet]);
+
+  useEffect(() => {
+    if (!isHome) return;
+    if (window.matchMedia("(max-width: 640px)").matches) setCommandOpen(true);
+  }, [isHome]);
 
   const dataLive = view.data_source === "dink";
   const unavailable = view.data_source === "unavailable";
@@ -619,7 +630,27 @@ export function DecisionSurface({ initialView, homeView = null }: DecisionSurfac
     })();
   }
 
-  function runAction(action: string, _routeOwner: string | null = null) {
+  function logOperatorHandNote(action: string, note: string) {
+    const text = note.trim();
+    if (!text) return;
+    const at = new Date().toISOString();
+    setChatEntries((prev) => [
+      ...prev,
+      {
+        entry_type: "message",
+        message: { role: "operator", text: `${action.replace(/_/g, " ").toUpperCase()}: ${text}`, at }
+      }
+    ]);
+    setDispatchStatus({
+      label: `${action.replace(/_/g, " ").toUpperCase()} noted`,
+      detail: text,
+      tone: "warn"
+    });
+  }
+
+  function runAction(action: string, _routeOwner: string | null = null, operatorNote?: string) {
+    if (operatorNote?.trim()) logOperatorHandNote(action, operatorNote);
+
     if (action === "more_info") {
       setWhyOpen(true);
       return;
@@ -998,13 +1029,16 @@ export function DecisionSurface({ initialView, homeView = null }: DecisionSurfac
     }
   }
 
-  function handleGuardedYea() {
+  function handleGuardedYea(reason?: string) {
+    if (reason !== undefined) mobileHandReasonRef.current = reason;
     setYeaPendingConfirm(true);
   }
 
   function handleYeaConfirm() {
     setYeaPendingConfirm(false);
-    runAction("yea");
+    const note = mobileHandReasonRef.current;
+    mobileHandReasonRef.current = "";
+    runAction("yea", null, note);
   }
 
   async function sendToPetra() {
@@ -1236,16 +1270,54 @@ export function DecisionSurface({ initialView, homeView = null }: DecisionSurfac
                 refreshing={refreshing}
                 onRefresh={() => void refresh()}
               />
-              <OptionsDeck compact {...optionsDeckProps} />
+              <div className="sd-mobile-hide">
+                <OptionsDeck compact {...optionsDeckProps} />
+              </div>
             </>
           ) : (
             <CommandLayerShell onReturnToPorch={requestReturnToPorch}>
               {showMockTestMode ? <MockTestBanner show /> : null}
 
-              <FleetRow
-                fleet={fleet.length ? fleet : homeView.fleet}
-                fleetStateLoaded={fleetStateLoaded}
-              />
+              <div className="sd-mobile-only">
+                <MobileFrontierPanel
+                  frontierCode={operatorFrontierCode}
+                  frontierTitle={operatorFrontierTitle}
+                  proposalSummary={proposal?.summary ?? null}
+                  waitingGatesCount={waitingGates.count}
+                  waitingGatesHint={waitingGates.hint}
+                  blockerHeadline={hasBlocker ? blocker.headline : null}
+                  humanGate={payload.human_gate}
+                  reactions={reactions}
+                />
+
+                <MobileHandsPanel
+                  humanGate={payload.human_gate}
+                  busy={busy}
+                  activeAction={activeAction}
+                  yeaPendingConfirm={yeaPendingConfirm}
+                  routeButtons={routeButtons}
+                  unavailable={unavailable}
+                  onApprove={(reason) => handleGuardedYea(reason)}
+                  onReject={(reason) => runAction("nay", null, reason)}
+                  onNeedsResearch={(reason) => runAction("needs_research", null, reason)}
+                  onKillTest={(reason) => runAction("kill_test", null, reason)}
+                  onYeaConfirm={(reason) => {
+                    mobileHandReasonRef.current = reason;
+                    handleYeaConfirm();
+                  }}
+                  onYeaCancel={() => {
+                    mobileHandReasonRef.current = "";
+                    setYeaPendingConfirm(false);
+                  }}
+                />
+              </div>
+
+              <div className="sd-mobile-hide">
+                <FleetRow
+                  fleet={fleet.length ? fleet : homeView.fleet}
+                  fleetStateLoaded={fleetStateLoaded}
+                />
+              </div>
 
               {unavailable ? (
                 <section className="fm-unavailable" aria-label="Live payload unavailable">
@@ -1254,13 +1326,21 @@ export function DecisionSurface({ initialView, homeView = null }: DecisionSurfac
                 </section>
               ) : null}
 
-              <CurrentBlockerPanel blocker={blocker} dataLive={dataLive && !unavailable} />
+              <div className="sd-mobile-hide">
+                <CurrentBlockerPanel blocker={blocker} dataLive={dataLive && !unavailable} />
+              </div>
 
               <AutomaticaRelayGrid onRefresh={refresh} />
 
-              <OptionsDeck {...optionsDeckProps} />
+              <div className="sd-mobile-only">
+                <MobileReceiptList entries={mergedReceipts} />
+              </div>
 
-              <section className="fm-frontier fm-frontier--command" aria-label="Single frontier">
+              <div className="sd-mobile-hide">
+                <OptionsDeck {...optionsDeckProps} />
+              </div>
+
+              <section className="fm-frontier fm-frontier--command sd-mobile-hide" aria-label="Single frontier">
                 <div className="fm-frontier__head">
                   <p className="fm-frontier__label">Frontier</p>
                   <HonestyBadge live={dataLive && !unavailable} compact />
@@ -1301,98 +1381,100 @@ export function DecisionSurface({ initialView, homeView = null }: DecisionSurfac
                 )}
               </section>
 
-              <ReceiptSearchBar
-                value={receiptSearch}
-                onChange={setReceiptSearch}
-                resultCount={filteredReceipts.length}
-                totalCount={mergedReceipts.length}
-              />
-
-              <ReceiptCenterPanel
-                entries={filteredReceipts}
-                dataLive={dataLive}
-                unavailable={unavailable}
-              />
-
-              {!unavailable ? (
-                <FrontierComparisonPanel
-                  operatorFrontier={frontier}
-                  machineFrontier={machineFrontier}
-                  source={frontierSource}
-                  dataLive={dataLive}
+              <div className="sd-mobile-hide">
+                <ReceiptSearchBar
+                  value={receiptSearch}
+                  onChange={setReceiptSearch}
+                  resultCount={filteredReceipts.length}
+                  totalCount={mergedReceipts.length}
                 />
-              ) : null}
 
-              {!unavailable ? (
-                <QueueVisibilityPanel
-                  frontier={frontier}
-                  machineFrontier={machineFrontier}
-                  top3Alternatives={top3Alternatives}
-                  machineWhyNumberOne={machineWhy}
+                <ReceiptCenterPanel
+                  entries={filteredReceipts}
                   dataLive={dataLive}
+                  unavailable={unavailable}
                 />
-              ) : null}
 
-              {queue.length > 0 && !unavailable ? (
-                <section ref={queueSectionRef} className="mw-queue-anchor">
-                  <QueueOverridePanel
-                    items={queue}
-                    activeId={proposal?.id ?? null}
-                    busy={queueBusy || busy}
-                    inspectedId={inspectedId}
+                {!unavailable ? (
+                  <FrontierComparisonPanel
+                    operatorFrontier={frontier}
+                    machineFrontier={machineFrontier}
+                    source={frontierSource}
                     dataLive={dataLive}
-                    onInspect={handleInspect}
-                    onMakeFrontier={runQueueAction}
                   />
-                  {overrideReceipt ? (
-                    <p className="fm-rank__receipt fm-rank__receipt--standalone">{overrideReceipt}</p>
-                  ) : null}
-                  {inspectedItem ? (
-                    <InspectDetail item={inspectedItem} rationale={payload.rationale} dataLive={dataLive} />
-                  ) : null}
-                </section>
-              ) : null}
-
-              <section className="mw-chat" aria-label="Operator chat log">
-                <h2 className="mw-chat__heading">Operator Chat</h2>
-                <p className="mw-chat__bar-hint">Compose in the operator bar below — this panel shows receipts.</p>
-                <div className="mw-chat__log ds-chat__log">
-                  {chatEntries.length === 0 && !petraReceipt ? (
-                    <p className="ds-muted ds-chat__empty">No chat entries yet.</p>
-                  ) : (
-                    chatEntries.map((entry, i) => <ChatEntry key={i} entry={entry} />)
-                  )}
-                  {petraReceipt ? <PetraTransportReceipt envelope={petraReceipt} /> : null}
-                  <div ref={chatEndRef} />
-                </div>
-              </section>
-
-              <nav className="fm-tiers fm-tiers--command" aria-label="Second-tier panels">
-                {showMockTestMode ? (
-                  <TierPanel summary="Mock test harness (dev only)">
-                    <MockTestHarness
-                      busy={busy}
-                      failureMode={mockFailureMode}
-                      onFailureModeChange={setMockFailureMode}
-                      lastResult={lastMockTest}
-                      onRunTest={(route) => runMockTestRoute(route, null, route)}
-                    />
-                  </TierPanel>
                 ) : null}
-                <TierPanel summary={`Churn — ${churnPreview}${payload.current_churn.summary.length > 72 ? "…" : ""}`}>
-                  <dl className="fm-dl">
-                    <div>
-                      <dt>Current churn</dt>
-                      <dd>{payload.current_churn.summary}</dd>
-                    </div>
-                  </dl>
-                </TierPanel>
-                <section ref={gateSectionRef} className="mw-gate-anchor">
-                  <TierPanel summary="Gate detail" defaultOpen={gateOpen}>
-                    <HumanGateDetail gate={payload.human_gate} />
-                  </TierPanel>
+
+                {!unavailable ? (
+                  <QueueVisibilityPanel
+                    frontier={frontier}
+                    machineFrontier={machineFrontier}
+                    top3Alternatives={top3Alternatives}
+                    machineWhyNumberOne={machineWhy}
+                    dataLive={dataLive}
+                  />
+                ) : null}
+
+                {queue.length > 0 && !unavailable ? (
+                  <section ref={queueSectionRef} className="mw-queue-anchor">
+                    <QueueOverridePanel
+                      items={queue}
+                      activeId={proposal?.id ?? null}
+                      busy={queueBusy || busy}
+                      inspectedId={inspectedId}
+                      dataLive={dataLive}
+                      onInspect={handleInspect}
+                      onMakeFrontier={runQueueAction}
+                    />
+                    {overrideReceipt ? (
+                      <p className="fm-rank__receipt fm-rank__receipt--standalone">{overrideReceipt}</p>
+                    ) : null}
+                    {inspectedItem ? (
+                      <InspectDetail item={inspectedItem} rationale={payload.rationale} dataLive={dataLive} />
+                    ) : null}
+                  </section>
+                ) : null}
+
+                <section className="mw-chat" aria-label="Operator chat log">
+                  <h2 className="mw-chat__heading">Operator Chat</h2>
+                  <p className="mw-chat__bar-hint">Compose in the operator bar below — this panel shows receipts.</p>
+                  <div className="mw-chat__log ds-chat__log">
+                    {chatEntries.length === 0 && !petraReceipt ? (
+                      <p className="ds-muted ds-chat__empty">No chat entries yet.</p>
+                    ) : (
+                      chatEntries.map((entry, i) => <ChatEntry key={i} entry={entry} />)
+                    )}
+                    {petraReceipt ? <PetraTransportReceipt envelope={petraReceipt} /> : null}
+                    <div ref={chatEndRef} />
+                  </div>
                 </section>
-              </nav>
+
+                <nav className="fm-tiers fm-tiers--command" aria-label="Second-tier panels">
+                  {showMockTestMode ? (
+                    <TierPanel summary="Mock test harness (dev only)">
+                      <MockTestHarness
+                        busy={busy}
+                        failureMode={mockFailureMode}
+                        onFailureModeChange={setMockFailureMode}
+                        lastResult={lastMockTest}
+                        onRunTest={(route) => runMockTestRoute(route, null, route)}
+                      />
+                    </TierPanel>
+                  ) : null}
+                  <TierPanel summary={`Churn — ${churnPreview}${payload.current_churn.summary.length > 72 ? "…" : ""}`}>
+                    <dl className="fm-dl">
+                      <div>
+                        <dt>Current churn</dt>
+                        <dd>{payload.current_churn.summary}</dd>
+                      </div>
+                    </dl>
+                  </TierPanel>
+                  <section ref={gateSectionRef} className="mw-gate-anchor">
+                    <TierPanel summary="Gate detail" defaultOpen={gateOpen}>
+                      <HumanGateDetail gate={payload.human_gate} />
+                    </TierPanel>
+                  </section>
+                </nav>
+              </div>
             </CommandLayerShell>
           )}
 
