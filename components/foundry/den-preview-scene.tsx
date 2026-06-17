@@ -1,3 +1,4 @@
+import { DenPortrait } from "@/components/goop-cycle/den-portrait";
 import Link from "next/link";
 import { denNavObjects } from "@/lib/den-atmosphere";
 import { copy } from "@/lib/copy";
@@ -42,12 +43,10 @@ export function DenPreviewScene() {
         <div className="den-scene__card-stack">
           <article className="den-scene__inspect-card" data-interaction="inspect-hold">
             <header className="den-scene__card-top">
-              <span className="avatar connector" aria-hidden="true">
-                C
-              </span>
+              <DenPortrait seed="candidate-maya-rojas" name="Maya Rojas" accent="#c08b52" size="md" />
               <div>
-                <h2>Candidate dossier</h2>
-                <p className="den-scene__card-hint">Long-press to inspect · tap to advance</p>
+                <h2>Maya Rojas</h2>
+                <p className="den-scene__card-hint">Connector · Austin — long-press to inspect</p>
               </div>
               <span className="score">87</span>
             </header>

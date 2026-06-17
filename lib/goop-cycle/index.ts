@@ -8,3 +8,5 @@ export * from "./duel";
 export * from "./religion-war";
 export * from "./player-state";
 export * from "./rng";
+export * from "./fighters";
+export * from "./portrait-features";

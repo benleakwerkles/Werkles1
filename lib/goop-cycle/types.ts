@@ -119,6 +119,7 @@ export type GoopCycle = {
 
 export type PlayerGoopState = {
   religionId: ReligionId | null;
+  heraldSeed?: string;
   summons: Summon[];
   skills: Record<LifeSkillId, { level: number; xp: number }>;
   quests: QuestProgress[];

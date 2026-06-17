@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SiteIcon } from "@/components/foundry/site-icon";
+import { DenPortrait } from "@/components/goop-cycle/den-portrait";
 import { copy } from "@/lib/copy";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 
@@ -76,9 +77,14 @@ export default function MatchDeck() {
         {active ? (
           <>
             <div className="candidate-top">
-              <span className="avatar connector" aria-hidden="true">W</span>
+              <DenPortrait
+                seed={active.target_user_id}
+                name={active.target_user_id.slice(0, 8)}
+                accent="#c08b52"
+                size="md"
+              />
               <div>
-                <h2>{active.target_user_id.slice(0, 8)}</h2>
+                <h2>Partner {active.target_user_id.slice(0, 8)}</h2>
                 <div className="meta-row">
                   <span className="tag">Candidate UUID</span>
                   <span className="verified-tag">Server scored</span>
