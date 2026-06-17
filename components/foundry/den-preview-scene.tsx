@@ -35,6 +35,9 @@ export function DenPreviewScene() {
         <p className="den-scene__lede">
           Cozy inventor nook for Connectors — lamp desk, paper stack, inspect pacing. Not a throne. Not a cockpit.
         </p>
+        <p className="den-scene__lede">
+          <a href="/proof/goop-cycle">Open Goop Cycle preview →</a> (religions, quests, fusion, duels)
+        </p>
 
         <div className="den-scene__card-stack">
           <article className="den-scene__inspect-card" data-interaction="inspect-hold">
