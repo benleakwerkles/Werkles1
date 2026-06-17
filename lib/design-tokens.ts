@@ -53,7 +53,13 @@ export const designTokens = {
     "Forge orange is atmosphere, not a CTA color.",
     "Copper is the frame, not the content.",
     "Ghost Forge draft assets are review-only until Ben approves final creative direction."
-  ]
+  ],
+  den: {
+    source: "foreman/design/WONKA_DEN_MOOD_REFERENCE.md",
+    previewRoute: "/proof/den",
+    facetClass: "workshop-facet--den",
+    status: "DRAFT_REVIEW"
+  }
 } as const;
 
 export type DesignTokens = typeof designTokens;
