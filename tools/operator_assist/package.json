@@ -1,0 +1,14 @@
+{
+  "name": "operator-assist",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local operator assistance for workspace snapshots and compact Aeye packets.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "snapshot": "node --experimental-strip-types src/index.ts snapshot",
+    "packet": "node --experimental-strip-types src/index.ts packet"
+  }
+}
