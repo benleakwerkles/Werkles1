@@ -15,4 +15,5 @@ function run(script) {
 }
 
 run("atlas-source-truth-readback.mjs");
+run("atlas-github-branch-index.mjs");
 run("speaker-truth-mirror.mjs");

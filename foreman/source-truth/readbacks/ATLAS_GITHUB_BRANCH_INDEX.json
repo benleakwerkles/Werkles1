@@ -1,0 +1,266 @@
+{
+  "index_id": "ATLAS_GITHUB_BRANCH_INDEX",
+  "created_at": "2026-06-27T18:05:55.110Z",
+  "organ": "Atlas",
+  "source_truth_statement": "GitHub origin/main is canonical. Other GitHub branches are candidate, audit, preview, or preservation evidence until human-gated promotion.",
+  "remote": "origin",
+  "remote_url": "https://github.com/benleakwerkles/Werkles1.git",
+  "canonical_branch": "main",
+  "canonical_hash": "0c727a2461f274f8990063ab9ee06b799a1890ed",
+  "branch_count": 36,
+  "branches": [
+    {
+      "branch": "main",
+      "ref": "refs/heads/main",
+      "hash": "0c727a2461f274f8990063ab9ee06b799a1890ed",
+      "classification": "CANONICAL_SOURCE_TRUTH",
+      "canonical": true
+    },
+    {
+      "branch": "app-infra-01-approved-clean",
+      "ref": "refs/heads/app-infra-01-approved-clean",
+      "hash": "12215b75f434ac30f9e18357fddb5491fe20ad51",
+      "classification": "REMOTE_BRANCH_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "audit/branch-salvage-map-2026-06-21-180250",
+      "ref": "refs/heads/audit/branch-salvage-map-2026-06-21-180250",
+      "hash": "f4cf645e8121099a594bc7e6b7639e59b8d5e486",
+      "classification": "AUDIT_EVIDENCE",
+      "canonical": false
+    },
+    {
+      "branch": "book/architecture-stream-split-v0-20260627",
+      "ref": "refs/heads/book/architecture-stream-split-v0-20260627",
+      "hash": "605e353737dc4f2a2a18d11c80c328bff05a4229",
+      "classification": "MANUSCRIPT_REVIEW",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/atlas-machine-role-eeea",
+      "ref": "refs/heads/cursor/atlas-machine-role-eeea",
+      "hash": "4964d80eaf7e2a20b8d3b34e23e2eb42d502ef00",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/concierge-console-v1-eeea",
+      "ref": "refs/heads/cursor/concierge-console-v1-eeea",
+      "hash": "32d24be76cc1232a7882a8039bf32d3b88e12228",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/concierge-sheet-spec-v1-eeea",
+      "ref": "refs/heads/cursor/concierge-sheet-spec-v1-eeea",
+      "hash": "a8bb720f6ad1d7b51f36e9380915471461af6578",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/dink-non-human-gate-agent-c25f",
+      "ref": "refs/heads/cursor/dink-non-human-gate-agent-c25f",
+      "hash": "ad8a47a5ce8001cdfda9e1133a7b4d30d405824a",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/doss-baseline-v1-eeea",
+      "ref": "refs/heads/cursor/doss-baseline-v1-eeea",
+      "hash": "03aed4b800395d5aa36a5695e3a10d121076f054",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/doss-local-dev-launcher-eeea",
+      "ref": "refs/heads/cursor/doss-local-dev-launcher-eeea",
+      "hash": "769eac6b12dcfd2dcc1bbbbbdda169144320062d",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/execution-context-doctrine-eeea",
+      "ref": "refs/heads/cursor/execution-context-doctrine-eeea",
+      "hash": "0992a3f56bdf801114df187a21d53ad6fba60d56",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/gd-status-layer-v1-eeea",
+      "ref": "refs/heads/cursor/gd-status-layer-v1-eeea",
+      "hash": "dc47322c030bc474adbee611fcfe0d66456667e2",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/gimpdash-human-gates-console-eeea",
+      "ref": "refs/heads/cursor/gimpdash-human-gates-console-eeea",
+      "hash": "594f045432ac8f677d3fc30723a5909e215fd1f2",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/goop-cycle-pvp-9b25",
+      "ref": "refs/heads/cursor/goop-cycle-pvp-9b25",
+      "hash": "2ed3902888cafabe5f9b88565a13308f7508be4d",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/post-merge-cockpit-cleanup-eeea",
+      "ref": "refs/heads/cursor/post-merge-cockpit-cleanup-eeea",
+      "hash": "5ce5f1b148e4c67ac01cfff632776603bce547d6",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/recommendation-card-v1-eeea",
+      "ref": "refs/heads/cursor/recommendation-card-v1-eeea",
+      "hash": "2fac6ae10dbe7b822d9e084d8ecd4af482c56146",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/refresh-cockpit-dashboard-eeea",
+      "ref": "refs/heads/cursor/refresh-cockpit-dashboard-eeea",
+      "hash": "578b4868a9037f69251a032ff6bfb3d6be997844",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/soledash-build-continue-eeea",
+      "ref": "refs/heads/cursor/soledash-build-continue-eeea",
+      "hash": "aa3b3120277949b80a67ee9f73efb28ca003f658",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/soledash-culture-safety-surface-v1-eeea",
+      "ref": "refs/heads/cursor/soledash-culture-safety-surface-v1-eeea",
+      "hash": "e875737881af97fd8b837eb7a6a2527960f38784",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/soledash-field-mode-v1-eeea",
+      "ref": "refs/heads/cursor/soledash-field-mode-v1-eeea",
+      "hash": "f883e55eb4938f35c5ca8d082e205dc18ad9e65d",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/soledash-inbox-outbox-build-v1-eeea",
+      "ref": "refs/heads/cursor/soledash-inbox-outbox-build-v1-eeea",
+      "hash": "3c25087332ddb1a53ce2bf9ed97f3f2f6d2e8182",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/soledash-inbox-outbox-v1-eeea",
+      "ref": "refs/heads/cursor/soledash-inbox-outbox-v1-eeea",
+      "hash": "00477b20e5f80606ce55888ce88a326eb5a2e4b0",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/soledash-onboarding-surface-v1-eeea",
+      "ref": "refs/heads/cursor/soledash-onboarding-surface-v1-eeea",
+      "hash": "4e920a58a5a3b69da2568d26392bf1982d10ed1d",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/soledash-screen-inventory-v1-eeea",
+      "ref": "refs/heads/cursor/soledash-screen-inventory-v1-eeea",
+      "hash": "0a933cdb09eb8b23d665f2f847d5f903db51b33b",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/user1-journey-map-v1-eeea",
+      "ref": "refs/heads/cursor/user1-journey-map-v1-eeea",
+      "hash": "2b8c79ba7eee80da044bb7f10cec4e02b9524e43",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/werkles-testable-claims-v1-eeea",
+      "ref": "refs/heads/cursor/werkles-testable-claims-v1-eeea",
+      "hash": "8a6c93196f1d0b2883208371909915f17cadf6de",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/wizard-of-oz-test-v1-eeea",
+      "ref": "refs/heads/cursor/wizard-of-oz-test-v1-eeea",
+      "hash": "8919b07972e38db37a23c5d1b7a2ef275b390f59",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/wonka-den-mood-reference-9b25",
+      "ref": "refs/heads/cursor/wonka-den-mood-reference-9b25",
+      "hash": "f32084eccb950625931ba0ba62c4be127585bd7f",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "cursor/woz-operator-console-v1-eeea",
+      "ref": "refs/heads/cursor/woz-operator-console-v1-eeea",
+      "hash": "c5d8bc50b98def7b84ca3dc9ec4bb98263612b91",
+      "classification": "CURSOR_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "ghost-forge-one-prompt-test",
+      "ref": "refs/heads/ghost-forge-one-prompt-test",
+      "hash": "7b8da425423091070e9a591d64f0952010f2ecdb",
+      "classification": "REMOTE_BRANCH_CANDIDATE",
+      "canonical": false
+    },
+    {
+      "branch": "preview/wonka-den-safe-preview-20260618",
+      "ref": "refs/heads/preview/wonka-den-safe-preview-20260618",
+      "hash": "dc6829580ec1ede8c864a9a9051efb02ec874c00",
+      "classification": "PREVIEW_EVIDENCE",
+      "canonical": false
+    },
+    {
+      "branch": "rescue/sally-dirty-worktree-2026-06-01",
+      "ref": "refs/heads/rescue/sally-dirty-worktree-2026-06-01",
+      "hash": "745dc1b2a58a15c2adaf8ddaa3a99838570c9766",
+      "classification": "PRESERVATION_EVIDENCE",
+      "canonical": false
+    },
+    {
+      "branch": "salvage/betsy/snapshot/sally-good-werkles-2026-06-12",
+      "ref": "refs/heads/salvage/betsy/snapshot/sally-good-werkles-2026-06-12",
+      "hash": "8e70a25547988b8b4820fa3c79fd85e07eddfe1a",
+      "classification": "PRESERVATION_EVIDENCE",
+      "canonical": false
+    },
+    {
+      "branch": "snapshot/sally-good-werkles-2026-06-12",
+      "ref": "refs/heads/snapshot/sally-good-werkles-2026-06-12",
+      "hash": "ffccad027151e3e1759209c4fc28d985d7c9ce9b",
+      "classification": "PRESERVATION_EVIDENCE",
+      "canonical": false
+    },
+    {
+      "branch": "source-truth/atlas-speaker-v0-20260627",
+      "ref": "refs/heads/source-truth/atlas-speaker-v0-20260627",
+      "hash": "f26b1aa5eab30872281656dea1897148c2221a24",
+      "classification": "SOURCE_TRUTH_REVIEW",
+      "canonical": false
+    },
+    {
+      "branch": "supabase-auth-stripe-test-wiring",
+      "ref": "refs/heads/supabase-auth-stripe-test-wiring",
+      "hash": "0c727a2461f274f8990063ab9ee06b799a1890ed",
+      "classification": "REMOTE_BRANCH_CANDIDATE",
+      "canonical": false
+    }
+  ],
+  "local_only_rule": "If a file or branch is not represented in GitHub, it is local evidence only and cannot be called source truth."
+}

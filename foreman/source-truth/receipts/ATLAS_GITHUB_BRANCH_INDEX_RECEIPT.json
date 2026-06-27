@@ -1,0 +1,15 @@
+{
+  "receipt_id": "ATLAS_GITHUB_BRANCH_INDEX_RECEIPT",
+  "mission": "ATLAS_GITHUB_BRANCH_INDEX",
+  "owner": "Atlas",
+  "created_at": "2026-06-27T18:05:55.112Z",
+  "status": "ARTIFACT",
+  "index_path": "foreman/source-truth/readbacks/ATLAS_GITHUB_BRANCH_INDEX.json",
+  "index_hash": "DAAC1F87FCBB4BC4D20D8C5E8F516A9C25EA13D309B4137F22150FEC97C12033",
+  "index_byte_count": 9985,
+  "canonical_branch": "main",
+  "canonical_hash": "0c727a2461f274f8990063ab9ee06b799a1890ed",
+  "branch_count": 36,
+  "readback_method": "git ls-remote --heads origin",
+  "canonical_readiness": "GITHUB_MAIN_ONLY"
+}

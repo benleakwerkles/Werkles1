@@ -6,6 +6,7 @@ on:
       - "foreman/source-truth/**"
       - "foreman/atlas/**"
       - "foreman/speaker/**"
+      - "scripts/foreman/atlas-github-branch-index.mjs"
       - "scripts/foreman/*source-truth*.mjs"
       - "scripts/foreman/speaker-truth-mirror.mjs"
       - "package.json"

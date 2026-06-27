@@ -1,0 +1,16 @@
+{
+  "packet_id": "NEXT_NERDKLE_SOURCE_TRUTH_PACKET_20260627",
+  "owner": "Swanson@Doss",
+  "stream": "NERDKLE / SOURCE TRUTH / ATLAS SPEAKER",
+  "status": "READY_FOR_REVIEW",
+  "context": "Atlas can now read GitHub branches, guard canonical claims, and point to candidate truth. Speaker mirrors rationale but does not promote.",
+  "next_action": "Decide whether the Atlas/Speaker source-truth branch should be merged to GitHub main before more Nerdkle proof body work is promoted.",
+  "evidence_required": [
+    "ATLAS_GITHUB_BRANCH_INDEX.json exists",
+    "CANDIDATE_TRUTH_REGISTRY.json exists",
+    "truth:ci passes",
+    "Human merge decision exists"
+  ],
+  "destination": "TinkerDen Intake / Speaker",
+  "failure_condition": "Aeyes continue treating local-only NMCLR, preview branches, or manuscript slices as canonical source truth."
+}

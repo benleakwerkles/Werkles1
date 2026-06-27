@@ -9,10 +9,11 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "truth:atlas": "node scripts/foreman/atlas-source-truth-readback.mjs --write",
+    "truth:branches": "node scripts/foreman/atlas-github-branch-index.mjs --write",
     "truth:speaker": "node scripts/foreman/speaker-truth-mirror.mjs --write",
     "truth:pulse": "node scripts/foreman/source-truth-pulse.mjs --write",
     "truth:guard": "node scripts/foreman/source-truth-guard.mjs",
-    "truth:ci": "node --check scripts/foreman/atlas-source-truth-readback.mjs && node --check scripts/foreman/speaker-truth-mirror.mjs && node --check scripts/foreman/source-truth-pulse.mjs && node --check scripts/foreman/source-truth-guard.mjs && node scripts/foreman/source-truth-guard.mjs && node scripts/foreman/atlas-source-truth-readback.mjs && node scripts/foreman/speaker-truth-mirror.mjs"
+    "truth:ci": "node --check scripts/foreman/atlas-source-truth-readback.mjs && node --check scripts/foreman/atlas-github-branch-index.mjs && node --check scripts/foreman/speaker-truth-mirror.mjs && node --check scripts/foreman/source-truth-pulse.mjs && node --check scripts/foreman/source-truth-guard.mjs && node scripts/foreman/source-truth-guard.mjs && node scripts/foreman/atlas-source-truth-readback.mjs && node scripts/foreman/atlas-github-branch-index.mjs && node scripts/foreman/speaker-truth-mirror.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",

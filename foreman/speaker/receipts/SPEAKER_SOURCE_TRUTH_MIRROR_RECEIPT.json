@@ -2,14 +2,14 @@
   "receipt_id": "SPEAKER_SOURCE_TRUTH_MIRROR_RECEIPT",
   "mission": "SPEAKER_SOURCE_TRUTH_MIRROR",
   "owner": "Speaker",
-  "created_at": "2026-06-27T17:53:56.877Z",
+  "created_at": "2026-06-27T18:05:55.186Z",
   "status": "ARTIFACT",
   "mirror_path": "foreman/speaker/SPEAKER_SOURCE_TRUTH_MIRROR.json",
-  "mirror_hash": "43084891A529EE907CB7633B6F08DE0199CA6FDC6E7F955CEB9759A5BC412050",
+  "mirror_hash": "2EF7BBFB1323D4AE9854BC9D9465F7D4A95068D97BBF402BC87A598ABE4F6559",
   "mirror_byte_count": 1099,
   "draft_entry_path": "foreman/speaker/entries/DRAFT_20260627-github-source-truth-is-canon.md",
   "draft_entry_status": "EXISTS_UNCHANGED",
   "atlas_readback_path": "foreman/source-truth/readbacks/ATLAS_SOURCE_TRUTH_READBACK.json",
-  "atlas_readback_hash": "0F0F18FCD61B3730A38F7D38AB2561721A5CAD95988808BC67C2FE8D65E48EDE",
+  "atlas_readback_hash": "FC35D889D8572AEE66FA333B10CCCA9F8CFFC1027EA6E333E8A0CF1097E23661",
   "canonical_readiness": "MIRROR_ONLY_NOT_PROMOTION"
 }

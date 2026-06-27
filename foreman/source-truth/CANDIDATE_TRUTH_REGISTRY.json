@@ -1,0 +1,65 @@
+{
+  "registry_id": "CANDIDATE_TRUTH_REGISTRY_V0",
+  "status": "DRAFT",
+  "owner": "Swanson@Doss",
+  "created_at": "2026-06-27",
+  "canonical_source_truth": {
+    "repository": "https://github.com/benleakwerkles/Werkles1.git",
+    "branch": "main",
+    "classification": "CANONICAL_SOURCE_TRUTH"
+  },
+  "github_candidates": [
+    {
+      "name": "Atlas / Speaker Source Truth V0",
+      "branch": "source-truth/atlas-speaker-v0-20260627",
+      "classification": "SOURCE_TRUTH_REVIEW",
+      "canonical": false,
+      "purpose": "Give Atlas and Speaker a file-backed way to read GitHub main, classify local drift, and mirror rationale.",
+      "proof_available": [
+        "ATLAS_SOURCE_TRUTH_READBACK_RECEIPT",
+        "ATLAS_GITHUB_BRANCH_INDEX_RECEIPT",
+        "SPEAKER_SOURCE_TRUTH_MIRROR_RECEIPT",
+        "SOURCE_TRUTH_GUARD ACK"
+      ],
+      "missing_before_main": [
+        "Human review",
+        "Human merge gate"
+      ]
+    },
+    {
+      "name": "Book Architecture Stream Split V0",
+      "branch": "book/architecture-stream-split-v0-20260627",
+      "classification": "MANUSCRIPT_REVIEW",
+      "canonical": false,
+      "purpose": "Preserve manuscript-only doctrine for stream split and proof boundaries.",
+      "proof_available": [
+        "STREAM_SPLIT_MANUSCRIPT_BOUNDARY_CHECK ARTIFACT"
+      ],
+      "missing_before_main": [
+        "Human review",
+        "Human merge gate"
+      ]
+    }
+  ],
+  "local_only_evidence": [
+    {
+      "name": "NMCLR Doss local proof body",
+      "classification": "LOCAL_ONLY_NOT_CANONICAL",
+      "known_path": "C:\\Users\\BenLeak\\Desktop\\github\\Werkles\\NMCLR\\spec\\build",
+      "known_receipts": [
+        "SWANSON_DOSS_NMCLR_PRESERVATION_RECEIPT",
+        "SWANSON_DOSS_NMCLR_FILESYSTEM_SNAPSHOT_RECEIPT",
+        "SWANSON_DOSS_BRANCH_COLLISION_RECEIPT_INGEST_RECEIPT"
+      ],
+      "reason_not_canonical": "Local dirty/untracked proof body is not represented on GitHub main.",
+      "missing_before_main": [
+        "GitHub branch or PR containing the intended NMCLR files",
+        "Branch identity",
+        "Lineage receipt",
+        "Branch-specific execution proof",
+        "Human promotion gate"
+      ]
+    }
+  ],
+  "rule": "If it is not on GitHub, it is not shared source truth. If it is not on main, it is candidate or evidence until human-gated promotion."
+}
