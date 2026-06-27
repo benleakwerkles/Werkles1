@@ -1,13 +1,13 @@
 {
   "mirror_id": "SPEAKER_FRONTIER_MIRROR",
-  "created_at": "2026-06-27T20:11:00.370Z",
+  "created_at": "2026-06-27T20:11:15.569Z",
   "organ": "Speaker",
   "status": "ARTIFACT",
   "frontier_status": "BLOCKER",
   "frontier_path": "foreman/source-truth/shared_frontier.json",
   "frontier_hash": "D890BF7DA1A941406F2CE01C18D826A9231D344A28857A1E5C1738B6BAB552D9",
   "bootloader_readback_path": "foreman/source-truth/readbacks/NERDKLE_BOOTLOADER_FRONTIER_READBACK.json",
-  "bootloader_readback_hash": "1610312B9AA70FCF7AD2E5ADBB35F8D013C5C0BE3397BA727034046CD7257A9B",
+  "bootloader_readback_hash": "7949C97114B0AAD27782FBD74A81A6D3FFA9FC8122C4A369CB8A35D126E8D441",
   "rationale": "Speaker mirrors the frontier warning so tomorrow's Aeye does not start from chat memory.",
   "warnings": [
     "Daily memory is blocked until production circulation.db exists.",

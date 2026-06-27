@@ -2,13 +2,13 @@
   "receipt_id": "SPEAKER_FRONTIER_MIRROR_RECEIPT",
   "mission": "SPEAKER_FRONTIER_MIRROR",
   "owner": "Speaker",
-  "created_at": "2026-06-27T20:11:00.373Z",
+  "created_at": "2026-06-27T20:11:15.572Z",
   "status": "ARTIFACT",
   "mirror_path": "foreman/speaker/SPEAKER_FRONTIER_MIRROR.json",
-  "mirror_hash": "E19CD709866C32B2F136DA8166AB0B2265D9BA2B607A4D098B20B43C9B938BE5",
+  "mirror_hash": "268989EB1C25D4DB09749C45E858EB40CD4CD6F9088C98AA96A43D58F0887502",
   "mirror_byte_count": 1958,
   "draft_entry_path": "foreman/speaker/entries/DRAFT_20260627-frontier-blocked-on-production-ledger.md",
-  "draft_entry_status": "CREATED",
+  "draft_entry_status": "EXISTS_UNCHANGED",
   "frontier_status": "BLOCKER",
   "blocker_count": 1
 }

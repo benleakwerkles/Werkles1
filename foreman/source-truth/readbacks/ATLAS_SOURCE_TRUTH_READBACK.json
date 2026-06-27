@@ -1,6 +1,6 @@
 {
   "readback_id": "ATLAS_SOURCE_TRUTH_READBACK",
-  "created_at": "2026-06-27T20:10:59.741Z",
+  "created_at": "2026-06-27T20:11:14.888Z",
   "organ": "Atlas",
   "machine_context": "Doss",
   "source_truth": {
@@ -14,15 +14,9 @@
   "local_workspace": {
     "path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\work\\source-truth-atlas-speaker-v0",
     "branch": "source-truth/atlas-speaker-v0-20260627",
-    "head": "dae083f62d1ac2cefecc9bd1c59d4ce0b55b5c8b",
-    "clean": false,
-    "status_short": [
-      "M package.json",
-      " M scripts/foreman/source-truth-pulse.mjs",
-      "?? scripts/foreman/frontier-bootloader-readback.mjs",
-      "?? scripts/foreman/nerdkle-production-input-readback.mjs",
-      "?? scripts/foreman/speaker-frontier-mirror.mjs"
-    ]
+    "head": "a6b0fe6ad78daf0ddff9d0967c3432ff7750bb10",
+    "clean": true,
+    "status_short": []
   },
   "classification": "LOCAL_NONCANONICAL_WORKSPACE",
   "source_truth_statement": "GitHub origin/main is canonical. Local branches and worktrees are evidence until promoted through a human gate.",

@@ -1,6 +1,6 @@
 {
   "index_id": "ATLAS_GITHUB_BRANCH_INDEX",
-  "created_at": "2026-06-27T20:11:00.089Z",
+  "created_at": "2026-06-27T20:11:15.260Z",
   "organ": "Atlas",
   "source_truth_statement": "GitHub origin/main is canonical. Other GitHub branches are candidate, audit, preview, or preservation evidence until human-gated promotion.",
   "remote": "origin",
