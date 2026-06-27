@@ -1,0 +1,14 @@
+{
+  "id": "breath-receipt-packet-first-movement-001",
+  "packet_id": "packet-first-movement-001",
+  "work_id": "work-first-artifact",
+  "artifact_path": "NMCLR/spec/build/artifacts/first-artifact.json",
+  "pass": true,
+  "proof_only": true,
+  "breath": {
+    "intake": "packet accepted",
+    "process": "artifact written",
+    "exhale": "receipt emitted"
+  },
+  "created_at": "2026-06-24T00:48:31.897Z"
+}

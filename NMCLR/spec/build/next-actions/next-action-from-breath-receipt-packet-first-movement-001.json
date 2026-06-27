@@ -1,0 +1,27 @@
+{
+  "id": "next-action-from-breath-receipt-packet-first-movement-001",
+  "source_receipt": "breath-receipt-packet-first-movement-001",
+  "source_packet": "packet-first-movement-001",
+  "prior_artifact": "NMCLR/spec/build/artifacts/first-artifact.json",
+  "recommendation": {
+    "title": "Build the next bounded NMCLR artifact from the proven breath loop",
+    "reason": "A passed breath receipt proves packet-to-artifact movement can become future work.",
+    "action_type": "write_artifact_from_packet",
+    "constraints": [
+      "stay inside NMCLR/spec/build",
+      "use receipt evidence only",
+      "do not introduce router, daemon, scheduler, queue, database, UI, or bridge"
+    ]
+  },
+  "lesson": {
+    "lesson_id": "lesson-from-breath-receipt-packet-first-movement-001",
+    "statement": "A passed breath receipt proves packet-to-artifact movement can become future work.",
+    "evidence": {
+      "receipt_id": "breath-receipt-packet-first-movement-001",
+      "packet_id": "packet-first-movement-001",
+      "work_id": "work-first-artifact",
+      "artifact_path": "NMCLR/spec/build/artifacts/first-artifact.json"
+    }
+  },
+  "created_at": "2026-06-24T02:24:19.897Z"
+}

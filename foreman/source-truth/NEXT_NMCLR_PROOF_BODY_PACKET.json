@@ -1,0 +1,18 @@
+{
+  "packet_id": "NEXT_NMCLR_PROOF_BODY_PACKET_20260627",
+  "owner": "Swanson@Doss",
+  "stream": "NERDKLE / NMCLR / PROOF BODY",
+  "status": "READY_FOR_REVIEW",
+  "source_branch": "nerdkle/nmclr-proof-body-preserve-v0-20260627",
+  "source_artifact": "NMCLR/spec/build",
+  "source_artifact_status": "PRESERVED_ONLY_NOT_CANONICAL",
+  "next_action": "Review the preserved NMCLR proof body branch and decide whether to run branch-specific execution proof in this branch.",
+  "evidence_required": [
+    "GitHub review branch exists",
+    "NMCLR_PROOF_BODY_PRESERVATION_CHECK returns ARTIFACT",
+    "Branch-specific execution proof exists before any canonical promotion",
+    "Human promotion decision exists"
+  ],
+  "destination": "TinkerDen Intake / Speaker",
+  "failure_condition": "Any Aeye calls this branch canonical, full Nerdkle proof, Feral proof, or TinkerDen proof before execution and promotion receipts exist."
+}

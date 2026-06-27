@@ -1,0 +1,49 @@
+{
+  "receipt_id": "SWANSON_DOSS_BRANCH_COLLISION_RECEIPT_INGEST_RECEIPT",
+  "mission": "SWANSON_DOSS_BRANCH_COLLISION_RECEIPT_INGEST",
+  "owner": "Swanson@Doss",
+  "stream": "NERDKLE / NMCLR / RECEIPT INGESTION",
+  "created_at": "2026-06-26T18:34:00-04:00",
+  "status": "ARTIFACT",
+  "artifact_path": "C:\\Users\\BenLeak\\Desktop\\github\\Werkles\\NMCLR\\spec\\build\\receipts\\branch_collision\\BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT.md",
+  "artifact_hash": "13014DC2A31596ED5C0486D5900E7F9A881977936947C4F60723E1CAA5D6CB4C",
+  "byte_count": 6059,
+  "review_copy_path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\branch_collision\\BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT.md",
+  "review_copy_hash": "13014DC2A31596ED5C0486D5900E7F9A881977936947C4F60723E1CAA5D6CB4C",
+  "review_copy_byte_count": 6059,
+  "readback_method": "Get-Content -Raw + Select-String marker check + Get-FileHash SHA256",
+  "readback_markers_found": [
+    "BS-BRANCHCOLLISION-20260626-1645",
+    "BS-BRANCHCOLLISION-20260626-1700",
+    "PRESERVED_ONLY / NOT_CANONICAL",
+    "BRANCH_A_NCL_PS1",
+    "BRANCH_B_NODE_ESM",
+    "RECEIPT_CANDIDATE_STORED_AND_READ_BACK"
+  ],
+  "current_proof_level": "RECEIPT_CANDIDATE_STORED_AND_READ_BACK",
+  "canonical_ruling": "PRESERVED_ONLY / NOT_CANONICAL",
+  "branch_a_status": "PRESERVED_ONLY / NOT_CANONICAL",
+  "branch_b_status": "PRESERVED_ONLY / NOT_CANONICAL",
+  "missing_proof": [
+    "Original Bean@Spanzee receipt body is represented from current operator-provided thread text, not direct machine-to-machine receiver storage.",
+    "Branch-specific git branch name for each build family.",
+    "Branch-specific commit hash for each build family.",
+    "Branch A NCL/PS1 filesystem snapshot.",
+    "Branch-specific execution proof for Branch A.",
+    "Branch-specific execution proof for Branch B.",
+    "Lineage for Branch A and Branch B.",
+    "Promotion decision receipt from Petra or Ben."
+  ],
+  "source_receipts_used": [
+    "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\SWANSON_DOSS_TWO_BRANCH_MANIFEST_RECEIPT.json",
+    "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\SWANSON_DOSS_NMCLR_FIRST_SLICE_READBACK_RECEIPT.json",
+    "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\SWANSON_DOSS_NMCLR_MANIFEST_READBACK_RECEIPT.json",
+    "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\nmclr_filesystem_snapshot\\SWANSON_DOSS_NMCLR_FILESYSTEM_SNAPSHOT_RECEIPT.json"
+  ],
+  "do_not": [
+    "Do not promote either branch.",
+    "Do not collapse the two builds.",
+    "Do not treat this candidate as canonical proof."
+  ],
+  "ben_action": "None for audit; required only for promotion decision."
+}

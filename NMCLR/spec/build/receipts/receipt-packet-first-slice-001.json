@@ -1,0 +1,23 @@
+{
+  "id": "receipt-packet-first-slice-001",
+  "packet_id": "packet-first-slice-001",
+  "pass": true,
+  "breath": {
+    "intake": "packet accepted",
+    "output": "work_item_written",
+    "receipt": "receipt written"
+  },
+  "output": {
+    "kind": "work_item_written",
+    "path": "work/work-first-slice-action.json",
+    "work_item": {
+      "id": "work-first-slice-action",
+      "title": "NMCLR first slice action completed",
+      "status": "ready",
+      "caused_by_packet": "packet-first-slice-001",
+      "muscle": "packet-causes-action",
+      "created_at": "2026-06-23T20:47:58.741Z"
+    }
+  },
+  "created_at": "2026-06-23T20:47:58.743Z"
+}

@@ -1,0 +1,63 @@
+﻿{
+    "receipt_id":  "DINK_NERDKLE_DRY_RECEIPT_INGESTION_RECEIPT",
+    "packet_id":  "HAND_EYE_PACKET_INGEST_NERDKLE_DRY_RECEIPTS",
+    "owner":  "Dink@Doss",
+    "stream":  "NERDKLE / NMCLR / RECEIPT INGESTION",
+    "created_at":  "2026-06-26T16:45:00-04:00",
+    "destination_path":  "C:\\Users\\BenLeak\\Desktop\\github\\Werkles\\NMCLR\\spec\\build\\receipts\\nerdkle_dry_receipt_ingestion\\DINK_NERDKLE_DRY_RECEIPT_INGESTION_RECEIPT.json",
+    "source_status":  "chat is not durable organism storage; this receipt is receiver-side file-backed readback",
+    "readback_method":  "PowerShell Test-Path + Get-Content -Raw + Get-FileHash SHA256 on each durable source file, then Get-FileHash SHA256 on this receiver-side artifact",
+    "status":  "RECEIPT_PROVEN",
+    "missing_proof":  [
+
+                      ],
+    "normalized_receipts":  [
+                                {
+                                    "receipt_or_packet_id":  "NERDKLE_DRY_RECEIPT_001",
+                                    "type":  "receipt",
+                                    "source_path":  "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\dink_doss_nerdkle_receipt_dry_run\\NERDKLE_DRY_RECEIPT_001.md",
+                                    "exists":  true,
+                                    "sha256":  "ECBCCB6ED1F13C94249E4ABD2E8660C0416E77E52536A7F5D615568F120CB007",
+                                    "byte_count":  739,
+                                    "status_guess":  "ACK",
+                                    "normalized_from":  "local durable file readback of previously generated chat-pasted receipt artifact"
+                                },
+                                {
+                                    "receipt_or_packet_id":  "NERDKLE_DRY_BIRD_001",
+                                    "type":  "packet",
+                                    "source_path":  "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\dink_doss_nerdkle_receipt_dry_run\\NERDKLE_DRY_BIRD_001.md",
+                                    "exists":  true,
+                                    "sha256":  "7F0DD3197C87A2690B49217ED91213B4823CE214BCF8C383257705F5207AFA87",
+                                    "byte_count":  667,
+                                    "status_guess":  "ACK",
+                                    "normalized_from":  "local durable file readback of previously generated chat-pasted receipt artifact"
+                                },
+                                {
+                                    "receipt_or_packet_id":  "PULSE_TEST_001_ACK_ARTIFACT",
+                                    "type":  "artifact",
+                                    "source_path":  "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\nerdkle_pulse_v0\\artifacts\\PULSE_TEST_001_ACK_ARTIFACT.md",
+                                    "exists":  true,
+                                    "sha256":  "C379763A9FA0B08102D0613F27C3D25AFB6ABEFF9AE3521535E34B2D68AD8877",
+                                    "byte_count":  341,
+                                    "status_guess":  "ACK",
+                                    "normalized_from":  "local durable file readback of previously generated chat-pasted receipt artifact"
+                                },
+                                {
+                                    "receipt_or_packet_id":  "NERDKLE_PULSE_RECEIPT",
+                                    "type":  "receipt",
+                                    "source_path":  "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\nerdkle_pulse_v0\\receipts\\NERDKLE_PULSE_RECEIPT.json",
+                                    "exists":  true,
+                                    "sha256":  "EDB92F63B709D756A1104AC7CC6377CB3BDF47017FD30E2708B2E70C104C2057",
+                                    "byte_count":  615,
+                                    "status_guess":  "ACK",
+                                    "normalized_from":  "local durable file readback of previously generated chat-pasted receipt artifact"
+                                }
+                            ],
+    "boundaries":  [
+                       "No Feral build",
+                       "No TinkerDen UI touch",
+                       "No anatomy doctrine",
+                       "No NMCLR canonical promotion",
+                       "No sender-side existence counted as delivery"
+                   ]
+}

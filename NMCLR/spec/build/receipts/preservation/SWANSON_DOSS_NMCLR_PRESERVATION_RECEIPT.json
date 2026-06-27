@@ -1,0 +1,55 @@
+{
+  "receipt_id": "SWANSON_DOSS_NMCLR_PRESERVATION_RECEIPT",
+  "mission": "SWANSON_DOSS_OPEN_NMCLR_RECEIPT_CHASER",
+  "owner": "Swanson@Doss",
+  "stream": "NERDKLE / NMCLR / RECEIPT CONTROL",
+  "created_at": "2026-06-26T18:13:51.1596211-04:00",
+  "status": "ARTIFACT",
+  "open_tasks_closed": [
+    {
+      "task": "BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT.md ingestion",
+      "artifact_path": "C:\\Users\\BenLeak\\Desktop\\github\\Werkles\\NMCLR\\spec\\build\\receipts\\branch_collision\\BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT.md",
+      "artifact_hash": "13014DC2A31596ED5C0486D5900E7F9A881977936947C4F60723E1CAA5D6CB4C",
+      "byte_count": 6059,
+      "proof_level": "RECEIPT_CANDIDATE_STORED_AND_READ_BACK"
+    },
+    {
+      "task": "NMCLR_SPEC_BUILD_FS_SNAPSHOT_V0.json filesystem snapshot",
+      "artifact_path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\nmclr_filesystem_snapshot\\NMCLR_SPEC_BUILD_FS_SNAPSHOT_V0.json",
+      "artifact_hash": "7A8B3F38733FAE65E17F15B8FC5FC80A5BAD998057512F3B7B66E243734E79C0",
+      "byte_count": 7317,
+      "aggregate_tree_hash": "83414BF6E8070F90DB68E2F476C8E0B02970D02F4E6BED300D2058DBA3B7FD87",
+      "branch_family_found": "BRANCH_B_NODE_ESM",
+      "proof_level": "FILESYSTEM_SNAPSHOT_STORED_AND_READ_BACK"
+    }
+  ],
+  "branch_collision_receipt_path": "C:\\Users\\BenLeak\\Desktop\\github\\Werkles\\NMCLR\\spec\\build\\receipts\\branch_collision\\BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT.md",
+  "branch_collision_artifact_hash": "13014DC2A31596ED5C0486D5900E7F9A881977936947C4F60723E1CAA5D6CB4C",
+  "filesystem_snapshot_path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\outputs\\nmclr_filesystem_snapshot\\NMCLR_SPEC_BUILD_FS_SNAPSHOT_V0.json",
+  "filesystem_snapshot_hash": "7A8B3F38733FAE65E17F15B8FC5FC80A5BAD998057512F3B7B66E243734E79C0",
+  "aggregate_tree_hash": "83414BF6E8070F90DB68E2F476C8E0B02970D02F4E6BED300D2058DBA3B7FD87",
+  "branch_family_found": "BRANCH_B_NODE_ESM",
+  "canonical_readiness": "NO",
+  "classification": {
+    "branch_a": "PRESERVED_ONLY / NOT_CANONICAL",
+    "branch_b": "PRESERVED_ONLY / NOT_CANONICAL"
+  },
+  "missing_proof": [
+    "Branch-specific identity for each build family.",
+    "Branch-specific commit hashes.",
+    "Branch A NCL/PS1 filesystem snapshot.",
+    "Branch-specific execution proof for Branch A.",
+    "Branch-specific execution proof for Branch B.",
+    "Lineage receipt for Branch A.",
+    "Lineage receipt for Branch B.",
+    "Canonical promotion decision from Petra or Ben."
+  ],
+  "readback_method": "Get-FileHash SHA256 for Bean receipt and filesystem snapshot; ConvertFrom-Json parse of filesystem snapshot receipt; this preservation receipt stored in NMCLR receipt surface and outputs.",
+  "do_not": [
+    "Do not promote either branch.",
+    "Do not collapse the branches.",
+    "Do not call chat text durable storage.",
+    "Do not claim canonical status."
+  ],
+  "ben_action": "None."
+}

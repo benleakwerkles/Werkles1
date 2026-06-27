@@ -1,0 +1,11 @@
+{
+  "id": "packet-first-movement-001",
+  "work": {
+    "id": "work-first-artifact",
+    "artifact_path": "NMCLR/spec/build/artifacts/first-artifact.json",
+    "body": {
+      "result": "packet became artifact",
+      "proof": "first muscle wrote this artifact from packet.work.body"
+    }
+  }
+}

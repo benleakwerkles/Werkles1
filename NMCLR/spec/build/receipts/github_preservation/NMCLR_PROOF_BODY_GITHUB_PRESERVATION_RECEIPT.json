@@ -1,0 +1,13 @@
+{
+  "receipt_id": "NMCLR_PROOF_BODY_GITHUB_PRESERVATION_RECEIPT",
+  "mission": "NMCLR_PROOF_BODY_GITHUB_PRESERVATION",
+  "owner": "Swanson@Doss",
+  "created_at": "2026-06-27T18:08:26.525Z",
+  "status": "ARTIFACT",
+  "readback_path": "NMCLR/spec/build/receipts/github_preservation/NMCLR_PROOF_BODY_GITHUB_PRESERVATION_READBACK.json",
+  "readback_hash": "6513A69F6A30F119A425E5A5F0571E00D44DD10009FA401C560DA25DCC3DE8DF",
+  "aggregate_tree_hash": "D54D28717A6A7365EA299D72412AC732222B1B077367388EEDEBE4C3CCE66200",
+  "branch_family_classification": "BRANCH_B_NODE_ESM",
+  "canonical_status": "PRESERVED_ONLY_NOT_CANONICAL",
+  "readback_method": "recursive file hash only; no NMCLR code executed"
+}

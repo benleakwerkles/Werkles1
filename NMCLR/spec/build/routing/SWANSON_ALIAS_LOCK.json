@@ -1,0 +1,28 @@
+{
+  "artifact_id": "SWANSON_ALIAS_LOCK",
+  "stream": "NERDKLE / NMCLR / ROUTING HYGIENE",
+  "mission": "SWANSON_ALIAS_LOCK",
+  "status": "ALIAS_LOCK_ACK",
+  "created_at": "2026-06-26T16:52:00-04:00",
+  "rule": {
+    "old_label": "Dink@Doss",
+    "normalized_name": "Swanson",
+    "machine_context": "Doss",
+    "aeye_function": "Dink-style execution / hand work",
+    "interpretation": "When Fucko previously says Dink@Doss, interpret the operational recipient as Swanson in the Doss context."
+  },
+  "do_not": [
+    "Do not treat Dink@Doss as a literal inbox.",
+    "Do not ask Ben why Dink@Doss cannot receive work.",
+    "Do not invent Speaker or Shared Reality as destination.",
+    "Do not call assignment labels delivery proof."
+  ],
+  "reachable_surface_if_known": [
+    "Current Swanson Codex session on Doss",
+    "Local file-backed NMCLR surface: C:\\Users\\BenLeak\\Desktop\\github\\Werkles\\NMCLR\\spec\\build"
+  ],
+  "unresolved_ambiguity": [
+    "No separate literal Dink@Doss inbox path is known or claimed.",
+    "This alias lock normalizes routing labels only; it does not prove downstream work delivery."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "receipt_id": "SWANSON_ALIAS_LOCK_RECEIPT",
+  "output": "ALIAS_LOCK_ACK",
+  "stream": "NERDKLE / NMCLR / ROUTING HYGIENE",
+  "mission": "SWANSON_ALIAS_LOCK",
+  "owner": "Swanson",
+  "timestamp": "2026-06-26T16:52:00-04:00",
+  "old_label": "Dink@Doss",
+  "normalized_name": "Swanson",
+  "machine_context": "Doss",
+  "reachable_surface_if_known": [
+    "Current Swanson Codex session on Doss",
+    "C:\\Users\\BenLeak\\Desktop\\github\\Werkles\\NMCLR\\spec\\build"
+  ],
+  "artifact_path": "C:\\Users\\BenLeak\\Desktop\\github\\Werkles\\NMCLR\\spec\\build\\routing\\SWANSON_ALIAS_LOCK.json",
+  "unresolved_ambiguity": [
+    "No literal Dink@Doss inbox is known.",
+    "Alias lock is routing normalization, not delivery proof."
+  ],
+  "status": "ALIAS_LOCK_ACK"
+}

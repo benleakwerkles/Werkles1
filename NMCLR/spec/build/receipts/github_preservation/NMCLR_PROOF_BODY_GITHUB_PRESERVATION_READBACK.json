@@ -1,0 +1,168 @@
+{
+  "check_id": "NMCLR_PROOF_BODY_PRESERVATION_CHECK",
+  "created_at": "2026-06-27T18:08:26.523Z",
+  "status": "ARTIFACT",
+  "root_path": "NMCLR/spec/build",
+  "recursive_file_count": 22,
+  "aggregate_tree_hash": "D54D28717A6A7365EA299D72412AC732222B1B077367388EEDEBE4C3CCE66200",
+  "branch_family_classification": "BRANCH_B_NODE_ESM",
+  "required_node_esm_present": [
+    "README.md",
+    "nmclr-first-slice.mjs",
+    "first_movement.mjs",
+    "first_breath.mjs",
+    "first_metabolism.mjs",
+    "fixtures/packet-causes-action.json",
+    "artifacts/first-artifact.json",
+    "receipts/receipt-packet-first-slice-001.json"
+  ],
+  "required_node_esm_missing": [],
+  "ncl_ps1_present": [],
+  "ncl_ps1_missing": [
+    "BUILD_SPEC_v2.3.json",
+    "runnable_slices/slice_001_init.ps1",
+    "runnable_slices/slice_002_validate.ncl",
+    "runnable_slices/slice_003_emit.json",
+    "manifest.lock",
+    "packet_manifest.sig"
+  ],
+  "canonical_status": "PRESERVED_ONLY_NOT_CANONICAL",
+  "proof_boundary": "This check reads and hashes files only. It does not execute NMCLR and does not prove full Nerdkle life.",
+  "excluded_from_fingerprint": [
+    "receipts/github_preservation"
+  ],
+  "files": [
+    {
+      "relative_path": "artifacts/first-artifact.json",
+      "byte_count": 110,
+      "sha256": "A5C2F79241D347C7E4373EF846525B8E181118A2D99E438C46186A926C0EC578",
+      "file_type": "artifact"
+    },
+    {
+      "relative_path": "first_breath.mjs",
+      "byte_count": 4076,
+      "sha256": "52868335D2D0672A22E2BFB29A005F56023CFD7C3512FE12F1BFC5BC968D1029",
+      "file_type": "source"
+    },
+    {
+      "relative_path": "first_metabolism.mjs",
+      "byte_count": 3656,
+      "sha256": "095882BE833990CA2E476F50C566B87C67671D81FE37486AA39E64EC45934763",
+      "file_type": "source"
+    },
+    {
+      "relative_path": "first_movement.mjs",
+      "byte_count": 4035,
+      "sha256": "34CE809D083D19E5615537EED28D3C4A16F14047BC3DE28536A2DEF927910628",
+      "file_type": "source"
+    },
+    {
+      "relative_path": "fixtures/packet-causes-action.json",
+      "byte_count": 306,
+      "sha256": "7684A1F258A49DA8374EF1FD9C9BC1780E192E34F273A3AE986611B85F7C5585",
+      "file_type": "fixture"
+    },
+    {
+      "relative_path": "next-actions/next-action-from-breath-receipt-packet-first-movement-001.json",
+      "byte_count": 1182,
+      "sha256": "717B5C4CE1461961D7A75A59E7447BA79C189FA59BA49BECC351764F01FB34AB",
+      "file_type": "next-action"
+    },
+    {
+      "relative_path": "nmclr-first-slice.mjs",
+      "byte_count": 3739,
+      "sha256": "333885DCB19FEF79957149FA87441D23AADBD627CB89A66AC6AFE7F38916954C",
+      "file_type": "source"
+    },
+    {
+      "relative_path": "README.md",
+      "byte_count": 1863,
+      "sha256": "32406BE6A555A3EC48DEC75641150AB21BF55FCB9132D30B06576198802A5F64",
+      "file_type": "source"
+    },
+    {
+      "relative_path": "receipts/branch_collision/BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT.md",
+      "byte_count": 6059,
+      "sha256": "13014DC2A31596ED5C0486D5900E7F9A881977936947C4F60723E1CAA5D6CB4C",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/branch_collision/SWANSON_DOSS_BRANCH_COLLISION_RECEIPT_INGEST_RECEIPT.json",
+      "byte_count": 2878,
+      "sha256": "34CDEFB5BF7D91E73C6D21307509489EAABAF1851D1E8469B0423DD4067F89EA",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/breath-receipt-packet-first-movement-001.json",
+      "byte_count": 405,
+      "sha256": "734F9A59FFB07D61074DCD053E22F2C947ACBDD026EBA69E64FB8BE45609CBE9",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/nerdkle_dry_receipt_ingestion/DINK_NERDKLE_DRY_RECEIPT_INGESTION_RECEIPT.json",
+      "byte_count": 4632,
+      "sha256": "4F88A94448F21491ABCF955FB1871E15F7D24EABFC6186FF1086F74B9B717951",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/nerdkle_dry_receipt_ingestion/DINK_NERDKLE_DRY_RECEIPT_INGESTION_RECEIPT.json.sha256",
+      "byte_count": 211,
+      "sha256": "D03572F308757FF8845CD55228CDEC447647AB34D994B7C22BB6D57DDB2A1512",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/preservation/SWANSON_DOSS_NMCLR_PRESERVATION_RECEIPT.json",
+      "byte_count": 3019,
+      "sha256": "914393CF5149A293054D2A8C62425F07AA3C2B3E58547CE1CBBE4C288FAFB33B",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/receipt-packet-first-movement-001.json",
+      "byte_count": 315,
+      "sha256": "A347B5981A6EC2BD9FEA10D261DEA323E60FD56FA59CF96B448D9958F913F7B6",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/receipt-packet-first-slice-001.json",
+      "byte_count": 648,
+      "sha256": "DEBE3F887FA052A55977A934610E992CE0A67F6F2631F987E6FA307B00EB7F6D",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/receipt-packet-first-slice-readback-20260626-1724.json",
+      "byte_count": 746,
+      "sha256": "99B39324B34CEE38DEB2F3B45CFCEE1EA24A1BD77FA03D6DA115FEA1933D1EB3",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "receipts/routing_hygiene/SWANSON_ALIAS_LOCK_RECEIPT.json",
+      "byte_count": 764,
+      "sha256": "0EC85720CB3DBB6306AF11F9EC9FBA72EF88805621781E9FC67AB0596D09EA2D",
+      "file_type": "receipt"
+    },
+    {
+      "relative_path": "routing/SWANSON_ALIAS_LOCK.json",
+      "byte_count": 1129,
+      "sha256": "F73EE905DBB35785553E78D5A16711CFFCD06B2607A1BF3A3E9A0429A84660BA",
+      "file_type": "routing"
+    },
+    {
+      "relative_path": "work/next-work-from-receipt.json",
+      "byte_count": 303,
+      "sha256": "B9D60424AC6E68F1DFE4AE05F117F750292957B6963282AB13EED0A2CF686D6C",
+      "file_type": "work"
+    },
+    {
+      "relative_path": "work/work-first-slice-action.json",
+      "byte_count": 236,
+      "sha256": "0AF1F6F94CB25BE4B054E2D520AB547CF4DA15137BFE65871B2B0648F4310460",
+      "file_type": "work"
+    },
+    {
+      "relative_path": "work/work-first-slice-readback-20260626-1724.json",
+      "byte_count": 280,
+      "sha256": "9689085495C575A3149D4E6AC80C95482E10C852ECC9567C4A71D0DE1688F407",
+      "file_type": "work"
+    }
+  ]
+}
