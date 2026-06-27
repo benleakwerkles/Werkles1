@@ -1,0 +1,17 @@
+{
+  "packet_id": "NEXT_SOURCE_TRUTH_PACKET_20260627",
+  "owner": "Swanson@Doss",
+  "stream": "NERDKLE / SOURCE TRUTH / ATLAS SPEAKER",
+  "status": "READY_FOR_REVIEW",
+  "context": "Atlas and Speaker V0 exist on a GitHub review branch. GitHub origin/main remains canonical until human-gated promotion.",
+  "next_action": "Review and merge source-truth/atlas-speaker-v0-20260627 into main if the policy and pulse are accepted.",
+  "evidence_required": [
+    "GitHub branch exists",
+    "truth:ci passes",
+    "Atlas readback receipt exists",
+    "Speaker mirror receipt exists",
+    "Ben/Petra promotion decision exists"
+  ],
+  "destination": "TinkerDen Intake / Speaker",
+  "failure_condition": "Any Aeye calls local branch, Atlas mirror, or Speaker draft canonical before merge/promotion."
+}

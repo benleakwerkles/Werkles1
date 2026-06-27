@@ -1,6 +1,6 @@
 {
   "readback_id": "ATLAS_SOURCE_TRUTH_READBACK",
-  "created_at": "2026-06-27T17:46:51.484Z",
+  "created_at": "2026-06-27T17:53:56.812Z",
   "organ": "Atlas",
   "machine_context": "Doss",
   "source_truth": {
@@ -14,16 +14,14 @@
   "local_workspace": {
     "path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\work\\source-truth-atlas-speaker-v0",
     "branch": "source-truth/atlas-speaker-v0-20260627",
-    "head": "0c727a2461f274f8990063ab9ee06b799a1890ed",
+    "head": "92512b08e8a057147afffcf0adc7268d92fd7b09",
     "clean": false,
     "status_short": [
       "M package.json",
-      "?? foreman/atlas/",
-      "?? foreman/source-truth/",
-      "?? foreman/speaker/",
-      "?? scripts/foreman/atlas-source-truth-readback.mjs",
-      "?? scripts/foreman/source-truth-pulse.mjs",
-      "?? scripts/foreman/speaker-truth-mirror.mjs"
+      "?? .github/",
+      "?? foreman/source-truth/AEYE_SOURCE_TRUTH_BOOT_PACKET.md",
+      "?? foreman/source-truth/NEXT_SOURCE_TRUTH_PACKET.json",
+      "?? scripts/foreman/source-truth-guard.mjs"
     ]
   },
   "classification": "LOCAL_NONCANONICAL_WORKSPACE",
