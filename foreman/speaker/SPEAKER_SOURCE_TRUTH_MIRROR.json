@@ -1,9 +1,9 @@
 {
   "mirror_id": "SPEAKER_SOURCE_TRUTH_MIRROR",
-  "created_at": "2026-06-27T19:31:05.697Z",
+  "created_at": "2026-06-27T19:31:34.586Z",
   "organ": "Speaker",
   "source_readback_path": "foreman/source-truth/readbacks/ATLAS_SOURCE_TRUTH_READBACK.json",
-  "source_readback_hash": "BBEAEE80F14FFCCC96FCFC8C691E4AD92056A1F61B9631AB7F798A300A2F6B2C",
+  "source_readback_hash": "7B99D97A0E9478E71FF38548E441F831FCA25EA936B94A7B2D9BD76E51FB3601",
   "canonical_statement": "GitHub origin/main is the canonical source truth. Local branches and worktrees are evidence until promoted through a human gate.",
   "remote_hash": "0c727a2461f274f8990063ab9ee06b799a1890ed",
   "local_classification": "LOCAL_NONCANONICAL_WORKSPACE",

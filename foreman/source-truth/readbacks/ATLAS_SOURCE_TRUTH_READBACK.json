@@ -1,6 +1,6 @@
 {
   "readback_id": "ATLAS_SOURCE_TRUTH_READBACK",
-  "created_at": "2026-06-27T19:31:05.221Z",
+  "created_at": "2026-06-27T19:31:34.070Z",
   "organ": "Atlas",
   "machine_context": "Doss",
   "source_truth": {
@@ -14,21 +14,9 @@
   "local_workspace": {
     "path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\work\\source-truth-atlas-speaker-v0",
     "branch": "source-truth/atlas-speaker-v0-20260627",
-    "head": "834ec9f4d529155e97f223dceed4ea2b6875a860",
-    "clean": false,
-    "status_short": [
-      "M foreman/source-truth/CANDIDATE_TRUTH_REGISTRY.json",
-      " M foreman/source-truth/readbacks/ATLAS_GITHUB_BRANCH_INDEX.json",
-      " M foreman/source-truth/readbacks/ATLAS_SOURCE_TRUTH_READBACK.json",
-      " M foreman/source-truth/receipts/ATLAS_GITHUB_BRANCH_INDEX_RECEIPT.json",
-      " M foreman/source-truth/receipts/ATLAS_SOURCE_TRUTH_READBACK_RECEIPT.json",
-      " M foreman/speaker/SPEAKER_SOURCE_TRUTH_MIRROR.json",
-      " M foreman/speaker/receipts/SPEAKER_SOURCE_TRUTH_MIRROR_RECEIPT.json",
-      " M scripts/foreman/atlas-github-branch-index.mjs",
-      "?? foreman/source-truth/NERDKLE_PRODUCTION_INPUT_CONTRACT.json",
-      "?? foreman/source-truth/NERDKLE_SHARED_REALITY_STATUS.md",
-      "?? foreman/source-truth/NEXT_NERDKLE_PRODUCTION_INPUTS_BIRD.json"
-    ]
+    "head": "ca79719a56ddd28ce980c7097234af8d7a916257",
+    "clean": true,
+    "status_short": []
   },
   "classification": "LOCAL_NONCANONICAL_WORKSPACE",
   "source_truth_statement": "GitHub origin/main is canonical. Local branches and worktrees are evidence until promoted through a human gate.",
