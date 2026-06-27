@@ -1,0 +1,30 @@
+{
+  "mirror_id": "SPEAKER_SOURCE_TRUTH_MIRROR",
+  "created_at": "2026-06-27T17:46:51.559Z",
+  "organ": "Speaker",
+  "source_readback_path": "foreman/source-truth/readbacks/ATLAS_SOURCE_TRUTH_READBACK.json",
+  "source_readback_hash": "1CCE6CEFDE8AF538A65747C3DA3180130220B0D768A88C38861EB7A3A5FAC522",
+  "canonical_statement": "GitHub origin/main is the canonical source truth. Local branches and worktrees are evidence until promoted through a human gate.",
+  "remote_hash": "0c727a2461f274f8990063ab9ee06b799a1890ed",
+  "local_classification": "LOCAL_NONCANONICAL_WORKSPACE",
+  "warnings": [
+    "Do not let session memory outrank GitHub readback.",
+    "Do not call a local branch canonical without promotion proof.",
+    "Do not confuse preservation receipts with canonical promotion.",
+    "Do not make Ben repeat source-truth routing rules."
+  ],
+  "speaker_boundaries": {
+    "may": [
+      "mirror rationale",
+      "write draft causal entries",
+      "warn on drift"
+    ],
+    "may_not": [
+      "execute",
+      "route",
+      "ratify",
+      "promote",
+      "delete history"
+    ]
+  }
+}

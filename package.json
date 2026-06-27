@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "truth:atlas": "node scripts/foreman/atlas-source-truth-readback.mjs --write",
+    "truth:speaker": "node scripts/foreman/speaker-truth-mirror.mjs --write",
+    "truth:pulse": "node scripts/foreman/source-truth-pulse.mjs --write"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",

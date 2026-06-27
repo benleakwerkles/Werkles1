@@ -1,0 +1,15 @@
+{
+  "receipt_id": "ATLAS_SOURCE_TRUTH_READBACK_RECEIPT",
+  "mission": "ATLAS_SOURCE_TRUTH_READBACK",
+  "owner": "Atlas",
+  "created_at": "2026-06-27T17:46:51.487Z",
+  "status": "ARTIFACT",
+  "readback_path": "foreman/source-truth/readbacks/ATLAS_SOURCE_TRUTH_READBACK.json",
+  "readback_hash": "1CCE6CEFDE8AF538A65747C3DA3180130220B0D768A88C38861EB7A3A5FAC522",
+  "readback_byte_count": 1670,
+  "remote_hash": "0c727a2461f274f8990063ab9ee06b799a1890ed",
+  "local_classification": "LOCAL_NONCANONICAL_WORKSPACE",
+  "canonical_readiness": "GITHUB_MAIN_ONLY",
+  "readback_method": "git ls-remote origin refs/heads/main + git rev-parse HEAD + git status --short",
+  "ben_action": "None unless promoting a candidate branch to main."
+}

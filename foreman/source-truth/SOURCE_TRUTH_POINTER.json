@@ -1,0 +1,19 @@
+{
+  "source_truth_id": "WERKLES_SOURCE_TRUTH_V0",
+  "status": "DRAFT",
+  "canonical_remote": "origin",
+  "canonical_repository": "https://github.com/benleakwerkles/Werkles1.git",
+  "canonical_branch": "main",
+  "canonical_ref": "refs/heads/main",
+  "local_branches_are_canonical": false,
+  "review_branches_are_canonical": false,
+  "promotion_requires_human_gate": true,
+  "atlas_role": "READ_AND_MIRROR_GITHUB_TRUTH",
+  "speaker_role": "MIRROR_RATIONALE_AND_WARN_ON_DRIFT",
+  "do_not": [
+    "Do not treat local branch state as source truth.",
+    "Do not treat a preview branch as canonical.",
+    "Do not promote Atlas mirror copies.",
+    "Do not let Speaker execute or route work."
+  ]
+}
