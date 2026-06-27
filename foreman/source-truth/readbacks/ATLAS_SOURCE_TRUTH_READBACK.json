@@ -1,6 +1,6 @@
 {
   "readback_id": "ATLAS_SOURCE_TRUTH_READBACK",
-  "created_at": "2026-06-27T20:11:14.888Z",
+  "created_at": "2026-06-27T20:11:34.270Z",
   "organ": "Atlas",
   "machine_context": "Doss",
   "source_truth": {
@@ -14,7 +14,7 @@
   "local_workspace": {
     "path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\work\\source-truth-atlas-speaker-v0",
     "branch": "source-truth/atlas-speaker-v0-20260627",
-    "head": "a6b0fe6ad78daf0ddff9d0967c3432ff7750bb10",
+    "head": "5e20fbc4a65c5016141c6bc37a27865a772fb3f6",
     "clean": true,
     "status_short": []
   },
