@@ -1,37 +1,82 @@
 {
   "created_at": "2026-06-27T20:06:13.603Z",
   "current_day": {
-    "blocker_count": 1,
-    "blocking_next_day": [
-      {
-        "blocker_id": "CIRCULATION_DB_MISSING",
-        "missing_path": "C:\\tinkarden\\server\\circulation.db",
-        "mission": "BIRD_0036_SWANSON_DAILY_STATE_SNAPSHOT",
-        "next_action": "Create or point SLEEP_CYCLE_DB/CIRCULATION_DB at the real production circulation.db before claiming daily action readback.",
-        "next_owner": "Swanson@Doss",
-        "owner": "Swanson@Doss",
-        "source_table": null,
-        "status": "BLOCKER",
-        "timestamp": "2026-06-27T20:06:53.683Z"
-      }
-    ],
+    "blocker_count": 0,
+    "blocking_next_day": [],
     "built_today": [],
-    "circulation_db": null,
+    "circulation_db": "C:\\tinkarden\\server\\circulation.db",
     "completed_packet_count": 0,
-    "created_at": "2026-06-27T20:06:53.683Z",
+    "created_at": "2026-06-27T20:17:34.543Z",
     "date": "2026-06-27",
     "machine": "Doss",
     "owner": "Swanson@Doss",
     "packet_id": "BIRD_0036_SWANSON_DAILY_STATE_SNAPSHOT",
-    "query_status": "BLOCKER",
+    "query_status": "READBACK_PROVEN",
     "raw_receipts_deleted": false,
     "rule": "Sleep cycle aggregates today's ledger into shared_frontier.json. It does not delete raw receipts.",
-    "snapshot_id": "SLEEP_CYCLE_20260627_2026-06-27T20-06-53-683Z",
-    "status": "BLOCKER",
+    "snapshot_id": "SLEEP_CYCLE_20260627_2026-06-27T20-17-34-543Z",
+    "status": "ARTIFACT",
     "stream": "INFRASTRUCTURE / MEMORY",
-    "table_summaries": [],
+    "table_summaries": [
+      {
+        "blocker_count": 0,
+        "columns_seen": [
+          "id",
+          "receipt_id",
+          "packet_id",
+          "mission",
+          "producer",
+          "owner",
+          "status",
+          "ASSIMILATED",
+          "receipt",
+          "payload",
+          "artifact_path",
+          "created_at",
+          "updated_at"
+        ],
+        "completed_count": 0,
+        "other_count": 0,
+        "rows_sampled": 0,
+        "rows_today": 0,
+        "table": "LiveReceipt",
+        "timestamp_column": "created_at"
+      },
+      {
+        "columns_seen": [
+          "id",
+          "applied_at",
+          "description"
+        ],
+        "rows_today": 0,
+        "skipped_reason": "NO_TIMESTAMP_COLUMN",
+        "table": "schema_migrations"
+      },
+      {
+        "blocker_count": 0,
+        "columns_seen": [
+          "id",
+          "kind",
+          "type",
+          "status",
+          "state",
+          "operator_signature",
+          "operator_signature_requested_at",
+          "created_at",
+          "updated_at",
+          "target_path",
+          "payload"
+        ],
+        "completed_count": 0,
+        "other_count": 0,
+        "rows_sampled": 0,
+        "rows_today": 0,
+        "table": "shadow_cache",
+        "timestamp_column": "created_at"
+      }
+    ],
     "warnings": [
-      "circulation.db was not found; no daily packet rows were queried."
+      "No completed packets were found for the selected day in readable timestamped tables."
     ]
   },
   "daily_state_snapshots": [
@@ -102,31 +147,98 @@
       "warnings": [
         "circulation.db was not found; no daily packet rows were queried."
       ]
+    },
+    {
+      "blocker_count": 0,
+      "blocking_next_day": [],
+      "built_today": [],
+      "circulation_db": "C:\\tinkarden\\server\\circulation.db",
+      "completed_packet_count": 0,
+      "created_at": "2026-06-27T20:17:34.543Z",
+      "date": "2026-06-27",
+      "machine": "Doss",
+      "owner": "Swanson@Doss",
+      "packet_id": "BIRD_0036_SWANSON_DAILY_STATE_SNAPSHOT",
+      "query_status": "READBACK_PROVEN",
+      "raw_receipts_deleted": false,
+      "rule": "Sleep cycle aggregates today's ledger into shared_frontier.json. It does not delete raw receipts.",
+      "snapshot_id": "SLEEP_CYCLE_20260627_2026-06-27T20-17-34-543Z",
+      "status": "ARTIFACT",
+      "stream": "INFRASTRUCTURE / MEMORY",
+      "table_summaries": [
+        {
+          "blocker_count": 0,
+          "columns_seen": [
+            "id",
+            "receipt_id",
+            "packet_id",
+            "mission",
+            "producer",
+            "owner",
+            "status",
+            "ASSIMILATED",
+            "receipt",
+            "payload",
+            "artifact_path",
+            "created_at",
+            "updated_at"
+          ],
+          "completed_count": 0,
+          "other_count": 0,
+          "rows_sampled": 0,
+          "rows_today": 0,
+          "table": "LiveReceipt",
+          "timestamp_column": "created_at"
+        },
+        {
+          "columns_seen": [
+            "id",
+            "applied_at",
+            "description"
+          ],
+          "rows_today": 0,
+          "skipped_reason": "NO_TIMESTAMP_COLUMN",
+          "table": "schema_migrations"
+        },
+        {
+          "blocker_count": 0,
+          "columns_seen": [
+            "id",
+            "kind",
+            "type",
+            "status",
+            "state",
+            "operator_signature",
+            "operator_signature_requested_at",
+            "created_at",
+            "updated_at",
+            "target_path",
+            "payload"
+          ],
+          "completed_count": 0,
+          "other_count": 0,
+          "rows_sampled": 0,
+          "rows_today": 0,
+          "table": "shadow_cache",
+          "timestamp_column": "created_at"
+        }
+      ],
+      "warnings": [
+        "No completed packets were found for the selected day in readable timestamped tables."
+      ]
     }
   ],
   "frontier_id": "SHARED_FRONTIER_V0",
   "next_bootloader": {
-    "blocker_count": 1,
-    "blocking_next_day": [
-      {
-        "blocker_id": "CIRCULATION_DB_MISSING",
-        "missing_path": "C:\\tinkarden\\server\\circulation.db",
-        "mission": "BIRD_0036_SWANSON_DAILY_STATE_SNAPSHOT",
-        "next_action": "Create or point SLEEP_CYCLE_DB/CIRCULATION_DB at the real production circulation.db before claiming daily action readback.",
-        "next_owner": "Swanson@Doss",
-        "owner": "Swanson@Doss",
-        "source_table": null,
-        "status": "BLOCKER",
-        "timestamp": "2026-06-27T20:06:53.683Z"
-      }
-    ],
+    "blocker_count": 0,
+    "blocking_next_day": [],
     "completed_packet_count": 0,
     "date": "2026-06-27",
     "read_this_first": "foreman/source-truth/shared_frontier.json",
-    "status": "BLOCKER",
-    "warning": "Daily state snapshot exists, but live ledger readback is blocked."
+    "status": "ARTIFACT",
+    "warning": "Daily state snapshot read back today's ledger."
   },
   "owner": "Swanson@Doss",
   "source_truth_rule": "GitHub origin/main remains canonical. Review branches and local runs are evidence until human-gated promotion.",
-  "updated_at": "2026-06-27T20:06:53.683Z"
+  "updated_at": "2026-06-27T20:17:34.543Z"
 }
