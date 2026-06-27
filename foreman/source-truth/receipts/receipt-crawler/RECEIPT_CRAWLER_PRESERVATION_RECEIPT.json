@@ -1,0 +1,18 @@
+{
+  "receipt_id": "RECEIPT_CRAWLER_PRESERVATION_RECEIPT",
+  "mission": "Preserve receipt crawler candidate on GitHub review branch",
+  "owner": "Swanson@Doss",
+  "created_at": "2026-06-27T19:14:59.458Z",
+  "status": "ARTIFACT",
+  "readback_path": "foreman/source-truth/readbacks/receipt-crawler/RECEIPT_CRAWLER_PRESERVATION_READBACK.json",
+  "readback_sha256": "F6FB42B75BD87C449D5BFD62FEC24B12C7D6120A79C20C274533C0A5C188A1BB",
+  "crawler_path": "scripts/foreman/crawler.js",
+  "launcher_path": "scripts/foreman/start-receipt-crawler.ps1",
+  "next_packet_path": "foreman/source-truth/NEXT_RECEIPT_CRAWLER_PACKET.json",
+  "live_ledger_status": "DB_MISSING",
+  "proof_boundary": "Self-test proves crawler mechanics against a synthetic local SQLite ledger. It does not prove a production LiveReceipt moved until circulation.db exists and logs RECEIPT_MOVED.",
+  "missing_for_go": [
+    "production circulation.db path",
+    "production LiveReceipt row movement proof"
+  ]
+}

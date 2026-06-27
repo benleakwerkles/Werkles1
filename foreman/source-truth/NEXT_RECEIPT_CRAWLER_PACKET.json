@@ -1,0 +1,37 @@
+{
+  "packet_id": "NEXT_RECEIPT_CRAWLER_PRODUCTION_MOVEMENT_PROOF",
+  "created_at": "2026-06-27T19:15:00.000Z",
+  "owner": "Swanson@Doss",
+  "stream": "NERDKLE / NERVOUS SYSTEM / RECEIPT CIRCULATION",
+  "status": "PENDING_REAL_LEDGER",
+  "mission": "Prove the receipt crawler against the real circulation.db ledger, not a synthetic self-test database.",
+  "source_truth_rule": "GitHub main remains canonical. This packet is carried on a review branch until promoted by a human gate.",
+  "input_required": {
+    "circulation_db": "Path to the real SQLite ledger containing table LiveReceipt",
+    "speaker_queue": "C:\\tinkarden\\intake\\speaker_queue"
+  },
+  "pass_condition": [
+    "A real LiveReceipt row with status SUCCESS and ASSIMILATED false/null is present.",
+    "crawler.js writes that receipt to C:\\tinkarden\\intake\\speaker_queue as Markdown.",
+    "The same SQLite row remains present and ASSIMILATED is updated to TRUE.",
+    "crawler log includes RECEIPT_MOVED for the real DB path."
+  ],
+  "fail_conditions": [
+    "circulation.db is missing",
+    "LiveReceipt table is missing required status or ASSIMILATED columns",
+    "receipt is written without updating the row",
+    "row is deleted",
+    "self-test output is described as production movement proof"
+  ],
+  "do_not": [
+    "Do not delete SQLite history rows.",
+    "Do not call DB_MISSING a successful receipt move.",
+    "Do not promote this crawler as canonical until production movement proof exists."
+  ],
+  "proof_artifacts_required": [
+    "crawler stdout line with RECEIPT_MOVED",
+    "speaker queue Markdown file path and SHA256",
+    "SQLite readback showing ASSIMILATED TRUE on the same row",
+    "receipt file under foreman/source-truth/receipts/receipt-crawler/"
+  ]
+}

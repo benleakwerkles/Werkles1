@@ -1,0 +1,89 @@
+{
+  "readback_id": "RECEIPT_CRAWLER_PRESERVATION_READBACK",
+  "created_at": "2026-06-27T19:14:58.739Z",
+  "status": "ARTIFACT",
+  "canonical_status": "PRESERVED_ONLY_NOT_CANONICAL",
+  "source_truth_rule": "GitHub main remains canonical. This branch preserves a crawler candidate for review.",
+  "files": [
+    {
+      "relative_path": "scripts/foreman/crawler.js",
+      "byte_count": 12017,
+      "sha256": "077799F171F21C1E2921D4E5BB9655389359F089A69E0F2BBE22B96D2AE4FDBD"
+    },
+    {
+      "relative_path": "scripts/foreman/start-receipt-crawler.ps1",
+      "byte_count": 2145,
+      "sha256": "A762BC7B955EB13F3B08193DFA2B23C95C2E51C8AA724CD4DB43A8BC0790DBD7"
+    },
+    {
+      "relative_path": "scripts/foreman/check-receipt-crawler-preservation.mjs",
+      "byte_count": 6582,
+      "sha256": "081B3841B2946B8F1579C712188285958737A7C97A3CD84F8DA0A12E1B844FEF"
+    },
+    {
+      "relative_path": "package.json",
+      "byte_count": 1018,
+      "sha256": "C355CE4DD52B5B7B9CE92E46442F9A749FBBDBC82F294ED8C9365F199BBEE8CB"
+    },
+    {
+      "relative_path": "foreman/source-truth/NEXT_RECEIPT_CRAWLER_PACKET.json",
+      "byte_count": 1755,
+      "sha256": "9040238CA419A954152E1B1FE9C02C32D83A3EC1595BB1D0C05549BE0D2E9CA5"
+    }
+  ],
+  "missing_files": [],
+  "default_db_candidates": [
+    {
+      "path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\work\\nerdkle-receipt-crawler-v0\\circulation.db",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\work\\nerdkle-receipt-crawler-v0\\data\\organism\\circulation.db",
+      "exists": false
+    },
+    {
+      "path": "C:\\tinkarden\\circulation.db",
+      "exists": false
+    }
+  ],
+  "live_ledger_status": "DB_MISSING",
+  "self_test_summary": {
+    "status": "ARTIFACT",
+    "event": "SELF_TEST_PASS",
+    "moved_count": 1,
+    "queue_files": [
+      "C:\\Users\\BenLeak\\AppData\\Local\\Temp\\receipt-crawler-self-test-JKNuoj\\tinkarden\\intake\\speaker_queue\\2026-06-27T19-14-59-435Z__SELF_TEST_RECEIPT_001.md"
+    ],
+    "rows_after": [
+      {
+        "id": "SELF_TEST_RECEIPT_001",
+        "status": "SUCCESS",
+        "ASSIMILATED": 1
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "node --check scripts/foreman/crawler.js",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "powershell -NoProfile -Command $tokens = $null; $errors = $null; [System.Management.Automation.Language.Parser]::ParseFile('scripts\\foreman\\start-receipt-crawler.ps1', [ref]$tokens, [ref]$errors) | Out-Null; if ($errors.Count -gt 0) { $errors | ForEach-Object { $_.Message }; exit 1 } else { 'PS_PARSE_OK' }",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "PS_PARSE_OK",
+      "stderr": ""
+    },
+    {
+      "command": "node scripts/foreman/crawler.js --self-test",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "{\"status\":\"ARTIFACT\",\"event\":\"SELF_TEST_PASS\",\"self_test_root\":\"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\receipt-crawler-self-test-JKNuoj\",\"db_path\":\"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\receipt-crawler-self-test-JKNuoj\\\\circulation.db\",\"queue_dir\":\"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\receipt-crawler-self-test-JKNuoj\\\\tinkarden\\\\intake\\\\speaker_queue\",\"moved_result\":{\"status\":\"ARTIFACT\",\"event\":\"RECEIPT_MOVED\",\"db_path\":\"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\receipt-crawler-self-test-JKNuoj\\\\circulation.db\",\"queue_dir\":\"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\receipt-crawler-self-test-JKNuoj\\\\tinkarden\\\\intake\\\\speaker_queue\",\"table\":\"LiveReceipt\",\"columns_seen\":[\"id\",\"mission\",\"producer\",\"status\",\"ASSIMILATED\",\"receipt\",\"created_at\"],\"moved_count\":1,\"moved\":[{\"receipt_id\":\"SELF_TEST_RECEIPT_001\",\"target_path\":\"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\receipt-crawler-self-test-JKNuoj\\\\tinkarden\\\\intake\\\\speaker_queue\\\\2026-06-27T19-14-59-435Z__SELF_TEST_RECEIPT_001.md\",\"byte_count\":749,\"sha256\":\"E1DA8EA6CC20F07C7F3A36064AA845080199C923AF431ED1E32AC1F9A72D89DB\",\"payload_sha256\":\"D7B9BCA0B8F2BF01F17E5B8F762ED27BE5B025050BA8B139F47C368E76B380B6\",\"source_rowid\":1,\"status_transition\":\"SUCCESS / UNASSIMILATED -> SUCCESS / ASSIMILATED\"}]},\"rows_after\":[{\"id\":\"SELF_TEST_RECEIPT_001\",\"status\":\"SUCCESS\",\"ASSIMILATED\":1}],\"queue_files\":[\"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\receipt-crawler-self-test-JKNuoj\\\\tinkarden\\\\intake\\\\speaker_queue\\\\2026-06-27T19-14-59-435Z__SELF_TEST_RECEIPT_001.md\"],\"logged_at\":\"2026-06-27T19:14:59.443Z\"}",
+      "stderr": ""
+    }
+  ],
+  "proof_boundary": "Self-test proves crawler mechanics against a synthetic local SQLite ledger. It does not prove a production LiveReceipt moved until circulation.db exists and logs RECEIPT_MOVED."
+}
