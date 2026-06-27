@@ -1,0 +1,22 @@
+{
+  "receipt_id": "NERDKLE_NERVOUS_SYSTEM_ORGANS_PRESERVATION_RECEIPT",
+  "mission": "Preserve Swateyes, Fleyes, and Ender apoptosis as auditable GitHub review artifacts",
+  "owner": "Swanson@Doss",
+  "created_at": "2026-06-27T19:27:47.055Z",
+  "status": "ARTIFACT",
+  "readback_path": "foreman/source-truth/readbacks/nervous-system/NERDKLE_NERVOUS_SYSTEM_ORGANS_READBACK.json",
+  "readback_sha256": "76CD76B01D6A411E155C3BFE796C5F48B47F08A0153880513E10B6DE69743F51",
+  "organs_preserved": [
+    "tinkarden/nervous_system/swateyes.js",
+    "tinkarden/nervous_system/fleyes.js",
+    "tinkarden/nervous_system/ender_apoptosis.js"
+  ],
+  "next_packet_path": "foreman/source-truth/NEXT_NERDKLE_NERVOUS_SYSTEM_PACKET.json",
+  "proof_boundary": "Self-tests prove deterministic behavior against generated fixtures. Production movement requires real circulation.db, world_state.json, and production outbox readback.",
+  "missing_for_go": [
+    "real C:/tinkarden/server/circulation.db or configured production ledger",
+    "real Wormeyes world_state.json",
+    "production outbox readback",
+    "human review before canonical promotion"
+  ]
+}

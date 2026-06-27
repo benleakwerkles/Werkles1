@@ -1,0 +1,17 @@
+{
+  "name": "tinkarden-local-nervous-system",
+  "version": "0.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "fleyes": "node nervous_system/fleyes.js --once",
+    "fleyes:self-test": "node nervous_system/fleyes.js --self-test",
+    "fleyes:daemon": "node nervous_system/fleyes.js --daemon",
+    "ender:apoptosis": "node nervous_system/ender_apoptosis.js --once",
+    "ender:apoptosis:self-test": "node nervous_system/ender_apoptosis.js --self-test",
+    "ender:apoptosis:daemon": "node nervous_system/ender_apoptosis.js --daemon"
+  },
+  "dependencies": {
+    "node-cron": "^4.2.1"
+  }
+}

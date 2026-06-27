@@ -1,0 +1,139 @@
+{
+  "readback_id": "NERDKLE_NERVOUS_SYSTEM_ORGANS_READBACK",
+  "created_at": "2026-06-27T19:27:46.528Z",
+  "status": "ARTIFACT",
+  "source_truth_rule": "GitHub main remains canonical. This branch preserves local nervous-system organ candidates for review.",
+  "canonical_status": "PRESERVED_ONLY_NOT_CANONICAL",
+  "files": [
+    {
+      "relative_path": "tinkarden/package.json",
+      "byte_count": 606,
+      "sha256": "F9244EB7B4AFE1F8FC8E97C6AFDB2A63978E77C50739ADFE5EBB9014903B1759"
+    },
+    {
+      "relative_path": "tinkarden/package-lock.json",
+      "byte_count": 623,
+      "sha256": "EFFBA02971585B9B3FAB8ACC833856E342BB1275AF0A5A8CC43E715C770729FC"
+    },
+    {
+      "relative_path": "tinkarden/nervous_system/README.md",
+      "byte_count": 1012,
+      "sha256": "750D8BF98463D920D8013833885C029F8BED71D43DBD280B860631C3C00B5C9B"
+    },
+    {
+      "relative_path": "tinkarden/nervous_system/swateyes.js",
+      "byte_count": 3819,
+      "sha256": "2F04F8FCD500C55D387C8BF595F0EF5A7C23B3C6E2F11D633BA86A30BFAE9BE4"
+    },
+    {
+      "relative_path": "tinkarden/nervous_system/swateyes.test.js",
+      "byte_count": 1402,
+      "sha256": "EB9E2AEE14E357E17FF48F47073967A06E0693F2E2C9A0D05298CDF3F1B3EA20"
+    },
+    {
+      "relative_path": "tinkarden/nervous_system/fleyes.js",
+      "byte_count": 16661,
+      "sha256": "9B2F8598057CA36917FA39F31E745349CB6E835E1B1B79569012735ED2445EC2"
+    },
+    {
+      "relative_path": "tinkarden/nervous_system/ender_apoptosis.js",
+      "byte_count": 17571,
+      "sha256": "26A8489C0CAC49DD3A2EC46A37EA90C749A0CB4226730848C165B6AB5C16B309"
+    },
+    {
+      "relative_path": "foreman/source-truth/NEXT_NERDKLE_NERVOUS_SYSTEM_PACKET.json",
+      "byte_count": 1828,
+      "sha256": "52C2833A9AB8A0B36D189B6BC23A7DE5B0EE1418146B83405977F27D516E9D13"
+    },
+    {
+      "relative_path": "scripts/foreman/check-nerdkle-nervous-system-organs.mjs",
+      "byte_count": 7693,
+      "sha256": "1A81A2A5EC07ED5E6FA2C654647352CB5595D0C3AF0BE359E00344BF542F0E14"
+    }
+  ],
+  "missing_files": [],
+  "organ_results": {
+    "swateyes": {
+      "status": "PASS",
+      "destructive_delete_is_fracture": true
+    },
+    "fleyes": {
+      "status": "PASS",
+      "stalled_count": 1,
+      "churn_count": 1
+    },
+    "ender_apoptosis": {
+      "status": "PASS",
+      "deleted_stale_dry_run": true,
+      "quarantined_old_packet": true,
+      "docs_human_gate_guard": true
+    }
+  },
+  "checks": [
+    {
+      "command": "node --check tinkarden/nervous_system/swateyes.js",
+      "cwd": ".",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "node --check tinkarden/nervous_system/swateyes.test.js",
+      "cwd": ".",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "node --check tinkarden/nervous_system/fleyes.js",
+      "cwd": ".",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "node --check tinkarden/nervous_system/ender_apoptosis.js",
+      "cwd": ".",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "node --check scripts/foreman/check-nerdkle-nervous-system-organs.mjs",
+      "cwd": ".",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "node tinkarden/nervous_system/swateyes.test.js",
+      "cwd": ".",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"PASS\",\n  \"module\": \"C:\\\\tinkarden\\\\nervous_system\\\\swateyes.js\",\n  \"tested_at\": \"2026-06-27T19:27:46.877Z\",\n  \"results\": [\n    {\n      \"name\": \"file read is GNAT\",\n      \"expected\": \"GNAT\",\n      \"actual\": \"GNAT\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"bounded reversible local write is MOSQUITO\",\n      \"expected\": \"MOSQUITO\",\n      \"actual\": \"MOSQUITO\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"canonical commit is WOUND\",\n      \"expected\": \"WOUND\",\n      \"actual\": \"WOUND\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"destructive delete is FRACTURE\",\n      \"expected\": \"FRACTURE\",\n      \"actual\": \"FRACTURE\",\n      \"pass\": true\n    },\n    {\n      \"name\": \"secret access is FRACTURE\",\n      \"expected\": \"FRACTURE\",\n      \"actual\": \"FRACTURE\",\n      \"pass\": true\n    }\n  ]\n}",
+      "stderr": ""
+    },
+    {
+      "command": "node tinkarden/nervous_system/fleyes.js --self-test --output C:\\Users\\BenLeak\\Documents\\Codex\\2026-06-20\\to-swanson-doss-mission-branch-truth\\work\\nerdkle-nervous-system-organs-v0\\foreman\\source-truth\\readbacks\\nervous-system\\FLEYES_SELF_TEST_FRICTIONAL_HEAT.json",
+      "cwd": ".",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"ARTIFACT\",\n  \"event\": \"SELF_TEST\",\n  \"fixture_root\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\",\n  \"db_path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\\\\circulation.db\",\n  \"world_state_path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\\\\world_state.json\",\n  \"output\": {\n    \"output_path\": \"C:\\\\Users\\\\BenLeak\\\\Documents\\\\Codex\\\\2026-06-20\\\\to-swanson-doss-mission-branch-truth\\\\work\\\\nerdkle-nervous-system-organs-v0\\\\foreman\\\\source-truth\\\\readbacks\\\\nervous-system\\\\FLEYES_SELF_TEST_FRICTIONAL_HEAT.json\",\n    \"byte_count\": 3390,\n    \"sha256\": \"8044BB941080FAD8110082C931F89C9BB9DC379801D84A8A2C8D7A302BCC45FA\"\n  },\n  \"result\": {\n    \"sensor\": \"FLEYES_MULE_SENSOR_V0\",\n    \"packet_id\": \"BIRD_0025_SWANSON_FLEYE_MULE_SENSOR\",\n    \"generated_at\": \"2026-06-27T19:27:46.946Z\",\n    \"status\": \"FRICTION_DETECTED\",\n    \"flags\": [\n      {\n        \"flag\": \"STALLED\",\n        \"source\": \"shadow_cache\",\n        \"rowid\": 1,\n        \"id\": \"SELF_TEST_SHADOW_MERGE_001\",\n        \"kind\": \"shadow_merge\",\n        \"status\": \"waiting_on_operator_signature\",\n        \"waiting_minutes\": 20,\n        \"threshold_minutes\": 15,\n        \"operator_signature\": null,\n        \"waiting_since\": \"2026-06-27T19:07:46.934Z\",\n        \"rule\": \"shadow_merge waiting on operator_signature for > 15 minutes\"\n      },\n      {\n        \"flag\": \"CHURN\",\n        \"source\": \"world_state.json\",\n        \"path\": \"foreman/source-truth/receipt.md\",\n        \"status\": \"modified\",\n        \"uncommitted_minutes\": 45,\n        \"threshold_minutes\": 30,\n        \"modified_since\": \"2026-06-27T18:42:46.934Z\",\n        \"rule\": \"modified but uncommitted for > 30 minutes\"\n      }\n    ],\n    \"summary\": {\n      \"stalled_count\": 1,\n      \"churn_count\": 1,\n      \"total_flags\": 2\n    },\n    \"sources\": {\n      \"circulation_db\": {\n        \"selected_path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\\\\circulation.db\",\n        \"exists\": true,\n        \"candidates\": [\n          \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\\\\circulation.db\"\n        ],\n        \"readback\": {\n          \"source\": \"circulation.db\",\n          \"path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\\\\circulation.db\",\n          \"status\": \"OK\",\n          \"rows_scanned\": 1,\n          \"flags\": [\n            {\n              \"flag\": \"STALLED\",\n              \"source\": \"shadow_cache\",\n              \"rowid\": 1,\n              \"id\": \"SELF_TEST_SHADOW_MERGE_001\",\n              \"kind\": \"shadow_merge\",\n              \"status\": \"waiting_on_operator_signature\",\n              \"waiting_minutes\": 20,\n              \"threshold_minutes\": 15,\n              \"operator_signature\": null,\n              \"waiting_since\": \"2026-06-27T19:07:46.934Z\",\n              \"rule\": \"shadow_merge waiting on operator_signature for > 15 minutes\"\n            }\n          ]\n        }\n      },\n      \"world_state_json\": {\n        \"selected_path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\\\\world_state.json\",\n        \"exists\": true,\n        \"candidates\": [\n          \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\\\\world_state.json\"\n        ],\n        \"readback\": {\n          \"source\": \"world_state.json\",\n          \"path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\fleyes-self-test-3JmQh3\\\\world_state.json\",\n          \"status\": \"OK\",\n          \"files_scanned\": 1,\n          \"flags\": [\n            {\n              \"flag\": \"CHURN\",\n              \"source\": \"world_state.json\",\n              \"path\": \"foreman/source-truth/receipt.md\",\n              \"status\": \"modified\",\n              \"uncommitted_minutes\": 45,\n              \"threshold_minutes\": 30,\n              \"modified_since\": \"2026-06-27T18:42:46.934Z\",\n              \"rule\": \"modified but uncommitted for > 30 minutes\"\n            }\n          ]\n        }\n      }\n    },\n    \"rules\": [\n      \"STALLED = shadow_cache row where kind/type/action is shadow_merge, status waits on operator_signature, operator_signature is empty, and wait age > 15 minutes.\",\n      \"CHURN = world_state file marked modified/uncommitted/dirty/changed and uncommitted age > 30 minutes.\",\n      \"Fleyes reports pain only. It does not delete, merge, heal, approve, or mutate tasks.\"\n    ]\n  }\n}",
+      "stderr": ""
+    },
+    {
+      "command": "node tinkarden/nervous_system/ender_apoptosis.js --self-test",
+      "cwd": ".",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"ARTIFACT\",\n  \"event\": \"SELF_TEST\",\n  \"fixture_root\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\ender-apoptosis-self-test-uExn6o\",\n  \"result\": {\n    \"status\": \"FILTRATION_ACTION\",\n    \"generated_at\": \"2026-06-27T19:27:47.031Z\",\n    \"cache\": {\n      \"status\": \"OK\",\n      \"db_path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\ender-apoptosis-self-test-uExn6o\\\\circulation.db\",\n      \"scanned_rows\": 3,\n      \"deleted_rows\": [\n        {\n          \"rowid\": 1,\n          \"id\": \"DRY_RUN_STALE_001\",\n          \"state\": \"dry_run\",\n          \"age_hours\": 72,\n          \"created_at\": \"2026-06-24T19:27:47.010Z\"\n        }\n      ],\n      \"skipped_rows\": [\n        {\n          \"rowid\": 3,\n          \"id\": \"DOCS_DRY_RUN_001\",\n          \"reason\": \"HUMAN_GATE_REQUIRED_FOR_DOCS\",\n          \"target_path\": \"docs/doctrine.md\",\n          \"age_hours\": 72\n        }\n      ]\n    },\n    \"quarantine\": {\n      \"generated_at\": \"2026-06-27T19:27:47.031Z\",\n      \"status\": \"QUARANTINE_REVIEW_REQUIRED\",\n      \"outbox_path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\ender-apoptosis-self-test-uExn6o\\\\foreman\\\\handoffs\\\\outbox\",\n      \"quarantine_count\": 1,\n      \"packets\": [\n        {\n          \"path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\ender-apoptosis-self-test-uExn6o\\\\foreman\\\\handoffs\\\\outbox\\\\UNREAD_PACKET_OLD.md\",\n          \"name\": \"UNREAD_PACKET_OLD.md\",\n          \"age_days\": 8,\n          \"modified_time\": \"2026-06-19T19:27:47.031Z\",\n          \"byte_count\": 36,\n          \"sha256\": \"3E8AD0D7DD0FDA3FA9CEBD54B0E9248F3571B07A00B8CB0D826C54327557BE21\",\n          \"reason\": \"unread outbox packet older than 7 days\"\n        }\n      ]\n    },\n    \"artifacts\": {\n      \"quarantine_list\": {\n        \"path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\ender-apoptosis-self-test-uExn6o\\\\quarantine_list.json\",\n        \"sha256\": \"02DDCD820401D24A65BA4ECCF027FC523B16817A85FA6163853CEA7BDD46C1D4\"\n      },\n      \"filtration_log\": {\n        \"path\": \"C:\\\\Users\\\\BenLeak\\\\AppData\\\\Local\\\\Temp\\\\ender-apoptosis-self-test-uExn6o\\\\filtration_log.txt\",\n        \"byte_count\": 826,\n        \"sha256\": \"6569D63BB0674046FEDB4A1DE77DA51C2BB0548745906A6609C267A5B5020990\"\n      }\n    }\n  },\n  \"rows_after\": [\n    {\n      \"id\": \"DOCS_DRY_RUN_001\",\n      \"state\": \"dry_run\",\n      \"target_path\": \"docs/doctrine.md\"\n    },\n    {\n      \"id\": \"DRY_RUN_FRESH_001\",\n      \"state\": \"dry_run\",\n      \"target_path\": \"tmp/fresh.json\"\n    }\n  ]\n}",
+      "stderr": ""
+    }
+  ],
+  "proof_boundary": "Self-tests prove deterministic behavior against generated fixtures. Production movement requires real circulation.db, world_state.json, and production outbox readback."
+}

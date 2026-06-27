@@ -1,0 +1,38 @@
+{
+  "packet_id": "NEXT_NERDKLE_NERVOUS_SYSTEM_PRODUCTION_PROOF",
+  "created_at": "2026-06-27T19:28:00.000Z",
+  "owner": "Swanson@Doss",
+  "stream": "NERDKLE / NERVOUS SYSTEM / PRODUCTION PROOF",
+  "status": "PENDING_REAL_INPUTS",
+  "source_truth_rule": "GitHub origin/main remains canonical. This review branch preserves candidates until human-gated promotion.",
+  "mission": "Replace fixture proof with production readback for Swateyes, Fleyes, and Ender apoptosis.",
+  "required_inputs": {
+    "swateyes": "A real action payload from Medulla or Fastify before execution.",
+    "fleyes": [
+      "real circulation.db containing shadow_cache",
+      "real Wormeyes world_state.json"
+    ],
+    "ender_apoptosis": [
+      "real C:/tinkarden/server/circulation.db",
+      "real foreman/handoffs/outbox surface"
+    ]
+  },
+  "pass_conditions": [
+    "Swateyes classifies a destructive production-bound payload as FRACTURE before execution.",
+    "Fleyes produces frictional_heat.json from production inputs, not fixtures.",
+    "Ender apoptosis runs on production circulation.db and logs any dry_run deletion or NO_ACTION without touching docs/ unless operator_signature exists.",
+    "All outputs have file paths, byte counts, and SHA256 hashes."
+  ],
+  "fail_conditions": [
+    "Fixture output is described as production proof.",
+    "Any docs/ artifact is deleted without operator_signature.",
+    "Any cache row is deleted without filtration_log.txt recording it.",
+    "Any quarantined packet is deleted instead of listed for manual Operator review."
+  ],
+  "do_not": [
+    "Do not promote this branch to canonical without production proof.",
+    "Do not delete doctrine.",
+    "Do not call no-input NO_FRICTION_DETECTED a healthy organism."
+  ],
+  "next_receipt_required": "NERDKLE_NERVOUS_SYSTEM_PRODUCTION_PROOF_RECEIPT"
+}

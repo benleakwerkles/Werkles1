@@ -1,0 +1,96 @@
+{
+  "sensor": "FLEYES_MULE_SENSOR_V0",
+  "packet_id": "BIRD_0025_SWANSON_FLEYE_MULE_SENSOR",
+  "generated_at": "2026-06-27T19:27:46.946Z",
+  "status": "FRICTION_DETECTED",
+  "flags": [
+    {
+      "flag": "STALLED",
+      "source": "shadow_cache",
+      "rowid": 1,
+      "id": "SELF_TEST_SHADOW_MERGE_001",
+      "kind": "shadow_merge",
+      "status": "waiting_on_operator_signature",
+      "waiting_minutes": 20,
+      "threshold_minutes": 15,
+      "operator_signature": null,
+      "waiting_since": "2026-06-27T19:07:46.934Z",
+      "rule": "shadow_merge waiting on operator_signature for > 15 minutes"
+    },
+    {
+      "flag": "CHURN",
+      "source": "world_state.json",
+      "path": "foreman/source-truth/receipt.md",
+      "status": "modified",
+      "uncommitted_minutes": 45,
+      "threshold_minutes": 30,
+      "modified_since": "2026-06-27T18:42:46.934Z",
+      "rule": "modified but uncommitted for > 30 minutes"
+    }
+  ],
+  "summary": {
+    "stalled_count": 1,
+    "churn_count": 1,
+    "total_flags": 2
+  },
+  "sources": {
+    "circulation_db": {
+      "selected_path": "C:\\Users\\BenLeak\\AppData\\Local\\Temp\\fleyes-self-test-3JmQh3\\circulation.db",
+      "exists": true,
+      "candidates": [
+        "C:\\Users\\BenLeak\\AppData\\Local\\Temp\\fleyes-self-test-3JmQh3\\circulation.db"
+      ],
+      "readback": {
+        "source": "circulation.db",
+        "path": "C:\\Users\\BenLeak\\AppData\\Local\\Temp\\fleyes-self-test-3JmQh3\\circulation.db",
+        "status": "OK",
+        "rows_scanned": 1,
+        "flags": [
+          {
+            "flag": "STALLED",
+            "source": "shadow_cache",
+            "rowid": 1,
+            "id": "SELF_TEST_SHADOW_MERGE_001",
+            "kind": "shadow_merge",
+            "status": "waiting_on_operator_signature",
+            "waiting_minutes": 20,
+            "threshold_minutes": 15,
+            "operator_signature": null,
+            "waiting_since": "2026-06-27T19:07:46.934Z",
+            "rule": "shadow_merge waiting on operator_signature for > 15 minutes"
+          }
+        ]
+      }
+    },
+    "world_state_json": {
+      "selected_path": "C:\\Users\\BenLeak\\AppData\\Local\\Temp\\fleyes-self-test-3JmQh3\\world_state.json",
+      "exists": true,
+      "candidates": [
+        "C:\\Users\\BenLeak\\AppData\\Local\\Temp\\fleyes-self-test-3JmQh3\\world_state.json"
+      ],
+      "readback": {
+        "source": "world_state.json",
+        "path": "C:\\Users\\BenLeak\\AppData\\Local\\Temp\\fleyes-self-test-3JmQh3\\world_state.json",
+        "status": "OK",
+        "files_scanned": 1,
+        "flags": [
+          {
+            "flag": "CHURN",
+            "source": "world_state.json",
+            "path": "foreman/source-truth/receipt.md",
+            "status": "modified",
+            "uncommitted_minutes": 45,
+            "threshold_minutes": 30,
+            "modified_since": "2026-06-27T18:42:46.934Z",
+            "rule": "modified but uncommitted for > 30 minutes"
+          }
+        ]
+      }
+    }
+  },
+  "rules": [
+    "STALLED = shadow_cache row where kind/type/action is shadow_merge, status waits on operator_signature, operator_signature is empty, and wait age > 15 minutes.",
+    "CHURN = world_state file marked modified/uncommitted/dirty/changed and uncommitted age > 30 minutes.",
+    "Fleyes reports pain only. It does not delete, merge, heal, approve, or mutate tasks."
+  ]
+}
