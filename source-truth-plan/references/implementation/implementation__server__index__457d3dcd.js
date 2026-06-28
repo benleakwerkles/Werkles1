@@ -380,6 +380,12 @@ fastify.get("/", async (_request, reply) => {
     .receipt-card .receipt-meta { margin-top: 6px; color: #aab6c3; font-size: 12px; line-height: 1.35; }
     .receipt-card code { color: #d3e8ff; overflow-wrap: anywhere; }
     .release-valve { margin-top: 16px; border: 1px solid #314152; background: #111820; border-radius: 8px; padding: 16px; }
+    .brainboot { margin: 0 0 18px; border: 1px solid #42607a; background: #121d26; border-radius: 8px; padding: 18px; }
+    .brainboot h2 { margin: 0 0 8px; font-size: 20px; }
+    .brainboot .rec-text { max-width: 78ch; }
+    .brainboot .brainboot-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+    .brainboot button { background: #24435e; border-color: #6caee8; }
+    .brainboot .mini { color: #9fb0c0; font-size: 12px; }
     .release-valve .status-line { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
     .release-valve ul { margin: 10px 0 0; padding-left: 18px; color: #c4cfda; }
     .release-valve li { margin: 4px 0; }
@@ -396,6 +402,15 @@ fastify.get("/", async (_request, reply) => {
   <main>
     <h1>Nerdkle Daemon Health</h1>
     <div class="sub">Live local preview from Doss. This is a command-health surface, not canonical promotion.</div>
+    <section class="brainboot" data-testid="brainboot-panel">
+      <div class="label">Session Start</div>
+      <h2>Nerdkle Brainboot</h2>
+      <div class="rec-text">Render the shared source-truth base for Skybro and Petra before a session starts drifting. This reads GitHub-backed source-truth files and writes bootpacks with exact hashes.</div>
+      <div class="brainboot-row">
+        <button type="button" id="brainboot-primary-button" data-testid="brainboot-primary-button">SESSION NERDKLE BRAINBOOT</button>
+        <span class="mini">Outputs: Skybro.Betsy.BOOTPACK.md and Petra.Betsy.NERDKLE_BRAINBOOT.BOOTPACK.md</span>
+      </div>
+    </section>
     <section class="grid">
       <div class="panel"><div class="label">Daemon</div><div class="value">${escapeHtml(snapshot.health.status || "UNKNOWN")}</div></div>
       <div class="panel"><div class="label">Friction</div><div class="value">${escapeHtml(snapshot.heat.status || "UNKNOWN")}</div></div>
@@ -574,6 +589,11 @@ fastify.get("/", async (_request, reply) => {
       runWorkbenchAction("Repo snapshot refresh", "/v1/action/refresh_repo_state");
     });
     document.getElementById("render-bootpack-button").addEventListener("click", () => {
+      runWorkbenchAction("Session Nerdkle Brainboot", "/v1/action/render_brainboot", {
+        targets: ["Skybro.Betsy", "Petra.Betsy"]
+      });
+    });
+    document.getElementById("brainboot-primary-button").addEventListener("click", () => {
       runWorkbenchAction("Session Nerdkle Brainboot", "/v1/action/render_brainboot", {
         targets: ["Skybro.Betsy", "Petra.Betsy"]
       });

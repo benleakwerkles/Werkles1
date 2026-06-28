@@ -1,6 +1,6 @@
 # Source Truth Plan: The Book / Nerdkle / Great Plan
 
-Generated: 2026-06-28T03:18:25.997Z
+Generated: 2026-06-28T03:44:11.383Z
 
 This folder is the current GitHub-backed review surface for the material Ben keeps having to reconstruct: The Book, Nerdkle/NMCLR, Speaker/Atlas, TinkerDen/Medulla, Feral cockpit membrane, and the proof/receipt discipline that ties them together.
 

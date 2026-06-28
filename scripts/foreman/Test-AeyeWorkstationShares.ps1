@@ -1,6 +1,7 @@
 param(
   [string]$ShareMapPath = "foreman/workstation/AEYE_WORKSTATION_SHARE_MAP.json",
-  [string]$OutPath = "foreman/workstation/readbacks/AEYE_WORKSTATION_SHARE_READBACK.json"
+  [string]$OutPath = "foreman/workstation/readbacks/AEYE_WORKSTATION_SHARE_READBACK.json",
+  [switch]$DeepShareProbe
 )
 
 $ErrorActionPreference = "Stop"
@@ -76,7 +77,15 @@ foreach ($machineProp in $map.machines.PSObject.Properties) {
     $smbOpen = $false
     $smbOpen = Test-TcpQuick -ComputerName $hostName -Port 445
     $sharePath = "\\$hostName\$($map.standard_share_name)"
-    $shareProbe = Test-PathQuick -Path $sharePath
+    $isLocalHost = $hostName -eq $env:COMPUTERNAME -or $hostName -eq $env:COMPUTERNAME.ToLower() -or $hostName -eq "localhost" -or $hostName -eq "127.0.0.1"
+    if ($DeepShareProbe -or $isLocalHost -or $hostName -match '^\d+\.\d+\.\d+\.\d+$') {
+      $shareProbe = Test-PathQuick -Path $sharePath
+    } else {
+      $shareProbe = [pscustomobject]@{
+        exists = $false
+        error = "SKIPPED_REMOTE_UNC_PROBE_USE_DEEP_SHARE_PROBE"
+      }
+    }
     $hostResults += [pscustomobject]@{
       host = $hostName
       smb_445_open = $smbOpen

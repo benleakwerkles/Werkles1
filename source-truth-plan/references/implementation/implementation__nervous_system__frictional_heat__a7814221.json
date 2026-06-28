@@ -1,7 +1,7 @@
 {
   "sensor": "FLEYES_MULE_SENSOR_V0",
   "packet_id": "BIRD_0025_SWANSON_FLEYE_MULE_SENSOR",
-  "generated_at": "2026-06-28T03:15:00.005Z",
+  "generated_at": "2026-06-28T03:40:00.002Z",
   "status": "FRICTION_DETECTED",
   "flags": [
     {
@@ -11,7 +11,7 @@
       "id": "SELF_TEST_SHADOW_MERGE_001",
       "kind": "shadow_merge",
       "status": "waiting_on_operator_signature",
-      "waiting_minutes": 494.76,
+      "waiting_minutes": 519.76,
       "threshold_minutes": 15,
       "operator_signature": null,
       "waiting_since": "2026-06-27T19:00:14.194Z",
@@ -22,7 +22,7 @@
       "source": "world_state.json",
       "path": "foreman/source-truth/receipt.md",
       "status": "modified",
-      "uncommitted_minutes": 519.76,
+      "uncommitted_minutes": 544.76,
       "threshold_minutes": 30,
       "modified_since": "2026-06-27T18:35:14.194Z",
       "rule": "modified but uncommitted for > 30 minutes"
@@ -54,7 +54,7 @@
             "id": "SELF_TEST_SHADOW_MERGE_001",
             "kind": "shadow_merge",
             "status": "waiting_on_operator_signature",
-            "waiting_minutes": 494.76,
+            "waiting_minutes": 519.76,
             "threshold_minutes": 15,
             "operator_signature": null,
             "waiting_since": "2026-06-27T19:00:14.194Z",
@@ -80,7 +80,7 @@
             "source": "world_state.json",
             "path": "foreman/source-truth/receipt.md",
             "status": "modified",
-            "uncommitted_minutes": 519.76,
+            "uncommitted_minutes": 544.76,
             "threshold_minutes": 30,
             "modified_since": "2026-06-27T18:35:14.194Z",
             "rule": "modified but uncommitted for > 30 minutes"
@@ -97,7 +97,7 @@
   "daemon_watchdog": {
     "sensor": "DAEMON_HEALTH_MONITOR",
     "packet_id": "BIRD_0039_SWANSON_DAEMON_HEALTH_MONITOR",
-    "generated_at": "2026-06-28T03:18:19.134Z",
+    "generated_at": "2026-06-28T03:43:49.557Z",
     "status": "OK",
     "core_organs": [
       {
@@ -113,8 +113,8 @@
         "name": "index",
         "status": "ONLINE",
         "fracture": false,
-        "pid": 23748,
-        "restarts": 10,
+        "pid": 39924,
+        "restarts": 11,
         "unstable_restarts": 0,
         "pm2_status": "online"
       },
@@ -139,5 +139,5 @@
     ],
     "rule": "FRACTURE when a core PM2 organ is missing, stopped, errored, or exceeds unstable restart threshold."
   },
-  "daemon_updated_at": "2026-06-28T03:18:19.134Z"
+  "daemon_updated_at": "2026-06-28T03:43:49.557Z"
 }

@@ -51,6 +51,22 @@ The share should be LAN/private-profile only and account-scoped to Ben's authent
 4. If the machine is reachable but share enumeration fails, report `MACHINE_REACHABLE_SHARE_NOT_PROVEN`.
 5. If the machine itself is unreachable, report `MACHINE_UNREACHABLE`.
 
+## One-Time Bootstrap On Each Machine
+
+Run this on the source machine, not from Doss:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\foreman\Enable-AeyeDesktopShare.ps1
+```
+
+If the current shell is not elevated, use:
+
+```cmd
+scripts\foreman\Enable-AeyeDesktopShare-Elevated.cmd
+```
+
+The elevated launcher exists because creating an SMB share is an operating-system permission boundary. The required human action is accepting the Windows admin prompt on the source machine, not translating paths or carrying files.
+
 ## Boundary
 
 This policy creates a deterministic file-sharing convention. It does not copy secrets, open public network exposure, or imply that every existing desktop folder is already readable until the share bootstrap receipt exists on that machine.

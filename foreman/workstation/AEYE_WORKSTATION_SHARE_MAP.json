@@ -20,8 +20,8 @@
       ],
       "local_desktop_path": "C:\\Users\\BenLeak\\Desktop",
       "standard_share": "\\\\Doss\\AeyeDesktop",
-      "current_status": "BOOTSTRAP_BLOCKED_NEEDS_ELEVATED_SHELL",
-      "evidence": "New-SmbShare returned Windows System Error 5 Access is denied from current non-elevated shell."
+      "current_status": "SHARE_READY",
+      "evidence": "\\\\DOSS\\AeyeDesktop and \\\\10.1.10.8\\AeyeDesktop resolved from Doss after elevated bootstrap."
     },
     "Betsy": {
       "role": "Aeye workstation",
