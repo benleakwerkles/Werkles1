@@ -2,7 +2,7 @@
 
 Generated: 2026-06-28T03:44:11.383Z
 
-## Priority Missing Source
+## Resolved Priority Source
 
 The user supplied this likely Betsy source folder:
 
@@ -10,12 +10,13 @@ The user supplied this likely Betsy source folder:
 C:\Users\Ben Leak\Desktop\Nerdkle The Book
 ```
 
-Doss cannot currently see it under these checked paths:
+Initial Doss-local path checks failed, but Dink@Betsy pushed the folder to GitHub and Swanson@Doss verified the branch readback.
 
-- C:/Users/Ben Leak/Desktop/Nerdkle The Book: MISSING_ON_DOSS
-- C:/Users/BenLeak/Desktop/Nerdkle The Book: MISSING_ON_DOSS
-- C:/Users/BenLeak/OneDrive/Desktop/Nerdkle The Book: MISSING_ON_DOSS
-- C:/Users/Ben Leak/OneDrive/Desktop/Nerdkle The Book: MISSING_ON_DOSS
+- Repo path: `source-truth-plan/references/betsy_desktop_nerdkle_the_book/`
+- Source branch: `preserve/tinkerden-packet-engine-20260622`
+- Source commit: `dda5d295554e70b0a75bf4b186e569f5b7393f5a`
+- Verified file count: `120`
+- Boundary: raw reference material only; not canonical prose by itself.
 
 ## Exact Files Still Marked Missing By The Book Map
 
@@ -31,6 +32,6 @@ Doss cannot currently see it under these checked paths:
 - Chapter Draft Obligation of the Organs
 - Chapter Twenty / Reality Gets a Vote
 
-## Missing During This Assembly Pass
+## Missing During Original Assembly Pass
 
 - No configured source paths were missing beyond priority Betsy material.

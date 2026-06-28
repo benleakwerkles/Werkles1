@@ -1,6 +1,7 @@
 # Source Truth Plan: The Book / Nerdkle / Great Plan
 
 Generated: 2026-06-28T03:44:11.383Z
+Updated: 2026-06-28 - Betsy desktop Nerdkle book raw reference imported.
 
 This folder is the current GitHub-backed review surface for the material Ben keeps having to reconstruct: The Book, Nerdkle/NMCLR, Speaker/Atlas, TinkerDen/Medulla, Feral cockpit membrane, and the proof/receipt discipline that ties them together.
 
@@ -21,6 +22,7 @@ This folder is the current GitHub-backed review surface for the material Ben kee
 - `NEXT_PACKETS.md` - the next concrete packets to finish source recovery.
 - `AEYE_RELAY_CONTRACT_V0.md` - the command/momentum dash to Aeye relay contract: sent is not delivered until receiver receipts return.
 - `references/` - copied source docs, receipts, scripts, specs, and bounded chatlog index.
+- `references/betsy_desktop_nerdkle_the_book/` - raw Betsy Desktop source material imported from `C:\Users\Ben Leak\Desktop\Nerdkle The Book` as reference material, not as a replacement for the source-truth plan.
 
 ## Hard Boundary
 

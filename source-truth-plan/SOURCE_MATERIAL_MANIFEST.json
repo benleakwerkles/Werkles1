@@ -1,848 +1,2046 @@
-{
-  "generated_at": "2026-06-28T03:44:11.383Z",
-  "repository": "https://github.com/benleakwerkles/Werkles1.git",
-  "branch": "source-truth/atlas-speaker-v0-20260627",
-  "status": "GITHUB_REVIEW_BRANCH_NOT_CANONICAL",
-  "purpose": "Single file-backed Source Truth Plan for The Book, Nerdkle/NMCLR, Speaker/Atlas, and TinkerDen/Medulla build references.",
-  "source_counts": {
-    "book": 14,
-    "nerdkle_nmclr": 27,
-    "tinkerden_medulla": 11,
-    "speaker_atlas": 22,
-    "implementation": 15
-  },
-  "chatlog_index": {
-    "repo_path": "source-truth-plan/references/chatlog_hits/CHATLOG_KEYWORD_INDEX.jsonl",
-    "hit_count": 48,
-    "scanned_file_count": 6,
-    "source_root": "C:/Users/BenLeak/.codex/sessions"
-  },
-  "missing_priority_sources": [
-    {
-      "source_path": "C:/Users/Ben Leak/Desktop/Nerdkle The Book",
-      "status": "MISSING_ON_DOSS"
-    },
-    {
-      "source_path": "C:/Users/BenLeak/Desktop/Nerdkle The Book",
-      "status": "MISSING_ON_DOSS"
-    },
-    {
-      "source_path": "C:/Users/BenLeak/OneDrive/Desktop/Nerdkle The Book",
-      "status": "MISSING_ON_DOSS"
-    },
-    {
-      "source_path": "C:/Users/Ben Leak/OneDrive/Desktop/Nerdkle The Book",
-      "status": "MISSING_ON_DOSS"
-    }
-  ],
-  "missing_or_unresolved_sources": [],
-  "proof_boundary": [
-    "This folder is a source-truth plan and evidence bundle, not proof that full automation is built.",
-    "origin/main remains canonical until reviewed and merged.",
-    "Betsy desktop source is not included until the folder is transferred or mounted on Doss.",
-    "Chatlog index is discovery evidence only; durable source material must still be copied into repo-backed files."
-  ],
-  "files": [
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/BOOK_INTEGRATION_MAP_V0.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__BOOK_INTEGRATION_MAP_V0__81fb34af.md",
-      "byte_count": 23214,
-      "sha256": "bd721f83956e446e280993da10d772059b484c1344d0851378a90579a79d61a9",
-      "modified_time": "2026-06-26T22:03:15.946Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/SWANSON_DOSS_BOOK_INTEGRATION_MAP_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/book/book__outputs__SWANSON_DOSS_BOOK_INTEGRATION_MAP_RECEIPT__6afb3c20.json",
-      "byte_count": 7971,
-      "sha256": "e8ac6dbca8b32e81074a6d12c71fcbc8c7be5cb9cf595c86417fb73253b80010",
-      "modified_time": "2026-06-26T22:03:32.473Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_SPINE_AUDIT.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__MANUSCRIPT_SPINE_AUDIT__1b6fedac.md",
-      "byte_count": 6122,
-      "sha256": "9bd8ded156fd7a2cc5d5f7721b0be2ac506b8a55b738abeb6ea498a7c054e6a1",
-      "modified_time": "2026-06-23T06:09:01.126Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_CONTINUITY_AUDIT.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__MANUSCRIPT_CONTINUITY_AUDIT__13f1265c.md",
-      "byte_count": 6551,
-      "sha256": "faf2726b4b8ea3e34f67f73e2cc373940ddefd7a3e4b813384a12ab4abf6b94b",
-      "modified_time": "2026-06-23T05:01:22.284Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_CONTINUITY_AUDIT_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__MANUSCRIPT_CONTINUITY_AUDIT_RECEIPT__2ff6288a.md",
-      "byte_count": 3138,
-      "sha256": "8458359e03d25b76d02b923363fd991afdb72677c779748f9153c728a11f9954",
-      "modified_time": "2026-06-23T05:01:49.795Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_STRUCTURE_AUDIT.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__MANUSCRIPT_STRUCTURE_AUDIT__46ed62ed.md",
-      "byte_count": 10086,
-      "sha256": "d622d5c7e967ab877f545482e08ab65f00687560c22fc084f8a3554f73423afd",
-      "modified_time": "2026-06-23T04:57:08.620Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_V1_RELEASE_AUDIT.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__MANUSCRIPT_V1_RELEASE_AUDIT__7d1f42c4.md",
-      "byte_count": 5951,
-      "sha256": "fde867a7f0444f24985639b11115d6d93a912f7b6792911e6184255c763acbb4",
-      "modified_time": "2026-06-23T05:44:24.225Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_GAP_AUDIT.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__MANUSCRIPT_GAP_AUDIT__f26c2b6f.md",
-      "byte_count": 9819,
-      "sha256": "fc59f74f2b742a081acf8631d31bc1cc42329d8ff49a93d05b81298069d70119",
-      "modified_time": "2026-06-23T04:48:10.534Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/CHAPTER_LINEAGE_LEDGER.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__CHAPTER_LINEAGE_LEDGER__70563174.md",
-      "byte_count": 7355,
-      "sha256": "2c428e6375dc7fd75487eef27073bdb80d72cdef14719896157101af80176804",
-      "modified_time": "2026-06-23T04:35:56.489Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/CHAPTER_OWNERSHIP_MAP.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__CHAPTER_OWNERSHIP_MAP__dcbcd70d.md",
-      "byte_count": 8731,
-      "sha256": "59ec25f72840c2f44aa5df1fe4c0578e3b87da3a527a4614e57052c2c350037d",
-      "modified_time": "2026-06-23T04:59:26.012Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/inheritance_chain_audit_receipt.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__inheritance_chain_audit_receipt__89c95467.md",
-      "byte_count": 10838,
-      "sha256": "7b50f15bc147a2e9812a16ea9ded100303a08acff0e2af8f2c11d3a024e4b443",
-      "modified_time": "2026-06-23T04:09:31.227Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/THESIS_DEFINITION_AUDIT.md",
-      "repo_path": "source-truth-plan/references/book/book__outputs__THESIS_DEFINITION_AUDIT__e610648e.md",
-      "byte_count": 4274,
-      "sha256": "303704423d7a2e6fe0803430acf3f4d42adf65a17da61e96d0df7f222e11a465",
-      "modified_time": "2026-06-23T06:06:23.885Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/work/MANUSCRIPT_SOURCE_BUNDLE_TO_ENDER_20260623/source_files/speaker/sublime-design/the_sublime_design_v0.md",
-      "repo_path": "source-truth-plan/references/book/book__sublime-design__the_sublime_design_v0__891bf617.md",
-      "byte_count": 1580,
-      "sha256": "f832f8e0d233f854f2eb237ca7d90f2dacea622bcb3f7f71bc621c383b13eb37",
-      "modified_time": "2026-06-20T05:55:44.722Z",
-      "copied": true
-    },
-    {
-      "category": "book",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/work/MANUSCRIPT_SOURCE_BUNDLE_TO_ENDER_20260623/source_files/speaker/genome/tinkularity_genome_v0.md",
-      "repo_path": "source-truth-plan/references/book/book__genome__tinkularity_genome_v0__b4dd2d20.md",
-      "byte_count": 5831,
-      "sha256": "fd5ef309bee13c344f3f275f932c9f45091cf7d21f3705ffd046158ada9b17d3",
-      "modified_time": "2026-06-20T05:52:25.987Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NEUROCIRCULYMPHATIC_V0_SPEC.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NEUROCIRCULYMPHATIC_V0_SPEC__a5ec3627.md",
-      "byte_count": 8144,
-      "sha256": "763af670cf857e1c0a13e16ff337617f41897d705d8d08c14e83cb7cfd3f997d",
-      "modified_time": "2026-06-23T06:43:16.193Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NEUROCIRCULYMPHATIC_V0_BOUNDARY.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NEUROCIRCULYMPHATIC_V0_BOUNDARY__57ac07ba.md",
-      "byte_count": 7647,
-      "sha256": "fe2ed3c6b7b2c396c0c58e23c3125a0d42eea4e795b301725f7d055076c99d25",
-      "modified_time": "2026-06-23T06:35:33.597Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_RESPIRATORY_RECEIPT_STANDARD.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_RESPIRATORY_RECEIPT_STANDARD__c449ecbd.md",
-      "byte_count": 5920,
-      "sha256": "9e10bc5ea48dc9b0154e1e7935bf80c9d4773a9c625d36dc27d19f871699f9d0",
-      "modified_time": "2026-06-24T00:21:19.166Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_MUSCLE_RECEIPT_STANDARD.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_MUSCLE_RECEIPT_STANDARD__daaff01a.md",
-      "byte_count": 5712,
-      "sha256": "bb292b7923262d153d8352a047b6010522fc196398f1f0d9995503b49e4d07f6",
-      "modified_time": "2026-06-24T00:22:48.857Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_METABOLISM_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_METABOLISM_RECEIPT__df492514.md",
-      "byte_count": 3741,
-      "sha256": "b801fc8d2b097fbf9597cb3f62feca9b8ce537e6a445161a060ea7902d66c189",
-      "modified_time": "2026-06-24T02:03:04.755Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_METABOLISM_V0.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_METABOLISM_V0__e4f6a052.md",
-      "byte_count": 5648,
-      "sha256": "ee6542089407572880eb0ab426713b2dc573be87ce32384f7fb285dbbffdc3d3",
-      "modified_time": "2026-06-24T00:49:15.397Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_METABOLISM_PROOF_CHAIN.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_METABOLISM_PROOF_CHAIN__e14cdb89.md",
-      "byte_count": 1635,
-      "sha256": "fafe94ba242aa94d593967924d746d9890758429f8c0ed2f08590f0575cc2abe",
-      "modified_time": "2026-06-24T03:13:30.066Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/ASSIMILATION_V0_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__ASSIMILATION_V0_RECEIPT__148dd086.md",
-      "byte_count": 5452,
-      "sha256": "5d1fbb3f6893959ef6d044fad44ff8d410a2e950acc94c0b2c3e6b63da05d922",
-      "modified_time": "2026-06-24T03:16:12.207Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/assimilation_rule.json",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__assimilation_rule__871f2451.json",
-      "byte_count": 9510,
-      "sha256": "05e0c784ba5a3b614629b3ebbcb4bca8884ea45a210a7f82fd9a96c98d364497",
-      "modified_time": "2026-06-25T04:47:13.476Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/INTENT_TO_ANATOMY_COMPILER_V0_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__INTENT_TO_ANATOMY_COMPILER_V0_RECEIPT__69885470.md",
-      "byte_count": 3904,
-      "sha256": "252fc0ef87b86abbbdd7bb16b5c5c7602d86a0b28bfc5212683c8e34cf8222ff",
-      "modified_time": "2026-06-25T03:39:37.046Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/INTENT_TO_ANATOMY_COMPILER_V0.json",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__INTENT_TO_ANATOMY_COMPILER_V0__b228f5c0.json",
-      "byte_count": 7109,
-      "sha256": "b518946d8f7350c874c6de343a285330ebf1ba72d540064b7a6fb2beaaf507b3",
-      "modified_time": "2026-06-25T03:39:37.044Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/CREATOR_OPERATOR_MODEL_V0.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__CREATOR_OPERATOR_MODEL_V0__49b06538.md",
-      "byte_count": 6358,
-      "sha256": "495947fccb5afd4f195ed4e3d44275dd2ab3826e20e26e653c6659a364a84dab",
-      "modified_time": "2026-06-24T00:42:12.816Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/CREATOR_OPERATOR_ORGANISM_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__CREATOR_OPERATOR_ORGANISM_RECEIPT__141aca1e.md",
-      "byte_count": 4090,
-      "sha256": "aec9762d7280eb0685879532b64b3885b025a0f8062f98b04d1cff9e66cbeb80",
-      "modified_time": "2026-06-24T00:48:24.812Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/SUCCESSFUL_INHERITANCE_EVENT_V0.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__SUCCESSFUL_INHERITANCE_EVENT_V0__e9e7fe0b.md",
-      "byte_count": 8438,
-      "sha256": "8228189706eebed14a385dad4d474e71227b199ddd45c704c8b542639fc8697d",
-      "modified_time": "2026-06-23T14:41:00.366Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/SUCCESSFUL_INHERITANCE_EVENT_V0_SPEC.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__SUCCESSFUL_INHERITANCE_EVENT_V0_SPEC__7e8f5076.md",
-      "byte_count": 7651,
-      "sha256": "387c23b98414b9de5994fde3a3560b35ffbc760a36e03ffd6e84617da274c244",
-      "modified_time": "2026-06-23T14:46:59.880Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/SUCCESSFUL_INHERITANCE_QUERY_V0.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__SUCCESSFUL_INHERITANCE_QUERY_V0__d2de49a1.md",
-      "byte_count": 9687,
-      "sha256": "4f8d970d5b15ea32901e16cb37f5bb46e4618fc6e89d6988cc7bb51d372dfc96",
-      "modified_time": "2026-06-23T14:50:29.606Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/INHERITANCE_EVENT_CANDIDATE_DETECTOR_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__INHERITANCE_EVENT_CANDIDATE_DETECTOR_RECEIPT__36ee14ed.md",
-      "byte_count": 5795,
-      "sha256": "76ab2bc53a56fbcd02361d8d251a92cd469aa2f4dce4d21ce57cf8d1f13b2c39",
-      "modified_time": "2026-06-23T14:55:05.248Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/candidate_inheritance_events.json",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__candidate_inheritance_events__cf5e96ca.json",
-      "byte_count": 1033,
-      "sha256": "f26a7c517a65ab5c6ff3d2fbfff35430fa572c1b5d26b5eb1e68c144965312f6",
-      "modified_time": "2026-06-23T14:55:05.139Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NERDKLE_HANDOFF_TO_FUCKO_RECEIPT_20260626-162718.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NERDKLE_HANDOFF_TO_FUCKO_RECEIPT_20260626-162718__a5c11aee.md",
-      "byte_count": 2647,
-      "sha256": "3439fd9deb4c0898529a232dcc2c2b5961d42fd8b1b6f9b868805f6865351c72",
-      "modified_time": "2026-06-26T20:28:48.456Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nerdkle_pulse_v0/PULSE_TEST_001.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__nerdkle_pulse_v0__PULSE_TEST_001__d31a3dc4.md",
-      "byte_count": 831,
-      "sha256": "e5fb75c18205d6987dabea0e6982b2fd0bbd9cf7ca22bc23a2c0ed40d538e600",
-      "modified_time": "2026-06-26T20:31:28.593Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nerdkle_pulse_v0/artifacts/PULSE_TEST_001_ACK_ARTIFACT.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__artifacts__PULSE_TEST_001_ACK_ARTIFACT__95d66f11.md",
-      "byte_count": 341,
-      "sha256": "c379763a9fa0b08102d0613f27c3d25afb6abeff9ae3521535e34b2d68ad8877",
-      "modified_time": "2026-06-26T20:31:28.594Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nerdkle_pulse_v0/receipts/NERDKLE_PULSE_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__receipts__NERDKLE_PULSE_RECEIPT__414d15bb.json",
-      "byte_count": 615,
-      "sha256": "edb92f63b709d756a1104ac7cc6377cb3bdf47017fd30e2708b2e70c104c2057",
-      "modified_time": "2026-06-26T20:31:28.595Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/dink_doss_nerdkle_receipt_dry_run/NERDKLE_DRY_RECEIPT_001.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__dink_doss_nerdkle_receipt_dry_run__NERDKLE_DRY_RECEIPT_001__f326362e.md",
-      "byte_count": 739,
-      "sha256": "ecbccb6ed1f13c94249e4abd2e8660c0416e77e52536a7f5d615568f120cb007",
-      "modified_time": "2026-06-26T20:33:49.063Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/dink_doss_nerdkle_receipt_dry_run/NERDKLE_DRY_BIRD_001.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__dink_doss_nerdkle_receipt_dry_run__NERDKLE_DRY_BIRD_001__91754420.md",
-      "byte_count": 667,
-      "sha256": "7f0dd3197c87a2690b49217ed91213b4823ce214bcf8c383257705f5207afa87",
-      "modified_time": "2026-06-26T20:33:49.061Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nmclr_filesystem_snapshot/NMCLR_SPEC_BUILD_FS_SNAPSHOT_V0.json",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__nmclr_filesystem_snapshot__NMCLR_SPEC_BUILD_FS_SNAPSHOT_V0__822789f6.json",
-      "byte_count": 7317,
-      "sha256": "7a8b3f38733fae65e17f15b8fc5fc80a5bad998057512f3b7b66e243734e79c0",
-      "modified_time": "2026-06-26T22:13:08.095Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nmclr_preservation/SWANSON_DOSS_NMCLR_PRESERVATION_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__nmclr_preservation__SWANSON_DOSS_NMCLR_PRESERVATION_RECEIPT__e1e1b554.json",
-      "byte_count": 3019,
-      "sha256": "914393cf5149a293054d2a8c62425f07aa3c2b3e58547ce1cbbe4c288fafb33b",
-      "modified_time": "2026-06-26T22:14:21.869Z",
-      "copied": true
-    },
-    {
-      "category": "nerdkle_nmclr",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/branch_collision/BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__branch_collision__BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT__e49f8a0f.md",
-      "byte_count": 6059,
-      "sha256": "13014dc2a31596ed5c0486d5900e7f9a881977936947c4f60723e1caa5d6cb4c",
-      "modified_time": "2026-06-26T22:11:14.225Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/find_the_lost_tinkerden.md",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__find_the_lost_tinkerden__e14dc97f.md",
-      "byte_count": 4806,
-      "sha256": "685c6d32fcc32606e4304bdd96b4fb5d458c789c2f8aed7fbe3b86e279d78b3c",
-      "modified_time": "2026-06-22T03:56:41.839Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_working_preview.html",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_working_preview__9f0d9288.html",
-      "byte_count": 24413,
-      "sha256": "dce29e3ab1772e0fcd9df249129fd60948b848959062cde7fae5fe4ca0a7fd5e",
-      "modified_time": "2026-06-22T05:01:09.234Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_working_preview_receipt.md",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_working_preview_receipt__06702eb8.md",
-      "byte_count": 2245,
-      "sha256": "78205ee09af209b94350bb28b73f6401292dfc8dd07f30399a873136f2b51e87",
-      "modified_time": "2026-06-22T05:04:02.352Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_branch_review_cockpit.html",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_branch_review_cockpit__31941830.html",
-      "byte_count": 35032,
-      "sha256": "282f86b27a4770f92e8629793cfba85a86d15a1a42dc9ad6b226779545d4ad00",
-      "modified_time": "2026-06-23T19:45:01.272Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_branch_review_cockpit_receipt.md",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_branch_review_cockpit_receipt__6baa5331.md",
-      "byte_count": 2034,
-      "sha256": "eb95ab107f2c369122b983baafeab61f98aca792309235b623d66113c609ab91",
-      "modified_time": "2026-06-22T05:20:06.213Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/TINKERDEN_SPOF_FREEZE_NOTICE.md",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__TINKERDEN_SPOF_FREEZE_NOTICE__b66ea2b0.md",
-      "byte_count": 4272,
-      "sha256": "5585b7e744f01aa261d62c0775067595fcbbc2f6c9bc0b701cd6d937738a79dd",
-      "modified_time": "2026-06-23T03:26:13.211Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/TINKERDEN_FREEZE_STATUS_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__TINKERDEN_FREEZE_STATUS_RECEIPT__1baba6b4.md",
-      "byte_count": 3846,
-      "sha256": "5aa8f6f3fcd66dfb7514dbdbb658e031739b65e4152fcd20c4c1575ee026c7b2",
-      "modified_time": "2026-06-23T03:26:13.090Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/UPDATED_TINKERDEN_FREEZE_STATUS_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__UPDATED_TINKERDEN_FREEZE_STATUS_RECEIPT__fab8a1c9.md",
-      "byte_count": 2990,
-      "sha256": "673e83b365209a0d45dcd869aca20e6eba8661866dc0ea03963698c09d65e956",
-      "modified_time": "2026-06-23T03:26:12.940Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_spof_preservation_receipt.md",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_spof_preservation_receipt__5229bad5.md",
-      "byte_count": 5505,
-      "sha256": "e7b0952f263253d318705f9c0900cca0d1d0299ef4f91df6c554938bfeca8986",
-      "modified_time": "2026-06-23T02:35:25.478Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/PROPOSAL_FERAL_TINKERDEN_HANDEYE_001_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__PROPOSAL_FERAL_TINKERDEN_HANDEYE_001_RECEIPT__b5798cbd.json",
-      "byte_count": 5420,
-      "sha256": "bca929235265e63c7f29f14b346142311dcaec01309a4278bd6f20960cbbe260",
-      "modified_time": "2026-06-28T02:49:30.150Z",
-      "copied": true
-    },
-    {
-      "category": "tinkerden_medulla",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/BIRD_0063_SWANSON_RATCHET_FEEDBACK_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__BIRD_0063_SWANSON_RATCHET_FEEDBACK_RECEIPT__3bd0fcb3.json",
-      "byte_count": 2688,
-      "sha256": "292ccfd27b3d63d6b876e2741dbc94a9a029b8a5f38df7e613ff3b9b224195ad",
-      "modified_time": "2026-06-27T20:52:45.245Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/atlas_truth_receipt.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__outputs__atlas_truth_receipt__4e89e0d0.md",
-      "byte_count": 10955,
-      "sha256": "6e1b71f1707f7a8483daaa8a3620f56be04a016dcb9ecbd5744fe6d183429758",
-      "modified_time": "2026-06-23T02:01:10.377Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/BIRD_0130_SWANSON_ATLAS_CORE_DEPLOY_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__outputs__BIRD_0130_SWANSON_ATLAS_CORE_DEPLOY_RECEIPT__8366a0b5.json",
-      "byte_count": 4351,
-      "sha256": "47e1daf21b9f07febb25d692bedd549a166f920abb0362ff989e0e345452a83c",
-      "modified_time": "2026-06-27T22:37:44.505Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/RECEIPT_TRUST_MODEL_AUDIT.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__outputs__RECEIPT_TRUST_MODEL_AUDIT__3678388e.md",
-      "byte_count": 6889,
-      "sha256": "4108ff9919971f59e125a724be9e5eea568535c2d4b97aaef1c5077f92214ffb",
-      "modified_time": "2026-06-23T05:40:47.867Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/FALSE_DELIVERY_AUDIT.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__outputs__FALSE_DELIVERY_AUDIT__e1404f12.md",
-      "byte_count": 6502,
-      "sha256": "33cf91014fc67f3b9134efff8fdb79b5b43705f0f12d0f48f37aa48b6d450fec",
-      "modified_time": "2026-06-23T05:21:55.782Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/aeye_feed/AEYE_FEED_PACKET_0001_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__aeye_feed__AEYE_FEED_PACKET_0001_RECEIPT__9f7e1d08.md",
-      "byte_count": 1605,
-      "sha256": "67331ec187c4cb7671a6106d7164fdc03423f289d11ee930871e29b296e84d55",
-      "modified_time": "2026-06-26T08:00:43.565Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/g_sprints/G_SPRINT_20260627_SOURCE_TRUTH_ATLAS_SPEAKER_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__g_sprints__G_SPRINT_20260627_SOURCE_TRUTH_ATLAS_SPEAKER_RECEIPT__425a31f0.json",
-      "byte_count": 2595,
-      "sha256": "32a507fda4d6e2bfc97fec4814cc531649419362074806e8e58b5b8d20b4d9dc",
-      "modified_time": "2026-06-27T17:54:34.093Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/receipt_crawler/BIRD_0019_SWANSON_RECEIPT_CRAWLER_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/implementation/implementation__receipt_crawler__BIRD_0019_SWANSON_RECEIPT_CRAWLER_RECEIPT__538834fe.json",
-      "byte_count": 5199,
-      "sha256": "62eb47470098c0b4cd0565c09a04f0dd7c2765e9b408821e37e9d0cb8e3d41f1",
-      "modified_time": "2026-06-27T19:12:59.774Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/swateyes/BIRD_0022_SWANSON_SWATEYES_CLASSIFIER_RECEIPT.md",
-      "repo_path": "source-truth-plan/references/implementation/implementation__swateyes__BIRD_0022_SWANSON_SWATEYES_CLASSIFIER_RECEIPT__7e6bda96.md",
-      "byte_count": 6002,
-      "sha256": "88a1dbcd247122d3757199c968428484283f70e186027cf26d423248c0bf9642",
-      "modified_time": "2026-06-27T19:17:50.056Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/fleyes/BIRD_0025_SWANSON_FLEYE_MULE_SENSOR_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/implementation/implementation__fleyes__BIRD_0025_SWANSON_FLEYE_MULE_SENSOR_RECEIPT__6cbb6512.json",
-      "byte_count": 5049,
-      "sha256": "da3c2d5c9834f2d9981866f9551675fc97c83821f89bd31dd467a055d941b343",
-      "modified_time": "2026-06-27T19:21:35.650Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/ender/BIRD_0029_SWANSON_ENDER_CRON_RECEIPT.json",
-      "repo_path": "source-truth-plan/references/implementation/implementation__ender__BIRD_0029_SWANSON_ENDER_CRON_RECEIPT__c135976d.json",
-      "byte_count": 5103,
-      "sha256": "4482ed864026e10fb923c24160ffcd9d1c81f4539f23e5d043d509e711ae5100",
-      "modified_time": "2026-06-27T19:25:35.516Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/README.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__speaker__README__81a7ec4d.md",
-      "byte_count": 2393,
-      "sha256": "880959aaf9c0bae7c23ac1dd120f5ea65fdb8dde2105aabd4158ce467577cf19",
-      "modified_time": "2026-06-28T03:16:35.212Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/atlas/SOURCE_TRUTH_GITHUB_DECISION_PACKET.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__atlas__SOURCE_TRUTH_GITHUB_DECISION_PACKET__0be76100.md",
-      "byte_count": 2028,
-      "sha256": "909e7de8c96701bd8f9461fbc6346d7bbf224cfeabc39ccf6e444f26e6418381",
-      "modified_time": "2026-06-27T21:52:58.017Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/atlas/CANONICAL_SOURCE_TRUTH_NEXT_PACKET.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__atlas__CANONICAL_SOURCE_TRUTH_NEXT_PACKET__0cb0bb50.md",
-      "byte_count": 1251,
-      "sha256": "d847645be264d4bec1b056f818036c2653c5a969f3c83e4ced5918cca002532e",
-      "modified_time": "2026-06-27T21:08:30.047Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/atlas/source_truth_snapshot.json",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__atlas__source_truth_snapshot__c9d41a4c.json",
-      "byte_count": 7101,
-      "sha256": "5467affe5ce5a33c37e27bb2bc2b1353501675a32e15b2551284b41bbe7f4207",
-      "modified_time": "2026-06-27T22:36:32.205Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bin/atlas-source-truth.js",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__bin__atlas-source-truth__ee2edafc.js",
-      "byte_count": 13546,
-      "sha256": "3ed4ee1d30e2736a04a4f52b05c6b9f6d8a4412e68eac0115f95f75d771e345b",
-      "modified_time": "2026-06-27T22:36:21.069Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bin/speakerctl.js",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__bin__speakerctl__67b3880c.js",
-      "byte_count": 72675,
-      "sha256": "adb95294bd1ea584ec9bacfeb711ad777ae2df94c48d31314be369ab37f27657",
-      "modified_time": "2026-06-28T03:18:13.196Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bin/git-snapshot.sh",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__bin__git-snapshot__562fdede.sh",
-      "byte_count": 2521,
-      "sha256": "e7721da8603bedcc6f624b3220092150d2016580617e2c7500f623917141acf8",
-      "modified_time": "2026-06-27T21:30:16.707Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bin/validate-fences.js",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__bin__validate-fences__85adb0e0.js",
-      "byte_count": 6034,
-      "sha256": "0098c8495d60cb60f074d51ed869c3cb0a94c1714d9ec58d9122ee0af2acbe55",
-      "modified_time": "2026-06-27T22:14:15.293Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bootloader/templates/CURRENT_REPO_STATE.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__templates__CURRENT_REPO_STATE__9082f1fb.md",
-      "byte_count": 5360,
-      "sha256": "9292abec7086325ed1faa20c5508950cc16bc8773f0d201d766892578999d71b",
-      "modified_time": "2026-06-28T03:18:21.106Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bootloader/profiles/Skybro.Betsy.json",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__profiles__Skybro.Betsy__2cead9ed.json",
-      "byte_count": 319,
-      "sha256": "cd300d2af382fde1adf96ac4e119936ad77d3a878d56de109b178a9f064c06bf",
-      "modified_time": "2026-06-28T03:15:29.428Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bootloader/profiles/Petra.Betsy.json",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__profiles__Petra.Betsy__15b499f7.json",
-      "byte_count": 334,
-      "sha256": "4b2d0ee75f431d2b05c8e8b652aa53c6b156597b9f6859f9f944e54b0adc8086",
-      "modified_time": "2026-06-28T03:15:29.429Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bootpacks/out/Skybro.Betsy.BOOTPACK.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__out__Skybro.Betsy.BOOTPACK__f8344054.md",
-      "byte_count": 20730,
-      "sha256": "fc307610c0e2b9fd58e48131e397ca10ee62dd56c12f4a8f67586b7a0e40dfad",
-      "modified_time": "2026-06-28T03:18:20.419Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/bootpacks/out/Petra.Betsy.NERDKLE_BRAINBOOT.BOOTPACK.md",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__out__Petra.Betsy.NERDKLE_BRAINBOOT.BOOTPACK__4da251ce.md",
-      "byte_count": 20744,
-      "sha256": "c5067b2bcdb62be210d87f34d51f6c307f0c74f7f03e8f57178dd3a6d496a814",
-      "modified_time": "2026-06-28T03:18:21.191Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/schemas/receipt.schema.json",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__schemas__receipt.schema__c9f590cc.json",
-      "byte_count": 1018,
-      "sha256": "a31bb6472cf9a34d41d27c432d5c093cc476acba62f9e245f4176b8cfc6afb1f",
-      "modified_time": "2026-06-27T20:37:08.143Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/db/master_plan_progress.json",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__db__master_plan_progress__0aab7ee7.json",
-      "byte_count": 473,
-      "sha256": "a3d951eb50c2f4029edc38f2f62fea275aaf804e68abd77c016b99d53e154ede",
-      "modified_time": "2026-06-27T22:04:07.115Z",
-      "copied": true
-    },
-    {
-      "category": "speaker_atlas",
-      "source_path": "C:/speaker/receipts/staged/SWANSON_REMOTE_ALIGNMENT.json",
-      "repo_path": "source-truth-plan/references/speaker_atlas/speaker_atlas__staged__SWANSON_REMOTE_ALIGNMENT__18dc6ad9.json",
-      "byte_count": 13739,
-      "sha256": "29a2214fc674cfb3b7650a0a301c58372d07c5a9390929a91f860bfde1b6a2ba",
-      "modified_time": "2026-06-27T22:06:25.032Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/ecosystem.config.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__tinkarden__ecosystem.config__a03fa76f.js",
-      "byte_count": 2244,
-      "sha256": "4b38394e3023ba9dd54c4166019807eb9b1f390281906cef8d6fe5c84d7e9fb8",
-      "modified_time": "2026-06-27T21:03:43.657Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/server/index.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__server__index__457d3dcd.js",
-      "byte_count": 39424,
-      "sha256": "c336cdb9d6dfa5e064cceb7818f5d594dd2d7a3d6eaef0ec55f324e5aeb63459",
-      "modified_time": "2026-06-28T03:41:47.470Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/server/feral_contract_routes.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__server__feral_contract_routes__1c5d3d48.js",
-      "byte_count": 7498,
-      "sha256": "bba63cc03a3cdd94328eb894df5a3921d500aa1c9fcf82831e12af077ed01514",
-      "modified_time": "2026-06-28T02:47:19.430Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/nervous_system/brainstem.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__nervous_system__brainstem__a4b26dfc.js",
-      "byte_count": 1593,
-      "sha256": "696898b87f3e0f828351f169bffb6a6ae194f98d788a7f9e74f71d9af471310e",
-      "modified_time": "2026-06-27T20:22:54.763Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/nervous_system/crawler.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__nervous_system__crawler__dae042bb.js",
-      "byte_count": 4298,
-      "sha256": "39be855d163946824edee8bd18de9919066a42acdaab3782a02215dc1385aa2a",
-      "modified_time": "2026-06-27T20:23:25.777Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/nervous_system/daemon_watchdog.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__nervous_system__daemon_watchdog__eee898d1.js",
-      "byte_count": 4881,
-      "sha256": "35f57100d49bcc7e72fa167091c68768b09ca07ca9b03682bb95fcdb2217b548",
-      "modified_time": "2026-06-27T20:25:04.917Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/nervous_system/ender_apoptosis.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__nervous_system__ender_apoptosis__454095f6.js",
-      "byte_count": 17571,
-      "sha256": "26a8489c0cac49dd3a2ec46a37ea90c749a0cb4226730848c165b6ab5c16b309",
-      "modified_time": "2026-06-27T19:24:30.798Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/nervous_system/fleyes.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__nervous_system__fleyes__b6f3511d.js",
-      "byte_count": 16661,
-      "sha256": "9b2f8598057ca36917fa39f31e745349cb6e835e1b1b79569012735ed2445ec2",
-      "modified_time": "2026-06-27T19:19:35.194Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/nervous_system/swateyes.js",
-      "repo_path": "source-truth-plan/references/implementation/implementation__nervous_system__swateyes__e5b9b6f5.js",
-      "byte_count": 3819,
-      "sha256": "2f04f8fcd500c55d387c8bf595f0ef5a7c23b3c6e2f11d633ba86a30bfae9be4",
-      "modified_time": "2026-06-27T19:16:57.661Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/nervous_system/frictional_heat.json",
-      "repo_path": "source-truth-plan/references/implementation/implementation__nervous_system__frictional_heat__a7814221.json",
-      "byte_count": 4607,
-      "sha256": "13411d18ea57cda8781d236db4ebbfcea7461ec163a6a0da9e5703b49c0f9dbe",
-      "modified_time": "2026-06-28T03:43:50.373Z",
-      "copied": true
-    },
-    {
-      "category": "implementation",
-      "source_path": "C:/tinkarden/world_state.json",
-      "repo_path": "source-truth-plan/references/implementation/implementation__tinkarden__world_state__732f8587.json",
-      "byte_count": 59075,
-      "sha256": "726a5350d20b1dab7b58c9ed3833043013c0e95b32150c6f552f8b7fc0369852",
-      "modified_time": "2026-06-27T20:17:09.372Z",
-      "copied": true
-    }
-  ]
+﻿{
+    "generated_at":  "2026-06-28T03:44:11.383Z",
+    "repository":  "https://github.com/benleakwerkles/Werkles1.git",
+    "branch":  "source-truth/atlas-speaker-v0-20260627",
+    "status":  "GITHUB_MAIN_SOURCE_TRUTH_ANCHOR_WITH_RAW_BETSY_BOOK_REFERENCE",
+    "purpose":  "Single file-backed Source Truth Plan for The Book, Nerdkle/NMCLR, Speaker/Atlas, and TinkerDen/Medulla build references.",
+    "source_counts":  {
+                          "book":  14,
+                          "nerdkle_nmclr":  27,
+                          "tinkerden_medulla":  11,
+                          "speaker_atlas":  22,
+                          "implementation":  15,
+                          "betsy_desktop_nerdkle_the_book":  120
+                      },
+    "chatlog_index":  {
+                          "repo_path":  "source-truth-plan/references/chatlog_hits/CHATLOG_KEYWORD_INDEX.jsonl",
+                          "hit_count":  48,
+                          "scanned_file_count":  6,
+                          "source_root":  "C:/Users/BenLeak/.codex/sessions"
+                      },
+    "missing_priority_sources":  [
+
+                                 ],
+    "missing_or_unresolved_sources":  [
+
+                                      ],
+    "proof_boundary":  [
+                           "This folder is a source-truth plan and evidence bundle, not proof that full automation is built.",
+                           "GitHub main is the current shared source-truth anchor after promotion.",
+                           "Betsy desktop Nerdkle The Book is included as raw reference material under source-truth-plan/references/betsy_desktop_nerdkle_the_book/.",
+                           "Raw reference material does not replace the source-truth plan or promote any draft as canonical prose.",
+                           "Chatlog index is discovery evidence only; durable source material must still be copied into repo-backed files."
+                       ],
+    "files":  [
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/BOOK_INTEGRATION_MAP_V0.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__BOOK_INTEGRATION_MAP_V0__81fb34af.md",
+                      "byte_count":  23214,
+                      "sha256":  "bd721f83956e446e280993da10d772059b484c1344d0851378a90579a79d61a9",
+                      "modified_time":  "2026-06-26T22:03:15.946Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/SWANSON_DOSS_BOOK_INTEGRATION_MAP_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__SWANSON_DOSS_BOOK_INTEGRATION_MAP_RECEIPT__6afb3c20.json",
+                      "byte_count":  7971,
+                      "sha256":  "e8ac6dbca8b32e81074a6d12c71fcbc8c7be5cb9cf595c86417fb73253b80010",
+                      "modified_time":  "2026-06-26T22:03:32.473Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_SPINE_AUDIT.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__MANUSCRIPT_SPINE_AUDIT__1b6fedac.md",
+                      "byte_count":  6122,
+                      "sha256":  "9bd8ded156fd7a2cc5d5f7721b0be2ac506b8a55b738abeb6ea498a7c054e6a1",
+                      "modified_time":  "2026-06-23T06:09:01.126Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_CONTINUITY_AUDIT.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__MANUSCRIPT_CONTINUITY_AUDIT__13f1265c.md",
+                      "byte_count":  6551,
+                      "sha256":  "faf2726b4b8ea3e34f67f73e2cc373940ddefd7a3e4b813384a12ab4abf6b94b",
+                      "modified_time":  "2026-06-23T05:01:22.284Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_CONTINUITY_AUDIT_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__MANUSCRIPT_CONTINUITY_AUDIT_RECEIPT__2ff6288a.md",
+                      "byte_count":  3138,
+                      "sha256":  "8458359e03d25b76d02b923363fd991afdb72677c779748f9153c728a11f9954",
+                      "modified_time":  "2026-06-23T05:01:49.795Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_STRUCTURE_AUDIT.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__MANUSCRIPT_STRUCTURE_AUDIT__46ed62ed.md",
+                      "byte_count":  10086,
+                      "sha256":  "d622d5c7e967ab877f545482e08ab65f00687560c22fc084f8a3554f73423afd",
+                      "modified_time":  "2026-06-23T04:57:08.620Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_V1_RELEASE_AUDIT.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__MANUSCRIPT_V1_RELEASE_AUDIT__7d1f42c4.md",
+                      "byte_count":  5951,
+                      "sha256":  "fde867a7f0444f24985639b11115d6d93a912f7b6792911e6184255c763acbb4",
+                      "modified_time":  "2026-06-23T05:44:24.225Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/MANUSCRIPT_GAP_AUDIT.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__MANUSCRIPT_GAP_AUDIT__f26c2b6f.md",
+                      "byte_count":  9819,
+                      "sha256":  "fc59f74f2b742a081acf8631d31bc1cc42329d8ff49a93d05b81298069d70119",
+                      "modified_time":  "2026-06-23T04:48:10.534Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/CHAPTER_LINEAGE_LEDGER.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__CHAPTER_LINEAGE_LEDGER__70563174.md",
+                      "byte_count":  7355,
+                      "sha256":  "2c428e6375dc7fd75487eef27073bdb80d72cdef14719896157101af80176804",
+                      "modified_time":  "2026-06-23T04:35:56.489Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/CHAPTER_OWNERSHIP_MAP.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__CHAPTER_OWNERSHIP_MAP__dcbcd70d.md",
+                      "byte_count":  8731,
+                      "sha256":  "59ec25f72840c2f44aa5df1fe4c0578e3b87da3a527a4614e57052c2c350037d",
+                      "modified_time":  "2026-06-23T04:59:26.012Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/inheritance_chain_audit_receipt.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__inheritance_chain_audit_receipt__89c95467.md",
+                      "byte_count":  10838,
+                      "sha256":  "7b50f15bc147a2e9812a16ea9ded100303a08acff0e2af8f2c11d3a024e4b443",
+                      "modified_time":  "2026-06-23T04:09:31.227Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/THESIS_DEFINITION_AUDIT.md",
+                      "repo_path":  "source-truth-plan/references/book/book__outputs__THESIS_DEFINITION_AUDIT__e610648e.md",
+                      "byte_count":  4274,
+                      "sha256":  "303704423d7a2e6fe0803430acf3f4d42adf65a17da61e96d0df7f222e11a465",
+                      "modified_time":  "2026-06-23T06:06:23.885Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/work/MANUSCRIPT_SOURCE_BUNDLE_TO_ENDER_20260623/source_files/speaker/sublime-design/the_sublime_design_v0.md",
+                      "repo_path":  "source-truth-plan/references/book/book__sublime-design__the_sublime_design_v0__891bf617.md",
+                      "byte_count":  1580,
+                      "sha256":  "f832f8e0d233f854f2eb237ca7d90f2dacea622bcb3f7f71bc621c383b13eb37",
+                      "modified_time":  "2026-06-20T05:55:44.722Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "book",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/work/MANUSCRIPT_SOURCE_BUNDLE_TO_ENDER_20260623/source_files/speaker/genome/tinkularity_genome_v0.md",
+                      "repo_path":  "source-truth-plan/references/book/book__genome__tinkularity_genome_v0__b4dd2d20.md",
+                      "byte_count":  5831,
+                      "sha256":  "fd5ef309bee13c344f3f275f932c9f45091cf7d21f3705ffd046158ada9b17d3",
+                      "modified_time":  "2026-06-20T05:52:25.987Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NEUROCIRCULYMPHATIC_V0_SPEC.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NEUROCIRCULYMPHATIC_V0_SPEC__a5ec3627.md",
+                      "byte_count":  8144,
+                      "sha256":  "763af670cf857e1c0a13e16ff337617f41897d705d8d08c14e83cb7cfd3f997d",
+                      "modified_time":  "2026-06-23T06:43:16.193Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NEUROCIRCULYMPHATIC_V0_BOUNDARY.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NEUROCIRCULYMPHATIC_V0_BOUNDARY__57ac07ba.md",
+                      "byte_count":  7647,
+                      "sha256":  "fe2ed3c6b7b2c396c0c58e23c3125a0d42eea4e795b301725f7d055076c99d25",
+                      "modified_time":  "2026-06-23T06:35:33.597Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_RESPIRATORY_RECEIPT_STANDARD.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_RESPIRATORY_RECEIPT_STANDARD__c449ecbd.md",
+                      "byte_count":  5920,
+                      "sha256":  "9e10bc5ea48dc9b0154e1e7935bf80c9d4773a9c625d36dc27d19f871699f9d0",
+                      "modified_time":  "2026-06-24T00:21:19.166Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_MUSCLE_RECEIPT_STANDARD.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_MUSCLE_RECEIPT_STANDARD__daaff01a.md",
+                      "byte_count":  5712,
+                      "sha256":  "bb292b7923262d153d8352a047b6010522fc196398f1f0d9995503b49e4d07f6",
+                      "modified_time":  "2026-06-24T00:22:48.857Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_METABOLISM_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_METABOLISM_RECEIPT__df492514.md",
+                      "byte_count":  3741,
+                      "sha256":  "b801fc8d2b097fbf9597cb3f62feca9b8ce537e6a445161a060ea7902d66c189",
+                      "modified_time":  "2026-06-24T02:03:04.755Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_METABOLISM_V0.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_METABOLISM_V0__e4f6a052.md",
+                      "byte_count":  5648,
+                      "sha256":  "ee6542089407572880eb0ab426713b2dc573be87ce32384f7fb285dbbffdc3d3",
+                      "modified_time":  "2026-06-24T00:49:15.397Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NMCLR_METABOLISM_PROOF_CHAIN.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NMCLR_METABOLISM_PROOF_CHAIN__e14cdb89.md",
+                      "byte_count":  1635,
+                      "sha256":  "fafe94ba242aa94d593967924d746d9890758429f8c0ed2f08590f0575cc2abe",
+                      "modified_time":  "2026-06-24T03:13:30.066Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/ASSIMILATION_V0_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__ASSIMILATION_V0_RECEIPT__148dd086.md",
+                      "byte_count":  5452,
+                      "sha256":  "5d1fbb3f6893959ef6d044fad44ff8d410a2e950acc94c0b2c3e6b63da05d922",
+                      "modified_time":  "2026-06-24T03:16:12.207Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/assimilation_rule.json",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__assimilation_rule__871f2451.json",
+                      "byte_count":  9510,
+                      "sha256":  "05e0c784ba5a3b614629b3ebbcb4bca8884ea45a210a7f82fd9a96c98d364497",
+                      "modified_time":  "2026-06-25T04:47:13.476Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/INTENT_TO_ANATOMY_COMPILER_V0_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__INTENT_TO_ANATOMY_COMPILER_V0_RECEIPT__69885470.md",
+                      "byte_count":  3904,
+                      "sha256":  "252fc0ef87b86abbbdd7bb16b5c5c7602d86a0b28bfc5212683c8e34cf8222ff",
+                      "modified_time":  "2026-06-25T03:39:37.046Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/INTENT_TO_ANATOMY_COMPILER_V0.json",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__INTENT_TO_ANATOMY_COMPILER_V0__b228f5c0.json",
+                      "byte_count":  7109,
+                      "sha256":  "b518946d8f7350c874c6de343a285330ebf1ba72d540064b7a6fb2beaaf507b3",
+                      "modified_time":  "2026-06-25T03:39:37.044Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/CREATOR_OPERATOR_MODEL_V0.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__CREATOR_OPERATOR_MODEL_V0__49b06538.md",
+                      "byte_count":  6358,
+                      "sha256":  "495947fccb5afd4f195ed4e3d44275dd2ab3826e20e26e653c6659a364a84dab",
+                      "modified_time":  "2026-06-24T00:42:12.816Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/CREATOR_OPERATOR_ORGANISM_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__CREATOR_OPERATOR_ORGANISM_RECEIPT__141aca1e.md",
+                      "byte_count":  4090,
+                      "sha256":  "aec9762d7280eb0685879532b64b3885b025a0f8062f98b04d1cff9e66cbeb80",
+                      "modified_time":  "2026-06-24T00:48:24.812Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/SUCCESSFUL_INHERITANCE_EVENT_V0.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__SUCCESSFUL_INHERITANCE_EVENT_V0__e9e7fe0b.md",
+                      "byte_count":  8438,
+                      "sha256":  "8228189706eebed14a385dad4d474e71227b199ddd45c704c8b542639fc8697d",
+                      "modified_time":  "2026-06-23T14:41:00.366Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/SUCCESSFUL_INHERITANCE_EVENT_V0_SPEC.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__SUCCESSFUL_INHERITANCE_EVENT_V0_SPEC__7e8f5076.md",
+                      "byte_count":  7651,
+                      "sha256":  "387c23b98414b9de5994fde3a3560b35ffbc760a36e03ffd6e84617da274c244",
+                      "modified_time":  "2026-06-23T14:46:59.880Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/SUCCESSFUL_INHERITANCE_QUERY_V0.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__SUCCESSFUL_INHERITANCE_QUERY_V0__d2de49a1.md",
+                      "byte_count":  9687,
+                      "sha256":  "4f8d970d5b15ea32901e16cb37f5bb46e4618fc6e89d6988cc7bb51d372dfc96",
+                      "modified_time":  "2026-06-23T14:50:29.606Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/INHERITANCE_EVENT_CANDIDATE_DETECTOR_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__INHERITANCE_EVENT_CANDIDATE_DETECTOR_RECEIPT__36ee14ed.md",
+                      "byte_count":  5795,
+                      "sha256":  "76ab2bc53a56fbcd02361d8d251a92cd469aa2f4dce4d21ce57cf8d1f13b2c39",
+                      "modified_time":  "2026-06-23T14:55:05.248Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/candidate_inheritance_events.json",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__candidate_inheritance_events__cf5e96ca.json",
+                      "byte_count":  1033,
+                      "sha256":  "f26a7c517a65ab5c6ff3d2fbfff35430fa572c1b5d26b5eb1e68c144965312f6",
+                      "modified_time":  "2026-06-23T14:55:05.139Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/NERDKLE_HANDOFF_TO_FUCKO_RECEIPT_20260626-162718.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__outputs__NERDKLE_HANDOFF_TO_FUCKO_RECEIPT_20260626-162718__a5c11aee.md",
+                      "byte_count":  2647,
+                      "sha256":  "3439fd9deb4c0898529a232dcc2c2b5961d42fd8b1b6f9b868805f6865351c72",
+                      "modified_time":  "2026-06-26T20:28:48.456Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nerdkle_pulse_v0/PULSE_TEST_001.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__nerdkle_pulse_v0__PULSE_TEST_001__d31a3dc4.md",
+                      "byte_count":  831,
+                      "sha256":  "e5fb75c18205d6987dabea0e6982b2fd0bbd9cf7ca22bc23a2c0ed40d538e600",
+                      "modified_time":  "2026-06-26T20:31:28.593Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nerdkle_pulse_v0/artifacts/PULSE_TEST_001_ACK_ARTIFACT.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__artifacts__PULSE_TEST_001_ACK_ARTIFACT__95d66f11.md",
+                      "byte_count":  341,
+                      "sha256":  "c379763a9fa0b08102d0613f27c3d25afb6abeff9ae3521535e34b2d68ad8877",
+                      "modified_time":  "2026-06-26T20:31:28.594Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nerdkle_pulse_v0/receipts/NERDKLE_PULSE_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__receipts__NERDKLE_PULSE_RECEIPT__414d15bb.json",
+                      "byte_count":  615,
+                      "sha256":  "edb92f63b709d756a1104ac7cc6377cb3bdf47017fd30e2708b2e70c104c2057",
+                      "modified_time":  "2026-06-26T20:31:28.595Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/dink_doss_nerdkle_receipt_dry_run/NERDKLE_DRY_RECEIPT_001.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__dink_doss_nerdkle_receipt_dry_run__NERDKLE_DRY_RECEIPT_001__f326362e.md",
+                      "byte_count":  739,
+                      "sha256":  "ecbccb6ed1f13c94249e4abd2e8660c0416e77e52536a7f5d615568f120cb007",
+                      "modified_time":  "2026-06-26T20:33:49.063Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/dink_doss_nerdkle_receipt_dry_run/NERDKLE_DRY_BIRD_001.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__dink_doss_nerdkle_receipt_dry_run__NERDKLE_DRY_BIRD_001__91754420.md",
+                      "byte_count":  667,
+                      "sha256":  "7f0dd3197c87a2690b49217ed91213b4823ce214bcf8c383257705f5207afa87",
+                      "modified_time":  "2026-06-26T20:33:49.061Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nmclr_filesystem_snapshot/NMCLR_SPEC_BUILD_FS_SNAPSHOT_V0.json",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__nmclr_filesystem_snapshot__NMCLR_SPEC_BUILD_FS_SNAPSHOT_V0__822789f6.json",
+                      "byte_count":  7317,
+                      "sha256":  "7a8b3f38733fae65e17f15b8fc5fc80a5bad998057512f3b7b66e243734e79c0",
+                      "modified_time":  "2026-06-26T22:13:08.095Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/nmclr_preservation/SWANSON_DOSS_NMCLR_PRESERVATION_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__nmclr_preservation__SWANSON_DOSS_NMCLR_PRESERVATION_RECEIPT__e1e1b554.json",
+                      "byte_count":  3019,
+                      "sha256":  "914393cf5149a293054d2a8c62425f07aa3c2b3e58547ce1cbbe4c288fafb33b",
+                      "modified_time":  "2026-06-26T22:14:21.869Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "nerdkle_nmclr",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/branch_collision/BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/nerdkle_nmclr/nerdkle_nmclr__branch_collision__BEAN_SPANZEE_BRANCH_COLLISION_ATTACK_RECEIPT__e49f8a0f.md",
+                      "byte_count":  6059,
+                      "sha256":  "13014dc2a31596ed5c0486d5900e7f9a881977936947c4f60723e1caa5d6cb4c",
+                      "modified_time":  "2026-06-26T22:11:14.225Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/find_the_lost_tinkerden.md",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__find_the_lost_tinkerden__e14dc97f.md",
+                      "byte_count":  4806,
+                      "sha256":  "685c6d32fcc32606e4304bdd96b4fb5d458c789c2f8aed7fbe3b86e279d78b3c",
+                      "modified_time":  "2026-06-22T03:56:41.839Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_working_preview.html",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_working_preview__9f0d9288.html",
+                      "byte_count":  24413,
+                      "sha256":  "dce29e3ab1772e0fcd9df249129fd60948b848959062cde7fae5fe4ca0a7fd5e",
+                      "modified_time":  "2026-06-22T05:01:09.234Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_working_preview_receipt.md",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_working_preview_receipt__06702eb8.md",
+                      "byte_count":  2245,
+                      "sha256":  "78205ee09af209b94350bb28b73f6401292dfc8dd07f30399a873136f2b51e87",
+                      "modified_time":  "2026-06-22T05:04:02.352Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_branch_review_cockpit.html",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_branch_review_cockpit__31941830.html",
+                      "byte_count":  35032,
+                      "sha256":  "282f86b27a4770f92e8629793cfba85a86d15a1a42dc9ad6b226779545d4ad00",
+                      "modified_time":  "2026-06-23T19:45:01.272Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_branch_review_cockpit_receipt.md",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_branch_review_cockpit_receipt__6baa5331.md",
+                      "byte_count":  2034,
+                      "sha256":  "eb95ab107f2c369122b983baafeab61f98aca792309235b623d66113c609ab91",
+                      "modified_time":  "2026-06-22T05:20:06.213Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/TINKERDEN_SPOF_FREEZE_NOTICE.md",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__TINKERDEN_SPOF_FREEZE_NOTICE__b66ea2b0.md",
+                      "byte_count":  4272,
+                      "sha256":  "5585b7e744f01aa261d62c0775067595fcbbc2f6c9bc0b701cd6d937738a79dd",
+                      "modified_time":  "2026-06-23T03:26:13.211Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/TINKERDEN_FREEZE_STATUS_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__TINKERDEN_FREEZE_STATUS_RECEIPT__1baba6b4.md",
+                      "byte_count":  3846,
+                      "sha256":  "5aa8f6f3fcd66dfb7514dbdbb658e031739b65e4152fcd20c4c1575ee026c7b2",
+                      "modified_time":  "2026-06-23T03:26:13.090Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/UPDATED_TINKERDEN_FREEZE_STATUS_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__UPDATED_TINKERDEN_FREEZE_STATUS_RECEIPT__fab8a1c9.md",
+                      "byte_count":  2990,
+                      "sha256":  "673e83b365209a0d45dcd869aca20e6eba8661866dc0ea03963698c09d65e956",
+                      "modified_time":  "2026-06-23T03:26:12.940Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/tinkerden_spof_preservation_receipt.md",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__tinkerden_spof_preservation_receipt__5229bad5.md",
+                      "byte_count":  5505,
+                      "sha256":  "e7b0952f263253d318705f9c0900cca0d1d0299ef4f91df6c554938bfeca8986",
+                      "modified_time":  "2026-06-23T02:35:25.478Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/PROPOSAL_FERAL_TINKERDEN_HANDEYE_001_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__PROPOSAL_FERAL_TINKERDEN_HANDEYE_001_RECEIPT__b5798cbd.json",
+                      "byte_count":  5420,
+                      "sha256":  "bca929235265e63c7f29f14b346142311dcaec01309a4278bd6f20960cbbe260",
+                      "modified_time":  "2026-06-28T02:49:30.150Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "tinkerden_medulla",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/BIRD_0063_SWANSON_RATCHET_FEEDBACK_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/tinkerden_medulla/tinkerden_medulla__outputs__BIRD_0063_SWANSON_RATCHET_FEEDBACK_RECEIPT__3bd0fcb3.json",
+                      "byte_count":  2688,
+                      "sha256":  "292ccfd27b3d63d6b876e2741dbc94a9a029b8a5f38df7e613ff3b9b224195ad",
+                      "modified_time":  "2026-06-27T20:52:45.245Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/atlas_truth_receipt.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__outputs__atlas_truth_receipt__4e89e0d0.md",
+                      "byte_count":  10955,
+                      "sha256":  "6e1b71f1707f7a8483daaa8a3620f56be04a016dcb9ecbd5744fe6d183429758",
+                      "modified_time":  "2026-06-23T02:01:10.377Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/BIRD_0130_SWANSON_ATLAS_CORE_DEPLOY_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__outputs__BIRD_0130_SWANSON_ATLAS_CORE_DEPLOY_RECEIPT__8366a0b5.json",
+                      "byte_count":  4351,
+                      "sha256":  "47e1daf21b9f07febb25d692bedd549a166f920abb0362ff989e0e345452a83c",
+                      "modified_time":  "2026-06-27T22:37:44.505Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/RECEIPT_TRUST_MODEL_AUDIT.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__outputs__RECEIPT_TRUST_MODEL_AUDIT__3678388e.md",
+                      "byte_count":  6889,
+                      "sha256":  "4108ff9919971f59e125a724be9e5eea568535c2d4b97aaef1c5077f92214ffb",
+                      "modified_time":  "2026-06-23T05:40:47.867Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/FALSE_DELIVERY_AUDIT.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__outputs__FALSE_DELIVERY_AUDIT__e1404f12.md",
+                      "byte_count":  6502,
+                      "sha256":  "33cf91014fc67f3b9134efff8fdb79b5b43705f0f12d0f48f37aa48b6d450fec",
+                      "modified_time":  "2026-06-23T05:21:55.782Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/aeye_feed/AEYE_FEED_PACKET_0001_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__aeye_feed__AEYE_FEED_PACKET_0001_RECEIPT__9f7e1d08.md",
+                      "byte_count":  1605,
+                      "sha256":  "67331ec187c4cb7671a6106d7164fdc03423f289d11ee930871e29b296e84d55",
+                      "modified_time":  "2026-06-26T08:00:43.565Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/g_sprints/G_SPRINT_20260627_SOURCE_TRUTH_ATLAS_SPEAKER_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__g_sprints__G_SPRINT_20260627_SOURCE_TRUTH_ATLAS_SPEAKER_RECEIPT__425a31f0.json",
+                      "byte_count":  2595,
+                      "sha256":  "32a507fda4d6e2bfc97fec4814cc531649419362074806e8e58b5b8d20b4d9dc",
+                      "modified_time":  "2026-06-27T17:54:34.093Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/receipt_crawler/BIRD_0019_SWANSON_RECEIPT_CRAWLER_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__receipt_crawler__BIRD_0019_SWANSON_RECEIPT_CRAWLER_RECEIPT__538834fe.json",
+                      "byte_count":  5199,
+                      "sha256":  "62eb47470098c0b4cd0565c09a04f0dd7c2765e9b408821e37e9d0cb8e3d41f1",
+                      "modified_time":  "2026-06-27T19:12:59.774Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/swateyes/BIRD_0022_SWANSON_SWATEYES_CLASSIFIER_RECEIPT.md",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__swateyes__BIRD_0022_SWANSON_SWATEYES_CLASSIFIER_RECEIPT__7e6bda96.md",
+                      "byte_count":  6002,
+                      "sha256":  "88a1dbcd247122d3757199c968428484283f70e186027cf26d423248c0bf9642",
+                      "modified_time":  "2026-06-27T19:17:50.056Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/fleyes/BIRD_0025_SWANSON_FLEYE_MULE_SENSOR_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__fleyes__BIRD_0025_SWANSON_FLEYE_MULE_SENSOR_RECEIPT__6cbb6512.json",
+                      "byte_count":  5049,
+                      "sha256":  "da3c2d5c9834f2d9981866f9551675fc97c83821f89bd31dd467a055d941b343",
+                      "modified_time":  "2026-06-27T19:21:35.650Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/Users/BenLeak/Documents/Codex/2026-06-20/to-swanson-doss-mission-branch-truth/outputs/ender/BIRD_0029_SWANSON_ENDER_CRON_RECEIPT.json",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__ender__BIRD_0029_SWANSON_ENDER_CRON_RECEIPT__c135976d.json",
+                      "byte_count":  5103,
+                      "sha256":  "4482ed864026e10fb923c24160ffcd9d1c81f4539f23e5d043d509e711ae5100",
+                      "modified_time":  "2026-06-27T19:25:35.516Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/README.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__speaker__README__81a7ec4d.md",
+                      "byte_count":  2393,
+                      "sha256":  "880959aaf9c0bae7c23ac1dd120f5ea65fdb8dde2105aabd4158ce467577cf19",
+                      "modified_time":  "2026-06-28T03:16:35.212Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/atlas/SOURCE_TRUTH_GITHUB_DECISION_PACKET.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__atlas__SOURCE_TRUTH_GITHUB_DECISION_PACKET__0be76100.md",
+                      "byte_count":  2028,
+                      "sha256":  "909e7de8c96701bd8f9461fbc6346d7bbf224cfeabc39ccf6e444f26e6418381",
+                      "modified_time":  "2026-06-27T21:52:58.017Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/atlas/CANONICAL_SOURCE_TRUTH_NEXT_PACKET.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__atlas__CANONICAL_SOURCE_TRUTH_NEXT_PACKET__0cb0bb50.md",
+                      "byte_count":  1251,
+                      "sha256":  "d847645be264d4bec1b056f818036c2653c5a969f3c83e4ced5918cca002532e",
+                      "modified_time":  "2026-06-27T21:08:30.047Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/atlas/source_truth_snapshot.json",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__atlas__source_truth_snapshot__c9d41a4c.json",
+                      "byte_count":  7101,
+                      "sha256":  "5467affe5ce5a33c37e27bb2bc2b1353501675a32e15b2551284b41bbe7f4207",
+                      "modified_time":  "2026-06-27T22:36:32.205Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bin/atlas-source-truth.js",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__bin__atlas-source-truth__ee2edafc.js",
+                      "byte_count":  13546,
+                      "sha256":  "3ed4ee1d30e2736a04a4f52b05c6b9f6d8a4412e68eac0115f95f75d771e345b",
+                      "modified_time":  "2026-06-27T22:36:21.069Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bin/speakerctl.js",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__bin__speakerctl__67b3880c.js",
+                      "byte_count":  72675,
+                      "sha256":  "adb95294bd1ea584ec9bacfeb711ad777ae2df94c48d31314be369ab37f27657",
+                      "modified_time":  "2026-06-28T03:18:13.196Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bin/git-snapshot.sh",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__bin__git-snapshot__562fdede.sh",
+                      "byte_count":  2521,
+                      "sha256":  "e7721da8603bedcc6f624b3220092150d2016580617e2c7500f623917141acf8",
+                      "modified_time":  "2026-06-27T21:30:16.707Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bin/validate-fences.js",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__bin__validate-fences__85adb0e0.js",
+                      "byte_count":  6034,
+                      "sha256":  "0098c8495d60cb60f074d51ed869c3cb0a94c1714d9ec58d9122ee0af2acbe55",
+                      "modified_time":  "2026-06-27T22:14:15.293Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bootloader/templates/CURRENT_REPO_STATE.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__templates__CURRENT_REPO_STATE__9082f1fb.md",
+                      "byte_count":  5360,
+                      "sha256":  "9292abec7086325ed1faa20c5508950cc16bc8773f0d201d766892578999d71b",
+                      "modified_time":  "2026-06-28T03:18:21.106Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bootloader/profiles/Skybro.Betsy.json",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__profiles__Skybro.Betsy__2cead9ed.json",
+                      "byte_count":  319,
+                      "sha256":  "cd300d2af382fde1adf96ac4e119936ad77d3a878d56de109b178a9f064c06bf",
+                      "modified_time":  "2026-06-28T03:15:29.428Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bootloader/profiles/Petra.Betsy.json",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__profiles__Petra.Betsy__15b499f7.json",
+                      "byte_count":  334,
+                      "sha256":  "4b2d0ee75f431d2b05c8e8b652aa53c6b156597b9f6859f9f944e54b0adc8086",
+                      "modified_time":  "2026-06-28T03:15:29.429Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bootpacks/out/Skybro.Betsy.BOOTPACK.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__out__Skybro.Betsy.BOOTPACK__f8344054.md",
+                      "byte_count":  20730,
+                      "sha256":  "fc307610c0e2b9fd58e48131e397ca10ee62dd56c12f4a8f67586b7a0e40dfad",
+                      "modified_time":  "2026-06-28T03:18:20.419Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/bootpacks/out/Petra.Betsy.NERDKLE_BRAINBOOT.BOOTPACK.md",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__out__Petra.Betsy.NERDKLE_BRAINBOOT.BOOTPACK__4da251ce.md",
+                      "byte_count":  20744,
+                      "sha256":  "c5067b2bcdb62be210d87f34d51f6c307f0c74f7f03e8f57178dd3a6d496a814",
+                      "modified_time":  "2026-06-28T03:18:21.191Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/schemas/receipt.schema.json",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__schemas__receipt.schema__c9f590cc.json",
+                      "byte_count":  1018,
+                      "sha256":  "a31bb6472cf9a34d41d27c432d5c093cc476acba62f9e245f4176b8cfc6afb1f",
+                      "modified_time":  "2026-06-27T20:37:08.143Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/db/master_plan_progress.json",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__db__master_plan_progress__0aab7ee7.json",
+                      "byte_count":  473,
+                      "sha256":  "a3d951eb50c2f4029edc38f2f62fea275aaf804e68abd77c016b99d53e154ede",
+                      "modified_time":  "2026-06-27T22:04:07.115Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "speaker_atlas",
+                      "source_path":  "C:/speaker/receipts/staged/SWANSON_REMOTE_ALIGNMENT.json",
+                      "repo_path":  "source-truth-plan/references/speaker_atlas/speaker_atlas__staged__SWANSON_REMOTE_ALIGNMENT__18dc6ad9.json",
+                      "byte_count":  13739,
+                      "sha256":  "29a2214fc674cfb3b7650a0a301c58372d07c5a9390929a91f860bfde1b6a2ba",
+                      "modified_time":  "2026-06-27T22:06:25.032Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/ecosystem.config.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__tinkarden__ecosystem.config__a03fa76f.js",
+                      "byte_count":  2244,
+                      "sha256":  "4b38394e3023ba9dd54c4166019807eb9b1f390281906cef8d6fe5c84d7e9fb8",
+                      "modified_time":  "2026-06-27T21:03:43.657Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/server/index.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__server__index__457d3dcd.js",
+                      "byte_count":  39424,
+                      "sha256":  "c336cdb9d6dfa5e064cceb7818f5d594dd2d7a3d6eaef0ec55f324e5aeb63459",
+                      "modified_time":  "2026-06-28T03:41:47.470Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/server/feral_contract_routes.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__server__feral_contract_routes__1c5d3d48.js",
+                      "byte_count":  7498,
+                      "sha256":  "bba63cc03a3cdd94328eb894df5a3921d500aa1c9fcf82831e12af077ed01514",
+                      "modified_time":  "2026-06-28T02:47:19.430Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/nervous_system/brainstem.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__nervous_system__brainstem__a4b26dfc.js",
+                      "byte_count":  1593,
+                      "sha256":  "696898b87f3e0f828351f169bffb6a6ae194f98d788a7f9e74f71d9af471310e",
+                      "modified_time":  "2026-06-27T20:22:54.763Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/nervous_system/crawler.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__nervous_system__crawler__dae042bb.js",
+                      "byte_count":  4298,
+                      "sha256":  "39be855d163946824edee8bd18de9919066a42acdaab3782a02215dc1385aa2a",
+                      "modified_time":  "2026-06-27T20:23:25.777Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/nervous_system/daemon_watchdog.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__nervous_system__daemon_watchdog__eee898d1.js",
+                      "byte_count":  4881,
+                      "sha256":  "35f57100d49bcc7e72fa167091c68768b09ca07ca9b03682bb95fcdb2217b548",
+                      "modified_time":  "2026-06-27T20:25:04.917Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/nervous_system/ender_apoptosis.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__nervous_system__ender_apoptosis__454095f6.js",
+                      "byte_count":  17571,
+                      "sha256":  "26a8489c0cac49dd3a2ec46a37ea90c749a0cb4226730848c165b6ab5c16b309",
+                      "modified_time":  "2026-06-27T19:24:30.798Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/nervous_system/fleyes.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__nervous_system__fleyes__b6f3511d.js",
+                      "byte_count":  16661,
+                      "sha256":  "9b2f8598057ca36917fa39f31e745349cb6e835e1b1b79569012735ed2445ec2",
+                      "modified_time":  "2026-06-27T19:19:35.194Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/nervous_system/swateyes.js",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__nervous_system__swateyes__e5b9b6f5.js",
+                      "byte_count":  3819,
+                      "sha256":  "2f04f8fcd500c55d387c8bf595f0ef5a7c23b3c6e2f11d633ba86a30bfae9be4",
+                      "modified_time":  "2026-06-27T19:16:57.661Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/nervous_system/frictional_heat.json",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__nervous_system__frictional_heat__a7814221.json",
+                      "byte_count":  4607,
+                      "sha256":  "13411d18ea57cda8781d236db4ebbfcea7461ec163a6a0da9e5703b49c0f9dbe",
+                      "modified_time":  "2026-06-28T03:43:50.373Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "implementation",
+                      "source_path":  "C:/tinkarden/world_state.json",
+                      "repo_path":  "source-truth-plan/references/implementation/implementation__tinkarden__world_state__732f8587.json",
+                      "byte_count":  59075,
+                      "sha256":  "726a5350d20b1dab7b58c9ed3833043013c0e95b32150c6f552f8b7fc0369852",
+                      "modified_time":  "2026-06-27T20:17:09.372Z",
+                      "copied":  true
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/.gitattributes",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\.gitattributes",
+                      "byte_count":  8,
+                      "sha256":  "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+                      "modified_time":  "2026-06-28T21:54:37.733Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/BEAN_AUDIT_INTEGRATION.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\BEAN_AUDIT_INTEGRATION.md",
+                      "byte_count":  1320,
+                      "sha256":  "9c45e509bc46a9f685f0b06330ab41538ad7275bcd7312e134c62eaeffc0d8c0",
+                      "modified_time":  "2026-06-28T21:54:37.734Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/CANON_ASSEMBLY_NOTES_V4.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\CANON_ASSEMBLY_NOTES_V4.md",
+                      "byte_count":  421,
+                      "sha256":  "e4c48358075ec02467a5fb085bbaf500c73528c1e995430748b1424b7b14d1a9",
+                      "modified_time":  "2026-06-28T21:54:37.738Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/CHANGE_CAPSULE_ORGAN_OBLIGATION_LAYER.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\CHANGE_CAPSULE_ORGAN_OBLIGATION_LAYER.md",
+                      "byte_count":  1528,
+                      "sha256":  "aaa2b858ed5bb1ddb34115efd57b09685d536ba6b04af4ff1286fe820954ec5e",
+                      "modified_time":  "2026-06-28T21:54:37.740Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/CHANGE_CAPSULE_TINKERDEN_MEDULLA_V0.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\CHANGE_CAPSULE_TINKERDEN_MEDULLA_V0.md",
+                      "byte_count":  1316,
+                      "sha256":  "86702f4e753c91fca88bfd41bed596f8e9c6e866fb8dc8ff5988b15d77750e6c",
+                      "modified_time":  "2026-06-28T21:54:37.741Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Eight - The Dead Continue Participating.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Eight - The Dead Continue Participating.docx",
+                      "byte_count":  11843,
+                      "sha256":  "c33c52ba56c489fe3d5192404201613dbd380a6659449dffcd8b09b5cee5727a",
+                      "modified_time":  "2026-06-28T21:54:37.746Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Eighteen - The Difference Between a Garden and a Religion.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Eighteen - The Difference Between a Garden and a Religion.docx",
+                      "byte_count":  12783,
+                      "sha256":  "0c0ee5237aab45d38fac97c02cdeb837374e0e9aeb9c2f7d4ea09557a2fd7688",
+                      "modified_time":  "2026-06-28T21:54:37.747Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Eighteen- Sovereignty.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Eighteen- Sovereignty.docx",
+                      "byte_count":  11546,
+                      "sha256":  "20d9b8bf886acc7205483c7ad72b6d116c804b3c6d66846ff70be39ab044ea91",
+                      "modified_time":  "2026-06-28T21:54:37.748Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Eleven - Cooperation (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Eleven - Cooperation (1).docx",
+                      "byte_count":  12070,
+                      "sha256":  "1949109e197950dc8b38681b5b7b96f6a77a745650e77541ff0ca16f914d4d56",
+                      "modified_time":  "2026-06-28T21:54:37.750Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Eleven - Cooperation.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Eleven - Cooperation.docx",
+                      "byte_count":  12077,
+                      "sha256":  "f3f6a115d48aa8ee765b91083be6b05d6f0ce8a48074528c39c553f2dbcd287b",
+                      "modified_time":  "2026-06-28T21:54:37.751Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Fifteen - Hope.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Fifteen - Hope.docx",
+                      "byte_count":  11846,
+                      "sha256":  "464b5dbdb7dd250b7e1f70096039343cc08e9a321d50764365f2a3e5c40ad88b",
+                      "modified_time":  "2026-06-28T21:54:37.752Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Four - The Living Machine.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Four - The Living Machine.docx",
+                      "byte_count":  12172,
+                      "sha256":  "c033d21f33cc06fe0a8fa6993cc6dbd27b7c4f799b912235bdf75db11c025c20",
+                      "modified_time":  "2026-06-28T21:54:37.754Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Fourteen - Opportunity.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Fourteen - Opportunity.docx",
+                      "byte_count":  11875,
+                      "sha256":  "ae1644748f998e5079c054e53199585ffe0ba7a59ccb4bd9e3f3c0736668161c",
+                      "modified_time":  "2026-06-28T21:54:37.756Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Nine - Sovereignty.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Nine - Sovereignty.docx",
+                      "byte_count":  12362,
+                      "sha256":  "8f3fdb27f17490b449ec106629009def1e7812082300f9ff53765163508b0170",
+                      "modified_time":  "2026-06-28T21:54:37.757Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Nineteen - The Tinkularity.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Nineteen - The Tinkularity.docx",
+                      "byte_count":  12235,
+                      "sha256":  "5c72df6dc1b7934048b766fb43e3a2ba99679529e4c5b7cbe4e25ed9dab13828",
+                      "modified_time":  "2026-06-28T21:54:37.759Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Nineteen- Capacity.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Nineteen- Capacity.docx",
+                      "byte_count":  12511,
+                      "sha256":  "7da02f0964d9147e25c2f995a746972cb821d66c0455006037dca9d2d3115b96",
+                      "modified_time":  "2026-06-28T21:54:37.760Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter One - The Human Infrastructure Problem.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter One - The Human Infrastructure Problem.docx",
+                      "byte_count":  12754,
+                      "sha256":  "4622ad4cc8f7bd2d3687dcd77195758dac45ba9f94e8d0099eaafa2e97f47600",
+                      "modified_time":  "2026-06-28T21:54:37.761Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter One- The Human Infrastructure Problem.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter One- The Human Infrastructure Problem.docx",
+                      "byte_count":  12727,
+                      "sha256":  "1b0ee057753da3b0a699dd43aad4e92f608b24c06770d6271cf06af3f19bd5f2",
+                      "modified_time":  "2026-06-28T21:54:37.763Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Seven - The Ratchet.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Seven - The Ratchet.docx",
+                      "byte_count":  12181,
+                      "sha256":  "44238f4c7e55b45699b701d7ea467a6c1d8b3b4ceaab279ce56bbc0f3e123427",
+                      "modified_time":  "2026-06-28T21:54:37.763Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Seventeen - The Operator Principle.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Seventeen - The Operator Principle.docx",
+                      "byte_count":  11845,
+                      "sha256":  "9b1f6823f266e3518e44a8f09170b5d127bc72df9762dbf0df981e2307bece17",
+                      "modified_time":  "2026-06-28T21:54:37.764Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Seventeen- Cooperation.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Seventeen- Cooperation.docx",
+                      "byte_count":  12269,
+                      "sha256":  "2746bc8eaf10aceda04b4fd1b615eeff836122ab483a07888cf83893fd6c2139",
+                      "modified_time":  "2026-06-28T21:54:37.766Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Six - Inheritance.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Six - Inheritance.docx",
+                      "byte_count":  11970,
+                      "sha256":  "6aa14847598cdce1661502e21522909cc936855abbe871b17c78d047ec0efaf8",
+                      "modified_time":  "2026-06-28T21:54:37.767Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Six- Inheritance.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Six- Inheritance.docx",
+                      "byte_count":  12908,
+                      "sha256":  "b63eae34340b0abe3f592b6c79d4d41533bf1652b57ce242be40d782c999a1ff",
+                      "modified_time":  "2026-06-28T21:54:37.772Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Sixteen- Health.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Sixteen- Health.docx",
+                      "byte_count":  11091,
+                      "sha256":  "6005856c47f48886f66553bbd0d33944b2974d0242bc5d7d73695ad0b1926257",
+                      "modified_time":  "2026-06-28T21:54:37.774Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Ten - Health (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Ten - Health (1).docx",
+                      "byte_count":  12105,
+                      "sha256":  "386f705bf4716e2b5b0fff7b9889451d21c61dc7e177b29c317285173cc0fdd9",
+                      "modified_time":  "2026-06-28T21:54:37.776Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Ten - Health.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Ten - Health.docx",
+                      "byte_count":  12104,
+                      "sha256":  "46f58c224edf1094f889e6fed6e4f68218d00113a8c29cabd8dc0a75f29dd177",
+                      "modified_time":  "2026-06-28T21:54:37.778Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Thirteen - Capacity.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Thirteen - Capacity.docx",
+                      "byte_count":  12238,
+                      "sha256":  "af34d07fd6649e9d33e0f72afe0d3ca6102acb737ab70ee894f1ae578eef3d45",
+                      "modified_time":  "2026-06-28T21:54:37.780Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Three - Automatica.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Three - Automatica.docx",
+                      "byte_count":  11890,
+                      "sha256":  "14b71bf193e99088c1f7a962f7993613994d62429a41ed1716cde8c65f5a6c9f",
+                      "modified_time":  "2026-06-28T21:54:37.782Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twelve - Consciousness.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twelve - Consciousness.docx",
+                      "byte_count":  12032,
+                      "sha256":  "622782838cd8d91aae8850f94cc726ddd7711d031adbeeca1364f8c7d86cd8d5",
+                      "modified_time":  "2026-06-28T21:54:37.783Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twelve- Consciousness.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twelve- Consciousness.docx",
+                      "byte_count":  13255,
+                      "sha256":  "e27efbe346cd23010c7ffd2e182f9c940b43657927ba04c0acbfb8d9c9af2b5d",
+                      "modified_time":  "2026-06-28T21:54:37.784Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty - The Test.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty - The Test.docx",
+                      "byte_count":  12023,
+                      "sha256":  "233ab97059e1649efaf08a15506eb688bdc46ed9cfaca5a7a9330fca834e8034",
+                      "modified_time":  "2026-06-28T21:54:37.785Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-Five - The Work.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-Five - The Work.docx",
+                      "byte_count":  11726,
+                      "sha256":  "12ccd1960497e3394cd6ae6aeb55228992ade5864b6ef542cc78c325e7874e3e",
+                      "modified_time":  "2026-06-28T21:54:37.787Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-One- Opportunity (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-One- Opportunity (1).docx",
+                      "byte_count":  11309,
+                      "sha256":  "d0c4df350d98d57eafa8291ffc4ef598a0c2369333e3ac3c87423700786d57fa",
+                      "modified_time":  "2026-06-28T21:54:37.789Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-One- Opportunity.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-One- Opportunity.docx",
+                      "byte_count":  11309,
+                      "sha256":  "bd2dfebc342ca508ce090639b9bd017929ffcea156dfebd0529040379ffe0e04",
+                      "modified_time":  "2026-06-28T21:54:37.791Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-One- The Loop (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-One- The Loop (1).docx",
+                      "byte_count":  11664,
+                      "sha256":  "6b7891b1ecf5721b33807854a31d2382dae05db6fd715b895768e668c57abaee",
+                      "modified_time":  "2026-06-28T21:54:37.792Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-One- The Loop.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-One- The Loop.docx",
+                      "byte_count":  11663,
+                      "sha256":  "1c270c0917c3cb71aa501b47770d723465041f178ce60454512fb44b2415128e",
+                      "modified_time":  "2026-06-28T21:54:37.793Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-Three - Reality Gets a Vote.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-Three - Reality Gets a Vote.docx",
+                      "byte_count":  12060,
+                      "sha256":  "499ce084dce6af004578b3ef2f193bab8b82c691033afdc435aecb5ded6b9538",
+                      "modified_time":  "2026-06-28T21:54:37.795Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-Three- The Test.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-Three- The Test.docx",
+                      "byte_count":  12445,
+                      "sha256":  "bc6dc130858639705d178669ec453dbb497b3a11e72bb9ebbaf3cbd521d34971",
+                      "modified_time":  "2026-06-28T21:54:37.796Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-Two- Hope.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-Two- Hope.docx",
+                      "byte_count":  11561,
+                      "sha256":  "f16c6523e40c7915c0346d495fab688a19ecf6d8d0a8f0d148e86d70814a9701",
+                      "modified_time":  "2026-06-28T21:54:37.798Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Chapter Twenty-Two.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Chapter Twenty-Two.docx",
+                      "byte_count":  12990,
+                      "sha256":  "f0f57bcb945f5650d931b1994760d5dcaa2591c1d69359893df1317030564e9b",
+                      "modified_time":  "2026-06-28T21:54:37.798Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/CHAPTER_13_THE_NERVOUS_SYSTEM_DRAFT.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\CHAPTER_13_THE_NERVOUS_SYSTEM_DRAFT.md",
+                      "byte_count":  3227,
+                      "sha256":  "4921500303d3d219ad9d90c3ef67d7a73a118c49d134612a4deda46c4130a689",
+                      "modified_time":  "2026-06-28T21:54:37.742Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/CHAPTER_14_CONSCIOUSNESS_NOTES.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\CHAPTER_14_CONSCIOUSNESS_NOTES.md",
+                      "byte_count":  1544,
+                      "sha256":  "9955b0c68556e433a3904b7a07660a3790d6d123ebba18d35c73d7ba7ac9358b",
+                      "modified_time":  "2026-06-28T21:54:37.743Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/CHAPTER_DRAFT_OBLIGATION_OF_THE_ORGANS.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\CHAPTER_DRAFT_OBLIGATION_OF_THE_ORGANS.md",
+                      "byte_count":  3722,
+                      "sha256":  "84123bac8d0430d693cf644bd65733736db40c5dbf154cce28146e689c0e291e",
+                      "modified_time":  "2026-06-28T21:54:37.745Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/DOCTRINE_ORGAN_OBLIGATION_LAYER.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\DOCTRINE_ORGAN_OBLIGATION_LAYER.md",
+                      "byte_count":  3264,
+                      "sha256":  "f0318e27796531c6d7883cf4fd07af2ef039fee69850e9b11aa2c5520f3f1c1a",
+                      "modified_time":  "2026-06-28T21:54:37.800Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/ENDER_SELECTION_PROTOCOL.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\ENDER_SELECTION_PROTOCOL.md",
+                      "byte_count":  1112,
+                      "sha256":  "1d3b18f100775bee7614c1e30e4a17776a5e2c28f333e7b15d7077d01a63a42b",
+                      "modified_time":  "2026-06-28T21:54:37.800Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Escape Velocity.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Escape Velocity.docx",
+                      "byte_count":  11870,
+                      "sha256":  "cfef9b2b0a18a1ac6463948b0b8f98fc4e81c54da5859a43ffbc6a8967a18157",
+                      "modified_time":  "2026-06-28T21:54:37.801Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Foreword (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Foreword (1).docx",
+                      "byte_count":  12015,
+                      "sha256":  "7faad033e2c7de72b6510a7603c27b3bf65d6fb15e2005259f83bce0deb205ae",
+                      "modified_time":  "2026-06-28T21:54:37.805Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Foreword (2).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Foreword (2).docx",
+                      "byte_count":  12220,
+                      "sha256":  "f99a8d5f75c481dfaf8bb2291b2e0cefb0b6badf5de1987f5d4e8c38dcff8f04",
+                      "modified_time":  "2026-06-28T21:54:37.806Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Foreword (3).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Foreword (3).docx",
+                      "byte_count":  12221,
+                      "sha256":  "478046ba2dbcc93069d5ed4481eacb962c48bb33d8c2e0acdcf0638e70a34f48",
+                      "modified_time":  "2026-06-28T21:54:37.807Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Foreword.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Foreword.docx",
+                      "byte_count":  11977,
+                      "sha256":  "f99268b24a81219ef525dcd9b6e61f75493ffe370c6e64560cb32727c53de56a",
+                      "modified_time":  "2026-06-28T21:54:37.809Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/FROM_ENDER_RED_TEAM_TINKULARITY_V5.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\FROM_ENDER_RED_TEAM_TINKULARITY_V5.md",
+                      "byte_count":  10340,
+                      "sha256":  "ede876fc9545ae8374a3bdf5bbe27b2f200f97e3efc1063e4d0cb1fbea55054b",
+                      "modified_time":  "2026-06-28T21:54:37.803Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/gemini-code-1782152275859.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\gemini-code-1782152275859.md",
+                      "byte_count":  4789,
+                      "sha256":  "15f6a91422b1debb7246b4e80d00b1474c4b6eeb7a7a4326cf4669514f5ac60d",
+                      "modified_time":  "2026-06-28T21:54:37.908Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Health and Resilience.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Health and Resilience.docx",
+                      "byte_count":  11127,
+                      "sha256":  "042825de38766f999584e16a5ef7559fc54fefd7bb7cd2d914cb4745c4a4c64c",
+                      "modified_time":  "2026-06-28T21:54:37.810Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Insert Candidate — The Duty of Discovery.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Insert Candidate — The Duty of Discovery.docx",
+                      "byte_count":  11545,
+                      "sha256":  "5b9ad0e563bcb71bbb07e727fa37c009e0986047606ab905ab991e9d0f1d4a2c",
+                      "modified_time":  "2026-06-28T21:54:37.811Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Interlude- The Difference Between a Garden and a Religion.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Interlude- The Difference Between a Garden and a Religion.docx",
+                      "byte_count":  12127,
+                      "sha256":  "c25d27b4e436e598634aefeb0350e0d7601ca45c4d857a90124463d7bbbd7b92",
+                      "modified_time":  "2026-06-28T21:54:37.811Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/MEDULLA_V0_TINKERDEN_BUILD_SPEC.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\MEDULLA_V0_TINKERDEN_BUILD_SPEC.md",
+                      "byte_count":  2793,
+                      "sha256":  "2b2adeda8e312e4b4abf418603d31df0122fd7f521f1a4d9012dc9b335d279c8",
+                      "modified_time":  "2026-06-28T21:54:37.814Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/ORGANISM_FRONTIER.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\ORGANISM_FRONTIER.md",
+                      "byte_count":  2454,
+                      "sha256":  "b93ed6ae9c704eaeb7ebb591383d2c06f42169ae032c542dc15bb356f20d4658",
+                      "modified_time":  "2026-06-28T21:54:37.815Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/PEARL_0000_THE_TINKULARITY.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\PEARL_0000_THE_TINKULARITY.md",
+                      "byte_count":  7166,
+                      "sha256":  "45fc2e7af6c0ad39890862d56bf9e36db8f4751cfed64f46ceefe049e8fd010c",
+                      "modified_time":  "2026-06-28T21:54:37.816Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/PEARL_0002 — ARTIFACTS OVER SUGGESTIONS.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\PEARL_0002 — ARTIFACTS OVER SUGGESTIONS.docx",
+                      "byte_count":  11232,
+                      "sha256":  "0852dec867433b742145d4dad495bfceca6774c384abc7c6d2da849f71efc36f",
+                      "modified_time":  "2026-06-28T21:54:37.817Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/PEARL_0003 — TEMPERED RECKLESSNESS.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\PEARL_0003 — TEMPERED RECKLESSNESS.docx",
+                      "byte_count":  10933,
+                      "sha256":  "16274800fa074477d337c3331711be3efee079c4dd25ac483a1f80b87986a71c",
+                      "modified_time":  "2026-06-28T21:54:37.819Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/README_BACKUP_PACKET.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\README_BACKUP_PACKET.md",
+                      "byte_count":  586,
+                      "sha256":  "a6fca2ab78bf9d0cb87f05abcee4e7f57a74543ace5900fceca5a1e2579e4b50",
+                      "modified_time":  "2026-06-28T21:54:37.820Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/README_IMPORT_BOUNDARY.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\README_IMPORT_BOUNDARY.md",
+                      "byte_count":  398,
+                      "sha256":  "b52a88cfb3836e19c1b21ce8df5ec38ea236991cbaa62b5beaf33e3c096f36cc",
+                      "modified_time":  "2026-06-28T21:54:37.822Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/README_ORGAN_OBLIGATION_PACKET.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\README_ORGAN_OBLIGATION_PACKET.md",
+                      "byte_count":  630,
+                      "sha256":  "09e7a72744babc39aa2e1007729a313632fe4d8c675fbb28e7f9ce57bc42c1e2",
+                      "modified_time":  "2026-06-28T21:54:37.823Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/README_TOMORROW_BOOTSTRAP.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\README_TOMORROW_BOOTSTRAP.md",
+                      "byte_count":  967,
+                      "sha256":  "0484483227e3226eb35138153ba7b73b0c992fa8f6e457edbed80e2b47f10648",
+                      "modified_time":  "2026-06-28T21:54:37.825Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/RECOVERED_OFFICIAL_BUILD_FERAL_TINKERDEN_BUDGET_ORGANISM.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\RECOVERED_OFFICIAL_BUILD_FERAL_TINKERDEN_BUDGET_ORGANISM.md",
+                      "byte_count":  3985,
+                      "sha256":  "d18161959c3ccb85815bcd91aeaeed52226931b145e9a5d357f4312abf1712de",
+                      "modified_time":  "2026-06-28T21:54:37.826Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/RED_TEAM_PACKET_V3_FOR_TINKULARITY_MANUSCRIPT.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\RED_TEAM_PACKET_V3_FOR_TINKULARITY_MANUSCRIPT.md",
+                      "byte_count":  1469,
+                      "sha256":  "3abbe4db86061a0f84dfd593231419f796017e2ff93536a09df04fbb9450fd2e",
+                      "modified_time":  "2026-06-28T21:54:37.827Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/RED_TEAM_PACKET_V5_FOR_TINKULARITY.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\RED_TEAM_PACKET_V5_FOR_TINKULARITY.md",
+                      "byte_count":  891,
+                      "sha256":  "91d6a2339e6a10d2007c9f07978b0a4d7ab431884fd9c23346b58fecc3ccbcd0",
+                      "modified_time":  "2026-06-28T21:54:37.829Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Skybro Neurosystem.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Skybro Neurosystem.docx",
+                      "byte_count":  24165,
+                      "sha256":  "c958f0d6e33d800ba13f349e3894690e49af325c1a48b06f9145a4372365b05e",
+                      "modified_time":  "2026-06-28T21:54:37.831Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/SPEAKER_ASSIMILATION_PROTOCOL.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\SPEAKER_ASSIMILATION_PROTOCOL.md",
+                      "byte_count":  1604,
+                      "sha256":  "69e7a1cbd022a2e405cec881ceb30232b22d60449c32e28ca88c352ba5f005fa",
+                      "modified_time":  "2026-06-28T21:54:37.830Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Sublime Design Note.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Sublime Design Note.docx",
+                      "byte_count":  11200,
+                      "sha256":  "b565db501410da3e40a59745dcb30d8b78816440cfb138398f5053926f830b4f",
+                      "modified_time":  "2026-06-28T21:54:37.832Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Cost of Forgetting (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Cost of Forgetting (1).docx",
+                      "byte_count":  11881,
+                      "sha256":  "df6f063875a0f8a8ffad55257e36ee8a079d9eee243e34f94618a3e8ffde3dc9",
+                      "modified_time":  "2026-06-28T21:54:37.857Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Cost of Forgetting.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Cost of Forgetting.docx",
+                      "byte_count":  11878,
+                      "sha256":  "491ad976267f891aa83033f42bf32d0c5ec7a8123e58995c2b42bd2149b771a2",
+                      "modified_time":  "2026-06-28T21:54:37.858Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Dead Continue Participating.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Dead Continue Participating.docx",
+                      "byte_count":  11121,
+                      "sha256":  "5eae186845cda8857ecceddf0d4c8008cc42cec39c535059d45afabefc463b4c",
+                      "modified_time":  "2026-06-28T21:54:37.860Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Difference Between a Garden and a Religion.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Difference Between a Garden and a Religion.docx",
+                      "byte_count":  11681,
+                      "sha256":  "5e0dff1928910700d113a3429101460bd80cd6912c415a07c6d4348fa3f0e5cc",
+                      "modified_time":  "2026-06-28T21:54:37.861Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The End.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The End.docx",
+                      "byte_count":  13008,
+                      "sha256":  "e223cc5975bd58dcf68387a35ad989681c682616465c1ab731bc20165ee2bd12",
+                      "modified_time":  "2026-06-28T21:54:37.863Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Hopeful Future of Intent (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Hopeful Future of Intent (1).docx",
+                      "byte_count":  12596,
+                      "sha256":  "5dcf15c97b97c04cc202fef8423a3b9bd54f0a88e251784f13445189734e5f13",
+                      "modified_time":  "2026-06-28T21:54:37.863Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Hopeful Future of Intent.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Hopeful Future of Intent.docx",
+                      "byte_count":  12653,
+                      "sha256":  "3458e27097bdb51b5e7965de5bc4ad31f8eec5dc20080bfc301e8709e4f2a34c",
+                      "modified_time":  "2026-06-28T21:54:37.864Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Operator Principle.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Operator Principle.docx",
+                      "byte_count":  11353,
+                      "sha256":  "061285e2f23c32e9dff9ed007a6dfb60eb0985f57e4b240d0f6377cfac709532",
+                      "modified_time":  "2026-06-28T21:54:37.866Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Ratchet Protocol.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Ratchet Protocol.docx",
+                      "byte_count":  12335,
+                      "sha256":  "4596aa762c5342c33db7e316c761dcc4b396c95e656600e9ef47f699af11f693",
+                      "modified_time":  "2026-06-28T21:54:37.867Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Sublime Design - Chapter Eleven- Inheritance (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Sublime Design - Chapter Eleven- Inheritance (1).docx",
+                      "byte_count":  13467,
+                      "sha256":  "da6950a3f64edae5d8016231c50b0194bd53b4bee4279c6efaaa1a449af59a59",
+                      "modified_time":  "2026-06-28T21:54:37.867Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Sublime Design - Chapter Eleven- Inheritance.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Sublime Design - Chapter Eleven- Inheritance.docx",
+                      "byte_count":  11799,
+                      "sha256":  "b3aa85cd2a09c74c442c7b1cf7b4c1e5ff68819666c2a6576248fada8f5f7583",
+                      "modified_time":  "2026-06-28T21:54:37.870Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Sublime Design - Chapter Twelve.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Sublime Design - Chapter Twelve.docx",
+                      "byte_count":  11336,
+                      "sha256":  "b42f78c2a1a550db97088a5c7caa9193c1f1ae895ef4815382ad63535d5e312b",
+                      "modified_time":  "2026-06-28T21:54:37.872Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Sublime Design.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Sublime Design.docx",
+                      "byte_count":  11478,
+                      "sha256":  "af04ac4be321a214a1d13e669fdd83b9f3245c00cba8dd3448a9a41c60df9a80",
+                      "modified_time":  "2026-06-28T21:54:37.873Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Tinkularity (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Tinkularity (1).docx",
+                      "byte_count":  13917,
+                      "sha256":  "3bbccaeb2ee059bc9281e461953d40c181276d0330812fc97c66eb8877ade00f",
+                      "modified_time":  "2026-06-28T21:54:37.874Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Tinkularity (2).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Tinkularity (2).docx",
+                      "byte_count":  14595,
+                      "sha256":  "1eafb4a040d3a6023b0a5c7c8b2e9a88ce6bd48245a2288c4124ed2d61047ccb",
+                      "modified_time":  "2026-06-28T21:54:37.875Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Tinkularity (3).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Tinkularity (3).docx",
+                      "byte_count":  14119,
+                      "sha256":  "ec8ad0116d416c719fcf6c05249fbea0c61d3c964abc967655dba3a85ca7840a",
+                      "modified_time":  "2026-06-28T21:54:37.877Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Tinkularity (4).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Tinkularity (4).docx",
+                      "byte_count":  15058,
+                      "sha256":  "d4bad4f539564249c82a3a649eb3e9ffbcb08ccf5fa5b632457395eae23f4364",
+                      "modified_time":  "2026-06-28T21:54:37.878Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Tinkularity (5).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Tinkularity (5).docx",
+                      "byte_count":  15059,
+                      "sha256":  "ccad3c4e03018aba558640c4cfc4f9f8ccaf86d26d5523707e9decf3cf9fcadd",
+                      "modified_time":  "2026-06-28T21:54:37.880Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Tinkularity (6).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Tinkularity (6).docx",
+                      "byte_count":  14119,
+                      "sha256":  "9f54578b685963af4c44f42b0efd9dd26d8876c60e335c6b31adc452b2891e77",
+                      "modified_time":  "2026-06-28T21:54:37.881Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Tinkularity (7).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Tinkularity (7).docx",
+                      "byte_count":  14762,
+                      "sha256":  "9dd4cfa83176059e87fc8f9656048a3e7baa37121186d14367ecc2bd6464392b",
+                      "modified_time":  "2026-06-28T21:54:37.882Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The Tinkularity.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The Tinkularity.docx",
+                      "byte_count":  10986,
+                      "sha256":  "f3175266e56b701819145a2c845208a4c44323ed52764b2c017c20b79929ebc5",
+                      "modified_time":  "2026-06-28T21:54:37.883Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Great_Plan_Working_Master_Manuscript (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Great_Plan_Working_Master_Manuscript (1).docx",
+                      "byte_count":  37785,
+                      "sha256":  "618966df2ccb6c9da95195017acc1dc1466418d64f1faa44edbc4f0aff996b31",
+                      "modified_time":  "2026-06-28T21:54:37.884Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Great_Plan_Working_Master_Manuscript (1).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Great_Plan_Working_Master_Manuscript (1).md",
+                      "byte_count":  2312,
+                      "sha256":  "b124c23a2e94c0680dacc3743029eac520510725cfe51390b51982bb0b781169",
+                      "modified_time":  "2026-06-28T21:54:37.887Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Great_Plan_Working_Master_Manuscript (2).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Great_Plan_Working_Master_Manuscript (2).docx",
+                      "byte_count":  37785,
+                      "sha256":  "618966df2ccb6c9da95195017acc1dc1466418d64f1faa44edbc4f0aff996b31",
+                      "modified_time":  "2026-06-28T21:54:37.888Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Great_Plan_Working_Master_Manuscript (3) (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Great_Plan_Working_Master_Manuscript (3) (1).docx",
+                      "byte_count":  37785,
+                      "sha256":  "618966df2ccb6c9da95195017acc1dc1466418d64f1faa44edbc4f0aff996b31",
+                      "modified_time":  "2026-06-28T21:54:37.890Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Great_Plan_Working_Master_Manuscript (3).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Great_Plan_Working_Master_Manuscript (3).docx",
+                      "byte_count":  37785,
+                      "sha256":  "618966df2ccb6c9da95195017acc1dc1466418d64f1faa44edbc4f0aff996b31",
+                      "modified_time":  "2026-06-28T21:54:37.892Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Great_Plan_Working_Master_Manuscript.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Great_Plan_Working_Master_Manuscript.docx",
+                      "byte_count":  37785,
+                      "sha256":  "618966df2ccb6c9da95195017acc1dc1466418d64f1faa44edbc4f0aff996b31",
+                      "modified_time":  "2026-06-28T21:54:37.893Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Great_Plan_Working_Master_Manuscript.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Great_Plan_Working_Master_Manuscript.md",
+                      "byte_count":  2312,
+                      "sha256":  "b124c23a2e94c0680dacc3743029eac520510725cfe51390b51982bb0b781169",
+                      "modified_time":  "2026-06-28T21:54:37.894Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_GREAT_WORK_V0_1 (1).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_GREAT_WORK_V0_1 (1).md",
+                      "byte_count":  4490,
+                      "sha256":  "636b4cf94d3feb0f077ae0213a9e1920640396d58334cd99d0f4ea339fec1325",
+                      "modified_time":  "2026-06-28T21:54:37.833Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_GREAT_WORK_V0_1 (2).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_GREAT_WORK_V0_1 (2).md",
+                      "byte_count":  4490,
+                      "sha256":  "636b4cf94d3feb0f077ae0213a9e1920640396d58334cd99d0f4ea339fec1325",
+                      "modified_time":  "2026-06-28T21:54:37.834Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_GREAT_WORK_V0_1 (3).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_GREAT_WORK_V0_1 (3).md",
+                      "byte_count":  4490,
+                      "sha256":  "636b4cf94d3feb0f077ae0213a9e1920640396d58334cd99d0f4ea339fec1325",
+                      "modified_time":  "2026-06-28T21:54:37.834Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_GREAT_WORK_V0_1 (4).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_GREAT_WORK_V0_1 (4).md",
+                      "byte_count":  4490,
+                      "sha256":  "636b4cf94d3feb0f077ae0213a9e1920640396d58334cd99d0f4ea339fec1325",
+                      "modified_time":  "2026-06-28T21:54:37.836Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_GREAT_WORK_V0_1 (5).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_GREAT_WORK_V0_1 (5).md",
+                      "byte_count":  4490,
+                      "sha256":  "636b4cf94d3feb0f077ae0213a9e1920640396d58334cd99d0f4ea339fec1325",
+                      "modified_time":  "2026-06-28T21:54:37.837Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_GREAT_WORK_V0_1 (6).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_GREAT_WORK_V0_1 (6).md",
+                      "byte_count":  4490,
+                      "sha256":  "636b4cf94d3feb0f077ae0213a9e1920640396d58334cd99d0f4ea339fec1325",
+                      "modified_time":  "2026-06-28T21:54:37.839Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_GREAT_WORK_V0_1.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_GREAT_WORK_V0_1.md",
+                      "byte_count":  4490,
+                      "sha256":  "636b4cf94d3feb0f077ae0213a9e1920640396d58334cd99d0f4ea339fec1325",
+                      "modified_time":  "2026-06-28T21:54:37.841Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_TINKULARITY_CANONICAL_MANUSCRIPT_V4_RED_TEAM_DRAFT.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_TINKULARITY_CANONICAL_MANUSCRIPT_V4_RED_TEAM_DRAFT.docx",
+                      "byte_count":  76924,
+                      "sha256":  "26b7b7c05a99e0694f84a0007f4e49173b1acd4c6f0a145a3b23adee4c28c632",
+                      "modified_time":  "2026-06-28T21:54:37.842Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_TINKULARITY_CANONICAL_MANUSCRIPT_V4_RED_TEAM_DRAFT.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_TINKULARITY_CANONICAL_MANUSCRIPT_V4_RED_TEAM_DRAFT.md",
+                      "byte_count":  102680,
+                      "sha256":  "e1d66ef1783df7c79ac3a9bd2f60a14e54cabb0b8b6b186080ff50e1ef436f3e",
+                      "modified_time":  "2026-06-28T21:54:37.844Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_TINKULARITY_CANONICAL_MANUSCRIPT_V4_RED_TEAM_DRAFT.pdf",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_TINKULARITY_CANONICAL_MANUSCRIPT_V4_RED_TEAM_DRAFT.pdf",
+                      "byte_count":  716890,
+                      "sha256":  "413faadb8fe0bdec2c10b815aed8fe827eb3b26d50efdd5783be58946650f9e1",
+                      "modified_time":  "2026-06-28T21:54:37.848Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_TINKULARITY_CANONICAL_MANUSCRIPT_V5_RED_TEAM_DRAFT.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_TINKULARITY_CANONICAL_MANUSCRIPT_V5_RED_TEAM_DRAFT.docx",
+                      "byte_count":  55599,
+                      "sha256":  "23ab691d02107c5940bc12102b426f935e1f5ec60474716e744b2af7ec8c780c",
+                      "modified_time":  "2026-06-28T21:54:37.850Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/THE_TINKULARITY_CANONICAL_MANUSCRIPT_V5_RED_TEAM_DRAFT.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\THE_TINKULARITY_CANONICAL_MANUSCRIPT_V5_RED_TEAM_DRAFT.md",
+                      "byte_count":  54188,
+                      "sha256":  "727db56d1d35bf8220d8942e346bb84d4910e2fad5e83deaeee52c72736848ec",
+                      "modified_time":  "2026-06-28T21:54:37.852Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Tinkularity_Master_Manuscript_V1 (1).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Tinkularity_Master_Manuscript_V1 (1).docx",
+                      "byte_count":  41105,
+                      "sha256":  "2107dc073daceef6cf413210b2389fa25f4eed4aef0ba4205212acde70f41c8d",
+                      "modified_time":  "2026-06-28T21:54:37.896Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Tinkularity_Master_Manuscript_V1 (2).docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Tinkularity_Master_Manuscript_V1 (2).docx",
+                      "byte_count":  41105,
+                      "sha256":  "2107dc073daceef6cf413210b2389fa25f4eed4aef0ba4205212acde70f41c8d",
+                      "modified_time":  "2026-06-28T21:54:37.897Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Tinkularity_Master_Manuscript_V1.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Tinkularity_Master_Manuscript_V1.docx",
+                      "byte_count":  41105,
+                      "sha256":  "2107dc073daceef6cf413210b2389fa25f4eed4aef0ba4205212acde70f41c8d",
+                      "modified_time":  "2026-06-28T21:54:37.898Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/The_Tinkularity_Publishable_Manuscript_V1.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\The_Tinkularity_Publishable_Manuscript_V1.docx",
+                      "byte_count":  37935,
+                      "sha256":  "e7edecd27442103f817b1deed2505e9fe52e5e73ea79e32348ab87e36a71c908",
+                      "modified_time":  "2026-06-28T21:54:37.899Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/TINKERDEN_UI_SALVAGE_MAP_RECEIPT.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\TINKERDEN_UI_SALVAGE_MAP_RECEIPT.md",
+                      "byte_count":  10740,
+                      "sha256":  "058d71ae5dcf49eb4d8493efee2145187f9ac3e0ad282302c593b0cbc0eefc62",
+                      "modified_time":  "2026-06-28T21:54:37.854Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/Tinkularity Purpose.docx",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\Tinkularity Purpose.docx",
+                      "byte_count":  10495,
+                      "sha256":  "b76734d08f022a3fac0dd1dc8a73f4a88f529236f7445c01ac01d1de318b90d3",
+                      "modified_time":  "2026-06-28T21:54:37.901Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/TO_SKYBRO_THUFIR_TECH_MAPPING_PACKET.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\TO_SKYBRO_THUFIR_TECH_MAPPING_PACKET.md",
+                      "byte_count":  2374,
+                      "sha256":  "3a629e7cae9055ba838c17ac377786ce3fe9eb645090d275a508aeaad6bb71f6",
+                      "modified_time":  "2026-06-28T21:54:37.855Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/WERKLES_MASTER_PLAN_V1 (1).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\WERKLES_MASTER_PLAN_V1 (1).md",
+                      "byte_count":  2658,
+                      "sha256":  "d3eb0427f9a93ce1b1c6b77007055a4a00c2a5ff66fa21844008043e88b97038",
+                      "modified_time":  "2026-06-28T21:54:37.903Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/WERKLES_MASTER_PLAN_V1 (2).md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\WERKLES_MASTER_PLAN_V1 (2).md",
+                      "byte_count":  2658,
+                      "sha256":  "d3eb0427f9a93ce1b1c6b77007055a4a00c2a5ff66fa21844008043e88b97038",
+                      "modified_time":  "2026-06-28T21:54:37.905Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  },
+                  {
+                      "category":  "betsy_desktop_nerdkle_the_book",
+                      "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book/WERKLES_MASTER_PLAN_V1.md",
+                      "repo_path":  "source-truth-plan\\references\\betsy_desktop_nerdkle_the_book\\WERKLES_MASTER_PLAN_V1.md",
+                      "byte_count":  2658,
+                      "sha256":  "d3eb0427f9a93ce1b1c6b77007055a4a00c2a5ff66fa21844008043e88b97038",
+                      "modified_time":  "2026-06-28T21:54:37.907Z",
+                      "copied":  true,
+                      "boundary":  "RAW_REFERENCE_ONLY"
+                  }
+              ],
+    "updated_at":  "2026-06-28T21:55:57Z",
+    "betsy_desktop_nerdkle_the_book_import":  {
+                                                  "original_reported_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book",
+                                                  "repo_path":  "source-truth-plan/references/betsy_desktop_nerdkle_the_book/",
+                                                  "source_branch":  "preserve/tinkerden-packet-engine-20260622",
+                                                  "source_commit":  "dda5d295554e70b0a75bf4b186e569f5b7393f5a",
+                                                  "verified_file_count":  120,
+                                                  "import_boundary":  "RAW_REFERENCE_ONLY_NOT_CANONICAL_PROSE"
+                                              }
 }

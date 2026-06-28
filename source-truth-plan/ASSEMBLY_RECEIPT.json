@@ -1,41 +1,39 @@
-{
-  "receipt_id": "SWANSON_DOSS_BOOK_NERDKLE_SOURCE_TRUTH_PLAN_ASSEMBLY",
-  "generated_at": "2026-06-28T03:44:11.383Z",
-  "status": "ARTIFACT",
-  "repository": "https://github.com/benleakwerkles/Werkles1.git",
-  "branch": "source-truth/atlas-speaker-v0-20260627",
-  "plan_root": "source-truth-plan",
-  "files_copied": 89,
-  "categories": {
-    "book": 14,
-    "nerdkle_nmclr": 27,
-    "tinkerden_medulla": 11,
-    "speaker_atlas": 22,
-    "implementation": 15
-  },
-  "chatlog_index": {
-    "repo_path": "source-truth-plan/references/chatlog_hits/CHATLOG_KEYWORD_INDEX.jsonl",
-    "hit_count": 48,
-    "scanned_file_count": 6,
-    "source_root": "C:/Users/BenLeak/.codex/sessions"
-  },
-  "missing_priority_sources": [
-    {
-      "source_path": "C:/Users/Ben Leak/Desktop/Nerdkle The Book",
-      "status": "MISSING_ON_DOSS"
-    },
-    {
-      "source_path": "C:/Users/BenLeak/Desktop/Nerdkle The Book",
-      "status": "MISSING_ON_DOSS"
-    },
-    {
-      "source_path": "C:/Users/BenLeak/OneDrive/Desktop/Nerdkle The Book",
-      "status": "MISSING_ON_DOSS"
-    },
-    {
-      "source_path": "C:/Users/Ben Leak/OneDrive/Desktop/Nerdkle The Book",
-      "status": "MISSING_ON_DOSS"
-    }
-  ],
-  "missing_count": 0
+﻿{
+    "receipt_id":  "SWANSON_DOSS_BOOK_NERDKLE_SOURCE_TRUTH_PLAN_ASSEMBLY",
+    "generated_at":  "2026-06-28T03:44:11.383Z",
+    "status":  "ARTIFACT_UPDATED_WITH_BETSY_BOOK_RAW_REFERENCE",
+    "repository":  "https://github.com/benleakwerkles/Werkles1.git",
+    "branch":  "source-truth/atlas-speaker-v0-20260627",
+    "plan_root":  "source-truth-plan",
+    "files_copied":  209,
+    "categories":  {
+                       "book":  14,
+                       "nerdkle_nmclr":  27,
+                       "tinkerden_medulla":  11,
+                       "speaker_atlas":  22,
+                       "implementation":  15,
+                       "betsy_desktop_nerdkle_the_book":  120
+                   },
+    "chatlog_index":  {
+                          "repo_path":  "source-truth-plan/references/chatlog_hits/CHATLOG_KEYWORD_INDEX.jsonl",
+                          "hit_count":  48,
+                          "scanned_file_count":  6,
+                          "source_root":  "C:/Users/BenLeak/.codex/sessions"
+                      },
+    "missing_priority_sources":  [
+
+                                 ],
+    "missing_count":  0,
+    "updated_at":  "2026-06-28T21:56:11Z",
+    "resolved_priority_sources":  [
+                                      {
+                                          "source_path":  "C:/Users/Ben Leak/Desktop/Nerdkle The Book",
+                                          "repo_path":  "source-truth-plan/references/betsy_desktop_nerdkle_the_book/",
+                                          "source_branch":  "preserve/tinkerden-packet-engine-20260622",
+                                          "source_commit":  "dda5d295554e70b0a75bf4b186e569f5b7393f5a",
+                                          "verified_file_count":  120,
+                                          "status":  "IMPORTED_AS_RAW_REFERENCE"
+                                      }
+                                  ],
+    "proof_boundary":  "Raw Betsy book files are preserved as reference material; they do not replace the source-truth plan or promote any draft as canonical prose."
 }

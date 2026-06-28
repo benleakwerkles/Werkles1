@@ -4,11 +4,11 @@ Generated: 2026-06-28T03:44:11.383Z
 
 ## PACKET 1: IMPORT_BETSY_NERDKLE_THE_BOOK
 
-Owner: Swanson@Doss with Betsy file access.
+Status: COMPLETE AS RAW REFERENCE IMPORT.
 
-Mission: Copy or mount `C:\Users\Ben Leak\Desktop\Nerdkle The Book` into this source-truth branch, hash every file, and update `SOURCE_MATERIAL_MANIFEST.json`.
+Owner: Dink@Betsy pushed; Swanson@Doss verified and promoted into source-truth.
 
-Pass: Betsy source files appear under `source-truth-plan/references/betsy_nerdkle_the_book/` with hashes.
+Evidence: `source-truth-plan/references/betsy_desktop_nerdkle_the_book/` contains the imported raw source packet. Original push branch was `preserve/tinkerden-packet-engine-20260622` at commit `dda5d295554e70b0a75bf4b186e569f5b7393f5a`; Doss readback counted `120` files.
 
 ## PACKET 2: SOURCE_TRUTH_REVIEW_TO_MAIN
 

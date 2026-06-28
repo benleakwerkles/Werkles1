@@ -14,7 +14,8 @@ Ben should not paste this manually every session. Speaker / ThinkIt / TinkerDen 
 2. `SOURCE_OF_TRUTH_PLAN.md`
 3. `BOOK_NERDKLE_GREAT_PLAN_CANONICAL_MAP.md`
 4. `NEXT_PACKETS.md`
-5. `SOURCE_MATERIAL_MANIFEST.json` when exact evidence is needed
+5. `references/betsy_desktop_nerdkle_the_book/README_IMPORT_BOUNDARY.md` before using raw Betsy book material
+6. `SOURCE_MATERIAL_MANIFEST.json` when exact evidence is needed
 
 ## Session Rule
 
@@ -22,7 +23,7 @@ Ben should not paste this manually every session. Speaker / ThinkIt / TinkerDen 
 - Do not trust chat memory over repo-backed files.
 - If memory conflicts with these files, the files win.
 - If a required source is missing, name the gap instead of inventing it.
-- Do not call this canonical main until the review branch is accepted and merged.
+- Treat `references/betsy_desktop_nerdkle_the_book/` as raw reference material only; do not promote any included draft as canonical without a chapter-source lock receipt.
 
 ## Implementation Surface
 
