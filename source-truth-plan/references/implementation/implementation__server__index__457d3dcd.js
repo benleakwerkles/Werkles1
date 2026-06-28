@@ -21,6 +21,15 @@ const GIT_SNAPSHOT_SCRIPT_PATH = process.env.GIT_SNAPSHOT_SCRIPT_PATH || "C:\\sp
 const CURRENT_REPO_STATE_PATH = process.env.CURRENT_REPO_STATE_PATH || "C:\\speaker\\bootloader\\templates\\CURRENT_REPO_STATE.md";
 const SKYBRO_BOOTPACK_PATH = process.env.SKYBRO_BOOTPACK_PATH || "C:\\speaker\\bootpacks\\out\\Skybro.Betsy.BOOTPACK.md";
 const PETRA_BOOTPACK_PATH = process.env.PETRA_BOOTPACK_PATH || "C:\\speaker\\bootpacks\\out\\Petra.Betsy.NERDKLE_BRAINBOOT.BOOTPACK.md";
+const BRAINBOOT_ROOT = process.env.BRAINBOOT_ROOT || "C:\\speaker\\brainboot";
+const BRAINBOOT_OUTBOX_DIR = path.join(BRAINBOOT_ROOT, "outbox");
+const BRAINBOOT_RECEIPTS_DIR = path.join(BRAINBOOT_ROOT, "receipts");
+const BRAINBOOT_LEDGER_PATH = path.join(BRAINBOOT_ROOT, "ledger.jsonl");
+const BRAINBOOT_PUBLIC_BASE_URL = process.env.BRAINBOOT_PUBLIC_BASE_URL || `http://10.1.10.8:${PORT}`;
+const AEYE_RELAY_ROOT = process.env.AEYE_RELAY_ROOT || "C:\\speaker\\aeye_relay";
+const AEYE_RELAY_OUTBOX_DIR = path.join(AEYE_RELAY_ROOT, "outbox");
+const AEYE_RELAY_RECEIPTS_DIR = path.join(AEYE_RELAY_ROOT, "receipts");
+const AEYE_RELAY_LEDGER_PATH = path.join(AEYE_RELAY_ROOT, "ledger.jsonl");
 
 function existsWithHashTarget(filePath) {
   return {
@@ -294,6 +303,429 @@ function writeRatchetDecisionReceipt(payload) {
   };
 }
 
+function appendJsonl(filePath, entry) {
+  ensureDir(path.dirname(filePath));
+  fs.appendFileSync(filePath, `${JSON.stringify(entry)}\n`, "utf8");
+}
+
+function readJsonl(filePath, maxLines = 100) {
+  if (!fs.existsSync(filePath)) return [];
+  const lines = fs.readFileSync(filePath, "utf8").split(/\r?\n/).filter(Boolean);
+  return lines.slice(-maxLines).map((line) => {
+    try {
+      return JSON.parse(line);
+    } catch (error) {
+      return {
+        event: "INVALID_JSONL",
+        error: error.message,
+        raw: line,
+      };
+    }
+  });
+}
+
+function brainbootPacketPath(packetId) {
+  return path.join(BRAINBOOT_OUTBOX_DIR, `${safeReceiptStem(packetId)}.json`);
+}
+
+function brainbootReceiptPath(receiptId) {
+  return path.join(BRAINBOOT_RECEIPTS_DIR, `${safeReceiptStem(receiptId)}.json`);
+}
+
+function bootpackPathForTarget(target, result) {
+  return result.output_path
+    || (target === "Skybro.Betsy" ? SKYBRO_BOOTPACK_PATH : null)
+    || (target === "Petra.Betsy" ? PETRA_BOOTPACK_PATH : null);
+}
+
+function brainbootBaseUrl(request) {
+  const host = request?.headers?.host ? String(request.headers.host) : "";
+  if (host && !host.startsWith("127.0.0.1") && !host.startsWith("localhost")) {
+    return `http://${host}`;
+  }
+  return BRAINBOOT_PUBLIC_BASE_URL;
+}
+
+function loadBrainbootPacket(packetId) {
+  const packetPath = brainbootPacketPath(packetId);
+  if (!fs.existsSync(packetPath)) {
+    const error = new Error(`Brainboot packet not found: ${packetId}`);
+    error.statusCode = 404;
+    throw error;
+  }
+  return {
+    packet_path: packetPath,
+    packet: JSON.parse(fs.readFileSync(packetPath, "utf8")),
+  };
+}
+
+function writeBrainbootPacket(packet) {
+  ensureDir(BRAINBOOT_OUTBOX_DIR);
+  fs.writeFileSync(brainbootPacketPath(packet.packet_id), `${JSON.stringify(packet, null, 2)}\n`, "utf8");
+}
+
+function createBrainbootPacket(request, target, renderResult) {
+  const artifact = renderResult.artifact || fileReadback(renderResult.artifact_path);
+  const createdAt = new Date().toISOString();
+  const stamp = createdAt.replace(/[-:.TZ]/g, "").slice(0, 14);
+  const suffix = crypto.randomBytes(4).toString("hex").toUpperCase();
+  const packetId = `BRAINBOOT_${safeReceiptStem(target).toUpperCase()}_${stamp}_${suffix}`;
+  const ackToken = crypto.randomBytes(16).toString("hex").toUpperCase();
+  const baseUrl = brainbootBaseUrl(request);
+  const packet = {
+    packet_id: packetId,
+    packet_type: "BRAINBOOT_DELIVERY",
+    mission: "SESSION_NERDKLE_BRAINBOOT",
+    producer: "Swanson@Doss",
+    target,
+    status: "SENT_UNACKNOWLEDGED",
+    created_at: createdAt,
+    ack_token: ackToken,
+    receive_url: `${baseUrl}/brainboot/receive/${encodeURIComponent(packetId)}?token=${encodeURIComponent(ackToken)}`,
+    ack_endpoint: `${baseUrl}/v1/brainboot/ack`,
+    bootpack_path: renderResult.artifact_path,
+    bootpack_sha256: artifact && artifact.exists ? artifact.sha256 : null,
+    bootpack_byte_count: artifact && artifact.exists ? artifact.byte_count : null,
+    required_receiver_receipts: [
+      "RECEIVED",
+      "COMPLETED or BLOCKER",
+    ],
+    rule: "Rendered is not delivered. This packet is incomplete until the target writes a receiver-side Brainboot receipt.",
+  };
+  writeBrainbootPacket(packet);
+  appendJsonl(BRAINBOOT_LEDGER_PATH, {
+    event: "BRAINBOOT_PACKET_SENT",
+    packet_id: packet.packet_id,
+    target: packet.target,
+    status: packet.status,
+    receive_url: packet.receive_url,
+    bootpack_sha256: packet.bootpack_sha256,
+    created_at: packet.created_at,
+  });
+  return packet;
+}
+
+function latestBrainbootPackets(limit = 20) {
+  ensureDir(BRAINBOOT_OUTBOX_DIR);
+  const packets = fs.readdirSync(BRAINBOOT_OUTBOX_DIR)
+    .filter((name) => name.toLowerCase().endsWith(".json"))
+    .map((name) => {
+      const packetPath = path.join(BRAINBOOT_OUTBOX_DIR, name);
+      try {
+        const packet = JSON.parse(fs.readFileSync(packetPath, "utf8"));
+        return {
+          ...packet,
+          packet_path: packetPath,
+          packet_modified_at: fs.statSync(packetPath).mtime.toISOString(),
+        };
+      } catch (error) {
+        return {
+          packet_id: name,
+          status: "INVALID_PACKET_JSON",
+          error: error.message,
+          packet_path: packetPath,
+        };
+      }
+    })
+    .sort((a, b) => String(b.created_at || b.packet_modified_at || "").localeCompare(String(a.created_at || a.packet_modified_at || "")))
+    .slice(0, limit);
+  return packets;
+}
+
+function targetMatches(packet, target) {
+  return String(packet.target || "").toLowerCase() === String(target || "").toLowerCase();
+}
+
+function latestBrainbootPacketsForTarget(target, limit = 20) {
+  return latestBrainbootPackets(200).filter((packet) => targetMatches(packet, target)).slice(0, limit);
+}
+
+function writeBrainbootAck(payload) {
+  const packetId = String(payload.packet_id || "").trim();
+  const ackToken = String(payload.ack_token || payload.token || "").trim();
+  const status = String(payload.status || "").trim().toUpperCase();
+  const evidence = String(payload.evidence || "").trim();
+  const receiver = String(payload.receiver || "").trim();
+
+  if (!packetId) {
+    const error = new Error("packet_id is required");
+    error.statusCode = 400;
+    throw error;
+  }
+  if (!["RECEIVED", "COMPLETED", "BLOCKER"].includes(status)) {
+    const error = new Error("status must be RECEIVED, COMPLETED, or BLOCKER");
+    error.statusCode = 400;
+    throw error;
+  }
+  const { packet_path: packetPath, packet } = loadBrainbootPacket(packetId);
+  if (!ackToken || ackToken !== packet.ack_token) {
+    const error = new Error("valid ack_token is required");
+    error.statusCode = 403;
+    throw error;
+  }
+  if ((status === "COMPLETED" || status === "BLOCKER") && evidence.length < 3) {
+    const error = new Error("evidence is required for COMPLETED or BLOCKER");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const createdAt = new Date().toISOString();
+  const suffix = crypto.randomBytes(4).toString("hex").toUpperCase();
+  const receiptId = `${safeReceiptStem(packetId)}_${status}_RECEIPT_${suffix}`;
+  const receipt = {
+    receipt_id: receiptId,
+    receipt_type: "BRAINBOOT_RECEIVER_RECEIPT",
+    packet_id: packetId,
+    target: packet.target,
+    receiver: receiver || packet.target,
+    status,
+    evidence: evidence || `Receiver reported ${status}.`,
+    bootpack_path: packet.bootpack_path,
+    bootpack_sha256: packet.bootpack_sha256,
+    created_at: createdAt,
+    source_packet_path: packetPath,
+  };
+  const receiptJson = `${JSON.stringify(receipt, null, 2)}\n`;
+  ensureDir(BRAINBOOT_RECEIPTS_DIR);
+  const receiptPath = brainbootReceiptPath(receiptId);
+  fs.writeFileSync(receiptPath, receiptJson, "utf8");
+
+  const updatedPacket = {
+    ...packet,
+    status: status === "RECEIVED" ? "RECEIVED_NOT_COMPLETED" : `${status}_RECEIPT_PROVEN`,
+    last_receiver_status: status,
+    last_receiver_receipt_id: receiptId,
+    last_receiver_receipt_path: receiptPath,
+    last_receiver_receipt_sha256: sha256Buffer(Buffer.from(receiptJson, "utf8")),
+    updated_at: createdAt,
+  };
+  if (status === "RECEIVED") updatedPacket.received_at = createdAt;
+  if (status === "COMPLETED") updatedPacket.completed_at = createdAt;
+  if (status === "BLOCKER") updatedPacket.blocked_at = createdAt;
+  writeBrainbootPacket(updatedPacket);
+  appendJsonl(BRAINBOOT_LEDGER_PATH, {
+    event: "BRAINBOOT_RECEIVER_RECEIPT",
+    packet_id: packetId,
+    receipt_id: receiptId,
+    target: packet.target,
+    receiver: receipt.receiver,
+    status,
+    receipt_path: receiptPath,
+    receipt_sha256: updatedPacket.last_receiver_receipt_sha256,
+    created_at: createdAt,
+  });
+
+  return {
+    status: "BRAINBOOT_RECEIVER_RECEIPT_WRITTEN",
+    packet: updatedPacket,
+    receipt,
+    receipt_path: receiptPath,
+    receipt_sha256: updatedPacket.last_receiver_receipt_sha256,
+    byte_count: Buffer.byteLength(receiptJson, "utf8"),
+  };
+}
+
+function relayPacketPath(packetId) {
+  return path.join(AEYE_RELAY_OUTBOX_DIR, `${safeReceiptStem(packetId)}.json`);
+}
+
+function relayReceiptPath(receiptId) {
+  return path.join(AEYE_RELAY_RECEIPTS_DIR, `${safeReceiptStem(receiptId)}.json`);
+}
+
+function loadRelayPacket(packetId) {
+  const packetPath = relayPacketPath(packetId);
+  if (!fs.existsSync(packetPath)) {
+    const error = new Error(`Relay packet not found: ${packetId}`);
+    error.statusCode = 404;
+    throw error;
+  }
+  return {
+    packet_path: packetPath,
+    packet: JSON.parse(fs.readFileSync(packetPath, "utf8")),
+  };
+}
+
+function writeRelayPacket(packet) {
+  ensureDir(AEYE_RELAY_OUTBOX_DIR);
+  fs.writeFileSync(relayPacketPath(packet.packet_id), `${JSON.stringify(packet, null, 2)}\n`, "utf8");
+}
+
+function createRelayPacket(request, payload) {
+  const packetType = String(payload.packet_type || "REPORT_DELIVERY").trim().toUpperCase();
+  const target = String(payload.target || "").trim();
+  const title = String(payload.title || "").trim();
+  const body = String(payload.body || payload.report || "").trim();
+  const evidencePath = String(payload.evidence_path || "").trim();
+  if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(target)) {
+    const error = new Error("target must be Aeye.Machine");
+    error.statusCode = 400;
+    throw error;
+  }
+  if (!title) {
+    const error = new Error("title is required");
+    error.statusCode = 400;
+    throw error;
+  }
+  if (!body && !evidencePath) {
+    const error = new Error("body or evidence_path is required");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const createdAt = new Date().toISOString();
+  const stamp = createdAt.replace(/[-:.TZ]/g, "").slice(0, 14);
+  const suffix = crypto.randomBytes(4).toString("hex").toUpperCase();
+  const packetId = `${safeReceiptStem(packetType)}_${safeReceiptStem(target).toUpperCase()}_${stamp}_${suffix}`;
+  const ackToken = crypto.randomBytes(16).toString("hex").toUpperCase();
+  const baseUrl = brainbootBaseUrl(request);
+  const packet = {
+    packet_id: packetId,
+    packet_type: packetType,
+    title,
+    body,
+    evidence_path: evidencePath || null,
+    producer: String(payload.producer || "TinkerDen@Doss"),
+    target,
+    destination: String(payload.destination || "Aeye Relay").trim(),
+    status: "SENT_UNACKNOWLEDGED",
+    created_at: createdAt,
+    ack_token: ackToken,
+    receive_url: `${baseUrl}/relay/receive/${encodeURIComponent(packetId)}?token=${encodeURIComponent(ackToken)}`,
+    ack_endpoint: `${baseUrl}/v1/relay/ack`,
+    required_receiver_receipts: [
+      "RECEIVED",
+      "COMPLETED or BLOCKER",
+    ],
+    rule: "Sent is not delivered. This packet is incomplete until the target writes a receiver-side relay receipt.",
+  };
+  writeRelayPacket(packet);
+  appendJsonl(AEYE_RELAY_LEDGER_PATH, {
+    event: "AEYE_RELAY_PACKET_SENT",
+    packet_id: packet.packet_id,
+    packet_type: packet.packet_type,
+    target: packet.target,
+    status: packet.status,
+    receive_url: packet.receive_url,
+    created_at: packet.created_at,
+  });
+  return packet;
+}
+
+function latestRelayPackets(limit = 20) {
+  ensureDir(AEYE_RELAY_OUTBOX_DIR);
+  return fs.readdirSync(AEYE_RELAY_OUTBOX_DIR)
+    .filter((name) => name.toLowerCase().endsWith(".json"))
+    .map((name) => {
+      const packetPath = path.join(AEYE_RELAY_OUTBOX_DIR, name);
+      try {
+        const packet = JSON.parse(fs.readFileSync(packetPath, "utf8"));
+        return {
+          ...packet,
+          packet_path: packetPath,
+          packet_modified_at: fs.statSync(packetPath).mtime.toISOString(),
+        };
+      } catch (error) {
+        return {
+          packet_id: name,
+          status: "INVALID_PACKET_JSON",
+          error: error.message,
+          packet_path: packetPath,
+        };
+      }
+    })
+    .sort((a, b) => String(b.created_at || b.packet_modified_at || "").localeCompare(String(a.created_at || a.packet_modified_at || "")))
+    .slice(0, limit);
+}
+
+function latestRelayPacketsForTarget(target, limit = 20) {
+  return latestRelayPackets(200).filter((packet) => targetMatches(packet, target)).slice(0, limit);
+}
+
+function writeRelayAck(payload) {
+  const packetId = String(payload.packet_id || "").trim();
+  const ackToken = String(payload.ack_token || payload.token || "").trim();
+  const status = String(payload.status || "").trim().toUpperCase();
+  const evidence = String(payload.evidence || "").trim();
+  const receiver = String(payload.receiver || "").trim();
+  if (!packetId) {
+    const error = new Error("packet_id is required");
+    error.statusCode = 400;
+    throw error;
+  }
+  if (!["RECEIVED", "COMPLETED", "BLOCKER"].includes(status)) {
+    const error = new Error("status must be RECEIVED, COMPLETED, or BLOCKER");
+    error.statusCode = 400;
+    throw error;
+  }
+  const { packet_path: packetPath, packet } = loadRelayPacket(packetId);
+  if (!ackToken || ackToken !== packet.ack_token) {
+    const error = new Error("valid ack_token is required");
+    error.statusCode = 403;
+    throw error;
+  }
+  if ((status === "COMPLETED" || status === "BLOCKER") && evidence.length < 3) {
+    const error = new Error("evidence is required for COMPLETED or BLOCKER");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const createdAt = new Date().toISOString();
+  const suffix = crypto.randomBytes(4).toString("hex").toUpperCase();
+  const receiptId = `${safeReceiptStem(packetId)}_${status}_RECEIPT_${suffix}`;
+  const receipt = {
+    receipt_id: receiptId,
+    receipt_type: "AEYE_RELAY_RECEIVER_RECEIPT",
+    packet_id: packetId,
+    packet_type: packet.packet_type,
+    target: packet.target,
+    receiver: receiver || packet.target,
+    status,
+    evidence: evidence || `Receiver reported ${status}.`,
+    created_at: createdAt,
+    source_packet_path: packetPath,
+  };
+  const receiptJson = `${JSON.stringify(receipt, null, 2)}\n`;
+  ensureDir(AEYE_RELAY_RECEIPTS_DIR);
+  const receiptPath = relayReceiptPath(receiptId);
+  fs.writeFileSync(receiptPath, receiptJson, "utf8");
+
+  const updatedPacket = {
+    ...packet,
+    status: status === "RECEIVED" ? "RECEIVED_NOT_COMPLETED" : `${status}_RECEIPT_PROVEN`,
+    last_receiver_status: status,
+    last_receiver_receipt_id: receiptId,
+    last_receiver_receipt_path: receiptPath,
+    last_receiver_receipt_sha256: sha256Buffer(Buffer.from(receiptJson, "utf8")),
+    updated_at: createdAt,
+  };
+  if (status === "RECEIVED") updatedPacket.received_at = createdAt;
+  if (status === "COMPLETED") updatedPacket.completed_at = createdAt;
+  if (status === "BLOCKER") updatedPacket.blocked_at = createdAt;
+  writeRelayPacket(updatedPacket);
+  appendJsonl(AEYE_RELAY_LEDGER_PATH, {
+    event: "AEYE_RELAY_RECEIVER_RECEIPT",
+    packet_id: packetId,
+    receipt_id: receiptId,
+    packet_type: packet.packet_type,
+    target: packet.target,
+    receiver: receipt.receiver,
+    status,
+    receipt_path: receiptPath,
+    receipt_sha256: updatedPacket.last_receiver_receipt_sha256,
+    created_at: createdAt,
+  });
+
+  return {
+    status: "AEYE_RELAY_RECEIVER_RECEIPT_WRITTEN",
+    packet: updatedPacket,
+    receipt,
+    receipt_path: receiptPath,
+    receipt_sha256: updatedPacket.last_receiver_receipt_sha256,
+    byte_count: Buffer.byteLength(receiptJson, "utf8"),
+  };
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -386,6 +818,33 @@ fastify.get("/", async (_request, reply) => {
     .brainboot .brainboot-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
     .brainboot button { background: #24435e; border-color: #6caee8; }
     .brainboot .mini { color: #9fb0c0; font-size: 12px; }
+    .brainboot-board { display: grid; gap: 10px; margin-top: 14px; }
+    .brainboot-card { border: 1px solid #2f4658; border-left: 4px solid #6caee8; border-radius: 6px; background: #0d1319; padding: 12px; }
+    .brainboot-card.complete { border-left-color: #8df0be; }
+    .brainboot-card.blocker { border-left-color: #ff6b7f; }
+    .brainboot-card.pending { border-left-color: #ffd36c; }
+    .brainboot-card .topline { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .brainboot-card .target { font-weight: 800; }
+    .brainboot-card .meta { color: #aab6c3; font-size: 12px; line-height: 1.45; margin-top: 8px; }
+    .brainboot-card code { color: #d3e8ff; overflow-wrap: anywhere; }
+    .brainboot-card a { font-weight: 700; }
+    .relay-panel { margin: 0 0 18px; border: 1px solid #3f5c48; background: #101d17; border-radius: 8px; padding: 18px; }
+    .relay-panel h2 { margin: 0 0 8px; font-size: 20px; }
+    .relay-form { display: grid; gap: 8px; margin-top: 12px; }
+    .relay-form input, .relay-form textarea { border: 1px solid #405468; border-radius: 6px; background: #0d1319; color: #edf2f7; padding: 10px; font-family: inherit; }
+    .relay-form textarea { min-height: 84px; resize: vertical; }
+    .relay-board { display: grid; gap: 10px; margin-top: 14px; }
+    .relay-card { border: 1px solid #2f4a39; border-left: 4px solid #76d996; border-radius: 6px; background: #0d1319; padding: 12px; }
+    .relay-card.pending { border-left-color: #ffd36c; }
+    .relay-card.complete { border-left-color: #8df0be; }
+    .relay-card.blocker { border-left-color: #ff6b7f; }
+    .relay-card .topline { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .relay-card .target { font-weight: 800; }
+    .relay-card .meta { color: #aab6c3; font-size: 12px; line-height: 1.45; margin-top: 8px; }
+    .relay-card code { color: #d3e8ff; overflow-wrap: anywhere; }
+    .inbox-links { margin: 0 0 18px; border: 1px solid #4c4b2f; background: #1d1b10; border-radius: 8px; padding: 16px; }
+    .inbox-links .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .inbox-links a { display: inline-block; border: 1px solid #7d7643; border-radius: 6px; padding: 8px 10px; background: #25220f; color: #f7e7a2; text-decoration: none; font-weight: 700; }
     .release-valve .status-line { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
     .release-valve ul { margin: 10px 0 0; padding-left: 18px; color: #c4cfda; }
     .release-valve li { margin: 4px 0; }
@@ -405,10 +864,43 @@ fastify.get("/", async (_request, reply) => {
     <section class="brainboot" data-testid="brainboot-panel">
       <div class="label">Session Start</div>
       <h2>Nerdkle Brainboot</h2>
-      <div class="rec-text">Render the shared source-truth base for Skybro and Petra before a session starts drifting. This reads GitHub-backed source-truth files and writes bootpacks with exact hashes.</div>
+      <div class="rec-text">Dispatch shared source-truth Brainboot packets to Skybro and Petra. A packet is not complete until the receiver writes back RECEIVED and then COMPLETED or BLOCKER.</div>
       <div class="brainboot-row">
-        <button type="button" id="brainboot-primary-button" data-testid="brainboot-primary-button">SESSION NERDKLE BRAINBOOT</button>
-        <span class="mini">Outputs: Skybro.Betsy.BOOTPACK.md and Petra.Betsy.NERDKLE_BRAINBOOT.BOOTPACK.md</span>
+        <button type="button" id="brainboot-primary-button" data-testid="brainboot-primary-button">DISPATCH SESSION NERDKLE BRAINBOOT</button>
+        <span class="mini">Creates durable packets in C:\speaker\brainboot\outbox and receiver receipts in C:\speaker\brainboot\receipts.</span>
+      </div>
+      <div id="brainboot-status-board" class="brainboot-board" data-testid="brainboot-status-board">
+        <div class="brainboot-card pending">
+          <div class="topline"><span class="target">Brainboot dispatch not checked yet.</span><span class="pill warn">UNKNOWN</span></div>
+          <div class="meta">Polling <code>/v1/brainboot/status</code> for receiver-side ACK / COMPLETE / BLOCKER receipts.</div>
+        </div>
+      </div>
+    </section>
+    <section class="relay-panel" data-testid="aeye-relay-panel">
+      <div class="label">Aeye Relay</div>
+      <h2>Report Packet Dispatch</h2>
+      <div class="rec-text">Send any report, decision packet, or source-truth note through the same receiver receipt lifecycle. This removes Ben as the courier: every packet must come back RECEIVED, COMPLETED, or BLOCKER.</div>
+      <div class="relay-form">
+        <input id="relay-target-input" data-testid="relay-target-input" value="Skybro.Betsy" aria-label="Target Aeye Machine" />
+        <input id="relay-title-input" data-testid="relay-title-input" value="Source Truth Report Pickup" aria-label="Packet title" />
+        <textarea id="relay-body-input" data-testid="relay-body-input" aria-label="Packet body">Read the latest source truth / Brainboot context and return a receiver receipt.</textarea>
+        <button type="button" id="relay-dispatch-button" data-testid="relay-dispatch-button">DISPATCH REPORT PACKET</button>
+      </div>
+      <div id="relay-status-board" class="relay-board" data-testid="relay-status-board">
+        <div class="relay-card pending">
+          <div class="topline"><span class="target">No report relay packets checked yet.</span><span class="pill warn">UNKNOWN</span></div>
+          <div class="meta">Polling <code>/v1/relay/status</code> for receiver-side receipts.</div>
+        </div>
+      </div>
+    </section>
+    <section class="inbox-links" data-testid="aeye-inbox-links">
+      <div class="label">Standing Aeye Inboxes</div>
+      <div class="rec-text">These are the receiver surfaces each Aeye can open at session start. They show pending Brainboot and report packets and write receiver receipts back to this dashboard.</div>
+      <div class="links">
+        <a href="/aeye/Skybro.Betsy" target="_blank" rel="noreferrer">Skybro@Betsy Inbox</a>
+        <a href="/aeye/Petra.Betsy" target="_blank" rel="noreferrer">Petra@Betsy Inbox</a>
+        <a href="/aeye/Swanson.Doss" target="_blank" rel="noreferrer">Swanson@Doss Inbox</a>
+        <a href="/aeye/Fucko.Betsy" target="_blank" rel="noreferrer">Fucko@Betsy Inbox</a>
       </div>
     </section>
     <section class="grid">
@@ -433,7 +925,7 @@ fastify.get("/", async (_request, reply) => {
       <div class="bench-actions">
         <button type="button" id="ingest-inbox-button" data-testid="ingest-inbox-button">INGEST RAW RECEIPTS</button>
         <button type="button" id="refresh-repo-button" data-testid="refresh-repo-button">REFRESH REPO SNAPSHOT</button>
-        <button type="button" id="render-bootpack-button" data-testid="render-bootpack-button">SESSION NERDKLE BRAINBOOT</button>
+        <button type="button" id="render-bootpack-button" data-testid="render-bootpack-button">DISPATCH BRAINBOOT</button>
       </div>
       <div id="operator-workbench-status" class="artifact-readback" data-testid="operator-workbench-status">
         <strong>Ready.</strong> Choose a safe muscle to produce a readback.
@@ -482,6 +974,118 @@ fastify.get("/", async (_request, reply) => {
   <script>
     let pendingRatchetDecision = null;
     const seenStreamEvents = new Set();
+
+    function brainbootCardClass(status) {
+      const upper = String(status || "").toUpperCase();
+      if (upper.includes("COMPLETED")) return "complete";
+      if (upper.includes("BLOCKER") || upper.includes("INVALID")) return "blocker";
+      return "pending";
+    }
+
+    function brainbootPillClass(status) {
+      const upper = String(status || "").toUpperCase();
+      if (upper.includes("COMPLETED")) return "ok";
+      if (upper.includes("BLOCKER") || upper.includes("INVALID")) return "bad";
+      return "warn";
+    }
+
+    function renderBrainbootBoard(packets) {
+      const board = document.getElementById("brainboot-status-board");
+      board.innerHTML = "";
+      if (!packets || packets.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "brainboot-card pending";
+        empty.innerHTML = '<div class="topline"><span class="target">No Brainboot packets yet.</span><span class="pill warn">EMPTY</span></div><div class="meta">Click DISPATCH SESSION NERDKLE BRAINBOOT to create receiver-visible packets.</div>';
+        board.appendChild(empty);
+        return;
+      }
+      for (const packet of packets.slice(0, 6)) {
+        const card = document.createElement("div");
+        card.className = "brainboot-card " + brainbootCardClass(packet.status);
+        const status = packet.status || "UNKNOWN";
+        const link = packet.receive_url ? '<a href="' + packet.receive_url + '" target="_blank" rel="noreferrer">receiver page</a>' : 'no receiver link';
+        const receipt = packet.last_receiver_receipt_id || "NO_RECEIVER_RECEIPT";
+        card.innerHTML = [
+          '<div class="topline">',
+          '<span class="target">' + (packet.target || "UNKNOWN_TARGET") + '</span>',
+          '<span class="pill ' + brainbootPillClass(status) + '">' + status + '</span>',
+          '</div>',
+          '<div class="meta">',
+          '<div>packet: <code>' + (packet.packet_id || "UNKNOWN") + '</code></div>',
+          '<div>bootpack: <code>' + (packet.bootpack_sha256 || "NO_HASH") + '</code></div>',
+          '<div>receiver: ' + link + '</div>',
+          '<div>last receipt: <code>' + receipt + '</code></div>',
+          '</div>'
+        ].join("");
+        board.appendChild(card);
+      }
+    }
+
+    async function pollBrainbootStatus() {
+      try {
+        const response = await fetch("/v1/brainboot/status?limit=10", { cache: "no-store" });
+        const result = await response.json();
+        renderBrainbootBoard(result.packets || []);
+      } catch (error) {
+        renderBrainbootBoard([{ target: "Brainboot status", status: "STATUS_READBACK_FAILED", packet_id: error.message }]);
+      }
+    }
+
+    function renderRelayBoard(packets) {
+      const board = document.getElementById("relay-status-board");
+      board.innerHTML = "";
+      if (!packets || packets.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "relay-card pending";
+        empty.innerHTML = '<div class="topline"><span class="target">No report packets yet.</span><span class="pill warn">EMPTY</span></div><div class="meta">Dispatch a report packet to create receiver-visible work.</div>';
+        board.appendChild(empty);
+        return;
+      }
+      for (const packet of packets.slice(0, 6)) {
+        const card = document.createElement("div");
+        card.className = "relay-card " + brainbootCardClass(packet.status);
+        const status = packet.status || "UNKNOWN";
+        const link = packet.receive_url ? '<a href="' + packet.receive_url + '" target="_blank" rel="noreferrer">receiver page</a>' : 'no receiver link';
+        card.innerHTML = [
+          '<div class="topline">',
+          '<span class="target">' + (packet.target || "UNKNOWN_TARGET") + ' | ' + (packet.packet_type || "REPORT") + '</span>',
+          '<span class="pill ' + brainbootPillClass(status) + '">' + status + '</span>',
+          '</div>',
+          '<div class="meta">',
+          '<div>title: <code>' + (packet.title || "UNTITLED") + '</code></div>',
+          '<div>packet: <code>' + (packet.packet_id || "UNKNOWN") + '</code></div>',
+          '<div>receiver: ' + link + '</div>',
+          '<div>last receipt: <code>' + (packet.last_receiver_receipt_id || "NO_RECEIVER_RECEIPT") + '</code></div>',
+          '</div>'
+        ].join("");
+        board.appendChild(card);
+      }
+    }
+
+    async function pollRelayStatus() {
+      try {
+        const response = await fetch("/v1/relay/status?limit=10", { cache: "no-store" });
+        const result = await response.json();
+        renderRelayBoard(result.packets || []);
+      } catch (error) {
+        renderRelayBoard([{ target: "Relay status", status: "STATUS_READBACK_FAILED", packet_id: error.message }]);
+      }
+    }
+
+    async function dispatchReportPacket() {
+      const target = document.getElementById("relay-target-input").value.trim();
+      const title = document.getElementById("relay-title-input").value.trim();
+      const body = document.getElementById("relay-body-input").value.trim();
+      await runWorkbenchAction("Aeye report relay dispatch", "/v1/relay/dispatch", {
+        packet_type: "REPORT_DELIVERY",
+        target,
+        title,
+        body,
+        producer: "TinkerDen@Doss",
+        destination: "Aeye Relay"
+      });
+      pollRelayStatus();
+    }
 
     function setRatchetStatus(message) {
       document.getElementById("ratchet-status").textContent = message;
@@ -574,9 +1178,18 @@ fastify.get("/", async (_request, reply) => {
         if (result.result && result.result.status) lines.push("result: " + result.result.status);
         if (result.result && Number.isInteger(result.result.canonicalized_count)) lines.push("canonicalized: " + result.result.canonicalized_count);
         if (result.result && Number.isInteger(result.result.quarantined_count)) lines.push("quarantined: " + result.result.quarantined_count);
+        if (Array.isArray(result.brainboot_packets)) {
+          lines.push("brainboot packets: " + result.brainboot_packets.length);
+          renderBrainbootBoard(result.brainboot_packets);
+        }
+        if (result.relay_packet) {
+          lines.push("relay packet: " + result.relay_packet.packet_id);
+          pollRelayStatus();
+        }
         setWorkbenchStatus(label + " returned", lines.length ? lines : ["Readback returned."], result);
         pollSpeakerStreamLog();
         pollReleaseValve();
+        pollBrainbootStatus();
       } catch (error) {
         setWorkbenchStatus(label + " failed", [error.message], null);
       }
@@ -589,15 +1202,16 @@ fastify.get("/", async (_request, reply) => {
       runWorkbenchAction("Repo snapshot refresh", "/v1/action/refresh_repo_state");
     });
     document.getElementById("render-bootpack-button").addEventListener("click", () => {
-      runWorkbenchAction("Session Nerdkle Brainboot", "/v1/action/render_brainboot", {
+      runWorkbenchAction("Session Nerdkle Brainboot Dispatch", "/v1/action/brainboot_dispatch", {
         targets: ["Skybro.Betsy", "Petra.Betsy"]
       });
     });
     document.getElementById("brainboot-primary-button").addEventListener("click", () => {
-      runWorkbenchAction("Session Nerdkle Brainboot", "/v1/action/render_brainboot", {
+      runWorkbenchAction("Session Nerdkle Brainboot Dispatch", "/v1/action/brainboot_dispatch", {
         targets: ["Skybro.Betsy", "Petra.Betsy"]
       });
     });
+    document.getElementById("relay-dispatch-button").addEventListener("click", dispatchReportPacket);
 
     function classifyStreamEvent(event) {
       const status = String(event.status || "").toUpperCase();
@@ -686,8 +1300,12 @@ fastify.get("/", async (_request, reply) => {
 
     pollSpeakerStreamLog();
     pollReleaseValve();
+    pollBrainbootStatus();
+    pollRelayStatus();
     setInterval(pollSpeakerStreamLog, 3000);
     setInterval(pollReleaseValve, 5000);
+    setInterval(pollBrainbootStatus, 4000);
+    setInterval(pollRelayStatus, 4000);
   </script>
 </body>
 </html>`);
@@ -846,6 +1464,380 @@ fastify.post("/v1/action/render_brainboot", async (request, reply) => {
       blocked,
       rule: "Session Nerdkle Brainboot renders file-backed bootpacks from Speaker source-truth readback. It does not promote canonical state.",
     });
+});
+
+fastify.post("/v1/action/brainboot_dispatch", async (request, reply) => {
+  const requestedTargets = Array.isArray(request.body?.targets) ? request.body.targets : ["Skybro.Betsy", "Petra.Betsy"];
+  const targets = requestedTargets
+    .map((target) => String(target || "").trim())
+    .filter(Boolean);
+  if (targets.length === 0 || targets.length > 5) {
+    return reply.code(400).send({
+      status: "BRAINBOOT_DISPATCH_BLOCKED",
+      error: "targets must contain 1-5 Aeye.Machine values",
+    });
+  }
+
+  const results = [];
+  const packets = [];
+  for (const target of targets) {
+    if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(target)) {
+      results.push({
+        target,
+        status: "BOOTPACK_RENDER_BLOCKED",
+        error: "target must be Aeye.Machine",
+      });
+      continue;
+    }
+    const run = runSpeakerctlJson(["render-bootpack", target]);
+    const result = run.result || {
+      status: "SPEAKERCTL_OUTPUT_UNPARSEABLE",
+      stdout: run.stdout,
+    };
+    const artifactPath = bootpackPathForTarget(target, result);
+    const renderResult = {
+      target,
+      status: run.ok ? "BOOTPACK_RENDERED" : "BOOTPACK_RENDER_BLOCKED",
+      artifact_path: artifactPath,
+      artifact: artifactPath ? fileReadback(artifactPath) : null,
+      result,
+      error: run.ok ? null : run.error,
+    };
+    results.push(renderResult);
+    if (run.ok) {
+      packets.push(createBrainbootPacket(request, target, renderResult));
+    }
+  }
+
+  const blocked = results.filter((result) => result.status !== "BOOTPACK_RENDERED");
+  return reply
+    .code(blocked.length ? 409 : 200)
+    .header("cache-control", "no-store")
+    .send({
+      status: blocked.length ? "BRAINBOOT_DISPATCH_PARTIAL" : "BRAINBOOT_DISPATCHED",
+      targets,
+      render_results: results,
+      brainboot_packets: packets,
+      blocked,
+      rule: "Dispatch creates receiver-visible packets. It is not complete until receiver receipts return.",
+    });
+});
+
+fastify.get("/v1/brainboot/status", async (request, reply) => {
+  const limit = Math.min(Math.max(Number(request.query?.limit) || 20, 1), 100);
+  return reply.header("cache-control", "no-store").send({
+    status: "BRAINBOOT_STATUS_READBACK",
+    root: BRAINBOOT_ROOT,
+    packets: latestBrainbootPackets(limit),
+    ledger_tail: readJsonl(BRAINBOOT_LEDGER_PATH, limit),
+  });
+});
+
+fastify.post("/v1/brainboot/ack", async (request, reply) => {
+  try {
+    const result = writeBrainbootAck(request.body || {});
+    return reply.code(201).header("cache-control", "no-store").send(result);
+  } catch (error) {
+    return reply.code(error.statusCode || 500).header("cache-control", "no-store").send({
+      status: "BRAINBOOT_RECEIVER_RECEIPT_BLOCKED",
+      error: error.message,
+    });
+  }
+});
+
+fastify.get("/brainboot/receive/:packetId", async (request, reply) => {
+  try {
+    const token = String(request.query?.token || "");
+    const { packet } = loadBrainbootPacket(request.params.packetId);
+    const safePacket = JSON.stringify(packet, null, 2);
+    return reply.type("text/html").send(`<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brainboot Receiver</title>
+  <style>
+    :root { color-scheme: dark; font-family: Arial, sans-serif; background: #101418; color: #edf2f7; }
+    body { margin: 0; padding: 28px; }
+    main { max-width: 860px; margin: 0 auto; }
+    .card { border: 1px solid #42607a; background: #121d26; border-radius: 8px; padding: 18px; }
+    button { border: 1px solid #6caee8; border-radius: 6px; color: #edf2f7; background: #24435e; padding: 10px 14px; font-weight: 700; cursor: pointer; margin-right: 8px; margin-top: 10px; }
+    button.blocker { border-color: #ff6b7f; background: #351b22; }
+    textarea { width: 100%; min-height: 80px; border: 1px solid #405468; border-radius: 6px; background: #0d1319; color: #edf2f7; padding: 10px; margin-top: 10px; }
+    pre { white-space: pre-wrap; background: #0d1319; border: 1px solid #2e3d4c; border-radius: 6px; padding: 12px; overflow-wrap: anywhere; }
+    .status { margin-top: 12px; color: #aab6c3; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Brainboot Receiver</h1>
+    <p>This page writes the receiver-side receipt. Sent is not proof until this page returns RECEIVED and then COMPLETED or BLOCKER.</p>
+    <pre id="packet">${escapeHtml(safePacket)}</pre>
+    <textarea id="evidence">I read this Brainboot packet and loaded the bootpack into session context.</textarea>
+    <div>
+      <button id="received">WRITE RECEIVED</button>
+      <button id="completed">WRITE COMPLETED</button>
+      <button id="blocker" class="blocker">WRITE BLOCKER</button>
+    </div>
+    <div id="status" class="status">Waiting for receiver action.</div>
+  </main>
+  <script>
+    const packetId = ${JSON.stringify(packet.packet_id)};
+    const token = ${JSON.stringify(token)};
+    async function ack(status) {
+      const evidence = document.getElementById("evidence").value.trim();
+      const response = await fetch("/v1/brainboot/ack", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ packet_id: packetId, ack_token: token, status, evidence })
+      });
+      const result = await response.json();
+      document.getElementById("status").textContent = response.ok
+        ? status + " receipt written: " + result.receipt.receipt_id
+        : status + " blocked: " + (result.error || "unknown error");
+    }
+    document.getElementById("received").addEventListener("click", () => ack("RECEIVED"));
+    document.getElementById("completed").addEventListener("click", () => ack("COMPLETED"));
+    document.getElementById("blocker").addEventListener("click", () => ack("BLOCKER"));
+  </script>
+</body>
+</html>`);
+  } catch (error) {
+    return reply.code(error.statusCode || 500).send({
+      status: "BRAINBOOT_RECEIVER_PAGE_BLOCKED",
+      error: error.message,
+    });
+  }
+});
+
+fastify.post("/v1/relay/dispatch", async (request, reply) => {
+  try {
+    const packet = createRelayPacket(request, request.body || {});
+    return reply.code(201).header("cache-control", "no-store").send({
+      status: "AEYE_RELAY_PACKET_DISPATCHED",
+      relay_packet: packet,
+      rule: "Dispatch is not delivery. The packet remains incomplete until receiver receipts return.",
+    });
+  } catch (error) {
+    return reply.code(error.statusCode || 500).header("cache-control", "no-store").send({
+      status: "AEYE_RELAY_DISPATCH_BLOCKED",
+      error: error.message,
+    });
+  }
+});
+
+fastify.get("/v1/relay/status", async (request, reply) => {
+  const limit = Math.min(Math.max(Number(request.query?.limit) || 20, 1), 100);
+  return reply.header("cache-control", "no-store").send({
+    status: "AEYE_RELAY_STATUS_READBACK",
+    root: AEYE_RELAY_ROOT,
+    packets: latestRelayPackets(limit),
+    ledger_tail: readJsonl(AEYE_RELAY_LEDGER_PATH, limit),
+  });
+});
+
+fastify.post("/v1/relay/ack", async (request, reply) => {
+  try {
+    const result = writeRelayAck(request.body || {});
+    return reply.code(201).header("cache-control", "no-store").send(result);
+  } catch (error) {
+    return reply.code(error.statusCode || 500).header("cache-control", "no-store").send({
+      status: "AEYE_RELAY_RECEIVER_RECEIPT_BLOCKED",
+      error: error.message,
+    });
+  }
+});
+
+fastify.get("/relay/receive/:packetId", async (request, reply) => {
+  try {
+    const token = String(request.query?.token || "");
+    const { packet } = loadRelayPacket(request.params.packetId);
+    const safePacket = JSON.stringify(packet, null, 2);
+    return reply.type("text/html").send(`<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aeye Relay Receiver</title>
+  <style>
+    :root { color-scheme: dark; font-family: Arial, sans-serif; background: #101418; color: #edf2f7; }
+    body { margin: 0; padding: 28px; }
+    main { max-width: 860px; margin: 0 auto; }
+    .card { border: 1px solid #3f5c48; background: #101d17; border-radius: 8px; padding: 18px; }
+    button { border: 1px solid #76d996; border-radius: 6px; color: #edf2f7; background: #1f4a31; padding: 10px 14px; font-weight: 700; cursor: pointer; margin-right: 8px; margin-top: 10px; }
+    button.blocker { border-color: #ff6b7f; background: #351b22; }
+    textarea { width: 100%; min-height: 80px; border: 1px solid #405468; border-radius: 6px; background: #0d1319; color: #edf2f7; padding: 10px; margin-top: 10px; }
+    pre { white-space: pre-wrap; background: #0d1319; border: 1px solid #2e3d4c; border-radius: 6px; padding: 12px; overflow-wrap: anywhere; }
+    .status { margin-top: 12px; color: #aab6c3; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Aeye Relay Receiver</h1>
+    <p>This page writes the receiver-side receipt. Sent is not proof until this packet returns RECEIVED and then COMPLETED or BLOCKER.</p>
+    <pre id="packet">${escapeHtml(safePacket)}</pre>
+    <textarea id="evidence">I received this packet and completed the requested readback/action.</textarea>
+    <div>
+      <button id="received">WRITE RECEIVED</button>
+      <button id="completed">WRITE COMPLETED</button>
+      <button id="blocker" class="blocker">WRITE BLOCKER</button>
+    </div>
+    <div id="status" class="status">Waiting for receiver action.</div>
+  </main>
+  <script>
+    const packetId = ${JSON.stringify(packet.packet_id)};
+    const token = ${JSON.stringify(token)};
+    async function ack(status) {
+      const evidence = document.getElementById("evidence").value.trim();
+      const response = await fetch("/v1/relay/ack", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ packet_id: packetId, ack_token: token, status, evidence })
+      });
+      const result = await response.json();
+      document.getElementById("status").textContent = response.ok
+        ? status + " receipt written: " + result.receipt.receipt_id
+        : status + " blocked: " + (result.error || "unknown error");
+    }
+    document.getElementById("received").addEventListener("click", () => ack("RECEIVED"));
+    document.getElementById("completed").addEventListener("click", () => ack("COMPLETED"));
+    document.getElementById("blocker").addEventListener("click", () => ack("BLOCKER"));
+  </script>
+</body>
+</html>`);
+  } catch (error) {
+    return reply.code(error.statusCode || 500).send({
+      status: "AEYE_RELAY_RECEIVER_PAGE_BLOCKED",
+      error: error.message,
+    });
+  }
+});
+
+fastify.get("/v1/aeye/:target/inbox", async (request, reply) => {
+  const target = String(request.params.target || "").trim();
+  if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(target)) {
+    return reply.code(400).header("cache-control", "no-store").send({
+      status: "AEYE_INBOX_BLOCKED",
+      error: "target must be Aeye.Machine",
+    });
+  }
+  const limit = Math.min(Math.max(Number(request.query?.limit) || 20, 1), 100);
+  return reply.header("cache-control", "no-store").send({
+    status: "AEYE_INBOX_READBACK",
+    target,
+    brainboot_packets: latestBrainbootPacketsForTarget(target, limit),
+    relay_packets: latestRelayPacketsForTarget(target, limit),
+    rule: "The Aeye owns returning RECEIVED and then COMPLETED or BLOCKER. Ben is not the courier.",
+  });
+});
+
+fastify.get("/aeye/:target", async (request, reply) => {
+  const target = String(request.params.target || "").trim();
+  if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(target)) {
+    return reply.code(400).send({
+      status: "AEYE_INBOX_BLOCKED",
+      error: "target must be Aeye.Machine",
+    });
+  }
+  const brainbootPackets = latestBrainbootPacketsForTarget(target, 20);
+  const relayPackets = latestRelayPacketsForTarget(target, 20);
+  const packets = [
+    ...brainbootPackets.map((packet) => ({ channel: "brainboot", ...packet })),
+    ...relayPackets.map((packet) => ({ channel: "relay", ...packet })),
+  ].sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
+  const packetsJson = JSON.stringify(packets);
+  const cards = packets.length === 0 ? `
+    <div class="card pending">
+      <div class="topline"><strong>No packets for ${escapeHtml(target)}.</strong><span class="pill warn">EMPTY</span></div>
+      <p>This inbox is working, but no dispatcher has assigned work to this Aeye yet.</p>
+    </div>` : packets.map((packet) => {
+      const status = String(packet.status || "UNKNOWN");
+      const statusClass = status.includes("COMPLETED") ? "ok" : status.includes("BLOCKER") ? "bad" : "warn";
+      const cardClass = status.includes("COMPLETED") ? "complete" : status.includes("BLOCKER") ? "blocker" : "pending";
+      const title = packet.title || packet.mission || packet.packet_type || "Packet";
+      const body = packet.body || packet.rule || "No packet body.";
+      return `
+    <div class="card ${cardClass}" data-packet-id="${escapeHtml(packet.packet_id)}" data-channel="${escapeHtml(packet.channel)}">
+      <div class="topline"><strong>${escapeHtml(title)}</strong><span class="pill ${statusClass}">${escapeHtml(status)}</span></div>
+      <p>${escapeHtml(body)}</p>
+      <div class="meta">
+        <div>channel: <code>${escapeHtml(packet.channel)}</code></div>
+        <div>packet: <code>${escapeHtml(packet.packet_id)}</code></div>
+        <div>last receipt: <code>${escapeHtml(packet.last_receiver_receipt_id || "NO_RECEIVER_RECEIPT")}</code></div>
+        <div>artifact/hash: <code>${escapeHtml(packet.bootpack_sha256 || packet.evidence_path || "NO_HASH")}</code></div>
+      </div>
+      <textarea data-evidence="${escapeHtml(packet.packet_id)}">${escapeHtml(packet.channel === "brainboot" ? "I read this Brainboot packet and loaded the bootpack into session context." : "I received this packet and completed the requested readback/action.")}</textarea>
+      <div>
+        <button data-action="RECEIVED" data-channel="${escapeHtml(packet.channel)}" data-packet-id="${escapeHtml(packet.packet_id)}">WRITE RECEIVED</button>
+        <button data-action="COMPLETED" data-channel="${escapeHtml(packet.channel)}" data-packet-id="${escapeHtml(packet.packet_id)}">WRITE COMPLETED</button>
+        <button class="blocker" data-action="BLOCKER" data-channel="${escapeHtml(packet.channel)}" data-packet-id="${escapeHtml(packet.packet_id)}">WRITE BLOCKER</button>
+      </div>
+    </div>`;
+    }).join("");
+
+  return reply.type("text/html").send(`<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aeye Inbox | ${escapeHtml(target)}</title>
+  <style>
+    :root { color-scheme: dark; font-family: Arial, sans-serif; background: #101418; color: #edf2f7; }
+    body { margin: 0; padding: 28px; }
+    main { max-width: 920px; margin: 0 auto; }
+    h1 { margin: 0 0 6px; }
+    .sub { color: #aab6c3; margin-bottom: 18px; }
+    .card { border: 1px solid #2f4658; border-left: 4px solid #ffd36c; border-radius: 8px; background: #0d1319; padding: 16px; margin-bottom: 12px; }
+    .card.complete { border-left-color: #8df0be; }
+    .card.blocker { border-left-color: #ff6b7f; }
+    .topline { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .pill { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .ok { background: #153c2e; color: #8df0be; }
+    .warn { background: #3a3015; color: #ffd36c; }
+    .bad { background: #461d25; color: #ff9aa9; }
+    .meta { color: #aab6c3; font-size: 12px; line-height: 1.5; margin: 8px 0; }
+    code { color: #d3e8ff; overflow-wrap: anywhere; }
+    textarea { width: 100%; min-height: 76px; border: 1px solid #405468; border-radius: 6px; background: #080d12; color: #edf2f7; padding: 10px; margin: 10px 0; font-family: inherit; }
+    button { border: 1px solid #6caee8; border-radius: 6px; color: #edf2f7; background: #24435e; padding: 10px 14px; font-weight: 700; cursor: pointer; margin-right: 8px; margin-top: 6px; }
+    button.blocker { border-color: #ff6b7f; background: #351b22; }
+    #status { margin: 12px 0; color: #aab6c3; }
+    a { color: #8fc7ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>${escapeHtml(target)} Inbox</h1>
+    <div class="sub">Standing receiver surface for Brainboot and report packets. Write RECEIVED, then COMPLETED or BLOCKER. Ben should not have to carry this state.</div>
+    <div id="status">Ready.</div>
+    ${cards}
+    <p><a href="/">Back to Command Dash</a></p>
+  </main>
+  <script>
+    const packets = ${packetsJson};
+    async function writeReceipt(button) {
+      const packetId = button.getAttribute("data-packet-id");
+      const channel = button.getAttribute("data-channel");
+      const status = button.getAttribute("data-action");
+      const packet = packets.find((item) => item.packet_id === packetId && item.channel === channel);
+      const evidence = document.querySelector('[data-evidence="' + packetId + '"]').value.trim();
+      const endpoint = channel === "brainboot" ? "/v1/brainboot/ack" : "/v1/relay/ack";
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ packet_id: packetId, ack_token: packet.ack_token, status, evidence, receiver: ${JSON.stringify(target)} })
+      });
+      const result = await response.json();
+      document.getElementById("status").textContent = response.ok
+        ? status + " receipt written: " + result.receipt.receipt_id
+        : status + " blocked: " + (result.error || "unknown error");
+      if (response.ok) window.setTimeout(() => window.location.reload(), 850);
+    }
+    document.querySelectorAll("button[data-action]").forEach((button) => {
+      button.addEventListener("click", () => writeReceipt(button));
+    });
+  </script>
+</body>
+</html>`);
 });
 
 fastify.post("/v1/action/promote_staged", async (request, reply) => {

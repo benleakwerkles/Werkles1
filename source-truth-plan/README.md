@@ -8,8 +8,9 @@ This folder is the current GitHub-backed review surface for the material Ben kee
 
 - GitHub repo: https://github.com/benleakwerkles/Werkles1.git
 - Branch: `source-truth/atlas-speaker-v0-20260627`
-- Status: review branch, not canonical main
-- Canonical gate: merge/review into `origin/main` after Ben/Petra approval
+- Main hash after source-truth push: `36ad1e0c500480f4f00d8bece22fa32c8f494aa4`
+- Status: GitHub `main` is the current shared source-truth anchor; branch remains as an audit mirror.
+- Canonical gate: future promotion still requires receiver receipts and explicit operator approval for changes that claim active organism behavior.
 
 ## What Is Included
 
@@ -18,6 +19,7 @@ This folder is the current GitHub-backed review surface for the material Ben kee
 - `SOURCE_MATERIAL_MANIFEST.json` - exact copied files with hashes.
 - `MISSING_SOURCE_GAPS.md` - gaps, including the Betsy desktop folder that is not visible from Doss.
 - `NEXT_PACKETS.md` - the next concrete packets to finish source recovery.
+- `AEYE_RELAY_CONTRACT_V0.md` - the command/momentum dash to Aeye relay contract: sent is not delivered until receiver receipts return.
 - `references/` - copied source docs, receipts, scripts, specs, and bounded chatlog index.
 
 ## Hard Boundary
