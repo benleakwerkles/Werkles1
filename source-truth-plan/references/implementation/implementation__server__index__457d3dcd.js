@@ -744,6 +744,39 @@ function daemonSnapshot() {
   };
 }
 
+function relayStatusClass(status) {
+  const upper = String(status || "").toUpperCase();
+  if (upper.includes("COMPLETED")) return "ok";
+  if (upper.includes("BLOCKER") || upper.includes("INVALID")) return "bad";
+  return "warn";
+}
+
+function relayCardClass(status) {
+  const upper = String(status || "").toUpperCase();
+  if (upper.includes("COMPLETED")) return "complete";
+  if (upper.includes("BLOCKER") || upper.includes("INVALID")) return "blocker";
+  return "pending";
+}
+
+function renderRelayCockpitPacket(packet) {
+  const channel = packet.channel || "relay";
+  const title = packet.title || packet.mission || packet.packet_type || "Packet";
+  return `
+      <article class="live-packet ${relayCardClass(packet.status)}">
+        <div class="live-packet-head">
+          <strong>${escapeHtml(packet.target || "UNKNOWN_TARGET")}</strong>
+          <span class="pill ${relayStatusClass(packet.status)}">${escapeHtml(packet.status || "UNKNOWN")}</span>
+        </div>
+        <div class="live-packet-title">${escapeHtml(title)}</div>
+        <div class="live-packet-meta">
+          <div>channel: <code>${escapeHtml(channel)}</code></div>
+          <div>packet: <code>${escapeHtml(packet.packet_id || "UNKNOWN")}</code></div>
+          <div>last receipt: <code>${escapeHtml(packet.last_receiver_receipt_id || "NO_RECEIVER_RECEIPT")}</code></div>
+          <div>${packet.receive_url ? `<a href="${escapeHtml(packet.receive_url)}" target="_blank" rel="noreferrer">open receiver page</a>` : "no receiver page"}</div>
+        </div>
+      </article>`;
+}
+
 fastify.get("/", async (_request, reply) => {
   const snapshot = daemonSnapshot();
   const organs = Array.isArray(snapshot.health.core_organs) ? snapshot.health.core_organs : [];
@@ -761,6 +794,17 @@ fastify.get("/", async (_request, reply) => {
       <td>${escapeHtml(flag.source || "")}</td>
       <td>${escapeHtml(flag.rule || flag.error || "")}</td>
     </tr>`).join("");
+  const brainbootPackets = latestBrainbootPackets(8).map((packet) => ({ channel: "brainboot", ...packet }));
+  const relayPackets = latestRelayPackets(8).map((packet) => ({ channel: "relay", ...packet }));
+  const livePackets = [...brainbootPackets, ...relayPackets]
+    .sort((a, b) => String(b.created_at || b.packet_modified_at || "").localeCompare(String(a.created_at || a.packet_modified_at || "")))
+    .slice(0, 8);
+  const openCount = livePackets.filter((packet) => !String(packet.status || "").includes("COMPLETED") && !String(packet.status || "").includes("BLOCKER")).length;
+  const completedCount = livePackets.filter((packet) => String(packet.status || "").includes("COMPLETED")).length;
+  const blockerCount = livePackets.filter((packet) => String(packet.status || "").includes("BLOCKER")).length;
+  const relayCockpitCards = livePackets.length
+    ? livePackets.map(renderRelayCockpitPacket).join("")
+    : `<article class="live-packet pending"><div class="live-packet-head"><strong>No packets found</strong><span class="pill warn">EMPTY</span></div><div class="live-packet-meta">Dispatch Brainboot or a report packet to start the relay.</div></article>`;
 
   reply.type("text/html").send(`<!doctype html>
 <html lang="en">
@@ -812,6 +856,21 @@ fastify.get("/", async (_request, reply) => {
     .receipt-card .receipt-meta { margin-top: 6px; color: #aab6c3; font-size: 12px; line-height: 1.35; }
     .receipt-card code { color: #d3e8ff; overflow-wrap: anywhere; }
     .release-valve { margin-top: 16px; border: 1px solid #314152; background: #111820; border-radius: 8px; padding: 16px; }
+    .relay-cockpit { margin: 0 0 18px; border: 1px solid #61717f; background: #121820; border-radius: 8px; padding: 18px; }
+    .relay-cockpit h2 { margin: 0 0 8px; font-size: 24px; }
+    .relay-cockpit .summary-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 14px 0; }
+    .relay-cockpit .summary-box { border: 1px solid #2f4050; background: #0d1319; border-radius: 6px; padding: 12px; }
+    .relay-cockpit .summary-box strong { display: block; font-size: 26px; margin-top: 4px; }
+    .relay-cockpit .quick-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 14px; }
+    .relay-cockpit .quick-actions a, .relay-cockpit .quick-actions button { border: 1px solid #61717f; border-radius: 6px; color: #edf2f7; background: #202b36; padding: 10px 12px; font-weight: 800; text-decoration: none; }
+    .live-packet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-top: 12px; }
+    .live-packet { border: 1px solid #2e3d4c; border-left: 5px solid #ffd36c; border-radius: 6px; background: #0d1319; padding: 12px; }
+    .live-packet.complete { border-left-color: #8df0be; }
+    .live-packet.blocker { border-left-color: #ff6b7f; }
+    .live-packet-head { display: flex; justify-content: space-between; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .live-packet-title { margin-top: 8px; color: #d9e4ee; font-weight: 700; }
+    .live-packet-meta { margin-top: 8px; color: #aab6c3; font-size: 12px; line-height: 1.45; }
+    .live-packet code { color: #d3e8ff; overflow-wrap: anywhere; }
     .brainboot { margin: 0 0 18px; border: 1px solid #42607a; background: #121d26; border-radius: 8px; padding: 18px; }
     .brainboot h2 { margin: 0 0 8px; font-size: 20px; }
     .brainboot .rec-text { max-width: 78ch; }
@@ -861,6 +920,25 @@ fastify.get("/", async (_request, reply) => {
   <main>
     <h1>Nerdkle Daemon Health</h1>
     <div class="sub">Live local preview from Doss. This is a command-health surface, not canonical promotion.</div>
+    <section class="relay-cockpit" data-testid="relay-cockpit">
+      <div class="label">Command Dash To Aeye Relay</div>
+      <h2>Momentum Relay</h2>
+      <div class="rec-text">This is the anti-mule surface. Packets are not done when sent. They are done only when the receiver writes RECEIVED and then COMPLETED or BLOCKER.</div>
+      <div class="summary-row">
+        <div class="summary-box"><div class="label">Open / Unacknowledged</div><strong>${openCount}</strong></div>
+        <div class="summary-box"><div class="label">Completed</div><strong>${completedCount}</strong></div>
+        <div class="summary-box"><div class="label">Blockers</div><strong>${blockerCount}</strong></div>
+      </div>
+      <div class="quick-actions">
+        <button type="button" id="dispatch-startup-button" data-testid="dispatch-startup-button">DISPATCH SKYBRO + PETRA STARTUP</button>
+        <a href="/aeye/Skybro.Betsy" target="_blank" rel="noreferrer">Skybro Inbox</a>
+        <a href="/aeye/Petra.Betsy" target="_blank" rel="noreferrer">Petra Inbox</a>
+        <a href="/aeye/Swanson.Doss" target="_blank" rel="noreferrer">Swanson Inbox</a>
+      </div>
+      <div class="live-packet-grid" data-testid="relay-cockpit-packets">
+        ${relayCockpitCards}
+      </div>
+    </section>
     <section class="brainboot" data-testid="brainboot-panel">
       <div class="label">Session Start</div>
       <h2>Nerdkle Brainboot</h2>
@@ -1087,6 +1165,42 @@ fastify.get("/", async (_request, reply) => {
       pollRelayStatus();
     }
 
+    async function dispatchStartupToSkybroPetra() {
+      setWorkbenchStatus("Startup relay dispatch running...", ["Creating Brainboot and source-truth report packets for Skybro/Petra."], null);
+      try {
+        const brainboot = await fetch("/v1/action/brainboot_dispatch", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ targets: ["Skybro.Betsy", "Petra.Betsy"] })
+        });
+        const brainbootResult = await brainboot.json();
+        const reportResults = [];
+        for (const target of ["Skybro.Betsy", "Petra.Betsy"]) {
+          const response = await fetch("/v1/relay/dispatch", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              packet_type: "SOURCE_TRUTH_STARTUP",
+              target,
+              title: "Read Brainboot and Source Truth",
+              body: "Open your standing inbox, read the latest Brainboot/source-truth packet, and return RECEIVED then COMPLETED or BLOCKER. Ben is not the courier.",
+              producer: "CommandDash@Doss",
+              destination: "Aeye Relay"
+            })
+          });
+          reportResults.push(await response.json());
+        }
+        setWorkbenchStatus("Startup relay dispatch returned", [
+          "brainboot: " + (brainbootResult.status || "UNKNOWN"),
+          "reports: " + reportResults.map((item) => item.status || "UNKNOWN").join(", "),
+          "Reloading visible cockpit state..."
+        ], { brainbootResult, reportResults });
+        window.setTimeout(() => window.location.reload(), 900);
+      } catch (error) {
+        setWorkbenchStatus("Startup relay dispatch failed", [error.message], null);
+      }
+    }
+
     function setRatchetStatus(message) {
       document.getElementById("ratchet-status").textContent = message;
     }
@@ -1212,6 +1326,7 @@ fastify.get("/", async (_request, reply) => {
       });
     });
     document.getElementById("relay-dispatch-button").addEventListener("click", dispatchReportPacket);
+    document.getElementById("dispatch-startup-button").addEventListener("click", dispatchStartupToSkybroPetra);
 
     function classifyStreamEvent(event) {
       const status = String(event.status || "").toUpperCase();

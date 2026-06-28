@@ -102,6 +102,21 @@ The UI must show:
 
 If no receiver receipt exists, the packet remains visibly incomplete.
 
+## Command Dash First View
+
+The TinkerDen / ThinkIt command dash must place the relay status before general daemon health.
+
+The first visible relay surface must show:
+
+- open / unacknowledged count
+- completed count
+- blocker count
+- top dispatch button for Skybro + Petra startup
+- standing inbox links
+- latest packet cards with receiver links
+
+This prevents the false impression that "nothing is working" when packets exist but are still waiting for receiver-side proof.
+
 ## V0 Boundary
 
 This is a local file-backed relay and status surface.
