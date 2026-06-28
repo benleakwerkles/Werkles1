@@ -1,0 +1,33 @@
+﻿{
+    "status":  "UNRESOLVED_SHARE_MISSING",
+    "input_path":  "C:\\Users\\Ben Leak\\Desktop\\Nerdkle The Book",
+    "source_machine":  "Betsy",
+    "resolved_path":  null,
+    "candidates":  [
+                       {
+                           "kind":  "standard_aeye_desktop_share",
+                           "path":  "\\\\Betsy\\AeyeDesktop\\Nerdkle The Book",
+                           "exists":  false,
+                           "error":  null
+                       },
+                       {
+                           "kind":  "standard_aeye_desktop_share",
+                           "path":  "\\\\Betsy.local\\AeyeDesktop\\Nerdkle The Book",
+                           "exists":  false,
+                           "error":  null
+                       },
+                       {
+                           "kind":  "diagnostic_admin_share",
+                           "path":  "\\\\Betsy\\C$\\Users\\Ben Leak\\Desktop\\Nerdkle The Book",
+                           "exists":  false,
+                           "error":  null
+                       },
+                       {
+                           "kind":  "diagnostic_admin_share",
+                           "path":  "\\\\Betsy.local\\C$\\Users\\Ben Leak\\Desktop\\Nerdkle The Book",
+                           "exists":  false,
+                           "error":  null
+                       }
+                   ],
+    "rule":  "Desktop paths resolve through \\\\\u003cMachine\u003e\\\\AeyeDesktop\\\\\u003crelative desktop path\u003e; local C: paths do not cross machines."
+}

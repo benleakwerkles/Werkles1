@@ -1,0 +1,58 @@
+{
+  "schema": "aeye_workstation_share_map.v0",
+  "updated_at": "2026-06-28T03:35:00Z",
+  "owner": "Swanson@Doss",
+  "policy": "Desktop folder links are resolved through the AeyeDesktop SMB share on the source machine.",
+  "standard_share_name": "AeyeDesktop",
+  "standard_unc_template": "\\\\{machine}\\AeyeDesktop\\{desktop_relative_path}",
+  "security_boundary": {
+    "network_scope": "LAN private profile only",
+    "anonymous_access": "FORBIDDEN",
+    "public_internet_exposure": "FORBIDDEN",
+    "default_access": "Ben authenticated Windows account"
+  },
+  "machines": {
+    "Doss": {
+      "role": "current machine",
+      "hostnames": [
+        "Doss",
+        "10.1.10.8"
+      ],
+      "local_desktop_path": "C:\\Users\\BenLeak\\Desktop",
+      "standard_share": "\\\\Doss\\AeyeDesktop",
+      "current_status": "BOOTSTRAP_BLOCKED_NEEDS_ELEVATED_SHELL",
+      "evidence": "New-SmbShare returned Windows System Error 5 Access is denied from current non-elevated shell."
+    },
+    "Betsy": {
+      "role": "Aeye workstation",
+      "hostnames": [
+        "Betsy",
+        "Betsy.local"
+      ],
+      "standard_share": "\\\\Betsy\\AeyeDesktop",
+      "current_status": "MACHINE_REACHABLE_SHARE_NOT_PROVEN",
+      "evidence": "SMB port 445 reachable, but net view \\\\Betsy returned Access is denied and AeyeDesktop share was not readable from Doss."
+    },
+    "Sally": {
+      "role": "Aeye workstation",
+      "hostnames": [
+        "Sally",
+        "Sally.local"
+      ],
+      "standard_share": "\\\\Sally\\AeyeDesktop",
+      "current_status": "RECHECK_REQUIRED",
+      "evidence": "No current share bootstrap receipt in this pass."
+    },
+    "Spanzee": {
+      "role": "Aeye workstation",
+      "hostnames": [
+        "Spanzee",
+        "Spanzee.local",
+        "10.1.10.63"
+      ],
+      "standard_share": "\\\\Spanzee\\AeyeDesktop",
+      "current_status": "RECHECK_REQUIRED",
+      "evidence": "Prior memory says LAN ping existed but remote service readiness was not proven; must recheck."
+    }
+  }
+}

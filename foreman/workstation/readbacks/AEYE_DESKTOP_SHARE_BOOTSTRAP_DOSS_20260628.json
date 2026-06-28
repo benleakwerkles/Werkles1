@@ -1,0 +1,11 @@
+﻿{
+    "machine":  "DOSS",
+    "rerun_command":  "powershell -ExecutionPolicy Bypass -File scripts\\foreman\\Enable-AeyeDesktopShare.ps1",
+    "blocker":  "Creating SMB shares requires an elevated PowerShell session.",
+    "desktop_path":  "C:\\Users\\BenLeak\\Desktop",
+    "unc":  "\\\\DOSS\\AeyeDesktop",
+    "created_at":  "2026-06-28T03:29:57.7547887Z",
+    "share_name":  "AeyeDesktop",
+    "receipt_id":  "AEYE_DESKTOP_SHARE_BOOTSTRAP",
+    "status":  "BLOCKED_NEEDS_ELEVATED_SHELL"
+}

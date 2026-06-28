@@ -1,0 +1,95 @@
+﻿{
+    "receipt_id":  "AEYE_WORKSTATION_SHARE_READBACK",
+    "created_at":  "2026-06-28T03:32:54.0892561Z",
+    "source_machine":  "DOSS",
+    "status":  "READBACK_COMPLETE",
+    "results":  [
+                    {
+                        "machine":  "Doss",
+                        "status":  "MACHINE_REACHABLE_SHARE_NOT_PROVEN",
+                        "hosts":  [
+                                      {
+                                          "host":  "Doss",
+                                          "smb_445_open":  true,
+                                          "share_path":  "\\\\Doss\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  null
+                                      },
+                                      {
+                                          "host":  "10.1.10.8",
+                                          "smb_445_open":  true,
+                                          "share_path":  "\\\\10.1.10.8\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  null
+                                      }
+                                  ]
+                    },
+                    {
+                        "machine":  "Betsy",
+                        "status":  "MACHINE_REACHABLE_SHARE_NOT_PROVEN",
+                        "hosts":  [
+                                      {
+                                          "host":  "Betsy",
+                                          "smb_445_open":  true,
+                                          "share_path":  "\\\\Betsy\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  null
+                                      },
+                                      {
+                                          "host":  "Betsy.local",
+                                          "smb_445_open":  true,
+                                          "share_path":  "\\\\Betsy.local\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  null
+                                      }
+                                  ]
+                    },
+                    {
+                        "machine":  "Sally",
+                        "status":  "MACHINE_UNREACHABLE_OR_SMB_CLOSED",
+                        "hosts":  [
+                                      {
+                                          "host":  "Sally",
+                                          "smb_445_open":  false,
+                                          "share_path":  "\\\\Sally\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  null
+                                      },
+                                      {
+                                          "host":  "Sally.local",
+                                          "smb_445_open":  false,
+                                          "share_path":  "\\\\Sally.local\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  "TIMEOUT_AFTER_2s"
+                                      }
+                                  ]
+                    },
+                    {
+                        "machine":  "Spanzee",
+                        "status":  "MACHINE_REACHABLE_SHARE_NOT_PROVEN",
+                        "hosts":  [
+                                      {
+                                          "host":  "Spanzee",
+                                          "smb_445_open":  true,
+                                          "share_path":  "\\\\Spanzee\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  "TIMEOUT_AFTER_2s"
+                                      },
+                                      {
+                                          "host":  "Spanzee.local",
+                                          "smb_445_open":  true,
+                                          "share_path":  "\\\\Spanzee.local\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  "TIMEOUT_AFTER_2s"
+                                      },
+                                      {
+                                          "host":  "10.1.10.63",
+                                          "smb_445_open":  true,
+                                          "share_path":  "\\\\10.1.10.63\\AeyeDesktop",
+                                          "share_exists":  false,
+                                          "share_error":  null
+                                      }
+                                  ]
+                    }
+                ]
+}
