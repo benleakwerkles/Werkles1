@@ -12,6 +12,7 @@ type RelaySnapshot = {
   actionableReturns: JsonRecord | null;
   bookChapters: JsonRecord | null;
   bookCourier: JsonRecord | null;
+  elwood: JsonRecord | null;
 };
 
 type ActionResult = {
@@ -31,7 +32,8 @@ const emptySnapshot: RelaySnapshot = {
   threadBridge: null,
   actionableReturns: null,
   bookChapters: null,
-  bookCourier: null
+  bookCourier: null,
+  elwood: null
 };
 
 function valueAt(source: unknown, path: string[]) {
@@ -191,6 +193,7 @@ type AeyeRosterRow = AeyeRosterEntry & {
   statusTone: string;
   latestPacket: string;
   latestReceipt: string;
+  latestCompletionState: string;
   proofGap: string;
   nextMove: string;
 };
@@ -269,6 +272,8 @@ function statusLabel(status: string) {
   switch (status) {
     case "ROUND_TRIP_PROVEN":
       return "Answered";
+    case "QUEUED_FOR_BRIDGE":
+      return "Queued to send";
     case "HELD_BY_TOPOLOGY":
       return "Retired / held";
     case "LOCAL_CONTROL_THREAD":
@@ -288,6 +293,7 @@ function statusLabel(status: string) {
 
 function statusTone(status: string) {
   if (status === "ROUND_TRIP_PROVEN") return "proven";
+  if (status === "QUEUED_FOR_BRIDGE") return "waiting";
   if (status === "HELD_BY_TOPOLOGY") return "held";
   if (status === "LOCAL_CONTROL_THREAD") return "local";
   if (status === "ALIAS_TO_SWANSON") return "alias";
@@ -296,9 +302,12 @@ function statusTone(status: string) {
   return "unwired";
 }
 
-function nextMoveForStatus(status: string, entry: AeyeRosterEntry) {
+function nextMoveForStatus(status: string, entry: AeyeRosterEntry, latestCompletionState = "") {
   if (entry.statusHint === "retired") return "Do not route new work until the RAM/topology lift receipt exists.";
   if (entry.statusHint === "alias") return "Use Swanson@Doss for this route.";
+  if (status === "QUEUED_FOR_BRIDGE" || latestCompletionState === "QUEUED_FOR_CODEX_THREAD_SEND") {
+    return "Bridge has a packet queued. It has not become receiver proof until the Aeye writes RECEIVED and then COMPLETED or BLOCKER.";
+  }
   if (status === "ROUND_TRIP_PROVEN") return "Callable from ThinkIt. Send the next packet when the work needs this Aeye.";
   if (status === "LOCAL_CONTROL_THREAD") return "This is the local Swanson control lane, not a remote receiver.";
   if (status === "RETURNED_BLOCKER") return "Open the blocker receipt before sending another packet.";
@@ -320,7 +329,8 @@ function buildAeyeRoster(coverage: JsonRecord | null) {
   const addRow = (entry: AeyeRosterEntry) => {
     const coverageRecord = coverageByTarget.get(entry.target) ?? null;
     const coverageStatus = asText(coverageRecord?.coverage, "");
-    const status =
+    const latestCompletionState = asText(coverageRecord?.latest_completion_state, "");
+    let status =
       coverageStatus ||
       (entry.statusHint === "retired"
         ? "HELD_BY_TOPOLOGY"
@@ -329,6 +339,12 @@ function buildAeyeRoster(coverage: JsonRecord | null) {
           : entry.statusHint === "alias"
             ? "ALIAS_TO_SWANSON"
             : "NOT_WIRED");
+    if (latestCompletionState === "QUEUED_FOR_CODEX_THREAD_SEND" && status === "WAITING_FOR_RECEIVER") {
+      status = "QUEUED_FOR_BRIDGE";
+    }
+    if (entry.statusHint === "retired") status = "HELD_BY_TOPOLOGY";
+    if (entry.statusHint === "local") status = "LOCAL_CONTROL_THREAD";
+    if (entry.statusHint === "alias") status = "ALIAS_TO_SWANSON";
     const { aeye, machine } = splitTarget(entry.target);
     seen.add(entry.target);
     rows.push({
@@ -341,8 +357,9 @@ function buildAeyeRoster(coverage: JsonRecord | null) {
       statusTone: statusTone(status),
       latestPacket: asText(coverageRecord?.latest_packet_id, "No packet sent yet"),
       latestReceipt: asText(coverageRecord?.latest_receiver_receipt_id, "No receiver receipt yet"),
+      latestCompletionState,
       proofGap: entry.note ?? asText(coverageRecord?.proof_gap, "No proof gap has been written back yet."),
-      nextMove: nextMoveForStatus(status, entry)
+      nextMove: nextMoveForStatus(status, entry, latestCompletionState)
     });
   };
 
@@ -463,19 +480,20 @@ export default function SwansonRelayControl() {
           };
         }
       };
-      const [contract, coverage, originReturn, threadBridge, actionableReturns, bookChapters, bookCourier, momentumReadback] = await Promise.all([
+      const [contract, coverage, originReturn, threadBridge, actionableReturns, bookChapters, bookCourier, momentumReadback, elwood] = await Promise.all([
         safeRead("/api/thinkit/swanson/thinkit/relay_merge_contract"),
         safeRead("/api/thinkit/swanson/relay/coverage"),
         safeRead("/api/thinkit/swanson/relay/origin_return"),
-        safeRead("/api/thinkit/swanson/relay/thread_bridge/status?limit=12"),
+        safeRead("/api/thinkit/swanson/relay/thread_bridge/status?limit=80"),
         safeRead("/api/thinkit/swanson/relay/actionable_returns"),
         safeRead("/api/thinkit/swanson/book/chapters"),
         safeRead("/api/thinkit/swanson/book/courier_status?limit=12"),
-        safeRead("/api/thinkit/momentum/next_three")
+        safeRead("/api/thinkit/momentum/next_three"),
+        safeRead("/api/thinkit/elwood/status")
       ]);
-      setSnapshot({ contract, coverage, originReturn, threadBridge, actionableReturns, bookChapters, bookCourier });
+      setSnapshot({ contract, coverage, originReturn, threadBridge, actionableReturns, bookChapters, bookCourier, elwood });
       setMomentum(momentumReadback);
-      const blockedReadbacks = [contract, coverage, originReturn, threadBridge, actionableReturns, bookChapters, bookCourier, momentumReadback].filter(
+      const blockedReadbacks = [contract, coverage, originReturn, threadBridge, actionableReturns, bookChapters, bookCourier, momentumReadback, elwood].filter(
         (item) => asText(asRecord(item)?.status, "") === "READBACK_BLOCKED"
       );
       if (blockedReadbacks.length > 0) {
@@ -541,6 +559,7 @@ export default function SwansonRelayControl() {
   const latest = latestReturn ?? directLatestReturn ?? snapshot.originReturn;
   const actuator = valueAt(snapshot.coverage, ["actuator"]) as JsonRecord | null;
   const queued = asArray(valueAt(snapshot.threadBridge, ["queued"]));
+  const sent = asArray(valueAt(snapshot.threadBridge, ["sent"]));
   const blocked = asArray(valueAt(snapshot.threadBridge, ["blocked"]));
   const actionable =
     valueAt(snapshot.actionableReturns, ["actionable_returns", "actionable"]) ??
@@ -596,6 +615,8 @@ export default function SwansonRelayControl() {
   const rosterHeld = rosterRows.filter((row) => row.status === "HELD_BY_TOPOLOGY").length;
   const rosterLocal = rosterRows.filter((row) => row.status === "LOCAL_CONTROL_THREAD" || row.status === "ALIAS_TO_SWANSON").length;
   const rosterUnwired = rosterRows.filter((row) => row.status === "NOT_WIRED").length;
+  const rosterQueued = rosterRows.filter((row) => row.status === "QUEUED_FOR_BRIDGE").length;
+  const rosterWaiting = rosterRows.filter((row) => row.status === "WAITING_FOR_RECEIVER" || row.status === "FILE_INBOX_WAITING").length;
 
   const contractStatus = asText(snapshot.contract?.status, "NO_CONTRACT");
   const relayReady = contractStatus.includes("THINKIT_RELAY_MERGE_READY");
@@ -607,6 +628,9 @@ export default function SwansonRelayControl() {
   const roundTrip = asNumber(coverageSummary?.round_trip_proven ?? valueAt(snapshot.contract, ["current_readback", "coverage_summary", "round_trip_proven"]));
   const targetCount = asNumber(coverageSummary?.target_count ?? valueAt(snapshot.contract, ["current_readback", "coverage_summary", "target_count"]));
   const held = asNumber(coverageSummary?.held ?? valueAt(snapshot.contract, ["current_readback", "coverage_summary", "held"]));
+  const waitingForReceiver = asNumber(coverageSummary?.waiting_for_receiver ?? valueAt(snapshot.contract, ["current_readback", "coverage_summary", "waiting_for_receiver"]));
+  const fileInboxWaiting = asNumber(coverageSummary?.file_inbox_waiting ?? valueAt(snapshot.contract, ["current_readback", "coverage_summary", "file_inbox_waiting"]));
+  const returnedBlocker = asNumber(coverageSummary?.returned_blocker ?? valueAt(snapshot.contract, ["current_readback", "coverage_summary", "returned_blocker"]));
   const bridgeStatus = asText(actuator?.status ?? valueAt(snapshot.threadBridge, ["actuator", "status"]), "UNKNOWN");
   const momentumLanes = useMemo(() => asArray(momentum?.lanes).map((item) => asRecord(item)).filter((item): item is JsonRecord => Boolean(item)), [momentum]);
   const momentumWorkflow = asRecord(momentum?.workflow);
@@ -623,6 +647,12 @@ export default function SwansonRelayControl() {
   const speakerState = asRecord(valueAt(momentum, ["speaker"]));
   const speakerSurfaces = asArray(valueAt(momentum, ["speaker", "surfaces"])).map((item) => asRecord(item)).filter((item): item is JsonRecord => Boolean(item));
   const recentMomentumDecisions = asArray(momentum?.recent_decisions).map((item) => asRecord(item)).filter((item): item is JsonRecord => Boolean(item));
+  const elwoodStatus = asRecord(snapshot.elwood);
+  const elwoodRelay = asRecord(elwoodStatus?.relay);
+  const elwoodCoordinates = asRecord(elwoodStatus?.current_coordinates);
+  const elwoodPaths = asRecord(elwoodStatus?.output_paths);
+  const elwoodHashes = asRecord(elwoodStatus?.hashes);
+  const elwoodProofGaps = asArray(elwoodStatus?.proof_gaps).map((item) => asText(item, "")).filter(Boolean);
   const latestPacket = asText(latest?.packet_id ?? latest?.relay_id, "NO_RETURN_YET");
   const latestTarget = asText(latest?.target ?? latest?.destination_label, "UNKNOWN_TARGET");
   const latestStatus = asText(latest?.packet_status ?? latest?.answer_status ?? latest?.origin_readback_status ?? latest?.status, "UNKNOWN_STATUS");
@@ -1159,13 +1189,15 @@ export default function SwansonRelayControl() {
           }}
         >
           <span>Round-trip proof</span>
-          <strong>{roundTrip}/{targetCount || "?"}</strong>
-          <small>{held} held target(s) / open full Aeye map</small>
+          <strong>{roundTrip} completed</strong>
+          <small>
+            {waitingForReceiver} waiting / {queued.length} queued / {targetCount || "?"} mapped
+          </small>
         </button>
         <button type="button" className="thinkit-relay__metric-card" onClick={() => scrollToDashboardSection("thinkit-thread-bridge-panel")}>
           <span>Thread bridge</span>
           <strong>{bridgeStatus}</strong>
-          <small>{queued.length} queued / {blocked.length} blocked / open send lane</small>
+          <small>{queued.length} queued / {sent.length} sent / {blocked.length} blocked</small>
         </button>
         <button type="button" className="thinkit-relay__metric-card" onClick={() => scrollToDashboardSection("thinkit-latest-return")}>
           <span>Latest return</span>
@@ -1177,7 +1209,79 @@ export default function SwansonRelayControl() {
           <strong>{actionables.length}</strong>
           <small>decisions available / open decision cards</small>
         </button>
+        <button type="button" className="thinkit-relay__metric-card" onClick={() => scrollToDashboardSection("thinkit-elwood-status")}>
+          <span>Elwood status</span>
+          <strong>{asText(elwoodStatus?.status, "NO_STATUS").replace("ELWOOD_THINKIT_", "")}</strong>
+          <small>paper trail for Aeye Brainboot</small>
+        </button>
       </div>
+
+      <section id="thinkit-elwood-status" className="thinkit-relay__elwood" aria-label="Elwood ThinkIt status paper trail">
+        <header>
+          <div>
+            <p className="td-bridge__eyebrow">Elwood / faceless Operator clerk</p>
+            <h3>ThinkIt is leaving a paper trail now.</h3>
+            <p>
+              Elwood does not decide or pretend to be an Aeye. It writes ThinkIt status, Brainboot context, and proof gaps to files that Skybro and Petra can read
+              without Ben re-teaching the project state.
+            </p>
+          </div>
+          <span>{asText(elwoodStatus?.status, "NO_ELWOOD_READBACK")}</span>
+        </header>
+        <dl className="thinkit-relay__elwood-grid">
+          <div>
+            <dt>Active book focus</dt>
+            <dd>{asText(elwoodCoordinates?.active_book_focus, "No book focus read back yet.")}</dd>
+          </div>
+          <div>
+            <dt>Active code focus</dt>
+            <dd>{asText(elwoodCoordinates?.active_code_focus, "No code focus read back yet.")}</dd>
+          </div>
+          <div>
+            <dt>Relay reality</dt>
+            <dd>
+              {asNumber(elwoodRelay?.round_trip_proven)}/{asNumber(elwoodRelay?.target_count)} completed, {asNumber(elwoodRelay?.queued_for_bridge)} queued,{" "}
+              {asNumber(elwoodRelay?.sent_to_thread)} sent, {asNumber(elwoodRelay?.waiting_for_receiver)} waiting for proof.
+            </dd>
+          </div>
+          <div>
+            <dt>Bridge</dt>
+            <dd>
+              {asText(elwoodRelay?.bridge_status, "UNKNOWN")} / {asText(elwoodRelay?.bridge_schedule, "UNKNOWN_SCHEDULE")}
+            </dd>
+          </div>
+        </dl>
+        <div className="thinkit-relay__elwood-files">
+          <article>
+            <strong>Repo status</strong>
+            <code>{asText(elwoodPaths?.repo_markdown, "No repo status file written yet.")}</code>
+          </article>
+          <article>
+            <strong>Speaker mirror</strong>
+            <code>{asText(elwoodPaths?.speaker_markdown, "No Speaker status mirror written yet.")}</code>
+          </article>
+          <article>
+            <strong>Brainboot anchor</strong>
+            <code>{asText(elwoodPaths?.speaker_brainboot, "No Brainboot anchor written yet.")}</code>
+          </article>
+          <article>
+            <strong>Status hash</strong>
+            <code>{asText(elwoodHashes?.repo_json_sha256, "No hash read back yet.")}</code>
+          </article>
+        </div>
+        <div className="thinkit-relay__elwood-gaps">
+          <strong>Current proof gaps</strong>
+          {elwoodProofGaps.length > 0 ? (
+            <ul>
+              {elwoodProofGaps.map((gap) => (
+                <li key={gap}>{gap}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No Elwood proof gaps read back yet.</p>
+          )}
+        </div>
+      </section>
 
       <section id="thinkit-next-three-projects" className="thinkit-relay__next-three" aria-label="Next Three Projects">
         <header>
@@ -1579,8 +1683,9 @@ export default function SwansonRelayControl() {
             <div>
               <h3>Round-trip proof map</h3>
               <p>
-                The <strong>{targetCount || 0}</strong> relay targets are only the currently wired coverage list. This roster maps the wider known helper mesh
-                and marks what actually answered, what is local-only, what is retired, and what still needs a receiver surface.
+                <strong>{roundTrip}</strong> completed round trip(s) means receiver-side COMPLETED proof came back to ThinkIt.{" "}
+                <strong>{waitingForReceiver}</strong> waiting target(s) means packets exist but the answer is not back yet. This map separates queued, waiting,
+                retired, local-only, and unwired so a zero never looks like a ghost story.
               </p>
             </div>
             <dl className="thinkit-relay__coverage-summary">
@@ -1589,8 +1694,16 @@ export default function SwansonRelayControl() {
                 <dd>{rosterRows.length}</dd>
               </div>
               <div>
-                <dt>Answered</dt>
+                <dt>Completed</dt>
                 <dd>{rosterAnswered}</dd>
+              </div>
+              <div>
+                <dt>Queued</dt>
+                <dd>{rosterQueued}</dd>
+              </div>
+              <div>
+                <dt>Waiting</dt>
+                <dd>{rosterWaiting}</dd>
               </div>
               <div>
                 <dt>Held / retired</dt>
@@ -1609,7 +1722,7 @@ export default function SwansonRelayControl() {
                 <header>
                   <h4>{machine}</h4>
                   <span>
-                    {rows.filter((row) => row.status === "ROUND_TRIP_PROVEN").length}/{rows.length} answered
+                    {rows.filter((row) => row.status === "ROUND_TRIP_PROVEN").length} done / {rows.filter((row) => row.status === "QUEUED_FOR_BRIDGE").length} queued
                   </span>
                 </header>
                 <div className="thinkit-relay__roster-list">
@@ -1643,6 +1756,10 @@ export default function SwansonRelayControl() {
                           <div>
                             <dt>Last response</dt>
                             <dd>{row.latestReceipt}</dd>
+                          </div>
+                          <div>
+                            <dt>Bridge state</dt>
+                            <dd>{row.latestCompletionState || row.status}</dd>
                           </div>
                           <div>
                             <dt>Last packet</dt>
@@ -1684,7 +1801,8 @@ export default function SwansonRelayControl() {
           </div>
 
           <p className="thinkit-relay__coverage-note">
-            Local-only and alias rows are counted separately from missing receivers. They are real topology facts, but not proof that a separate Aeye chat answered.
+            Backend coverage right now: {roundTrip}/{targetCount || "?"} completed, {waitingForReceiver} waiting, {fileInboxWaiting} file-inbox waiting,{" "}
+            {returnedBlocker} blockers, {held} backend-held. Local-only and alias rows are real topology facts, but not proof that a separate Aeye chat answered.
             Current local/alias count: {rosterLocal}.
           </p>
         </section>

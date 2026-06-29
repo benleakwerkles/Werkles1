@@ -2493,11 +2493,12 @@ main .proof-warning.proof-boundary .workshop-band {
 
 .thinkit-relay__metrics {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 10px;
 }
 
 .thinkit-relay__metric-card,
+.thinkit-relay__elwood,
 .thinkit-relay__next-three,
 .thinkit-relay__coverage,
 .thinkit-relay__book,
@@ -2552,6 +2553,85 @@ main .proof-warning.proof-boundary .workshop-band {
   gap: 14px;
   border-color: rgba(2, 145, 126, 0.24);
   background: rgba(255, 253, 248, 0.9);
+}
+
+.thinkit-relay__elwood {
+  display: grid;
+  gap: 12px;
+  border-color: rgba(96, 73, 141, 0.22);
+  background: rgba(250, 248, 255, 0.82);
+}
+
+.thinkit-relay__elwood > header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.thinkit-relay__elwood h3 {
+  margin: 0;
+  color: #211a16;
+}
+
+.thinkit-relay__elwood p {
+  margin: 6px 0 0;
+  color: #4d3e32;
+  line-height: 1.5;
+}
+
+.thinkit-relay__elwood > header > span {
+  border: 1px solid rgba(96, 73, 141, 0.28);
+  border-radius: 999px;
+  background: rgba(96, 73, 141, 0.11);
+  padding: 5px 9px;
+  color: #4d3674;
+  font-size: 0.7rem;
+  font-weight: 950;
+}
+
+.thinkit-relay__elwood-grid,
+.thinkit-relay__elwood-files {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.thinkit-relay__elwood-grid > div,
+.thinkit-relay__elwood-files article,
+.thinkit-relay__elwood-gaps {
+  min-width: 0;
+  border: 1px solid rgba(96, 73, 141, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 10px;
+}
+
+.thinkit-relay__elwood-grid dt,
+.thinkit-relay__elwood-files strong,
+.thinkit-relay__elwood-gaps strong {
+  display: block;
+  color: #4d3674;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.thinkit-relay__elwood-grid dd,
+.thinkit-relay__elwood-files code,
+.thinkit-relay__elwood-gaps li,
+.thinkit-relay__elwood-gaps p {
+  margin: 4px 0 0;
+  color: #211a16;
+  font-size: 0.78rem;
+  line-height: 1.42;
+  overflow-wrap: anywhere;
+}
+
+.thinkit-relay__elwood-gaps ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
 }
 
 .thinkit-relay__next-three > header,
@@ -3822,6 +3902,8 @@ main .proof-warning.proof-boundary .workshop-band {
   .thinkit-relay__incoming-grid,
   .thinkit-relay__incoming-buttons,
   .thinkit-relay__momentum-layout,
+  .thinkit-relay__elwood-grid,
+  .thinkit-relay__elwood-files,
   .thinkit-relay__lane-tabs,
   .thinkit-relay__momentum-flow,
   .thinkit-relay__momentum-card dl,

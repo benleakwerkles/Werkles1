@@ -1,0 +1,168 @@
+{
+  "status": "ELWOOD_THINKIT_STATUS_READY",
+  "status_id": "ELWOOD_THINKIT_STATUS_1782708797711_55219BB8",
+  "generated_at": "2026-06-29T04:53:17.711Z",
+  "source": "ThinkIt deterministic Elwood status exporter",
+  "current_coordinates": {
+    "active_book_focus": "Foreword copy",
+    "active_code_focus": "ThinkIt relay, Elwood status mirrors, Doozer/reviewer momentum loop, and round-trip proof clarity.",
+    "active_project_lane": "Oddly Godly on Spanzee",
+    "active_project_question": "Oddly Godly on Spanzee: what can run on AUTO G, and what still needs a leash?",
+    "thinkit_last_known_location": "http://10.1.10.8:3342/thinkit",
+    "book_source_truth": "https://github.com/benleakwerkles/Werkles1/tree/main/source-truth-plan/references/betsy_desktop_nerdkle_the_book"
+  },
+  "workflow": {
+    "builder_team_name": "Doozers",
+    "builder_team_note": "The Fraggle Rock builders are the Doozers. Here, Doozers means the cowork/build lane: Maker, Dink, and Ender when Ender is cutting, filtering, or shaping work.",
+    "doozer_targets": [
+      "Maker.Betsy",
+      "Dink.Betsy",
+      "Ender.Betsy"
+    ],
+    "review_team_name": "Reviewer cousins",
+    "review_team_note": "Reviewers do not build first. They sign off, catch drift, name missing proof, kill weak ideas, or ask for a sharper packet.",
+    "review_targets": [
+      "Ender.Doss",
+      "Bean.Spanzee",
+      "Thufir.Sally",
+      "Skybro.Betsy"
+    ],
+    "thinkit_job": "ThinkIt routes the packet, records the decision, shows who answered, and refuses to call SENT success.",
+    "perfect_loop": [
+      "Ben picks a project lane.",
+      "Doozers propose the next concrete build move.",
+      "Reviewers sign off, modify, or kill the proposal.",
+      "ThinkIt dispatches the chosen work and waits for receiver proof.",
+      "Speaker/Brainboot records what changed so the next session starts from shared reality."
+    ]
+  },
+  "relay": {
+    "target_count": 15,
+    "round_trip_proven": 3,
+    "waiting_for_receiver": 11,
+    "file_inbox_waiting": 0,
+    "returned_blocker": 0,
+    "held": 0,
+    "local_only": 1,
+    "queued_for_bridge": 13,
+    "sent_to_thread": 52,
+    "blocked": 0,
+    "bridge_status": "ACTIVE",
+    "bridge_schedule": "FREQ=MINUTELY;INTERVAL=30",
+    "latest_return_status": "COMPLETED",
+    "latest_return_packet": "UNIVERSAL_OPERATOR_MESSAGE_ENDER.SPANZEE_20260629042941_9C8B4670"
+  },
+  "book": {
+    "chapter_count": 71,
+    "completed_chapter_count": 4,
+    "active_packet_count": 0,
+    "next_unsent_chapter": "Foreword copy",
+    "next_uncompleted_chapter": "Foreword copy",
+    "source_repo_url": "https://github.com/benleakwerkles/Werkles1/tree/main/source-truth-plan/references/betsy_desktop_nerdkle_the_book"
+  },
+  "recent_decisions": [
+    {
+      "decision_id": "NEXT_THREE_1782707754241_73b9a9",
+      "created_at": "2026-06-29T04:35:54.241Z",
+      "lane_id": "oddly_godly",
+      "project": "Oddly Godly on Spanzee",
+      "move_id": "oddly_godly_001_spanzee_route",
+      "move_title": "Map the Spanzee route before pretending AUTO G exists.",
+      "choice": "KILL",
+      "operator_note": "Cool. Move this forward with receiver-side proof, or return the exact blocker.",
+      "target": "Bean.Spanzee",
+      "packet_type": "ODDLY_GODLY_SPANZEE_ROUTE",
+      "proof_required": "Receiver thread, command path, source folder/repo, response path, and blocker list.",
+      "source_state_path": "C:\\wt\\stbook\\data\\thinkit\\next_three_projects.json"
+    },
+    {
+      "decision_id": "NEXT_THREE_1782707744651_5cb36a",
+      "created_at": "2026-06-29T04:35:44.652Z",
+      "lane_id": "oddly_godly",
+      "project": "Oddly Godly on Spanzee",
+      "move_id": "oddly_godly_002_first_packet",
+      "move_title": "Write the first Oddly Godly work packet like a Bird.",
+      "choice": "KILL",
+      "operator_note": "Cool. Move this forward with receiver-side proof, or return the exact blocker.",
+      "target": "Maker.Betsy",
+      "packet_type": "ODDLY_GODLY_FIRST_BIRD",
+      "proof_required": "Packet draft plus destination proof or explicit blocker.",
+      "source_state_path": "C:\\wt\\stbook\\data\\thinkit\\next_three_projects.json"
+    },
+    {
+      "decision_id": "NEXT_THREE_1782707729546_90ffa5",
+      "created_at": "2026-06-29T04:35:29.547Z",
+      "lane_id": "oddly_godly",
+      "project": "Oddly Godly on Spanzee",
+      "move_id": "oddly_godly_003_auto_g_boundary",
+      "move_title": "Define the Oddly Godly AUTO G stop rules.",
+      "choice": "ACCEPT",
+      "operator_note": "Cool. Move this forward with receiver-side proof, or return the exact blocker.",
+      "target": "Thufir.Sally",
+      "packet_type": "ODDLY_GODLY_AUTO_G_BOUNDARY",
+      "proof_required": "GO checklist, stop conditions, proof cadence, and human gate trigger.",
+      "source_state_path": "C:\\wt\\stbook\\data\\thinkit\\next_three_projects.json"
+    },
+    {
+      "decision_id": "NEXT_THREE_1782707685328_0c6ef3",
+      "created_at": "2026-06-29T04:34:45.328Z",
+      "lane_id": "oddly_godly",
+      "project": "Oddly Godly on Spanzee",
+      "move_id": "oddly_godly_001_spanzee_route",
+      "move_title": "Map the Spanzee route before pretending AUTO G exists.",
+      "choice": "MODIFY",
+      "operator_note": "Cool. Move this forward with receiver-side proof, or return the exact blocker.",
+      "target": "Bean.Spanzee",
+      "packet_type": "ODDLY_GODLY_SPANZEE_ROUTE",
+      "proof_required": "Receiver thread, command path, source folder/repo, response path, and blocker list.",
+      "source_state_path": "C:\\wt\\stbook\\data\\thinkit\\next_three_projects.json"
+    },
+    {
+      "decision_id": "NEXT_THREE_1782706193274_d75ef5",
+      "created_at": "2026-06-29T04:09:53.274Z",
+      "lane_id": "kind_sir",
+      "project": "Kind Sir",
+      "move_id": "kind_sir_003_next_revenue_move",
+      "move_title": "Name the next useful revenue/clarity move.",
+      "choice": "ACCEPT",
+      "operator_note": "Cool. Move this forward with receiver-side proof, or return the exact blocker.\n",
+      "target": "Skybro.Betsy",
+      "packet_type": "KIND_SIR_NEXT_REVENUE_MOVE",
+      "proof_required": "Three candidates, one recommendation, one test Ben can accept or reject.",
+      "source_state_path": "C:\\wt\\stbook\\data\\thinkit\\next_three_projects.json"
+    },
+    {
+      "decision_id": "NEXT_THREE_1782706043828_50eaac",
+      "created_at": "2026-06-29T04:07:23.829Z",
+      "lane_id": "oddly_godly",
+      "project": "Oddly Godly on Spanzee",
+      "move_id": "oddly_godly_001_spanzee_route",
+      "move_title": "Map the Spanzee command route before AUTO G.",
+      "choice": "ACCEPT",
+      "operator_note": "Cool. Move this forward with receiver-side proof, or return the exact blocker.\n",
+      "target": "Petra.Betsy",
+      "packet_type": "ODDLY_GODLY_SPANZEE_ROUTE_MAP",
+      "proof_required": "Receiver path or BLOCKER, command path or BLOCKER, and whether Ben is required.",
+      "source_state_path": "C:\\wt\\stbook\\data\\thinkit\\next_three_projects.json"
+    }
+  ],
+  "proof_gaps": [
+    "13 packet(s) are queued for the Codex thread bridge; queued is not delivery.",
+    "11 target(s) are waiting for receiver-side proof."
+  ],
+  "raw_readback": {
+    "coverage_status": "AEYE_RELAY_COVERAGE_STATUS",
+    "thread_bridge_status": "THREAD_BRIDGE_STATUS",
+    "book_courier_status": "BOOK_COURIER_STATUS",
+    "origin_return_status": "ORIGIN_DASH_RETURN_READBACK"
+  },
+  "output_paths": {
+    "repo_json": "C:\\wt\\stbook\\data\\thinkit\\elwood_status.json",
+    "repo_markdown": "C:\\wt\\stbook\\data\\thinkit\\thinkit_status.md",
+    "repo_log": "C:\\wt\\stbook\\data\\thinkit\\thinkit_status.log",
+    "repo_brainboot": "C:\\wt\\stbook\\data\\thinkit\\brainboot.md",
+    "speaker_markdown": "C:\\speaker\\bootloader\\templates\\THINKIT_STATUS.md",
+    "speaker_json": "C:\\speaker\\bootloader\\templates\\ELWOOD_THINKIT_STATUS.json",
+    "speaker_brainboot": "C:\\speaker\\brainboot\\brainboot.md"
+  }
+}

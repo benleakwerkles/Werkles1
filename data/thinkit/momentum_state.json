@@ -1,23 +1,33 @@
 {
   "schema": "thinkit_momentum_state_v1",
-  "updated_at": "2026-06-29T04:20:00.000Z",
-  "note": "Next Three now uses the Doozer proposal / reviewer sign-off loop.",
+  "updated_at": "2026-06-29T04:33:46.070Z",
+  "note": "Cool. Move this forward with receiver-side proof, or return the exact blocker.",
   "source_state_path": "C:\\wt\\stbook\\data\\thinkit\\next_three_projects.json",
   "decisions_path": "C:\\wt\\stbook\\data\\thinkit\\next_three_decisions.jsonl",
   "speaker_root": "C:\\speaker",
   "workflow": {
     "builder_team_name": "Doozers",
+    "builder_team_note": "The Fraggle Rock builders are the Doozers. Here, Doozers means the cowork/build lane: Maker, Dink, and Ender when Ender is cutting, filtering, or shaping work.",
     "doozer_targets": [
       "Maker.Betsy",
       "Dink.Betsy",
       "Ender.Betsy"
     ],
     "review_team_name": "Reviewer cousins",
+    "review_team_note": "Reviewers do not build first. They sign off, catch drift, name missing proof, kill weak ideas, or ask for a sharper packet.",
     "review_targets": [
       "Ender.Doss",
       "Bean.Spanzee",
       "Thufir.Sally",
       "Skybro.Betsy"
+    ],
+    "thinkit_job": "ThinkIt routes the packet, records the decision, shows who answered, and refuses to call SENT success.",
+    "perfect_loop": [
+      "Ben picks a project lane.",
+      "Doozers propose the next concrete build move.",
+      "Reviewers sign off, modify, or kill the proposal.",
+      "ThinkIt dispatches the chosen work and waits for receiver proof.",
+      "Speaker/Brainboot records what changed so the next session starts from shared reality."
     ]
   },
   "lane_count": 4
