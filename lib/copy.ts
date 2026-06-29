@@ -14,7 +14,7 @@ export const copy = {
     subhead:
       "A private floor for Builders, Operators, Backers, Connectors, and Sparks looking for serious fit, not guru fog.",
     brandPromise: "Create with trust. Build to thrive.",
-    primaryCta: "Enter the Foundry",
+    primaryCta: "Start discovery",
     secondaryCta: "See how it works",
     trustLine: "Proof signals. Private knocks. No public shouting into the void."
   },

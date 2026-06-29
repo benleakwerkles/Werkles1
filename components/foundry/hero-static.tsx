@@ -12,7 +12,7 @@ export function HeroStatic() {
         <p>{copy.hero.subhead}</p>
         <p className="hero-promise">{copy.hero.brandPromise}</p>
         <div className="hero-actions">
-          <Link className="button button-light" href="/signup">{copy.hero.primaryCta}</Link>
+          <Link className="button button-light" href="/discovery">{copy.hero.primaryCta}</Link>
           <Link className="button button-ghost" href="#how">{copy.hero.secondaryCta}</Link>
         </div>
         <p className="hero-trust">{copy.hero.trustLine}</p>

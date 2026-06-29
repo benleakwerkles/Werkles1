@@ -18,7 +18,7 @@ export function SiteHeader() {
         <Link href="/login">Login</Link>
         <Link href="/#beta">Beta</Link>
       </nav>
-      <Link className="header-cta" href="/signup">{copy.hero.primaryCta}</Link>
+      <Link className="header-cta" href="/discovery">{copy.hero.primaryCta}</Link>
     </header>
   );
 }
