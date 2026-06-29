@@ -205,6 +205,18 @@ const expectedAeyeRoster: AeyeRosterEntry[] = [
   },
   { target: "Bean.Spanzee", role: "Red-team audit and contradiction finding" },
   { target: "Computer.Spanzee", role: "Spanzee machine-side execution and receiver proof" },
+  {
+    target: "Ender.Betsy",
+    role: "Book filtration, cut-list, controlled forgetting",
+    statusHint: "unwired",
+    note: "Ender is only retired on Sally. This route needs a receiver thread before ThinkIt can send work here."
+  },
+  {
+    target: "Ender.Doss",
+    role: "Local filtration/editing candidate",
+    statusHint: "unwired",
+    note: "Potential Doss-side Ender route. Needs a receiver surface before routing work."
+  },
   { target: "Thufir.Sally", role: "Validation, adversarial review, proof discipline" },
   {
     target: "Ender.Sally",
@@ -229,6 +241,12 @@ const expectedAeyeRoster: AeyeRosterEntry[] = [
     role: "Bean route if Sally has capacity",
     statusHint: "unwired",
     note: "Known topology name. Held until Sally capacity/routing is explicit."
+  },
+  {
+    target: "Ender.Spanzee",
+    role: "Spanzee-side filtration/editing candidate",
+    statusHint: "unwired",
+    note: "Potential Ender route. Needs a receiver surface before routing work."
   }
 ];
 
@@ -348,6 +366,20 @@ function summarizePackets(value: unknown) {
     .join(", ");
 }
 
+function isRouteHeld(status: string) {
+  return status === "HELD_BY_TOPOLOGY" || status === "LOCAL_CONTROL_THREAD" || status === "ALIAS_TO_SWANSON";
+}
+
+function isRoutableReceiver(receiver: JsonRecord | null, row?: AeyeRosterRow) {
+  if (row && isRouteHeld(row.status)) return false;
+  return asText(receiver?.relay_mode, "") === "CODEX_THREAD_BRIDGE";
+}
+
+function scrollToDashboardSection(id: string) {
+  if (typeof document === "undefined") return;
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 async function readJson(endpoint: string): Promise<JsonRecord> {
   const response = await fetch(endpoint, { cache: "no-store" });
   const result = (await response.json()) as JsonRecord;
@@ -384,6 +416,14 @@ export default function SwansonRelayControl() {
     "Edit this chapter from source truth. Return access gaps, continuity issues, a recommended edit, and any cousin-editor packets you need ThinkIt to route next."
   );
   const [selectedBookReportId, setSelectedBookReportId] = useState("");
+  const [threadScope, setThreadScope] = useState("main receiver lane");
+  const [universalBody, setUniversalBody] = useState(
+    "Return one useful status delta: what you received, what changed on your side, what is blocked, and what ThinkIt should decide next."
+  );
+  const [enderTarget, setEnderTarget] = useState("Ender.Betsy");
+  const [enderInstruction, setEnderInstruction] = useState(
+    "Filter this returned chapter report for what should be cut, parked, or preserved. Return a concise edit/factoring recommendation with proof gaps."
+  );
 
   async function refresh(reason = "Relay state refreshed") {
     setLoading(true);
@@ -517,6 +557,22 @@ export default function SwansonRelayControl() {
   const bookSourceUrl = asText(valueAt(snapshot.bookCourier, ["source_repo_url"]) ?? valueAt(snapshot.bookChapters, ["source_repo_url"]), "No source URL read back yet.");
   const nextUnsentTitle = asText(nextUnsentChapter?.title, "No next unsent chapter read back yet.");
   const nextUncompletedTitle = asText(nextUncompletedChapter?.title, "No next unfinished chapter read back yet.");
+  const latestActionable = asRecord(actionables.find((item) => asText(asRecord(item)?.packet_id, "") === latestPacket));
+  const latestChange = humanizeTargetText(
+    latestActionable?.advanced ?? latest?.advanced,
+    latestTarget,
+    "No organism-change summary has been returned yet."
+  );
+  const latestDecisionHelp = humanizeTargetText(
+    latestActionable?.helps_decide ?? latest?.helps_decide,
+    latestTarget,
+    "No decision question has been attached yet."
+  );
+  const connectedRelayRows = rosterRows.filter((row) => isRoutableReceiver(findReceiver(snapshot.threadBridge, row.target), row));
+  const enderRows = rosterRows.filter((row) => row.aeye === "Ender");
+  const selectedEnderRow = rosterRows.find((row) => row.target === enderTarget) ?? null;
+  const selectedEnderReceiver = findReceiver(snapshot.threadBridge, enderTarget);
+  const selectedEnderCanRoute = isRoutableReceiver(selectedEnderReceiver, selectedEnderRow ?? undefined);
   const defaultBookReportId = asText(bookReturnRecords[0]?.packet_id, "");
   const selectedBookReport =
     bookReturnRecords.find((record) => asText(record.packet_id, "") === selectedBookReportId) ?? bookReturnRecords[0] ?? null;
@@ -574,7 +630,11 @@ export default function SwansonRelayControl() {
       packet_type: packetType,
       target: destination,
       title,
-      body: selectedBookFollowupBody(instruction)
+      body: [
+        `Thread scope: ${threadScope}`,
+        "",
+        selectedBookFollowupBody(instruction)
+      ].join("\n")
     });
   }
 
@@ -587,6 +647,128 @@ export default function SwansonRelayControl() {
       advanced: `Book workbench decision for ${selectedBookReportChapter}.`,
       helps_decide: "What should happen next with this returned chapter report?"
     });
+  }
+
+  function selectReportAndOpenWorkbench(packetId: string) {
+    setSelectedBookReportId(packetId);
+    window.setTimeout(() => scrollToDashboardSection("thinkit-chapter-workbench"), 0);
+  }
+
+  function recordActionableRecordDecision(record: JsonRecord, choice: string) {
+    const itemTarget = asText(record.target, "UNKNOWN_TARGET");
+    return runAction(`Decision: ${humanLabel(choice)}`, "/api/thinkit/swanson/relay/actionable_decision", {
+      choice,
+      target: itemTarget,
+      source_packet_id: asText(record.packet_id, ""),
+      receiver_receipt_id: asText(record.receiver_receipt_id, ""),
+      advanced: asText(record.advanced, ""),
+      helps_decide: asText(record.helps_decide, "")
+    });
+  }
+
+  function pingAeye(row: AeyeRosterRow) {
+    const receiver = findReceiver(snapshot.threadBridge, row.target);
+    if (!isRoutableReceiver(receiver, row)) {
+      return requestReceiverSetup(row.target);
+    }
+    return runAction(`Ping ${humanTargetName(row.target)}`, "/api/thinkit/swanson/relay/dispatch", {
+      packet_type: "THINKIT_TARGET_PING",
+      target: row.target,
+      title: `ThinkIt ping: ${humanTargetName(row.target)}`,
+      body: [
+        "MISSION: Prove this receiver lane is alive and visible to ThinkIt.",
+        "",
+        `Receiver lane: ${receiverTitle(snapshot.threadBridge, row.target)}`,
+        `Thread scope: ${threadScope}`,
+        "",
+        "Return RECEIVED, then COMPLETED or BLOCKER.",
+        "Include whether this Aeye is available for book, architecture, relay, or editing work.",
+        "Do not call SENT success."
+      ].join("\n")
+    });
+  }
+
+  function requestReceiverSetup(targetToConnect: string) {
+    return runAction(`Request setup for ${humanTargetName(targetToConnect)}`, "/api/thinkit/swanson/relay/dispatch", {
+      packet_type: "RECEIVER_SETUP_REQUEST",
+      target: "Petra.Betsy",
+      title: `Receiver setup needed: ${humanTargetName(targetToConnect)}`,
+      body: [
+        "MISSION: Create or identify the missing receiver surface so ThinkIt can route packets without Ben as courier.",
+        "",
+        `Requested receiver: ${humanTargetName(targetToConnect)}`,
+        `Raw target: ${targetToConnect}`,
+        "",
+        "Current proof boundary:",
+        "ThinkIt cannot ping an unwired Aeye directly. This packet asks the routing owner to create/bind the receiver thread or mark the target held.",
+        "",
+        "Return:",
+        "1. RECEIVED.",
+        "2. COMPLETED with receiver title and binding proof, or BLOCKER with exact missing access/thread.",
+        "3. Do not call SENT success."
+      ].join("\n")
+    });
+  }
+
+  async function sendUniversalMessage() {
+    const targets = connectedRelayRows.map((row) => row.target);
+    setActionPending("Send Universal Message");
+    setError(null);
+    const results: JsonRecord[] = [];
+    try {
+      for (const destination of targets) {
+        const { statusCode, result } = await postJson("/api/thinkit/swanson/relay/dispatch", {
+          packet_type: "UNIVERSAL_OPERATOR_MESSAGE",
+          target: destination,
+          title: `Universal ThinkIt message: ${threadScope}`,
+          body: [
+            "MISSION: Receive this universal ThinkIt message and answer with a receiver-side status delta.",
+            "",
+            `Receiver: ${humanTargetName(destination)}`,
+            `Thread scope: ${threadScope}`,
+            "",
+            "Operator message:",
+            universalBody,
+            "",
+            "Return:",
+            "1. RECEIVED.",
+            "2. COMPLETED with what changed, what is blocked, and what ThinkIt should decide next, or BLOCKER with exact missing proof.",
+            "3. Do not call SENT success."
+          ].join("\n")
+        });
+        results.push({ target: destination, statusCode, result });
+      }
+      const ok = results.every((item) => asNumber(item.statusCode) >= 200 && asNumber(item.statusCode) < 300);
+      setLastAction({
+        label: "Send Universal Message",
+        endpoint: "POST /v1/relay/dispatch per connected target",
+        timestamp: new Date().toISOString(),
+        ok,
+        statusCode: ok ? 201 : 207,
+        result: {
+          status: ok ? "UNIVERSAL_MESSAGE_QUEUED" : "UNIVERSAL_MESSAGE_PARTIAL",
+          target_count: targets.length,
+          targets,
+          results,
+          proof_boundary: "Queued is not delivery. Each target still needs RECEIVED then COMPLETED or BLOCKER."
+        }
+      });
+      await refresh("Universal message dispatched");
+    } catch (actionError) {
+      const message = actionError instanceof Error ? actionError.message : "Universal dispatch failed";
+      setLastAction({
+        label: "Send Universal Message",
+        endpoint: "POST /v1/relay/dispatch per connected target",
+        timestamp: new Date().toISOString(),
+        ok: false,
+        statusCode: 0,
+        result: { targets, results },
+        error: message
+      });
+      setError(message);
+    } finally {
+      setActionPending(null);
+    }
   }
 
   return (
@@ -609,28 +791,84 @@ export default function SwansonRelayControl() {
           className="thinkit-relay__metric-card"
           aria-expanded={roundTripOpen}
           aria-controls="thinkit-round-trip-proof-map"
-          onClick={() => setRoundTripOpen((current) => !current)}
+          onClick={() => {
+            setRoundTripOpen(true);
+            window.setTimeout(() => scrollToDashboardSection("thinkit-round-trip-proof-map"), 0);
+          }}
         >
           <span>Round-trip proof</span>
           <strong>{roundTrip}/{targetCount || "?"}</strong>
-          <small>{held} held target(s) / click for full Aeye map</small>
+          <small>{held} held target(s) / open full Aeye map</small>
         </button>
-        <article>
+        <button type="button" className="thinkit-relay__metric-card" onClick={() => scrollToDashboardSection("thinkit-thread-bridge-panel")}>
           <span>Thread bridge</span>
           <strong>{bridgeStatus}</strong>
-          <small>{queued.length} queued / {blocked.length} blocked</small>
-        </article>
-        <article>
+          <small>{queued.length} queued / {blocked.length} blocked / open send lane</small>
+        </button>
+        <button type="button" className="thinkit-relay__metric-card" onClick={() => scrollToDashboardSection("thinkit-latest-return")}>
           <span>Latest return</span>
           <strong>{latestStatus}</strong>
-          <small>{humanTargetName(latestTarget)}</small>
-        </article>
-        <article>
+          <small>{latestChange}</small>
+        </button>
+        <button type="button" className="thinkit-relay__metric-card" onClick={() => scrollToDashboardSection("thinkit-action-cards")}>
           <span>Action cards</span>
           <strong>{actionables.length}</strong>
-          <small>returned decisions available</small>
-        </article>
+          <small>decisions available / open decision cards</small>
+        </button>
       </div>
+
+      <section id="thinkit-thread-bridge-panel" className="thinkit-relay__bridge-panel" aria-label="Thread bridge controls">
+        <header>
+          <div>
+            <p className="td-bridge__eyebrow">Thread bridge / receiver lanes</p>
+            <h3>Send, chase, or request a missing receiver from here.</h3>
+            <p>
+              The bridge currently maps one receiver lane per Aeye. The <strong>Thread scope</strong> field is carried inside packets until ThinkIt has true
+              multi-thread routing per Aeye.
+            </p>
+          </div>
+          <a href="http://10.1.10.8:3339/relay/receiver_bootstrap" target="_blank" rel="noreferrer">
+            Open Receiver Setup
+          </a>
+        </header>
+        <dl className="thinkit-relay__bridge-stats">
+          <div>
+            <dt>Actuator</dt>
+            <dd>{bridgeStatus}</dd>
+          </div>
+          <div>
+            <dt>Queued for bridge</dt>
+            <dd>{queued.length}</dd>
+          </div>
+          <div>
+            <dt>Blocked bridge items</dt>
+            <dd>{blocked.length}</dd>
+          </div>
+          <div>
+            <dt>Universal targets</dt>
+            <dd>{connectedRelayRows.length}</dd>
+          </div>
+        </dl>
+        <div className="thinkit-relay__bridge-actions">
+          <button type="button" disabled={actionPending !== null} onClick={() => void runAction("Run Chaser Once", "/api/thinkit/swanson/relay/run_chaser", {})}>
+            {actionPending === "Run Chaser Once" ? "Chasing" : "Run Chaser Once"}
+          </button>
+          <button
+            type="button"
+            disabled={actionPending !== null}
+            onClick={() => void runAction("Build Receiver Setup Packets", "/api/thinkit/swanson/relay/build_receiver_bootstraps", {})}
+          >
+            {actionPending === "Build Receiver Setup Packets" ? "Writing" : "Build Receiver Setup Packets"}
+          </button>
+          <button
+            type="button"
+            disabled={actionPending !== null}
+            onClick={() => void runAction("Write Missing Receiver Blockers", "/api/thinkit/swanson/relay/write_missing_receiver_blockers", {})}
+          >
+            {actionPending === "Write Missing Receiver Blockers" ? "Writing" : "Write Missing Receiver Blockers"}
+          </button>
+        </div>
+      </section>
 
       {roundTripOpen ? (
         <section id="thinkit-round-trip-proof-map" className="thinkit-relay__coverage" aria-label="Round-trip proof by Aeye and machine">
@@ -713,6 +951,27 @@ export default function SwansonRelayControl() {
                           </div>
                         </dl>
                         <p>{row.proofGap}</p>
+                        <div className="thinkit-relay__roster-buttons">
+                          {row.status === "HELD_BY_TOPOLOGY" ? (
+                            <button type="button" disabled>
+                              Held by topology
+                            </button>
+                          ) : row.status === "LOCAL_CONTROL_THREAD" || row.status === "ALIAS_TO_SWANSON" ? (
+                            <button type="button" disabled>
+                              Local / alias route
+                            </button>
+                          ) : (
+                            <button type="button" disabled={actionPending !== null} onClick={() => void pingAeye(row)}>
+                              {isRoutableReceiver(receiver, row)
+                                ? actionPending === `Ping ${humanTargetName(row.target)}`
+                                  ? "Pinging"
+                                  : "Ping Aeye"
+                                : actionPending === `Request setup for ${humanTargetName(row.target)}`
+                                  ? "Requesting"
+                                  : "Request Receiver Setup"}
+                            </button>
+                          )}
+                        </div>
                       </article>
                     );
                   })}
@@ -777,6 +1036,16 @@ export default function SwansonRelayControl() {
             </select>
           </label>
           <label>
+            <span>Receiver</span>
+            <select value={target} onChange={(event) => setTarget(event.target.value)}>
+              {rosterRows.map((row) => (
+                <option key={row.target} value={row.target}>
+                  {humanTargetName(row.target)} - {row.statusLabel}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
             <span>Edit mode</span>
             <input value={bookEditingMode} onChange={(event) => setBookEditingMode(event.target.value)} />
           </label>
@@ -835,7 +1104,7 @@ export default function SwansonRelayControl() {
           </article>
         </div>
 
-        <section className="thinkit-relay__workbench" aria-label="Chapter workbench">
+        <section id="thinkit-chapter-workbench" className="thinkit-relay__workbench" aria-label="Chapter workbench">
           <header>
             <div>
               <p className="td-bridge__eyebrow">Chapter workbench / returned report</p>
@@ -905,6 +1174,21 @@ export default function SwansonRelayControl() {
             </button>
             <button
               type="button"
+              disabled={actionPending !== null || !selectedBookReport || !selectedEnderCanRoute}
+              onClick={() =>
+                void dispatchBookWorkbenchPacket(
+                  "Ask Ender",
+                  enderTarget,
+                  "BOOK_ENDER_FILTRATION_REVIEW",
+                  `Ender filtration: ${selectedBookReportChapter}`,
+                  enderInstruction
+                )
+              }
+            >
+              {selectedEnderCanRoute ? (actionPending === "Ask Ender" ? "Routing" : "Ask Ender") : "Ask Ender Needs Setup"}
+            </button>
+            <button
+              type="button"
               disabled={actionPending !== null || !selectedBookReport}
               onClick={() =>
                 void dispatchBookWorkbenchPacket(
@@ -962,6 +1246,59 @@ export default function SwansonRelayControl() {
           </p>
         </section>
 
+        <section className="thinkit-relay__ender" aria-label="Ender editing lane">
+          <header>
+            <div>
+              <p className="td-bridge__eyebrow">Ask Ender / controlled forgetting</p>
+              <h4>Ender can edit somewhere else. Sally is the retired route.</h4>
+              <p>
+                This lane is for cut-list, filtration, and preserve/park/delete judgment. If the selected Ender route is not wired, ThinkIt will request receiver setup
+                instead of pretending it delivered work.
+              </p>
+            </div>
+            <span>{selectedEnderCanRoute ? "Receiver mapped" : "Receiver setup needed"}</span>
+          </header>
+          <div className="thinkit-relay__ender-form">
+            <label>
+              <span>Ender route</span>
+              <select value={enderTarget} onChange={(event) => setEnderTarget(event.target.value)}>
+                {enderRows.map((row) => (
+                  <option key={row.target} value={row.target}>
+                    {humanTargetName(row.target)} - {row.statusLabel}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>Ender instruction</span>
+              <textarea rows={3} value={enderInstruction} onChange={(event) => setEnderInstruction(event.target.value)} />
+            </label>
+          </div>
+          <div className="thinkit-relay__ender-buttons">
+            <button
+              type="button"
+              disabled={actionPending !== null || !selectedBookReport || !selectedEnderCanRoute}
+              onClick={() =>
+                void dispatchBookWorkbenchPacket(
+                  "Ask Ender",
+                  enderTarget,
+                  "BOOK_ENDER_FILTRATION_REVIEW",
+                  `Ender filtration: ${selectedBookReportChapter}`,
+                  enderInstruction
+                )
+              }
+            >
+              {selectedEnderCanRoute ? "Send to Ender" : "Ender Not Wired"}
+            </button>
+            <button type="button" disabled={actionPending !== null || selectedEnderCanRoute} onClick={() => void requestReceiverSetup(enderTarget)}>
+              {actionPending === `Request setup for ${humanTargetName(enderTarget)}` ? "Requesting" : "Request Ender Receiver Setup"}
+            </button>
+          </div>
+          <p className="thinkit-relay__workbench-note">
+            Current selected route: {humanTargetName(enderTarget)}. {selectedEnderRow?.proofGap ?? "No proof gap read back yet."}
+          </p>
+        </section>
+
         <div className="thinkit-relay__book-packets">
           <header>
             <h4>Latest chapter reports</h4>
@@ -997,7 +1334,7 @@ export default function SwansonRelayControl() {
                     <dd>{asText(packet.updated_at, "No update timestamp")}</dd>
                   </div>
                 </dl>
-                <button type="button" onClick={() => setSelectedBookReportId(packetId)}>
+                <button type="button" onClick={() => selectReportAndOpenWorkbench(packetId)}>
                   Open in Workbench
                 </button>
               </article>
@@ -1033,7 +1370,7 @@ export default function SwansonRelayControl() {
               packet_type: "THINKIT_OPERABILITY_PROOF",
               target,
               title: "ThinkIt relay operability proof",
-              body: proofBody
+              body: [`Thread scope: ${threadScope}`, "", proofBody].join("\n")
             })
           }
         >
@@ -1050,8 +1387,18 @@ export default function SwansonRelayControl() {
 
       <div className="thinkit-relay__operator">
         <label>
-          <span>Target for proof/book packet</span>
-          <input value={target} onChange={(event) => setTarget(event.target.value)} />
+          <span>Specific receiver</span>
+          <select value={target} onChange={(event) => setTarget(event.target.value)}>
+            {rosterRows.map((row) => (
+              <option key={row.target} value={row.target}>
+                {humanTargetName(row.target)} - {row.statusLabel}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <span>Thread scope / menu lane</span>
+          <input value={threadScope} onChange={(event) => setThreadScope(event.target.value)} />
         </label>
         <label>
           <span>Proof packet body</span>
@@ -1059,7 +1406,28 @@ export default function SwansonRelayControl() {
         </label>
       </div>
 
-      <section className="thinkit-relay__return" aria-label="Latest origin return">
+      <section className="thinkit-relay__universal" aria-label="Universal relay message">
+        <header>
+          <div>
+            <p className="td-bridge__eyebrow">Universal message / all mapped receivers</p>
+            <h3>Send one message to every connected Aeye lane.</h3>
+            <p>
+              Universal means one packet per mapped receiver. It does not include held, local-only, alias, or unwired targets, and it still requires a return receipt
+              from each receiver.
+            </p>
+          </div>
+          <strong>{connectedRelayRows.length} target(s)</strong>
+        </header>
+        <label>
+          <span>Universal message</span>
+          <textarea rows={4} value={universalBody} onChange={(event) => setUniversalBody(event.target.value)} />
+        </label>
+        <button type="button" disabled={actionPending !== null || connectedRelayRows.length === 0} onClick={() => void sendUniversalMessage()}>
+          {actionPending === "Send Universal Message" ? "Sending" : "Send Universal Message"}
+        </button>
+      </section>
+
+      <section id="thinkit-latest-return" className="thinkit-relay__return" aria-label="Latest origin return">
         <header>
           <h3>Latest returned answer on the origin dash</h3>
           <code>{latestPacket}</code>
@@ -1086,10 +1454,20 @@ export default function SwansonRelayControl() {
             <small>{latestSourcePacketPath}</small>
           </article>
         </div>
+        <dl className="thinkit-relay__change-readback">
+          <div>
+            <dt>What changed</dt>
+            <dd>{latestChange}</dd>
+          </div>
+          <div>
+            <dt>What this helps decide</dt>
+            <dd>{latestDecisionHelp}</dd>
+          </div>
+        </dl>
         <p>{latestAnswer}</p>
       </section>
 
-      <section className="thinkit-relay__actions" aria-label="Returned work waiting on operator decision">
+      <section id="thinkit-action-cards" className="thinkit-relay__actions" aria-label="Returned work waiting on operator decision">
         <header>
           <h3>Returned work waiting on you</h3>
           <span>{actionables.length} usable return(s)</span>
@@ -1100,6 +1478,7 @@ export default function SwansonRelayControl() {
             const itemTarget = asText(record.target, "UNKNOWN_TARGET");
             const itemPacket = asText(record.packet_id, `RETURN_${index + 1}`);
             const itemReceiver = findReceiver(snapshot.threadBridge, itemTarget);
+            const operatorChoices = asArray(record.operator_choices).map((choice) => asText(choice, "")).filter(Boolean);
             return (
               <article key={itemPacket}>
                 <header>
@@ -1127,6 +1506,23 @@ export default function SwansonRelayControl() {
                     <dd>{asText(record.receiver_receipt_id, "NO_RECEIPT_ID")}</dd>
                   </div>
                 </dl>
+                <div className="thinkit-relay__action-buttons">
+                  {operatorChoices.map((choice) => (
+                    <button
+                      key={`${itemPacket}-${choice}`}
+                      type="button"
+                      disabled={actionPending !== null}
+                      onClick={() => void recordActionableRecordDecision(record, choice)}
+                    >
+                      {humanLabel(choice)}
+                    </button>
+                  ))}
+                  {itemPacket.startsWith("BOOK_CHAPTER_EDIT") ? (
+                    <button type="button" onClick={() => selectReportAndOpenWorkbench(itemPacket)}>
+                      Review Report In Workbench
+                    </button>
+                  ) : null}
+                </div>
               </article>
             );
           })}

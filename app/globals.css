@@ -2497,10 +2497,12 @@ main .proof-warning.proof-boundary .workshop-band {
   gap: 10px;
 }
 
-.thinkit-relay__metrics article,
 .thinkit-relay__metric-card,
 .thinkit-relay__coverage,
 .thinkit-relay__book,
+.thinkit-relay__bridge-panel,
+.thinkit-relay__ender,
+.thinkit-relay__universal,
 .thinkit-relay__return,
 .thinkit-relay__actions,
 .thinkit-relay__result {
@@ -2542,6 +2544,66 @@ main .proof-warning.proof-boundary .workshop-band {
   font-size: 1.34rem;
   line-height: 1.05;
   overflow-wrap: anywhere;
+}
+
+.thinkit-relay__bridge-panel,
+.thinkit-relay__ender,
+.thinkit-relay__universal {
+  display: grid;
+  gap: 12px;
+  border-color: rgba(74, 111, 153, 0.22);
+  background: rgba(248, 252, 255, 0.76);
+}
+
+.thinkit-relay__bridge-panel > header,
+.thinkit-relay__ender > header,
+.thinkit-relay__universal > header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.thinkit-relay__bridge-panel h3,
+.thinkit-relay__ender h4,
+.thinkit-relay__universal h3 {
+  margin: 0;
+  color: #211a16;
+}
+
+.thinkit-relay__bridge-panel p,
+.thinkit-relay__ender p,
+.thinkit-relay__universal p {
+  margin: 6px 0 0;
+  color: #4d3e32;
+  line-height: 1.5;
+}
+
+.thinkit-relay__bridge-panel a,
+.thinkit-relay__ender > header > span,
+.thinkit-relay__universal > header > strong {
+  border: 1px solid rgba(74, 111, 153, 0.32);
+  border-radius: 999px;
+  background: rgba(74, 111, 153, 0.1);
+  padding: 6px 10px;
+  color: #24415f;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.thinkit-relay__bridge-stats,
+.thinkit-relay__change-readback {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.thinkit-relay__bridge-actions,
+.thinkit-relay__ender-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .thinkit-relay__coverage {
@@ -2686,6 +2748,18 @@ main .proof-warning.proof-boundary .workshop-band {
   font-size: 0.78rem;
 }
 
+.thinkit-relay__roster-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.thinkit-relay__roster-buttons button {
+  width: auto;
+  min-height: 32px;
+  padding: 0 9px;
+}
+
 .thinkit-relay__book {
   display: grid;
   gap: 12px;
@@ -2741,7 +2815,7 @@ main .proof-warning.proof-boundary .workshop-band {
 
 .thinkit-relay__book-form {
   display: grid;
-  grid-template-columns: minmax(220px, 1.2fr) minmax(160px, 0.6fr) minmax(0, 1.6fr);
+  grid-template-columns: minmax(220px, 1.2fr) minmax(190px, 0.9fr) minmax(150px, 0.55fr) minmax(0, 1.5fr);
   gap: 10px;
   align-items: end;
 }
@@ -2832,7 +2906,7 @@ main .proof-warning.proof-boundary .workshop-band {
 
 .thinkit-relay__workbench-buttons {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -2865,6 +2939,12 @@ main .proof-warning.proof-boundary .workshop-band {
   min-height: 34px;
   margin-top: 10px;
   padding: 0 10px;
+}
+
+.thinkit-relay__ender-form {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+  gap: 10px;
 }
 
 .thinkit-relay__controls,
@@ -2902,7 +2982,7 @@ main .proof-warning.proof-boundary .workshop-band {
 }
 
 .thinkit-relay__operator {
-  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-columns: minmax(220px, 0.7fr) minmax(220px, 0.7fr) minmax(0, 1.4fr);
 }
 
 .thinkit-relay label {
@@ -2967,6 +3047,10 @@ main .proof-warning.proof-boundary .workshop-band {
   color: #3e3026;
   line-height: 1.55;
   white-space: pre-wrap;
+}
+
+.thinkit-relay__change-readback {
+  margin-top: 12px;
 }
 
 .thinkit-relay__provenance {
@@ -3070,6 +3154,19 @@ main .proof-warning.proof-boundary .workshop-band {
 .thinkit-relay__action-list p {
   margin: 0;
   color: #5c4a3a;
+}
+
+.thinkit-relay__action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.thinkit-relay__action-buttons button {
+  width: auto;
+  min-height: 34px;
+  padding: 0 10px;
 }
 
 .thinkit-relay__result dl {
@@ -3200,10 +3297,15 @@ main .proof-warning.proof-boundary .workshop-band {
 @media (max-width: 920px) {
   .thinkit-relay__header,
   .thinkit-relay__metrics,
+  .thinkit-relay__bridge-stats,
+  .thinkit-relay__bridge-actions,
   .thinkit-relay__coverage-machines,
   .thinkit-relay__coverage-summary,
   .thinkit-relay__provenance,
+  .thinkit-relay__change-readback,
   .thinkit-relay__operator,
+  .thinkit-relay__ender-form,
+  .thinkit-relay__ender-buttons,
   .thinkit-relay__book-summary,
   .thinkit-relay__book-form,
   .thinkit-relay__book-buttons,
