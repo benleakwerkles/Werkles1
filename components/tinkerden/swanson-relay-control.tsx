@@ -131,6 +131,31 @@ function humanizeTargetText(value: unknown, target: string, fallback: string) {
   return asText(value, fallback).replaceAll(target, humanTargetName(target));
 }
 
+function chapterDeliveryLabel(bridgeStatus: string, packetStatus: string) {
+  const bridge = bridgeStatus.toUpperCase();
+  const packet = packetStatus.toUpperCase();
+  if (packet.includes("COMPLETED_RECEIPT_PROVEN")) return "Answered by receiver";
+  if (packet.includes("BLOCKER")) return "Receiver returned blocker";
+  if (bridge === "SENT_TO_CODEX_THREAD") return "Posted to receiver chat";
+  if (bridge === "QUEUED_FOR_CODEX_THREAD_SEND") return "Queued for bridge";
+  if (bridge === "FILE_INBOX_WAITING_FOR_RECEIVER") return "Waiting in LAN inbox";
+  if (bridge === "NO_THREAD_MAPPING") return "Blocked: no receiver chat";
+  if (bridge === "NOT_QUEUED") return "Not queued yet";
+  return humanLabel(bridgeStatus || packetStatus || "UNKNOWN_DELIVERY");
+}
+
+function chapterDeliveryMeaning(bridgeStatus: string, packetStatus: string) {
+  const bridge = bridgeStatus.toUpperCase();
+  const packet = packetStatus.toUpperCase();
+  if (packet.includes("COMPLETED_RECEIPT_PROVEN")) return "The chapter came back with receiver-side COMPLETED proof.";
+  if (packet.includes("BLOCKER")) return "The receiver answered, but returned a blocker instead of an edit.";
+  if (bridge === "SENT_TO_CODEX_THREAD") return "The packet was posted into the standing receiver chat. Now wait for RECEIVED then COMPLETED or BLOCKER.";
+  if (bridge === "QUEUED_FOR_CODEX_THREAD_SEND") return "ThinkIt created the packet, but it is not in the receiver chat yet. It waits for the thread bridge sweep or a Swanson drain.";
+  if (bridge === "FILE_INBOX_WAITING_FOR_RECEIVER") return "ThinkIt wrote the packet to a LAN inbox; the receiving surface still has to read it.";
+  if (bridge === "NO_THREAD_MAPPING") return "ThinkIt could not find a standing receiver chat for this target.";
+  return "No delivery proof has been read for this selected chapter yet.";
+}
+
 const evidenceSectionKeys = new Set([
   "source_access",
   "editing_mode",
@@ -821,6 +846,14 @@ export default function SwansonRelayControl() {
   const selectedBookReportEvidence = parseEvidenceSections(selectedBookReport?.evidence);
   const selectedChapterTitle = asText(selectedChapter?.title, packetChapterLabel(selectedBookPacket, "No chapter selected"));
   const selectedChapterSource = asText(selectedChapter?.github_url ?? selectedChapter?.repo_path ?? selectedChapter?.local_path, "No source path read back yet.");
+  const selectedChapterPacketId = asText(selectedChapterPacket?.packet_id, "NO_PACKET_SENT_FOR_SELECTED_CHAPTER");
+  const selectedChapterPacketTarget = asText(selectedChapterPacket?.target, target);
+  const selectedChapterPacketStatus = asText(selectedChapterPacket?.status, "No packet sent for this chapter yet");
+  const selectedChapterBridgeStatus = asText(selectedChapterPacket?.thread_bridge_status, "NOT_QUEUED");
+  const selectedChapterDeliveryLabel = chapterDeliveryLabel(selectedChapterBridgeStatus, selectedChapterPacketStatus);
+  const selectedChapterDeliveryMeaning = chapterDeliveryMeaning(selectedChapterBridgeStatus, selectedChapterPacketStatus);
+  const selectedChapterReceiver = findReceiver(snapshot.threadBridge, selectedChapterPacketTarget);
+  const selectedChapterReceiverName = receiverHomeThreadName(selectedChapterReceiver, selectedChapterPacketTarget);
   const selectedBookReportChapter = selectedBookReportEvidence.chapter_read || selectedChapterTitle;
   const selectedBookReportRecommendation = selectedBookReportEvidence.recommended_next_edit || "No recommended edit has been parsed yet.";
   const selectedIncoming =
@@ -2184,7 +2217,7 @@ export default function SwansonRelayControl() {
               })
             }
           >
-            {actionPending === "Send Selected Chapter" ? "Sending" : "Send Selected Chapter"}
+            {actionPending === "Send Selected Chapter" ? "Queueing" : "Queue Selected Chapter"}
           </button>
           <button
             type="button"
@@ -2200,6 +2233,15 @@ export default function SwansonRelayControl() {
           >
             {actionPending === "Send Next Book Chapter" ? "Sending" : "Send Next Unsent"}
           </button>
+        </div>
+
+        <div className="thinkit-relay__book-delivery" data-state={selectedChapterBridgeStatus.toLowerCase()}>
+          <strong>{selectedChapterDeliveryLabel}</strong>
+          <span>{selectedChapterDeliveryMeaning}</span>
+          <small>
+            Selected packet: {selectedChapterPacketId} / receiver: {selectedChapterReceiverName} / bridge cadence:{" "}
+            {asText(valueAt(snapshot.threadBridge, ["actuator", "schedule"]) ?? valueAt(snapshot.bookCourier, ["bridge_actuator", "schedule"]), "unknown")}
+          </small>
         </div>
 
         <div className="thinkit-relay__book-loop">
@@ -2273,7 +2315,19 @@ export default function SwansonRelayControl() {
             </div>
             <div>
               <dt>Packet state</dt>
-              <dd>{asText(selectedBookPacket?.status, "No packet sent for this chapter yet")}</dd>
+              <dd>{selectedChapterPacketStatus}</dd>
+            </div>
+            <div>
+              <dt>Delivery to Aeye</dt>
+              <dd>{selectedChapterDeliveryLabel}</dd>
+            </div>
+            <div>
+              <dt>Receiver chat</dt>
+              <dd>{selectedChapterReceiverName}</dd>
+            </div>
+            <div>
+              <dt>Packet id</dt>
+              <dd>{selectedChapterPacketId}</dd>
             </div>
             <div>
               <dt>Returned receipt</dt>

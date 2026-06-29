@@ -460,6 +460,14 @@ function dispatchBookChapterPacket(request, payload) {
     chapter,
     chapter_count: chapters.length,
     relay_packet: packet,
+    delivery_state: packet.thread_bridge?.status || "NOT_QUEUED",
+    receiver_chat: packet.thread_bridge?.home_thread_title || target,
+    receiver_thread_id: packet.thread_bridge?.thread_id || null,
+    operator_meaning: packet.thread_bridge?.status === "QUEUED_FOR_CODEX_THREAD_SEND"
+      ? "Chapter packet was created and queued locally. It will not appear in the receiver chat until the Codex thread bridge posts it."
+      : packet.thread_bridge?.status === "SENT_TO_CODEX_THREAD"
+        ? "Chapter packet has been posted into the receiver chat. Now wait for RECEIVED then COMPLETED or BLOCKER."
+        : "Chapter packet state requires bridge/status readback before claiming delivery.",
     missing_proof: "This is queued work only until the thread bridge sends it and Skybro returns RECEIVED then COMPLETED or BLOCKER.",
   };
 }

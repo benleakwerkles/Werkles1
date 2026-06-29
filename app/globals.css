@@ -3398,6 +3398,45 @@ main .proof-warning.proof-boundary .workshop-band {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
+.thinkit-relay__book-delivery {
+  display: grid;
+  gap: 6px;
+  border: 1px solid rgba(184, 121, 22, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 246, 229, 0.78);
+  padding: 10px;
+}
+
+.thinkit-relay__book-delivery[data-state="sent_to_codex_thread"],
+.thinkit-relay__book-delivery[data-state="completed_receipt_proven"] {
+  border-color: rgba(2, 145, 126, 0.24);
+  background: rgba(24, 197, 174, 0.09);
+}
+
+.thinkit-relay__book-delivery[data-state="no_thread_mapping"],
+.thinkit-relay__book-delivery[data-state*="blocker"] {
+  border-color: rgba(157, 43, 43, 0.28);
+  background: rgba(255, 239, 236, 0.82);
+}
+
+.thinkit-relay__book-delivery strong {
+  color: #211a16;
+  font-size: 0.92rem;
+}
+
+.thinkit-relay__book-delivery span {
+  color: #4d3e32;
+  font-size: 0.82rem;
+  line-height: 1.42;
+}
+
+.thinkit-relay__book-delivery small {
+  color: #6b5845;
+  font-size: 0.7rem;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
 .thinkit-relay__book-loop article,
 .thinkit-relay__book-packets article {
   min-width: 0;
