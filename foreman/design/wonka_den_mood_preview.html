@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Werkles — Wonka Den Mood Preview</title>
+  <style>
+    :root {
+      --forge-black: #050404;
+      --workshop-night: #191817;
+      --smoke: #2c231d;
+      --copper: #9f6633;
+      --brass: #e0b569;
+      --ember: #fbc368;
+      --violet: #672eed;
+      --paper: #f6efe5;
+      --ink: #2c231d;
+      --ink-muted: #5c4a3a;
+      --cream: #f4e2b1;
+      --lamp: radial-gradient(circle at 58% 38%, rgba(251,195,104,.42), rgba(224,181,105,.18) 28%, transparent 58%);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Iowan Old Style", serif;
+      color: var(--cream);
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(44,35,29,.55), transparent 55%),
+        var(--forge-black);
+      padding: 40px 24px 64px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(28px, 4vw, 40px);
+      background: linear-gradient(90deg, #e0b569, #fbc368);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .sub { color: var(--copper); font-style: italic; margin: 0 0 8px; }
+    .meta { color: #6d5b46; font-family: ui-monospace, monospace; font-size: 12px; margin: 0 0 32px; }
+    .note {
+      max-width: 900px;
+      background: var(--workshop-night);
+      border-left: 3px solid var(--violet);
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .note strong { color: #18c5ae; }
+    h2 {
+      font-size: 15px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--brass);
+      border-bottom: 1px solid #3b342a;
+      padding-bottom: 8px;
+      margin: 36px 0 16px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .card {
+      background: linear-gradient(165deg, rgba(59,52,42,.35), rgba(5,4,4,.15)), linear-gradient(180deg, #fffaf2, #f6efe5);
+      border: 1px solid rgba(159,102,51,.28);
+      border-radius: 20px;
+      padding: 18px;
+      color: var(--ink);
+      box-shadow: 0 18px 48px rgba(5,4,4,.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--lamp);
+      pointer-events: none;
+    }
+    .card > * { position: relative; }
+    .card h3 { margin: 0 0 8px; color: var(--ink); font-size: 18px; }
+    .card p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--ink-muted); }
+    .reject { color: #c45c5c; }
+    .layout {
+      background: var(--smoke);
+      border: 1px solid #3b342a;
+      border-radius: 12px;
+      padding: 14px;
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #c08b52;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .interaction {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(159,102,51,.35);
+      background: rgba(246,239,229,.12);
+      font-size: 13px;
+    }
+    .preview-link {
+      display: inline-block;
+      margin-top: 24px;
+      color: var(--brass);
+      font-family: ui-monospace, monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <h1>The Den</h1>
+  <p class="sub">WONKA_DEN_MOOD_REFERENCE · cozy inventor hobbit-hole workshop</p>
+  <p class="meta">DRAFT REVIEW · immersion refs: Black Desert menus · GTA diegetic UI · Dark Souls inspect</p>
+
+  <div class="note">
+    <strong>North star:</strong> UI lives on surfaces in a room — lamp desk, pegboard, paper stack — not on glass HUD rails.
+    <span class="reject">Reject: throne · enterprise dashboard · spaceship cockpit.</span>
+  </div>
+
+  <h2>10 visual notes (summary)</h2>
+  <div class="grid">
+    <div class="card"><h3>Desk lamp primary</h3><p>Warm ember pool on work surface; periphery in workshop shadow.</p></div>
+    <div class="card"><h3>Hobbit-hole geometry</h3><p>Soft arches, inset alcoves, carved-not-floated panels.</p></div>
+    <div class="card"><h3>Paper archaeology</h3><p>Layered scraps, tape corners, ink-on-paper type.</p></div>
+    <div class="card"><h3>Tools before chrome</h3><p>Brass, pegboard, drawers — copper frame, rare violet spark.</p></div>
+    <div class="card"><h3>Gadgets in media res</h3><p>Half-finished inventions imply story without slot-machine motion.</p></div>
+    <div class="card"><h3>BDO ornament</h3><p>Filigree borders frame content; never replace it.</p></div>
+    <div class="card"><h3>GTA diegesis</h3><p>Nav as objects on desk/pegboard; cards on felt.</p></div>
+    <div class="card"><h3>Dark Souls inspect</h3><p>Stillness, lore lines, deliberate next action.</p></div>
+    <div class="card"><h3>Three-plane depth</h3><p>Lamp · paper · back shelf. No holographic grid.</p></div>
+    <div class="card"><h3>Owl at the door</h3><p>Mascot inspects; Connector owns the bench.</p></div>
+  </div>
+
+  <h2>5 layout ideas</h2>
+  <div class="grid">
+    <div class="layout">LAMP DESK (default)
+[pegboard nav] | lamp pool + inspect card
+scrap tray: filters · blueprint pin</div>
+    <div class="layout">ALCOVE NOOK
+round arch · slanted drafting board
+brass tabs on board edge</div>
+    <div class="layout">STRING BOARD
+cork pins + abstract string
+dossier pulls to desk on click</div>
+    <div class="layout">DRAWER INDEX
+icon drawers slide up (mechanical)
+match stack stays centered</div>
+    <div class="layout">ROUND TABLE EDGE
+three seats at bottom arc
+shared center paper for intros</div>
+  </div>
+
+  <h2>3 interaction ideas</h2>
+  <div class="interaction">
+    <span class="chip">Inspect hold — long-press lifts card, brightens lamp</span>
+    <span class="chip">Desk scatter nav — routes as physical objects</span>
+    <span class="chip">Lamp focus sweep — 400ms ease between sections</span>
+  </div>
+
+  <a class="preview-link" href="/proof/den">Live preview route → /proof/den</a>
+</body>
+</html>
