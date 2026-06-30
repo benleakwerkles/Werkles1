@@ -108,6 +108,7 @@ If skipped, mark the build: **`SPEAKER_REVIEW_MISSING`**
 | `CAUSAL_LEDGER.md` | Index of causal entries |
 | `AEYE_ROLE_REGISTRY.md` | Role boundaries Speaker watches |
 | `SPEAKER_PACKET_TEMPLATE.md` | Memory packet shape |
+| `RECOMMENDATION_CONSTITUTION_V1.md` | Squibb recommendation classes, evidence, gates |
 | `entries/*.md` | Individual causal entries |
 
 ---

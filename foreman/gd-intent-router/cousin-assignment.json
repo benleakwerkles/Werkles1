@@ -4,7 +4,14 @@
   "cousins": {
     "PETRA": { "label": "Petra", "platform": "ChatGPT", "seat": "Comptroller" },
     "SKYBRO": { "label": "Skybro", "platform": "Gemini", "seat": "Infra / ops" },
-    "ENDER": { "label": "Ender", "platform": "Claude", "seat": "Product / UX" },
+    "ENDER": {
+      "label": "Ender",
+      "platform": "Claude",
+      "seat": "Product / UX",
+      "availability": "HELD_ON_SALLY",
+      "topologyLock": "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json",
+      "routingNote": "Do not generate Ender@Sally packets until Sally RAM upgrade and a clearing receipt. Deletion/filtration stays HELD unless another Ender machine is explicitly assigned with proof."
+    },
     "BEAN": { "label": "Bean", "platform": "DeepSeek", "seat": "Hostile audit" },
     "COMPUTER": { "label": "Computer", "platform": "Perplexity", "seat": "Doctrine / research" }
   },

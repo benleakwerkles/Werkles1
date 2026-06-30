@@ -125,7 +125,10 @@
       "instructions": "foreman/platform-instructions/CLAUDE_ENDER_PROJECT_INSTRUCTIONS.md",
       "packetPrefix": "TO_CLAUDE",
       "pasteBlockSuffix": "ENDER_PASTE_BLOCK.txt",
-      "tabId": null
+      "tabId": null,
+      "availability": "HELD_ON_SALLY",
+      "topologyLock": "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json",
+      "routingNote": "Do not generate Ender@Sally packets until Sally RAM upgrade and a clearing receipt. Deletion/filtration stays HELD unless another Ender machine is explicitly assigned with proof."
     },
     {
       "id": "bean",
@@ -180,7 +183,7 @@
     },
     "ender-imagery-direction": {
       "label": "Ender imagery direction wire",
-      "description": "UX/brand review of IMAGERY_DIRECTION — placements, static vs motion, formation beats. No assets, no UI commit.",
+      "description": "HELD for Ender@Sally until RAM upgrade and clearing receipt. UX/brand review may only route to another explicitly assigned Ender machine with availability proof. No assets, no UI commit.",
       "primaryRole": "ender",
       "cockpitExtras": [
         "foreman/IMAGERY_DIRECTION.md",

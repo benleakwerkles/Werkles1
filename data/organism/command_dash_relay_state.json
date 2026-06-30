@@ -1,0 +1,19 @@
+{
+  "processed": {
+    "fd9cf16cb96f329809fa4720b6f1d195642ffc8810f0358a9f1c4fa34cc038fd": {
+      "status": "processed",
+      "intake_line": 1,
+      "intake_hash": "fd9cf16cb96f329809fa4720b6f1d195642ffc8810f0358a9f1c4fa34cc038fd",
+      "packet_id": "cmd_dash_intake_proof_0001",
+      "target_aeye": "BEAN",
+      "packet_path": "foreman/handoffs/outbox/TO_BEAN_COMMAND_DASH_RELAY_cmd_dash_intake_proof_0001.md",
+      "paste_block_path": "foreman/handoffs/outbox/BEAN_COMMAND_DASH_RELAY_PASTE_BLOCK.txt",
+      "proof_path": "data/organism/command_dash_relay_proofs/cmd_dash_intake_proof_0001.json",
+      "manual_send_required": true,
+      "created_at": "2026-06-28T04:37:47.087Z"
+    }
+  },
+  "last_run_at": "2026-06-28T04:37:47.088Z",
+  "intake_path": "data/organism/command_dash_intake.jsonl",
+  "receipts_path": "data/organism/command_dash_relay_intake_receipts.jsonl"
+}

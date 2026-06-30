@@ -1,0 +1,14 @@
+{
+  "schema_version": "CRAWLER_PEARLS.v0.1",
+  "updated_at": "2026-06-28T03:48:19.265Z",
+  "source": "foreman/nuggets_of_wisdom_top_25.json",
+  "rule": "Crawler pearls do not enter Working until promoted.",
+  "states": [
+    "New",
+    "Reviewed",
+    "Promoted to Task",
+    "Archived",
+    "Killed"
+  ],
+  "pearls": []
+}

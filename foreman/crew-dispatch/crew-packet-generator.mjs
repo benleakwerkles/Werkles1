@@ -63,6 +63,12 @@ function generatePacket(cousinKey, missionId = "crew-checkin") {
   const info = COUSIN_MAP[cousin];
   if (!info) throw new Error(`Unknown cousin: ${cousinKey}`);
 
+  if (cousin === "ENDER") {
+    throw new Error(
+      "ENDER dispatch is HELD: Ender@Sally is retired until Sally RAM upgrade and a clearing receipt. See foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json. Do not silently move Ender to another machine without availability proof."
+    );
+  }
+
   ensureRelayDirs();
   loadSchema();
 

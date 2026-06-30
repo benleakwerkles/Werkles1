@@ -1,0 +1,127 @@
+{
+  "pass": true,
+  "checked_at": "2026-06-28T19:06:18.636Z",
+  "source": {
+    "events": "data/organism/packet_relay_events.jsonl",
+    "receipts": "data/organism/receipt_pickup.jsonl"
+  },
+  "counts": {
+    "events": 3,
+    "receipt_rows": 3,
+    "event_parse_errors": 0,
+    "receipt_parse_errors": 0,
+    "passing_events": 3,
+    "failing_events": 0
+  },
+  "parse_errors": {
+    "events": [],
+    "receipts": []
+  },
+  "events": [
+    {
+      "packet_id": "cmd_dash_relay_proof_0001",
+      "target_aeye": "PETRA",
+      "event_id": "packet_relay_ready_cmd_dash_relay_proof_0001",
+      "pass": true,
+      "checks": [
+        {
+          "name": "packet_id_present",
+          "pass": true
+        },
+        {
+          "name": "manual_send_boundary",
+          "pass": true
+        },
+        {
+          "name": "packet_file_exists",
+          "pass": true,
+          "path": "foreman/handoffs/outbox/TO_PETRA_COMMAND_DASH_RELAY_cmd_dash_relay_proof_0001.md"
+        },
+        {
+          "name": "paste_block_exists",
+          "pass": true,
+          "path": "foreman/handoffs/outbox/PETRA_COMMAND_DASH_RELAY_PASTE_BLOCK.txt"
+        },
+        {
+          "name": "proof_exists",
+          "pass": true,
+          "path": "data/organism/command_dash_relay_proofs/cmd_dash_relay_proof_0001.json"
+        },
+        {
+          "name": "receipt_pickup_linked",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "packet_id": "cmd_dash_intake_proof_0001",
+      "target_aeye": "BEAN",
+      "event_id": "packet_relay_ready_cmd_dash_intake_proof_0001",
+      "pass": true,
+      "checks": [
+        {
+          "name": "packet_id_present",
+          "pass": true
+        },
+        {
+          "name": "manual_send_boundary",
+          "pass": true
+        },
+        {
+          "name": "packet_file_exists",
+          "pass": true,
+          "path": "foreman/handoffs/outbox/TO_BEAN_COMMAND_DASH_RELAY_cmd_dash_intake_proof_0001.md"
+        },
+        {
+          "name": "paste_block_exists",
+          "pass": true,
+          "path": "foreman/handoffs/outbox/BEAN_COMMAND_DASH_RELAY_PASTE_BLOCK.txt"
+        },
+        {
+          "name": "proof_exists",
+          "pass": true,
+          "path": "data/organism/command_dash_relay_proofs/cmd_dash_intake_proof_0001.json"
+        },
+        {
+          "name": "receipt_pickup_linked",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "packet_id": "cmd_dash_api_proof_0001",
+      "target_aeye": "COMPUTER",
+      "event_id": "packet_relay_ready_cmd_dash_api_proof_0001",
+      "pass": true,
+      "checks": [
+        {
+          "name": "packet_id_present",
+          "pass": true
+        },
+        {
+          "name": "manual_send_boundary",
+          "pass": true
+        },
+        {
+          "name": "packet_file_exists",
+          "pass": true,
+          "path": "foreman/handoffs/outbox/TO_COMPUTER_COMMAND_DASH_RELAY_cmd_dash_api_proof_0001.md"
+        },
+        {
+          "name": "paste_block_exists",
+          "pass": true,
+          "path": "foreman/handoffs/outbox/COMPUTER_COMMAND_DASH_RELAY_PASTE_BLOCK.txt"
+        },
+        {
+          "name": "proof_exists",
+          "pass": true,
+          "path": "data/organism/command_dash_relay_proofs/cmd_dash_api_proof_0001.json"
+        },
+        {
+          "name": "receipt_pickup_linked",
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

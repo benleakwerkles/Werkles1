@@ -49,6 +49,20 @@ Full rules and the merge/push/deploy evidence-locality requirement: `foreman/EXE
 | Bean @ Sally | Hostile audit / failure modes |
 | Petra | Synthesis / red-team / GO-NO-GO |
 
+### Active Routing Lock: Ender@Sally Retired
+
+Capsule: `foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json`
+
+Ender@Sally is retired until Sally receives a RAM upgrade and a new availability receipt clears the lock.
+
+Rules:
+
+- No new meals, packets, audits, cleanup tasks, or filtration work route to Ender@Sally.
+- Deletion/filtration work is HELD unless another Ender machine is explicitly assigned with proof of availability.
+- Prefer Swanson@Doss for topology and receipt ledgers.
+- Do not silently move Ender to another machine without proof of availability.
+- Assignment labels are not delivery proof.
+
 ## Canonical Workstation Software Stack
 
 Required on Aeye workstations:

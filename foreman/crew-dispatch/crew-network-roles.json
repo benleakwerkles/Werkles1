@@ -66,17 +66,21 @@
       "name": "Ender",
       "platform": "Claude",
       "seat": "Product / UX cousin",
+      "availability": "HELD_ON_SALLY",
+      "topologyLock": "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json",
       "edgeTabIndex": 3,
       "edgeUrl": "https://claude.ai/",
-      "lane": "UX, brand voice, design system — not SQL, billing, security, or deploy execution.",
-      "relayJob": "Acknowledge UX lane; confirm brand mark outranks environmental art for palette canon.",
-      "mustNot": ["SQL", "billing rails", "security audits", "deploy", "unsourced doctrine"],
+      "lane": "UX, brand voice, design system — held on Sally until RAM upgrade; not SQL, billing, security, cleanup, filtration, or deploy execution.",
+      "relayJob": "HELD for Sally. Do not dispatch Ender@Sally until RAM upgrade and a clearing receipt. If another Ender machine is explicitly assigned with proof, acknowledge UX lane and confirm brand mark outranks environmental art for palette canon.",
+      "mustNot": ["SQL", "billing rails", "security audits", "deploy", "unsourced doctrine", "Ender@Sally", "cleanup on Sally", "filtration on Sally"],
+      "mustNotRouteTo": ["Ender@Sally"],
       "readsFirst": [
         "foreman/NEXT_ACTION.md",
         "foreman/DESIGN_SYSTEM.md",
         "foreman/SITE_STYLE_APPROVED_v0.6.md",
         "company/WERKLES_UX_LAW.md",
-        "company/WERKLES_BRAND_VOICE.md"
+        "company/WERKLES_BRAND_VOICE.md",
+        "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json"
       ],
       "pasteBlockSuffix": "ENDER_NETWORK_PASTE_BLOCK.txt"
     },

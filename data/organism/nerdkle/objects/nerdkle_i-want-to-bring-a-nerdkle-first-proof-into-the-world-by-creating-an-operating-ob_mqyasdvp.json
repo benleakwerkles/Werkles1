@@ -1,0 +1,27 @@
+{
+  "id": "nerdkle_i-want-to-bring-a-nerdkle-first-proof-into-the-world-by-creating-an-operating-ob_mqyasdvp",
+  "object_type": "operating_object",
+  "source": "Nerdkle Operator Intake",
+  "operator_intent": "I want to bring a Nerdkle first proof into the world by creating an operating object that Dink and Maker can both inspect.",
+  "artifact_created": "data/organism/nerdkle/objects/nerdkle_i-want-to-bring-a-nerdkle-first-proof-into-the-world-by-creating-an-operating-ob_mqyasdvp.json",
+  "unresolved_fields": [
+    "constraints / budget"
+  ],
+  "human_gates": [
+    "none"
+  ],
+  "execution_owner": "Maker",
+  "receipt_required": {
+    "required": "Y",
+    "destination": "data/organism/nerdkle/receipts"
+  },
+  "next_action": "Resolve constraints / budget so Maker can execute.",
+  "evidence_required": [
+    "artifact path exists",
+    "execution owner named",
+    "human gates named",
+    "receipt written"
+  ],
+  "failure_condition": "Operator has to restate context already provided, or execution proceeds without a receipt.",
+  "created_at": "2026-06-28T21:25:21.348Z"
+}

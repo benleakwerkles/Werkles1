@@ -90,6 +90,23 @@ Kind Sir Drive:
 - Doss: Mobile/Mirror Forge
 - Sally: Archive / Snapshot Surface
 
+## Active Topology Locks
+
+### Ender@Sally retirement lock (2026-06-26)
+
+Capsule: `foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json`
+
+Status: **ACTIVE** until Sally receives a RAM upgrade and a new availability receipt clears this lock.
+
+Routing rule:
+
+- Do not assign new meals, packets, audits, cleanup tasks, or filtration work to **Ender@Sally**.
+- Treat deletion/filtration work as **HELD** unless another Ender machine is explicitly assigned with proof of availability.
+- Prefer **Swanson@Doss** for topology and receipt ledgers.
+- Do not silently move Ender to another machine without proof of availability.
+
+Source receipt: Operator correction in current thread - "Ender@Sally is retired until some new RAM comes in for Sally."
+
 ## Guardrails
 
 No workstation may:
@@ -111,6 +128,8 @@ No workstation may:
 | **Atlas** | **UNKNOWN** | vault path per `foreman/ATLAS_MACHINE_PLAN.md` | n/a (not a git writer) | n/a | **archive forge** | n/a | Plan doc only — no live readback recorded |
 
 ### Sally work-surface detail (live 2026-06-12, host `DESKTOP-SJSJMNK`)
+
+**Ender@Sally status:** retired until Sally RAM upgrade. No Ender cleanup, filtration, review packets, meals, or audits route to Sally without a new clearing receipt.
 
 | Path | Branch | Commit | Working tree | Notes |
 |------|--------|--------|--------------|-------|
@@ -141,6 +160,8 @@ Intended primary path per Dink critical-path note: `C:\Users\benle\Desktop\githu
 **Alias history:** Formerly referenced as BLDer.
 
 **Localhost on hostname `BLDER`:** `:3000` (Werkles dev) and `:4317` (Foreman / SoleDash cockpit) verified live 2026-06-12.
+
+**Power policy (2026-06-13):** AC sleep **never** (MWB / forge disconnect fix). Battery: 30 min sleep, 15 min display. See `foreman/machines/DOSS_SLEEP_MWB_DISCONNECT_V1.md`.
 
 ---
 

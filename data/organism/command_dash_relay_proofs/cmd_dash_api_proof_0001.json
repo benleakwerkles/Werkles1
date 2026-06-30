@@ -1,0 +1,16 @@
+{
+  "receipt_id": "receipt_cmd_dash_api_proof_0001",
+  "packet_id": "cmd_dash_api_proof_0001",
+  "mission": "COMMAND_DASH_TO_AEYE_RELAY",
+  "producer": "Maker@Doss",
+  "pass": true,
+  "proof_path": "data/organism/command_dash_relay_proofs/cmd_dash_api_proof_0001.json",
+  "packet_path": "foreman/handoffs/outbox/TO_COMPUTER_COMMAND_DASH_RELAY_cmd_dash_api_proof_0001.md",
+  "paste_block_path": "foreman/handoffs/outbox/COMPUTER_COMMAND_DASH_RELAY_PASTE_BLOCK.txt",
+  "event_path": "data/organism/packet_relay_events.jsonl",
+  "packet_sha256": "e95801fd8189ff9b42eb70cb5bb71f1c415d19443c8340c1e996a9f221cbf31f",
+  "event_sha256": "a2a0455055dc95d79802f2c352b53667bdd9a6b9c5566a07c3eaa311e190a698",
+  "manual_send_required": true,
+  "receipt_required": true,
+  "created_at": "2026-06-28T04:38:53.288Z"
+}

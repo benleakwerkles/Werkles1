@@ -22,7 +22,17 @@
     "gd:synthesize": "node foreman/gd-intent-router/gd-intent-router.mjs synthesize",
     "gd:runs": "node foreman/gd-intent-router/gd-intent-router.mjs runs",
     "gd:thread-refresh": "node foreman/gd-intent-router/gd-intent-router.mjs thread-refresh",
-    "gd:gimpdash": "node -e \"require('child_process').execSync('start http://127.0.0.1:4317/#gimpdash',{stdio:'inherit',shell:true})\""
+    "gd:gimpdash": "node -e \"require('child_process').execSync('start http://127.0.0.1:4317/#gimpdash',{stdio:'inherit',shell:true})\"",
+    "receipt:crawler": "node scripts/foreman/crawler.js",
+    "receipt:crawler:self-test": "node scripts/foreman/crawler.js --self-test",
+    "relay:command-dash": "node scripts/foreman/command-dash-aeye-relay.mjs",
+    "relay:command-dash:intake": "node scripts/foreman/command-dash-relay-intake.mjs --once",
+    "relay:command-dash:watch": "node scripts/foreman/command-dash-relay-intake.mjs --watch",
+    "relay:command-dash:doctor": "node scripts/foreman/command-dash-relay-doctor.mjs",
+    "relay:command-dash:triage": "node scripts/foreman/command-dash-inbox-triage.mjs",
+    "relay:command-dash:status": "node scripts/foreman/command-dash-relay-status.mjs",
+    "nerdkle:doctor": "node scripts/foreman/nerdkle-doctor.mjs",
+    "nerdkle:packet": "node scripts/foreman/nerdkle-execution-packet.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",

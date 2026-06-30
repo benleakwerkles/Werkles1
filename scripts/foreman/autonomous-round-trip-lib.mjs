@@ -43,6 +43,18 @@ function expandTemplate(template, tokens) {
   return out;
 }
 
+const HELD_COUSIN_REASONS = {
+  ENDER:
+    "ENDER autonomous relay is HELD: Ender@Sally is retired until Sally RAM upgrade and a clearing receipt. See foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json. Do not silently move Ender to another machine without availability proof.",
+};
+
+function assertCousinNotHeld(cousinId) {
+  const cousin = String(cousinId || "").toUpperCase();
+  if (HELD_COUSIN_REASONS[cousin]) {
+    throw new Error(HELD_COUSIN_REASONS[cousin]);
+  }
+}
+
 function loadRoleCard(cousinId) {
   const cards = JSON.parse(read("foreman/crew-dispatch/crew-role-cards.json"));
   const card = cards.cousins[cousinId.toUpperCase()];
@@ -66,6 +78,7 @@ export function generateAutonomousPacket({
   packetIdPrefix,
 }) {
   const cousin = cousinId.toUpperCase();
+  assertCousinNotHeld(cousin);
   const tplMeta = loadTemplateMeta(templateId);
   const role = loadRoleCard(cousin);
 

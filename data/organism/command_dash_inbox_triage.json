@@ -1,0 +1,88 @@
+{
+  "pass": true,
+  "triaged_at": "2026-06-28T19:06:19.440Z",
+  "source": {
+    "events": "data/organism/packet_relay_events.jsonl",
+    "inbox": "foreman/handoffs/inbox"
+  },
+  "counts": {
+    "relay_packets": 3,
+    "inbox_files": 9,
+    "command_dash_related_inbox_files": 0,
+    "matched_packets": 0,
+    "pending_packets": 3
+  },
+  "pending_packets": [
+    {
+      "packet_id": "cmd_dash_relay_proof_0001",
+      "status": "awaiting_aeye_receipt",
+      "next_action": "Operator manually sends prepared paste block; Aeye response returns as FROM_* inbox file."
+    },
+    {
+      "packet_id": "cmd_dash_intake_proof_0001",
+      "status": "awaiting_aeye_receipt",
+      "next_action": "Operator manually sends prepared paste block; Aeye response returns as FROM_* inbox file."
+    },
+    {
+      "packet_id": "cmd_dash_api_proof_0001",
+      "status": "awaiting_aeye_receipt",
+      "next_action": "Operator manually sends prepared paste block; Aeye response returns as FROM_* inbox file."
+    }
+  ],
+  "inbox": [
+    {
+      "path": "foreman/handoffs/inbox/FROM_COMPUTER_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_GD_RUN_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_20260606-175245.md",
+      "from": "COMPUTER",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    },
+    {
+      "path": "foreman/handoffs/inbox/FROM_COMPUTER_HOMEPAGE_VISUAL_NARRATIVE_GD_RUN_HOMEPAGE_VISUAL_NARRATIVE_20260606-173334.md",
+      "from": "COMPUTER",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    },
+    {
+      "path": "foreman/handoffs/inbox/FROM_CURSOR_READ_ME.md",
+      "from": "CURSOR",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    },
+    {
+      "path": "foreman/handoffs/inbox/FROM_ENDER_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_GD_RUN_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_20260606-175245.md",
+      "from": "ENDER",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    },
+    {
+      "path": "foreman/handoffs/inbox/FROM_ENDER_HOMEPAGE_VISUAL_NARRATIVE_GD_RUN_HOMEPAGE_VISUAL_NARRATIVE_20260606-173334.md",
+      "from": "ENDER",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    },
+    {
+      "path": "foreman/handoffs/inbox/FROM_ENDER_IMAGERY_AND_UX_FOR_MAKER_1.md",
+      "from": "ENDER",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    },
+    {
+      "path": "foreman/handoffs/inbox/FROM_PETRA_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_GD_RUN_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_20260606-175245.md",
+      "from": "PETRA",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    },
+    {
+      "path": "foreman/handoffs/inbox/FROM_SKYBRO_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_GD_RUN_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_20260606-175245.md",
+      "from": "SKYBRO",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    },
+    {
+      "path": "foreman/handoffs/inbox/FROM_SKYBRO_HOMEPAGE_VISUAL_NARRATIVE_GD_RUN_HOMEPAGE_VISUAL_NARRATIVE_20260606-173334.md",
+      "from": "SKYBRO",
+      "matched_packet_ids": [],
+      "command_dash_related": false
+    }
+  ]
+}

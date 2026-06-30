@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "pass": true,
+  "checked_at": "2026-06-29T01:15:04.655Z",
+  "counts": {
+    "objects": 1,
+    "receipts": 1,
+    "plans": 0,
+    "events": 1,
+    "packet_events": 3,
+    "lineage_events": 4,
+    "owners": 1,
+    "execution_receipts": 0,
+    "passing_objects": 1,
+    "failing_objects": 0
+  },
+  "objects": [
+    {
+      "object_id": "nerdkle_i-want-to-bring-a-nerdkle-first-proof-into-the-world-by-creating-an-operating-ob_mqyasdvp",
+      "path": "data/organism/nerdkle/objects/nerdkle_i-want-to-bring-a-nerdkle-first-proof-into-the-world-by-creating-an-operating-ob_mqyasdvp.json",
+      "stage": "needs_clarification",
+      "pass": true,
+      "checks": [
+        {
+          "name": "artifact_created_present",
+          "pass": true
+        },
+        {
+          "name": "execution_owner_present",
+          "pass": true
+        },
+        {
+          "name": "human_gates_present",
+          "pass": true
+        },
+        {
+          "name": "receipt_exists",
+          "pass": true,
+          "path": "data/organism/nerdkle/receipts/receipt_nerdkle_i-want-to-bring-a-nerdkle-first-proof-into-the-world-by-creating-an-operating-ob_mqyasdvp.json"
+        },
+        {
+          "name": "event_exists",
+          "pass": true
+        },
+        {
+          "name": "stage_classified",
+          "pass": true,
+          "stage": "needs_clarification"
+        },
+        {
+          "name": "clarification_state_valid",
+          "pass": true
+        },
+        {
+          "name": "completed_object_has_execution_receipt",
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

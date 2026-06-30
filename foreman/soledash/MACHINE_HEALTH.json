@@ -1,0 +1,180 @@
+{
+  "schema_version": "MACHINE_HEALTH.v0.3",
+  "updated_at": "2026-06-28T09:36:02.154Z",
+  "path": "foreman/soledash/MACHINE_HEALTH.json",
+  "state_schema": {
+    "schema_version": "MACHINE_HEALTH_TRUTH_SOURCE.v0.2",
+    "source_of_truth": "foreman/soledash/MACHINE_HEALTH.json",
+    "allowed_states": [
+      "GREEN",
+      "WATCH",
+      "DEGRADED",
+      "STOP",
+      "QUARANTINE"
+    ],
+    "required_state_change_fields": [
+      "reason",
+      "state_changed_at",
+      "state_receipt_path"
+    ],
+    "local_petra_copies_allowed": false,
+    "rule": "All Petra instances and Aeyes read machine state from this single file. No local Petra copy may mutate or override machine state.",
+    "state_meanings": {
+      "GREEN": "Healthy",
+      "WATCH": "Possible issue",
+      "DEGRADED": "Partial functionality",
+      "STOP": "Unavailable",
+      "QUARANTINE": "Known harmful condition"
+    }
+  },
+  "policy": "Machine state source is GREEN/WATCH/DEGRADED/STOP/QUARANTINE only. Every state change requires reason, state_changed_at, and state_receipt_path. No local Petra copies may mutate fleet state.",
+  "health_rules": [
+    {
+      "rule_id": "DEV_SERVER_WEDGED",
+      "when": {
+        "port_listening": true,
+        "route_timed_out": true
+      },
+      "machine_status": "WATCH",
+      "reason": "DEV_SERVER_WEDGED",
+      "queue_action": "do_not_reroute",
+      "stop_only_if": [
+        "shell_fails_system_wide",
+        "repo_inaccessible",
+        "repeated_restart_failure"
+      ]
+    },
+    {
+      "rule_id": "SALLY_DEGRADED_PARTIAL_FUNCTIONALITY",
+      "machine_id": "sally",
+      "machine_status": "DEGRADED",
+      "reason": "Persistent Cursor launch/cmd integration failure.",
+      "lane": "Crawler/Swatter read-only only",
+      "build_allowed": false,
+      "cursor_allowed": false,
+      "terminal_allowed": false,
+      "reroute_build_work_to": "Doss",
+      "allowed_work": [
+        "browser review",
+        "visual audits",
+        "reading crawler pearls",
+        "non-terminal observation"
+      ]
+    },
+    {
+      "rule_id": "BLOCKING_MODAL_QUARANTINE",
+      "when": {
+        "stuck_blocking_modal": true
+      },
+      "machine_status": "QUARANTINE",
+      "reason": "BLOCKING_MODAL",
+      "build_allowed": false,
+      "queue_action": "do_not_build",
+      "green_return_requires": [
+        "modal_cleared",
+        "shell_verified",
+        "cursor_verified_if_cursor_work_required"
+      ]
+    }
+  ],
+  "machines": [
+    {
+      "machine_id": "doss",
+      "display_name": "Doss",
+      "hostname": "Doss",
+      "role": "Dink/Skybro/Thufir local control surface",
+      "status": "GREEN",
+      "evidence_status": "live_local",
+      "reason": "Live local control surface.",
+      "blocker": "none",
+      "fallback_priority": 1,
+      "latest_receipt_path": null,
+      "state_changed_at": "2026-06-28T03:48:19.246Z",
+      "state_receipt_path": null,
+      "dev_server": null,
+      "lane": null,
+      "build_allowed": null,
+      "cursor_allowed": null,
+      "terminal_allowed": null,
+      "allowed_work": [],
+      "disallowed_work": [],
+      "updated_at": "2026-06-28T03:48:19.246Z"
+    },
+    {
+      "machine_id": "betsy",
+      "display_name": "Betsy",
+      "hostname": "BETSY",
+      "role": "Maker/Petra/Ender surface",
+      "status": "WATCH",
+      "evidence_status": "not_checked_this_run",
+      "reason": "State not verified in this run.",
+      "blocker": "State not verified in this run.",
+      "fallback_priority": 20,
+      "latest_receipt_path": null,
+      "state_changed_at": "2026-06-28T03:48:19.246Z",
+      "state_receipt_path": null,
+      "dev_server": null,
+      "lane": null,
+      "build_allowed": null,
+      "cursor_allowed": null,
+      "terminal_allowed": null,
+      "allowed_work": [],
+      "disallowed_work": [],
+      "updated_at": "2026-06-28T03:48:19.246Z"
+    },
+    {
+      "machine_id": "sally",
+      "display_name": "Sally",
+      "hostname": "SALLY",
+      "role": "Bean/Dink2/Thufir backup and media surface",
+      "status": "DEGRADED",
+      "evidence_status": "operator_reported",
+      "reason": "Persistent Cursor launch/cmd integration failure.",
+      "blocker": "Build/Cursor/terminal disabled on Sally; build work rerouted to Doss.",
+      "fallback_priority": 30,
+      "latest_receipt_path": null,
+      "state_changed_at": "2026-06-28T03:48:19.246Z",
+      "state_receipt_path": null,
+      "dev_server": null,
+      "lane": "Crawler/Swatter read-only only",
+      "build_allowed": false,
+      "cursor_allowed": false,
+      "terminal_allowed": false,
+      "allowed_work": [
+        "browser review",
+        "visual audits",
+        "reading crawler pearls",
+        "non-terminal observation"
+      ],
+      "disallowed_work": [
+        "build execution",
+        "Cursor work",
+        "terminal/cmd/PowerShell work"
+      ],
+      "updated_at": "2026-06-28T03:48:19.246Z"
+    },
+    {
+      "machine_id": "spanzee",
+      "display_name": "Spanzee",
+      "hostname": "DESKTOP-UL1T2KE",
+      "role": "Compute / remote workstation candidate",
+      "status": "WATCH",
+      "evidence_status": "not_checked_this_run",
+      "reason": "State not verified in this run.",
+      "blocker": "State not verified in this run.",
+      "fallback_priority": 40,
+      "latest_receipt_path": null,
+      "state_changed_at": "2026-06-28T03:48:19.246Z",
+      "state_receipt_path": null,
+      "dev_server": null,
+      "lane": null,
+      "build_allowed": null,
+      "cursor_allowed": null,
+      "terminal_allowed": null,
+      "allowed_work": [],
+      "disallowed_work": [],
+      "updated_at": "2026-06-28T03:48:19.246Z"
+    }
+  ],
+  "events": []
+}

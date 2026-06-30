@@ -1,6 +1,14 @@
 {
   "schemaVersion": "aeye-dispatch-policy/v0.1",
   "description": "Dispatch classification and AUTO_SEND guards for Relay Courier.",
+  "heldCousins": {
+    "ENDER": {
+      "availability": "HELD_ON_SALLY",
+      "topologyLock": "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json",
+      "reason": "Ender@Sally is retired until Sally RAM upgrade and a clearing receipt.",
+      "rule": "Do not auto-send, auto-load, generate tests, or create new Ender@Sally packets."
+    }
+  },
   "classes": {
     "AUTO_SEND": {
       "id": "CLASS_A",
@@ -12,7 +20,12 @@
         "COCKPIT_STATUS_SYNC",
         "GATE_SUMMARY_SYNC"
       ],
-      "allowedCousins": ["PETRA", "SKYBRO", "ENDER", "BEAN", "COMPUTER"],
+      "allowedCousins": [
+        "PETRA",
+        "SKYBRO",
+        "BEAN",
+        "COMPUTER"
+      ],
       "requiresFreshHashes": true,
       "requiresHealthyContext": true,
       "maxPacketBytes": 32768,
@@ -31,12 +44,26 @@
       "id": "CLASS_C",
       "label": "BLOCKED",
       "description": "Never load or send.",
-      "markers": ["DO_NOT_SEND", "CLASS_C", "BLOCKED_PACKET"]
+      "markers": [
+        "DO_NOT_SEND",
+        "CLASS_C",
+        "BLOCKED_PACKET"
+      ]
     }
   },
   "blockedContent": {
-    "structuralMarkers": ["DO_NOT_SEND", "NEVER_SEND", "CLASS_C_BLOCKED"],
-    "filenamePatterns": ["\\.env", "credentials", "secret", "token", "service-role"],
+    "structuralMarkers": [
+      "DO_NOT_SEND",
+      "NEVER_SEND",
+      "CLASS_C_BLOCKED"
+    ],
+    "filenamePatterns": [
+      "\\.env",
+      "credentials",
+      "secret",
+      "token",
+      "service-role"
+    ],
     "neverLoadPatterns": [
       "sk_live_",
       "sk_test_",
@@ -64,17 +91,23 @@
     },
     "AUTONOMOUS_ROUND_TRIP_TEST": {
       "dispatchClass": "AUTONOMOUS_ROUND_TRIP_TEST",
-      "cousins": ["ENDER"],
+      "cousins": [
+        "ENDER"
+      ],
+      "status": "HELD_ON_SALLY",
+      "topologyLock": "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json",
       "explicitTestFlag": "ALLOW_AUTONOMOUS_ROUND_TRIP_SEND",
       "issuerScript": "scripts/foreman/autonomous-round-trip-test.mjs",
       "packetTemplate": "foreman/templates/TO_AUTONOMOUS_ROUND_TRIP_TEST_TEMPLATE.md",
       "pasteBlock": "foreman/handoffs/outbox/ENDER_PASTE_BLOCK.txt",
       "proofManifest": "foreman/crew-dispatch/AUTONOMOUS_ROUND_TRIP_PROOF.json",
-      "description": "ENDER reliability harness — Playwright send only when explicit test flag set"
+      "description": "HELD: Ender@Sally retired until RAM upgrade and clearing receipt. Do not run this harness."
     },
     "AUTONOMOUS_ROUND_TRIP_TEST_SKYBRO": {
       "dispatchClass": "AUTONOMOUS_ROUND_TRIP_TEST",
-      "cousins": ["SKYBRO"],
+      "cousins": [
+        "SKYBRO"
+      ],
       "explicitTestFlag": "ALLOW_AUTONOMOUS_ROUND_TRIP_SEND",
       "issuerScript": "scripts/foreman/autonomous-round-trip-skybro.mjs",
       "packetTemplate": "foreman/templates/TO_AUTONOMOUS_ROUND_TRIP_TEST_TEMPLATE.md",
@@ -84,21 +117,35 @@
     },
     "HOMEPAGE_REWRITE_DISCOVERY_SMOKE_TEST": {
       "dispatchClass": "AUTONOMOUS_ROUND_TRIP_TEST",
-      "cousins": ["ENDER", "SKYBRO", "COMPUTER"],
+      "cousins": [
+        "SKYBRO",
+        "COMPUTER"
+      ],
+      "heldCousins": [
+        "ENDER"
+      ],
+      "topologyLock": "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json",
       "explicitTestFlag": "ALLOW_AUTONOMOUS_ROUND_TRIP_SEND",
       "issuerScript": "scripts/foreman/homepage-rewrite-discovery-smoke-test.mjs",
       "packetTemplate": "foreman/templates/TO_HOMEPAGE_REWRITE_DISCOVERY_SMOKE_TEST_TEMPLATE.md",
       "proofManifest": "foreman/crew-dispatch/HOMEPAGE_REWRITE_DISCOVERY_SMOKE_PROOF.json",
-      "description": "Homepage discovery smoke — ENDER, SKYBRO, COMPUTER (Thufir); receipt from at least one cousin"
+      "description": "Homepage discovery smoke with Ender held on Sally; no Ender@Sally packet until RAM upgrade and clearing receipt."
     },
     "WERKLES_HOMEPAGE_DISCOVERY_FULL_CREW": {
       "dispatchClass": "AUTONOMOUS_ROUND_TRIP_TEST",
-      "cousins": ["ENDER", "SKYBRO", "COMPUTER"],
+      "cousins": [
+        "SKYBRO",
+        "COMPUTER"
+      ],
+      "heldCousins": [
+        "ENDER"
+      ],
+      "topologyLock": "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json",
       "explicitTestFlag": "ALLOW_AUTONOMOUS_ROUND_TRIP_SEND",
       "issuerScript": "scripts/foreman/werkles-homepage-discovery-full-crew.mjs",
       "packetTemplate": "foreman/templates/TO_WERKLES_HOMEPAGE_DISCOVERY_FULL_CREW_TEMPLATE.md",
       "proofManifest": "foreman/crew-dispatch/WERKLES_HOMEPAGE_DISCOVERY_FULL_CREW_PROOF.json",
-      "description": "Full crew homepage discovery — ENDER UX, SKYBRO positioning, COMPUTER market; Petra synthesis handoff"
+      "description": "Full crew homepage discovery with Ender held on Sally; no Ender@Sally packet until RAM upgrade and clearing receipt."
     }
   }
 }

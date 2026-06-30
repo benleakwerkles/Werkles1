@@ -1,0 +1,7 @@
+{
+  "schema_version": "SWATTER_EVENT_STREAM.v0.1",
+  "updated_at": "2026-06-28T03:48:19.267Z",
+  "path": "foreman/soledash/SWATTER_EVENT_STREAM.json",
+  "rule": "BLUE/GREEN routine local actions may proceed with receipts; RED remains human-required every time.",
+  "events": []
+}

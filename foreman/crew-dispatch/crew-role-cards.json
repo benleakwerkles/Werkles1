@@ -20,10 +20,12 @@
     "ENDER": {
       "platform": "Claude",
       "role": "UX / brand",
-      "lane": "product / UX — not SQL, billing, security, or deploy execution",
+      "lane": "product / UX — HELD on Sally until RAM upgrade; not SQL, billing, security, cleanup, filtration, or deploy execution",
       "filenamePrefix": "FROM_ENDER_",
       "edgeTabIndex": 3,
-      "overreachWatch": ["billing", "security audit", "deploy"]
+      "availability": "HELD_ON_SALLY",
+      "topologyLock": "foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json",
+      "overreachWatch": ["billing", "security audit", "deploy", "Ender@Sally", "cleanup on Sally", "filtration on Sally"]
     },
     "BEAN": {
       "platform": "DeepSeek",

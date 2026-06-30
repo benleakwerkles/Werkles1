@@ -1,0 +1,317 @@
+{
+  "ok": true,
+  "built_at": "2026-06-28T19:06:20.130Z",
+  "health": {
+    "doctor_pass": true,
+    "triage_pass": true,
+    "manual_send_boundary": true
+  },
+  "counts": {
+    "relay_events": 3,
+    "relay_receipts": 3,
+    "intake_rows": 1,
+    "intake_processed": 1,
+    "pending_aeye_receipts": 3
+  },
+  "latest": {
+    "event": {
+      "event_id": "packet_relay_ready_cmd_dash_api_proof_0001",
+      "event_type": "packet_relay_ready",
+      "source_system": "TinkerDen",
+      "source_aliases": [
+        "Command Dash",
+        "ThinkIt",
+        "TinkerDen"
+      ],
+      "target_aeye": "COMPUTER",
+      "workspace_target": "clipboard_only_not_configured",
+      "delivery_mode": "manual_operator_paste_send",
+      "auto_send_to_external_aeye_chat": false,
+      "account_automation": false,
+      "browser_credential_control": false,
+      "fake_delivery": false,
+      "packet": {
+        "packet_id": "cmd_dash_api_proof_0001",
+        "source": "TinkerDen",
+        "source_aliases": [
+          "Command Dash",
+          "ThinkIt",
+          "TinkerDen"
+        ],
+        "target_aeye": "COMPUTER",
+        "title": "TinkerDen API Relay Proof",
+        "intent": "Prove POST /api/tinkerden/relay creates an Aeye relay packet without auto-send.",
+        "context": "Prove POST /api/tinkerden/relay creates an Aeye relay packet without auto-send.",
+        "next_action": "Computer validates the API relay path and returns a receipt.",
+        "evidence_required": [
+          "Aeye response returned as FROM_* receipt",
+          "Operator manual Send confirmation if loaded into external chat"
+        ],
+        "unresolved_fields": [],
+        "human_gates": [
+          "Operator must paste/send manually in external Aeye chat"
+        ],
+        "dispatch_class": "AUTO_LOAD_HUMAN_SEND",
+        "receipt_required": "Y",
+        "return_destination": "TinkerDen Intake / Speaker",
+        "failure_condition": "No Aeye receipt returns, or packet is sent without operator manual Send.",
+        "rules": [
+          "No account automation",
+          "No unauthorized auto-send",
+          "No browser credential control",
+          "No fake delivery",
+          "Clipboard + workspace focus only in V0",
+          "Operator must paste/send manually"
+        ]
+      },
+      "packet_path": "foreman/handoffs/outbox/TO_COMPUTER_COMMAND_DASH_RELAY_cmd_dash_api_proof_0001.md",
+      "paste_block_path": "foreman/handoffs/outbox/COMPUTER_COMMAND_DASH_RELAY_PASTE_BLOCK.txt",
+      "created_at": "2026-06-28T04:38:53.288Z"
+    },
+    "receipt": {
+      "receipt_id": "receipt_cmd_dash_api_proof_0001",
+      "mission": "COMMAND_DASH_TO_AEYE_RELAY",
+      "producer": "Maker@Doss",
+      "path": "C:/Users/BenLeak/Desktop/github/Werkles/data/organism/command_dash_relay_proofs/cmd_dash_api_proof_0001.json",
+      "timestamp": "2026-06-28T04:38:53.288Z",
+      "hash": "321850f5d4bcd48984dc2f791a833ab8097bd41a4dcf2eba453db225462ad4aa",
+      "status_guess": "packet_relay_ready_manual_send_required",
+      "linked_packet_id": "cmd_dash_api_proof_0001"
+    },
+    "intake_receipt": {
+      "status": "processed",
+      "intake_line": 1,
+      "intake_hash": "fd9cf16cb96f329809fa4720b6f1d195642ffc8810f0358a9f1c4fa34cc038fd",
+      "packet_id": "cmd_dash_intake_proof_0001",
+      "target_aeye": "BEAN",
+      "packet_path": "foreman/handoffs/outbox/TO_BEAN_COMMAND_DASH_RELAY_cmd_dash_intake_proof_0001.md",
+      "paste_block_path": "foreman/handoffs/outbox/BEAN_COMMAND_DASH_RELAY_PASTE_BLOCK.txt",
+      "proof_path": "data/organism/command_dash_relay_proofs/cmd_dash_intake_proof_0001.json",
+      "manual_send_required": true,
+      "created_at": "2026-06-28T04:37:47.087Z"
+    }
+  },
+  "sources": {
+    "events": "data/organism/packet_relay_events.jsonl",
+    "receipts": "data/organism/receipt_pickup.jsonl",
+    "intake": "data/organism/command_dash_intake.jsonl",
+    "intakeReceipts": "data/organism/command_dash_relay_intake_receipts.jsonl",
+    "doctor": "data/organism/command_dash_relay_doctor.json",
+    "triage": "data/organism/command_dash_inbox_triage.json"
+  },
+  "doctor": {
+    "pass": true,
+    "checked_at": "2026-06-28T19:06:18.636Z",
+    "source": {
+      "events": "data/organism/packet_relay_events.jsonl",
+      "receipts": "data/organism/receipt_pickup.jsonl"
+    },
+    "counts": {
+      "events": 3,
+      "receipt_rows": 3,
+      "event_parse_errors": 0,
+      "receipt_parse_errors": 0,
+      "passing_events": 3,
+      "failing_events": 0
+    },
+    "parse_errors": {
+      "events": [],
+      "receipts": []
+    },
+    "events": [
+      {
+        "packet_id": "cmd_dash_relay_proof_0001",
+        "target_aeye": "PETRA",
+        "event_id": "packet_relay_ready_cmd_dash_relay_proof_0001",
+        "pass": true,
+        "checks": [
+          {
+            "name": "packet_id_present",
+            "pass": true
+          },
+          {
+            "name": "manual_send_boundary",
+            "pass": true
+          },
+          {
+            "name": "packet_file_exists",
+            "pass": true,
+            "path": "foreman/handoffs/outbox/TO_PETRA_COMMAND_DASH_RELAY_cmd_dash_relay_proof_0001.md"
+          },
+          {
+            "name": "paste_block_exists",
+            "pass": true,
+            "path": "foreman/handoffs/outbox/PETRA_COMMAND_DASH_RELAY_PASTE_BLOCK.txt"
+          },
+          {
+            "name": "proof_exists",
+            "pass": true,
+            "path": "data/organism/command_dash_relay_proofs/cmd_dash_relay_proof_0001.json"
+          },
+          {
+            "name": "receipt_pickup_linked",
+            "pass": true
+          }
+        ]
+      },
+      {
+        "packet_id": "cmd_dash_intake_proof_0001",
+        "target_aeye": "BEAN",
+        "event_id": "packet_relay_ready_cmd_dash_intake_proof_0001",
+        "pass": true,
+        "checks": [
+          {
+            "name": "packet_id_present",
+            "pass": true
+          },
+          {
+            "name": "manual_send_boundary",
+            "pass": true
+          },
+          {
+            "name": "packet_file_exists",
+            "pass": true,
+            "path": "foreman/handoffs/outbox/TO_BEAN_COMMAND_DASH_RELAY_cmd_dash_intake_proof_0001.md"
+          },
+          {
+            "name": "paste_block_exists",
+            "pass": true,
+            "path": "foreman/handoffs/outbox/BEAN_COMMAND_DASH_RELAY_PASTE_BLOCK.txt"
+          },
+          {
+            "name": "proof_exists",
+            "pass": true,
+            "path": "data/organism/command_dash_relay_proofs/cmd_dash_intake_proof_0001.json"
+          },
+          {
+            "name": "receipt_pickup_linked",
+            "pass": true
+          }
+        ]
+      },
+      {
+        "packet_id": "cmd_dash_api_proof_0001",
+        "target_aeye": "COMPUTER",
+        "event_id": "packet_relay_ready_cmd_dash_api_proof_0001",
+        "pass": true,
+        "checks": [
+          {
+            "name": "packet_id_present",
+            "pass": true
+          },
+          {
+            "name": "manual_send_boundary",
+            "pass": true
+          },
+          {
+            "name": "packet_file_exists",
+            "pass": true,
+            "path": "foreman/handoffs/outbox/TO_COMPUTER_COMMAND_DASH_RELAY_cmd_dash_api_proof_0001.md"
+          },
+          {
+            "name": "paste_block_exists",
+            "pass": true,
+            "path": "foreman/handoffs/outbox/COMPUTER_COMMAND_DASH_RELAY_PASTE_BLOCK.txt"
+          },
+          {
+            "name": "proof_exists",
+            "pass": true,
+            "path": "data/organism/command_dash_relay_proofs/cmd_dash_api_proof_0001.json"
+          },
+          {
+            "name": "receipt_pickup_linked",
+            "pass": true
+          }
+        ]
+      }
+    ]
+  },
+  "triage": {
+    "pass": true,
+    "triaged_at": "2026-06-28T19:06:19.440Z",
+    "source": {
+      "events": "data/organism/packet_relay_events.jsonl",
+      "inbox": "foreman/handoffs/inbox"
+    },
+    "counts": {
+      "relay_packets": 3,
+      "inbox_files": 9,
+      "command_dash_related_inbox_files": 0,
+      "matched_packets": 0,
+      "pending_packets": 3
+    },
+    "pending_packets": [
+      {
+        "packet_id": "cmd_dash_relay_proof_0001",
+        "status": "awaiting_aeye_receipt",
+        "next_action": "Operator manually sends prepared paste block; Aeye response returns as FROM_* inbox file."
+      },
+      {
+        "packet_id": "cmd_dash_intake_proof_0001",
+        "status": "awaiting_aeye_receipt",
+        "next_action": "Operator manually sends prepared paste block; Aeye response returns as FROM_* inbox file."
+      },
+      {
+        "packet_id": "cmd_dash_api_proof_0001",
+        "status": "awaiting_aeye_receipt",
+        "next_action": "Operator manually sends prepared paste block; Aeye response returns as FROM_* inbox file."
+      }
+    ],
+    "inbox": [
+      {
+        "path": "foreman/handoffs/inbox/FROM_COMPUTER_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_GD_RUN_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_20260606-175245.md",
+        "from": "COMPUTER",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      },
+      {
+        "path": "foreman/handoffs/inbox/FROM_COMPUTER_HOMEPAGE_VISUAL_NARRATIVE_GD_RUN_HOMEPAGE_VISUAL_NARRATIVE_20260606-173334.md",
+        "from": "COMPUTER",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      },
+      {
+        "path": "foreman/handoffs/inbox/FROM_CURSOR_READ_ME.md",
+        "from": "CURSOR",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      },
+      {
+        "path": "foreman/handoffs/inbox/FROM_ENDER_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_GD_RUN_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_20260606-175245.md",
+        "from": "ENDER",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      },
+      {
+        "path": "foreman/handoffs/inbox/FROM_ENDER_HOMEPAGE_VISUAL_NARRATIVE_GD_RUN_HOMEPAGE_VISUAL_NARRATIVE_20260606-173334.md",
+        "from": "ENDER",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      },
+      {
+        "path": "foreman/handoffs/inbox/FROM_ENDER_IMAGERY_AND_UX_FOR_MAKER_1.md",
+        "from": "ENDER",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      },
+      {
+        "path": "foreman/handoffs/inbox/FROM_PETRA_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_GD_RUN_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_20260606-175245.md",
+        "from": "PETRA",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      },
+      {
+        "path": "foreman/handoffs/inbox/FROM_SKYBRO_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_GD_RUN_BEN_ENTREPRENEURSHIP_DOSSIER_FOR_SHERLOCK_20260606-175245.md",
+        "from": "SKYBRO",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      },
+      {
+        "path": "foreman/handoffs/inbox/FROM_SKYBRO_HOMEPAGE_VISUAL_NARRATIVE_GD_RUN_HOMEPAGE_VISUAL_NARRATIVE_20260606-173334.md",
+        "from": "SKYBRO",
+        "matched_packet_ids": [],
+        "command_dash_related": false
+      }
+    ]
+  }
+}

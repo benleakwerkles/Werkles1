@@ -29,6 +29,27 @@ const COUSIN_META = {
   COMPUTER: { label: "Computer", platform: "Perplexity", prefix: "TO_COMPUTER" },
 };
 
+const HELD_COUSINS = {
+  ENDER:
+    "ENDER dispatch is HELD: Ender@Sally is retired until Sally RAM upgrade and a clearing receipt. See foreman/change-capsules/CHANGE_CAPSULE_ENDER_SALLY_RETIRED.json. Do not silently move Ender to another machine without availability proof.",
+};
+
+function heldRecipientDetails(recipients) {
+  return recipients
+    .filter((cousin) => HELD_COUSINS[cousin])
+    .map((cousin) => ({
+      cousin,
+      reason: HELD_COUSINS[cousin],
+    }));
+}
+
+function assertNoHeldRecipients(recipients) {
+  const held = heldRecipientDetails(recipients);
+  if (held.length) {
+    throw new Error(held.map((entry) => entry.reason).join(" "));
+  }
+}
+
 export function loadMissionClasses() {
   return JSON.parse(read(MISSION_CLASSES_PATH));
 }
@@ -59,11 +80,13 @@ export function resolveMissionClass(missionClass) {
 
 export function routeIntent(missionClass) {
   const { key, def, recipients } = resolveMissionClass(missionClass);
+  const heldRecipients = heldRecipientDetails(recipients);
   return {
     missionClass: key,
     label: def.label,
     description: def.description,
     recipients,
+    heldRecipients,
     synthesisLead: def.synthesisLead,
     hgApprovalLevel: def.hgApprovalLevel,
     dispatchClass: def.dispatchClass,
@@ -165,6 +188,7 @@ export function listMissionClasses() {
 
 export function generateRun(missionClass, { brief = "" } = {}) {
   const { key, def, recipients } = resolveMissionClass(missionClass);
+  assertNoHeldRecipients(recipients);
   const runId = buildRunId(key);
   const runDir = `${RUNS_DIR}/${runId}`;
   const packetsDir = `${runDir}/packets`;

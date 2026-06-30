@@ -1,0 +1,1 @@
+{"packet_id":"cmd_dash_intake_proof_0001","source":"ThinkIt","target_aeye":"BEAN","title":"ThinkIt Intake Relay Proof","intent":"Prove JSONL intake can become an Aeye relay packet without Ben carrying context.","next_action":"Bean validates intake relay safety and returns a receipt.","return_destination":"TinkerDen Intake / Speaker"}

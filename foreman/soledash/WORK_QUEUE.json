@@ -1,0 +1,32 @@
+{
+  "schema_version": "SOLEDASH_WORK_QUEUE.v0.1",
+  "updated_at": "2026-06-28T09:36:02.157Z",
+  "path": "foreman/soledash/WORK_QUEUE.json",
+  "policy": "Queue continues on healthy available machines; unhealthy machines do not create Ben work.",
+  "tasks": [
+    {
+      "task_id": "CRAWLER_PEARLS_BOARD_V0",
+      "title": "Crawler Pearls Board V0",
+      "source_machine": "Sally",
+      "assigned_machine": "Sally",
+      "status": "queued",
+      "required_capability": "local_soledash_build",
+      "blocker": "Sally cmd.exe unstable again.",
+      "latest_receipt_path": null,
+      "updated_at": "2026-06-28T03:48:19.250Z",
+      "route_history": []
+    },
+    {
+      "task_id": "SWATTER_EVENT_STREAM_V0",
+      "title": "Swatter Event Stream V0",
+      "source_machine": "Sally",
+      "assigned_machine": "Sally",
+      "status": "queued",
+      "required_capability": "local_soledash_build",
+      "blocker": "Sally cmd.exe unstable again.",
+      "latest_receipt_path": null,
+      "updated_at": "2026-06-28T03:48:19.250Z",
+      "route_history": []
+    }
+  ]
+}

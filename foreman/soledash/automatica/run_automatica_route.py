@@ -93,16 +93,25 @@ def read_json_if_exists(path: Path) -> dict[str, Any] | None:
         return None
 
 
-def make_base_receipt(route: dict[str, Any], action_id: str) -> dict[str, Any]:
+def make_base_receipt(route: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]:
+    action_id = args.action_id or f"automatica_{route['route_id']}_{now_stamp()}"
+    card_id = args.card_id or f"automatica_card_{route['route_id']}"
+    approval_id = args.approval_id or f"approval_{route['route_id']}_{now_stamp()}"
+    expected_return_location = args.expected_return_location or f"#automatica/{card_id}"
     return {
         "schema_version": "AUTOMATICA_ROUTE_RECEIPT.v0.1",
         "receipt_id": f"{route['receipt_prefix']}_{now_stamp()}",
+        "card_id": card_id,
+        "parent_card_id": card_id,
         "action_id": action_id,
+        "approval_id": approval_id,
         "route_id": route["route_id"],
         "card_label": route["card_label"],
         "target_owner": route["target_owner"],
         "target_machine": route["target_machine"],
         "created_at": now_iso(),
+        "approval_status": "approved",
+        "expected_return_location": expected_return_location,
         "receipt_contract": ["decision", "why", "evidence", "assumption", "blocker", "next_action", "confidence"],
         "decision": "UNKNOWN",
         "why": "UNKNOWN",
@@ -401,8 +410,8 @@ HANDLERS = {
 
 
 def run_route(route: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]:
-    action_id = f"automatica_{route['route_id']}_{now_stamp()}"
-    receipt = make_base_receipt(route, action_id)
+    receipt = make_base_receipt(route, args)
+    action_id = receipt["action_id"]
     try:
         handler = HANDLERS[route["handler"]]
         receipt = handler(receipt, args)
@@ -424,12 +433,17 @@ def run_route(route: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]
     action_path = ACTIONS_DIR / f"{action_id}.json"
     action = {
         "schema_version": "AUTOMATICA_ACTION.v0.1",
+        "card_id": receipt["card_id"],
+        "parent_card_id": receipt["parent_card_id"],
         "action_id": action_id,
+        "approval_id": receipt["approval_id"],
         "route_id": route["route_id"],
         "card_label": route["card_label"],
         "target_owner": route["target_owner"],
         "target_machine": route["target_machine"],
         "created_at": receipt["created_at"],
+        "approval_status": receipt.get("approval_status", "approved"),
+        "expected_return_location": receipt.get("expected_return_location"),
         "status": receipt["status"],
         "command": route["command"],
         "receipt_path": str(receipt_path.relative_to(SOLEDASH_ROOT.parent.parent)),
@@ -438,6 +452,7 @@ def run_route(route: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]
         "next_action": receipt["next_action"],
     }
     receipt["receipt_path"] = str(receipt_path.relative_to(SOLEDASH_ROOT.parent.parent))
+    receipt["receipt_drawer_archive_path"] = receipt["receipt_path"]
     receipt["action_path"] = str(action_path.relative_to(SOLEDASH_ROOT.parent.parent))
     write_json(receipt_path, receipt)
     write_json(action_path, action)
@@ -453,6 +468,10 @@ def parse_args() -> argparse.Namespace:
         default=r"C:\Users\BenLeak\Desktop\github\Werkles",
         help="Local repo path used by site cleanup route.",
     )
+    parser.add_argument("--action-id", default=None, help="Stable action id allocated by the originating card.")
+    parser.add_argument("--card-id", default=None, help="Stable originating card id.")
+    parser.add_argument("--approval-id", default=None, help="Approval id allocated when the operator approved the card.")
+    parser.add_argument("--expected-return-location", default=None, help="UI location where the receipt should return.")
     return parser.parse_args()
 
 
